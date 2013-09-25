@@ -1,0 +1,32 @@
+apply plugin: "android"
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.5.+'
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:18.0.+'
+    compile 'com.googlecode.android-query:android-query:0.24.3'
+    compile 'com.google.code.gson:gson:2.2.4'
+}
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "18.1"
+
+    defaultConfig {
+        versionCode 33
+        versionName "3.3"
+    }
+}
