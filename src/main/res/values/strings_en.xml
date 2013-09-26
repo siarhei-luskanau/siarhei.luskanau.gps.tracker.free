@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Free-gps.net Tracker</string>
+    <string name="service_tracker_running">Tracker is running</string>
+
+    <!-- menu -->
+    <string name="menu_preferences">Preferences</string>
+    <string name="menu_about">About</string>
+    <string name="menu_send_packets">Send packets</string>
+
+    <!-- eula -->
+    <string name="layout_eula_title">Free-gps.net Tracker EULA</string>
+    <string name="layout_eula_accept">Accept</string>
+    <string name="layout_eula_refuse">Cancel</string>
+
+    <!-- fragment_settings_tab.xml -->
+    <string name="fragment_settings_tab_general">General</string>
+    <string name="fragment_settings_tab_internet_battery">Internet Battery</string>
+    <string name="fragment_settings_tab_location">Location</string>
+
+    <!-- fragment_settings_general.xml -->
+    <string name="fragment_settings_general_server">Server</string>
+    <string name="fragment_settings_general_edit_custom_server">Edit custom server</string>
+    <string name="fragment_settings_general_autostart">Autostart</string>
+    <string name="fragment_settings_general_show_notification">Show notification</string>
+    <string name="fragment_settings_general_reset_disable_ad">Disable the Ad bar</string>
+    <string name="fragment_settings_general_reset_packet_counter">Reset counter</string>
+    <string name="fragment_settings_general_warning_reset_counter">Do you want reset the counter?</string>
+    <string name="fragment_settings_general_language">Language</string>
+
+    <!-- fragment_settings_internet.xml -->
+    <string name="fragment_settings_internet_internet">Internet</string>
+    <string name="fragment_settings_internet_send_to_server_interval">Sending to server interval:</string>
+    <string name="fragment_settings_internet_battery">Battery</string>
+    <string name="fragment_settings_internet_stop_if_battery_low">Stop if battery low</string>
+    <string name="fragment_settings_internet_start_if_battery_ok">Start if battery OK</string>
+    <string name="fragment_settings_internet_charger">Charger</string>
+    <string name="fragment_settings_internet_stop_if_charger_disconnected">Stop if charger is disconnected</string>
+    <string name="fragment_settings_internet_start_if_charger_connected">Start if charger is connected</string>
+
+    <!-- fragment_settings_location.xml -->
+    <string name="service_providers_disable">Locations disable in phone settings.</string>
+    <string name="settings_location_interval_prompt">Location update interval</string>
+    <string name="settings_location_gps">GPS</string>
+    <string name="settings_location_gps_distance_filter">GPS: distance filter</string>
+    <string name="settings_location_wireless_network">Wireless network locations</string>
+    <string name="settings_location_wireless_network_distance_filter">Wireless locations: distance filter</string>
+    <string name="settings_location_gsm">GSM cell information</string>
+
+    <!-- fragment_tracker.xml -->
+    <string name="fragment_tracker_imei">IMEI: %s</string>
+    <string name="fragment_tracker_server">Server:</string>
+    <string name="fragment_tracker_packets">Packets:</string>
+    <string name="fragment_tracker_date">Date:</string>
+    <string name="fragment_tracker_source">Source:</string>
+    <string name="fragment_tracker_source_gps">GPS</string>
+    <string name="fragment_tracker_source_mobile">Wireless networks.\nLow accuracy.</string>
+    <string name="fragment_tracker_position">Position:</string>
+    <string name="fragment_tracker_speed">Speed:</string>
+    <string name="fragment_tracker_meters_per_sec">m/s</string>
+    <string name="fragment_tracker_satellites">Satellites:</string>
+    <string name="fragment_tracker_accuracy">Accuracy:</string>
+    <string name="fragment_tracker_accuracy_meter">m.</string>
+    <string name="fragment_tracker_operator">Operator:</string>
+    <string name="fragment_tracker_mcc">MCC:</string>
+    <string name="fragment_tracker_mnc">MNC:</string>
+    <string name="fragment_tracker_lac">LAC:</string>
+    <string name="fragment_tracker_cid">CID:</string>
+
+    <!-- fragment_edit_server.xml -->
+    <string name="fragment_edit_server_name">Server name</string>
+    <string name="fragment_edit_server_type">Server type</string>
+    <string name="fragment_edit_server_address">Server address</string>
+    <string name="fragment_edit_server_port">Server port</string>
+    <string name="fragment_edit_server_check">Check server</string>
+    <string name="fragment_edit_server_save">Save</string>
+
+    <!-- fragment_edit_server.xml -->
+    <string name="server_type_socket">Socket</string>
+    <string name="server_type_json_form">JSON Form</string>
+    <string name="server_type_json_body">JSON body</string>
+
+</resources>

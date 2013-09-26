@@ -17,8 +17,9 @@ repositories {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:18.0.+'
-    compile 'com.googlecode.android-query:android-query:0.24.3'
+    compile 'com.googlecode.android-query:android-query:0.25.9'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'siarhei.luskanau.gps:siarhei.luskanau.gps.shared:0.0.1'
 }
 
 android {

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
 The MIT License (MIT)
 
@@ -20,8 +21,9 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="siarhei.luskanau.gps.tracker.free">
+          package="net.freegps.tracker.free">
 
     <uses-sdk
             android:minSdkVersion="8"
@@ -29,10 +31,10 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 
     <supports-screens
             android:anyDensity="true"
-            android:largeScreens="true"
-            android:normalScreens="true"
             android:resizeable="true"
             android:smallScreens="true"
+            android:normalScreens="true"
+            android:largeScreens="true"
             android:xlargeScreens="true"/>
 
     <uses-feature
@@ -56,5 +58,26 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.BATTERY_STATS"/>
     <uses-permission android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+
+    <application
+            android:label="@string/app_name"
+            android:icon="@drawable/ic_launcher"
+            android:theme="@style/Theme.TrackerTheme"
+            android:allowBackup="false">
+
+        <activity
+                android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <provider
+                android:name="siarhei.luskanau.gps.tracker.free.database.ContentProvider"
+                android:authorities="siarhei.luskanau.gps.tracker.free.provider"
+                android:exported="false"/>
+
+    </application>
 
 </manifest>
