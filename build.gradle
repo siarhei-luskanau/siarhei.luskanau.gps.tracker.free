@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.+'
+        classpath 'com.android.tools.build:gradle:0.6.+'
     }
 }
 
@@ -30,6 +30,26 @@ android {
     defaultConfig {
         versionCode 33
         versionName "3.3"
+    }
+
+    signingConfigs {
+        def storeProperties = new Properties()
+        storeProperties.load(new FileInputStream(file("keystore/debug.keystore.properties")))
+
+        debug {
+            storeFile file(storeProperties['store.path'])
+            storePassword storeProperties['store.password']
+            keyAlias storeProperties['key.alias']
+            keyPassword storeProperties['key.password']
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            zipAlign true
+            signingConfig signingConfigs.debug
+        }
     }
 
 }

@@ -10,3 +10,5 @@ bin/
 build/
 .gradle/
 local.properties
+
+keystore/
