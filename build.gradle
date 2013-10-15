@@ -48,9 +48,11 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.debug
             debuggable false
             zipAlign true
-            signingConfig signingConfigs.debug
+            runProguard true
+            proguardFile 'proguard.cfg'
         }
     }
 
