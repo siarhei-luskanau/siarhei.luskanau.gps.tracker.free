@@ -25,10 +25,10 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.TrackerTheme" parent="Theme.AppCompat.Light">
-        <item name="android:imageButtonStyle">@style/TNScanImageButtonStyle</item>
+        <item name="android:imageButtonStyle">@style/TrackerImageButtonStyle</item>
     </style>
 
-    <style name="TNScanTextViewStyle" parent="@android:style/Widget.TextView">
+    <style name="TrackerTextViewStyle" parent="@android:style/Widget.TextView">
         <item name="android:paddingLeft">@dimen/component_gap</item>
         <item name="android:paddingRight">@dimen/component_gap</item>
         <item name="android:minWidth">@dimen/abc_action_button_min_width</item>
@@ -36,7 +36,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="TNScanImageButtonStyle" parent="@android:style/Widget.ImageButton">
+    <style name="TrackerImageButtonStyle" parent="@android:style/Widget.ImageButton">
         <item name="android:background">?attr/actionBarItemBackground</item>
         <item name="android:paddingLeft">@dimen/action_icon_gap</item>
         <item name="android:paddingRight">@dimen/action_icon_gap</item>

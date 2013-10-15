@@ -60,7 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         try {
             Log.d(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
 
-            //AppSettings.clear(context);
+            DataBaseSettings.clear(context);
 
             queryDropTable(db, LocationColumns.TABLE_NAME);
 

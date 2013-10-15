@@ -21,16 +21,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.activity;
+package siarhei.luskanau.gps.tracker.free.database;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 
-public class TrackerActivity extends ActionBarActivity {
+public class DataBaseSettings {
 
-    public static void startTrackerActivity(Context context) {
-        context.startActivity(new Intent(context, TrackerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    private static SharedPreferences getPreferences(Context context) {
+        return context.getSharedPreferences("database_preferences", Context.MODE_PRIVATE);
+    }
+
+    public static void clear(Context context) {
+        getPreferences(context).edit().clear().commit();
     }
 
 }

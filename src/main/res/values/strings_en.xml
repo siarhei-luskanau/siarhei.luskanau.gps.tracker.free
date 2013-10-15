@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Free-gps.net Tracker</string>
+    <string name="tracker_app_name">Free-gps.net Tracker</string>
     <string name="service_tracker_running">Tracker is running</string>
 
     <!-- menu -->

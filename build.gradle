@@ -30,6 +30,8 @@ android {
     defaultConfig {
         versionCode 33
         versionName "3.3"
+        minSdkVersion 8
+        targetSdkVersion 18
     }
 
     signingConfigs {
