@@ -23,30 +23,30 @@
 
 package siarhei.luskanau.gps.tracker.free.activity;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
-import com.androidquery.AQuery;
+import siarhei.luskanau.gps.tracker.free.database.LocationDAO;
 
-import net.freegps.tracker.free.R;
-
-import siarhei.luskanau.gps.tracker.free.utils.Utils;
-
-public class TrackerActivity extends ActionBarActivity {
-
-    private AQuery aq = new AQuery(this);
-
-    public static void startTrackerActivity(Context context) {
-        context.startActivity(new Intent(context, TrackerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-    }
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tracker);
-        aq.id(R.id.imeiTextView).text(getString(R.string.fragment_tracker_imei, Utils.getDeviceId(this)));
+
+        // Database will be created
+        LocationDAO.getCountPacket(this);
+
+        // Main activity has a single instance launch mode.
+        // Such approach allows us to have a single application instance
+        // but restore the activity stack when user press
+        // "Home" button and then launch application again
+        Intent intent = new Intent(this, TrackerActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+
+        finish();
     }
 
 }

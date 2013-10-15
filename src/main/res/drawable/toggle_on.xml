@@ -23,11 +23,9 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<resources>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <dimen name="component_gap">4dp</dimen>
-    <dimen name="action_icon_gap">8dp</dimen>
-    <dimen name="activity_padding">16dp</dimen>
-    <dimen name="component_size">48dp</dimen>
+    <item android:drawable="@drawable/toggle_on_center" android:state_pressed="true" android:state_selected="false"/>
+    <item android:drawable="@drawable/toggle_on_right"/>
 
-</resources>
+</selector>

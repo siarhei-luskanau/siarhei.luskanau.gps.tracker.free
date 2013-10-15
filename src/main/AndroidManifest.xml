@@ -20,6 +20,7 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
 FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -62,12 +63,14 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
             android:allowBackup="false">
 
         <activity
-                android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerActivity">
+                android:name="siarhei.luskanau.gps.tracker.free.activity.MainActivity"
+                android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerActivity"/>
 
         <provider
                 android:name="siarhei.luskanau.gps.tracker.free.database.ContentProvider"

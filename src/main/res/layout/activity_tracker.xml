@@ -23,11 +23,27 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<resources>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-    <dimen name="component_gap">4dp</dimen>
-    <dimen name="action_icon_gap">8dp</dimen>
-    <dimen name="activity_padding">16dp</dimen>
-    <dimen name="component_size">48dp</dimen>
+    <include
+            android:id="@+id/include_imei"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/include_imei"/>
 
-</resources>
+    <include
+            android:id="@+id/include_tracker_toggle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/include_imei"
+            layout="@layout/include_tracker_toggle"/>
+
+    <include
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/include_tracker_toggle"
+            layout="@layout/include_tracker_info"/>
+
+</RelativeLayout>

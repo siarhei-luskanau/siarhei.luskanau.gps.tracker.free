@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2013 Siarhei Luskanau
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/frame"
+            android:fillViewport="true">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_server"/>
+
+                <TextView
+                        android:id="@+id/serverTextView"
+                        android:linksClickable="true"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_packets"/>
+
+                <TextView
+                        android:id="@+id/paketsTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <View
+                    android:layout_height="1dip"
+                    android:background="#FF909090"/>
+        </TableLayout>
+
+        <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_date"/>
+
+                <TextView
+                        android:id="@+id/dateTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_source"/>
+
+                <TextView
+                        android:id="@+id/sourceTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_position"/>
+
+                <TextView
+                        android:id="@+id/positionTextView"
+                        android:linksClickable="true"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_speed"/>
+
+                <TextView
+                        android:id="@+id/speedTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_satellites"/>
+
+                <TextView
+                        android:id="@+id/satellitesTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_accuracy"/>
+
+                <TextView
+                        android:id="@+id/accuracyTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <View
+                    android:layout_height="1dip"
+                    android:background="#FF909090"/>
+        </TableLayout>
+
+        <TableLayout
+                android:id="@+id/gsmCellTableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_operator"/>
+
+                <TextView
+                        android:id="@+id/operatorNameTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_mcc"/>
+
+                <TextView
+                        android:id="@+id/mccTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_mnc"/>
+
+                <TextView
+                        android:id="@+id/mncTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_lac"/>
+
+                <TextView
+                        android:id="@+id/lacTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:gravity="right"
+                        android:padding="3dip"
+                        android:text="@string/fragment_tracker_cid"/>
+
+                <TextView
+                        android:id="@+id/cidTextView"
+                        android:padding="3dip"
+                        android:text="@null"/>
+            </TableRow>
+
+            <View
+                    android:layout_height="1dip"
+                    android:background="#FF909090"/>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>
