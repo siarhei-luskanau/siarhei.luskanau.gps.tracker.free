@@ -35,6 +35,7 @@ import com.androidquery.AQuery;
 
 import net.freegps.tracker.free.R;
 
+import siarhei.luskanau.gps.tracker.free.fragment.AboutFragment;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
 public class TrackerActivity extends ActionBarActivity {
@@ -66,6 +67,9 @@ public class TrackerActivity extends ActionBarActivity {
                 return true;
             }
             case R.id.menu_action_about: {
+                if (getSupportFragmentManager().findFragmentByTag(AboutFragment.TAG) == null) {
+                    new AboutFragment().show(getSupportFragmentManager(), AboutFragment.TAG);
+                }
                 return true;
             }
             default: {
