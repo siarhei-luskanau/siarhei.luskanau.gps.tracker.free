@@ -29,8 +29,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="service_tracker_running">Tracker is running</string>
 
     <!-- menu -->
-    <string name="menu_preferences">Preferences</string>
-    <string name="menu_about">About</string>
+    <string name="menu_action_settings">Preferences</string>
+    <string name="menu_action_about">About</string>
     <string name="menu_send_packets">Send packets</string>
 
     <!-- eula -->

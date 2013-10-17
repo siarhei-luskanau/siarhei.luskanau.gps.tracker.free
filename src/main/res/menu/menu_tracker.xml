@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:orderInCategory="900"
+            yourapp:showAsAction="ifRoom|withText"
+            android:title="@string/abc_action_menu_overflow_description"
+            android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_light">
+
+        <menu>
+
+
+            <item
+                    android:id="@+id/menu_action_settings"
+                    android:orderInCategory="100"
+                    yourapp:showAsAction="ifRoom|withText"
+                    android:title="@string/menu_action_settings"
+                    android:icon="@drawable/ic_action_settings"/>
+
+            <item
+                    android:id="@+id/menu_action_about"
+                    android:orderInCategory="200"
+                    yourapp:showAsAction="ifRoom|withText"
+                    android:title="@string/menu_action_about"
+                    android:icon="@drawable/ic_action_about"/>
+
+        </menu>
+
+    </item>
+
+</menu>
