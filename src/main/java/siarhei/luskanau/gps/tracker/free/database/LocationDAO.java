@@ -34,7 +34,7 @@ import java.util.List;
 
 import siarhei.luskanau.gps.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.utils.AppSettings;
+import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 
 public class LocationDAO {
 

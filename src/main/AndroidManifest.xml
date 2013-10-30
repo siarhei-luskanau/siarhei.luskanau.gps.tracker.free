@@ -72,6 +72,13 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         </activity>
         <activity android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerActivity"/>
 
+        <service
+                android:name="siarhei.luskanau.gps.tracker.free.sync.SyncService"
+                android:exported="false"/>
+        <service
+                android:name="siarhei.luskanau.gps.tracker.free.location.LocationService"
+                android:exported="false"/>
+
         <provider
                 android:name="siarhei.luskanau.gps.tracker.free.database.ContentProvider"
                 android:authorities="siarhei.luskanau.gps.tracker.free.provider"
