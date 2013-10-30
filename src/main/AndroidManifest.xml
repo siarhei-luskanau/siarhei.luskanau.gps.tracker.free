@@ -56,6 +56,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <uses-permission android:name="android.permission.BATTERY_STATS"/>
     <uses-permission android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
 
+    <!-- GCM -->
+    <permission
+            android:name="net.freegps.tracker.free.permission.C2D_MESSAGE"
+            android:protectionLevel="signature"/>
+    <!-- GCM -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="net.freegps.tracker.free.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+
     <application
             android:label="@string/tracker_app_name"
             android:icon="@drawable/ic_launcher"
@@ -83,6 +93,17 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 android:name="siarhei.luskanau.gps.tracker.free.database.ContentProvider"
                 android:authorities="siarhei.luskanau.gps.tracker.free.provider"
                 android:exported="false"/>
+
+        <!-- GCM -->
+        <receiver
+                android:name="net.freegps.tracker.free.gcm.GcmBroadcastReceiver"
+                android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="net.freegps.tracker.free"/>
+            </intent-filter>
+        </receiver>
+        <service android:name="net.freegps.tracker.free.gcm.GcmIntentService"/>
 
     </application>
 
