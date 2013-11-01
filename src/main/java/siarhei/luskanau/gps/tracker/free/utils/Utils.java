@@ -27,21 +27,25 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.telephony.TelephonyManager;
-
-import net.freegps.tracker.free.R;
+import android.util.Log;
 
 import java.math.BigDecimal;
 import java.util.Locale;
 
+import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.activity.TrackerActivity;
 
 public class Utils {
+
+    private static final String TAG = "Utils";
 
     public static double round(double value, int scale) {
         return new BigDecimal(value).setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
@@ -108,6 +112,16 @@ public class Utils {
             return false;
         }
         return networkInfo.isConnected();
+    }
+
+    public static int getVersionCode(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, e.toString(), e);
+        }
+        return 0;
     }
 
 }

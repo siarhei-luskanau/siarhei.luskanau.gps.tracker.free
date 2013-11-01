@@ -27,31 +27,38 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-    <View
-            android:layout_width="0dip"
-            android:layout_height="0dip"/>
-
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true">
 
-        <ImageView
-                android:id="@+id/ledImageView"
+        <TextView
+                android:id="@+id/imeiTextView"
+                style="@style/TrackerTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:contentDescription="@null"
-                android:src="@drawable/led_off"/>
+                android:gravity="center"
+                android:text="@string/fragment_tracker_imei"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
 
-        <Button
-                android:id="@+id/startStopTrackerButton"
-                android:layout_width="wrap_content"
+        <ToggleButton
+                android:id="@+id/trackerToggleButton"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ledImageView"
+                android:layout_width="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/toggle_off"/>
+                android:layout_below="@+id/imeiTextView"
+                android:textColor="#8cc541"
+                android:textStyle="bold"
+                android:textSize="32dp"/>
+
+        <View
+                android:layout_height="@dimen/action_icon_gap"
+                android:layout_width="0dp"
+                android:layout_below="@+id/trackerToggleButton"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

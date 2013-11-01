@@ -38,11 +38,10 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
 
-import net.freegps.tracker.free.R;
-
 import java.util.Iterator;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.utils.PhoneStateUtils;
@@ -59,6 +58,10 @@ public class LocationService extends Service {
     private LocationsController networkLocationsController;
     private long ntpDifferentTime;
     private String deviceId;
+
+    public static void pingAntiKiller(Context context) {
+        context.startService(new Intent(context, LocationService.class).setAction(ACTION_ANTI_KILLER));
+    }
 
     public static void updateGpsListener(Context context) {
         context.startService(new Intent(context, LocationService.class)

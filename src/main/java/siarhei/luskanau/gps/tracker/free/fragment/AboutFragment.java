@@ -32,10 +32,9 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
-import net.freegps.tracker.free.R;
-
 import java.util.Locale;
 
+import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.utils.CryptUtils;
 
 public class AboutFragment extends DialogFragment {

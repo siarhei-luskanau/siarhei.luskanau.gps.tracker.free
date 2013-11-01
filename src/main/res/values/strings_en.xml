@@ -73,6 +73,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="settings_location_gsm">GSM cell information</string>
 
     <!-- fragment_tracker.xml -->
+
     <string name="fragment_tracker_imei">IMEI: %s</string>
     <string name="fragment_tracker_server">Server:</string>
     <string name="fragment_tracker_packets">Packets:</string>

@@ -24,7 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="net.freegps.tracker.free">
+          package="siarhei.luskanau.gps.tracker.free">
 
     <supports-screens
             android:anyDensity="true"
@@ -58,19 +58,24 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <!-- GCM -->
     <permission
-            android:name="net.freegps.tracker.free.permission.C2D_MESSAGE"
+            android:name="siarhei.luskanau.gps.tracker.free.permission.C2D_MESSAGE"
             android:protectionLevel="signature"/>
     <!-- GCM -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="net.freegps.tracker.free.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="siarhei.luskanau.gps.tracker.free.permission.C2D_MESSAGE"/>
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
 
     <application
+            android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerApplication"
             android:label="@string/tracker_app_name"
             android:icon="@drawable/ic_launcher"
             android:theme="@style/Theme.TrackerTheme"
             android:allowBackup="false">
+
+        <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version"/>
 
         <activity
                 android:name="siarhei.luskanau.gps.tracker.free.activity.MainActivity"
@@ -96,14 +101,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
         <!-- GCM -->
         <receiver
-                android:name="net.freegps.tracker.free.gcm.GcmBroadcastReceiver"
+                android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmBroadcastReceiver"
                 android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <category android:name="net.freegps.tracker.free"/>
+                <category android:name="siarhei.luskanau.gps.tracker.free"/>
             </intent-filter>
         </receiver>
-        <service android:name="net.freegps.tracker.free.gcm.GcmIntentService"/>
+        <service android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmIntentService"/>
 
     </application>
 

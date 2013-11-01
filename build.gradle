@@ -15,8 +15,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:18.0.+'
-    compile 'com.google.android.gms:play-services:3.2.+'
+    compile 'com.android.support:appcompat-v7:19.0.+'
+    compile 'com.google.android.gms:play-services:4.0.+'
     compile 'com.googlecode.android-query:android-query:0.25.+'
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'siarhei.luskanau.gps:siarhei.luskanau.gps.shared:0.0.1'
@@ -25,14 +25,14 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion "18.1"
+    compileSdkVersion 19
+    buildToolsVersion "19"
 
     defaultConfig {
         versionCode 33
         versionName "3.3"
         minSdkVersion 8
-        targetSdkVersion 18
+        targetSdkVersion 19
     }
 
     signingConfigs {
@@ -50,9 +50,9 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.debug
-            debuggable false
+            debuggable true
             zipAlign true
-            runProguard true
+            runProguard false
             proguardFile 'proguard.cfg'
         }
     }

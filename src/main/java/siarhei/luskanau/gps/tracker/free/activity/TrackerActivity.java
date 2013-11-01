@@ -33,13 +33,13 @@ import android.view.MenuItem;
 
 import com.androidquery.AQuery;
 
-import net.freegps.tracker.free.R;
-
+import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.fragment.AboutFragment;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
 public class TrackerActivity extends ActionBarActivity {
 
+    private static final String TAG = "TrackerActivity";
     private AQuery aq = new AQuery(this);
 
     public static void startTrackerActivity(Context context) {
