@@ -21,34 +21,39 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.activity;
+package siarhei.luskanau.gps.tracker.free.fragment.toggle;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Switch;
 
-import siarhei.luskanau.gps.tracker.free.database.LocationDAO;
-import siarhei.luskanau.gps.tracker.free.sync.SyncService;
+public class ToggleTrackerV14Fragment extends ToggleTrackerBaseFragment {
 
-public class MainActivity extends Activity {
+//    <Switch xmlns:android="http://schemas.android.com/apk/res/android"
+//    android:layout_height="wrap_content"
+//    android:layout_width="wrap_content"/>
+
+    private Switch switchView;
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        switchView = new Switch(getActivity());
+        return switchView;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void showStartState() {
+        switchView.setChecked(true);
+    }
 
-        // Database will be created
-        LocationDAO.getCountPacket(this);
-        SyncService.ping(this);
-
-        // Main activity has a single instance launch mode.
-        // Such approach allows us to have a single application instance
-        // but restore the activity stack when user press
-        // "Home" button and then launch application again
-        Intent intent = new Intent(this, TrackerActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-
-        finish();
+    @Override
+    protected void showStopState() {
+        switchView.setChecked(false);
     }
 
 }

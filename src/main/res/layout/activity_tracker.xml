@@ -23,21 +23,36 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
 
-    <include
-            android:id="@+id/include_tracker_toggle"
+    <TextView
+            android:id="@+id/imeiTextView"
+            style="@style/TrackerTextViewStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/include_imei"
-            layout="@layout/include_tracker_toggle"/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/fragment_tracker_imei"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
+
+    <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/include_tracker_toggle"
+            android:layout_gravity="center_horizontal"/>
+
+    <View
+            android:layout_height="@dimen/action_icon_gap"
+            android:layout_width="0dp"/>
 
     <include
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/include_tracker_toggle"
             layout="@layout/include_tracker_info"/>
 
-</RelativeLayout>
+</LinearLayout>

@@ -52,10 +52,10 @@ public class GcmTask extends BaseTask {
                 return;
             }
             String registrationId = GcmSettings.getRegistrationId(context);
-            if (registrationId == null) {
+            if (registrationId != null) {
                 GoogleCloudMessaging googleCloudMessaging = GoogleCloudMessaging.getInstance(context);
                 Bundle data = new Bundle();
-                data.putString("my_message", "Hello World from " + registrationId);
+                data.putString("my_message", "Hello World from siarhei");
                 data.putString("my_action", "siarhei.luskanau.gps.tracker.free.ECHO_NOW");
                 String id = Integer.toString(atomicInteger.incrementAndGet());
                 googleCloudMessaging.send(SENDER_ID + "@gcm.googleapis.com", id, data);

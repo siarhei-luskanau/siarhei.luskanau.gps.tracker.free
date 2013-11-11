@@ -31,6 +31,7 @@ import java.util.concurrent.Callable;
 
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettingsEntity;
+import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
 import siarhei.luskanau.gps.tracker.free.sync.task.SendLocationTask;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
@@ -50,7 +51,7 @@ public class SyncCallable implements Callable<Object> {
                 throw new IOException("not online");
             }
 
-            // new GcmTask(context).doTask();
+            new GcmTask(context).doTask();
 
             boolean isAllowSendToServer = true;
             AppSettingsEntity appSettingsEntity = AppSettings.getAppSettingsEntity(context);

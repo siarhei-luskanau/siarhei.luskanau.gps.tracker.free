@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +36,7 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.fragment.AboutFragment;
+import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
 public class TrackerActivity extends ActionBarActivity {
@@ -64,6 +66,18 @@ public class TrackerActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_settings: {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            new GcmTask(TrackerActivity.this).doTask();
+                            GcmTask.sendEchoMessage(TrackerActivity.this);
+                        } catch (Exception e) {
+                            Log.d(TAG, e.toString(), e);
+                        }
+
+                    }
+                }).start();
                 return true;
             }
             case R.id.menu_action_about: {
