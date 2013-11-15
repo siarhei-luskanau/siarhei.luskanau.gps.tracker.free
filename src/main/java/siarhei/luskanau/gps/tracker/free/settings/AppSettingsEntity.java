@@ -57,9 +57,6 @@ public class AppSettingsEntity {
     @SerializedName("serverName")
     public String serverName = "m.free-gps.net";
 
-    @SerializedName("activeServerBean")
-    public ServerEntity activeServerBean;
-
     @SerializedName("customServerBean")
     public ServerEntity customServerBean;
 

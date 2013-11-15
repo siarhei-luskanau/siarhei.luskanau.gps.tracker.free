@@ -20,8 +20,6 @@ dependencies {
     compile 'com.googlecode.android-query:android-query:0.25.+'
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'siarhei.luskanau.gps:siarhei.luskanau.gps.shared:0.0.+'
-    compile 'siarhei.luskanau.gps:siarhei.luskanau.gps.keytool:1.0.+'
-    compile 'siarhei.luskanau.gps:siarhei.luskanau.gps.crypted:0.0.+'
 }
 
 android {

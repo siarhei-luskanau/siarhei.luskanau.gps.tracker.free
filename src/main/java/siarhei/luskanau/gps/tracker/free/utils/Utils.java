@@ -37,6 +37,8 @@ import android.support.v4.app.TaskStackBuilder;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Locale;
 
@@ -122,6 +124,24 @@ public class Utils {
             Log.e(TAG, e.toString(), e);
         }
         return 0;
+    }
+
+    public static byte[] getBytes(InputStream inputStream) throws Exception {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        for (; ; ) {
+            int length = inputStream.read(buffer);
+            if (length == -1) {
+                break;
+            } else {
+                if (length > 0) {
+                    byteArrayOutputStream.write(buffer, 0, length);
+                } else {
+                }
+            }
+        }
+        inputStream.close();
+        return byteArrayOutputStream.toByteArray();
     }
 
 }

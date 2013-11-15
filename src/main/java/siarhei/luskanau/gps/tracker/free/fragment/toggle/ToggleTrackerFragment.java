@@ -28,19 +28,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import siarhei.luskanau.gps.tracker.free.R;
 
 public class ToggleTrackerFragment extends ToggleTrackerBaseFragment {
-
-//    <ToggleButton xmlns:android="http://schemas.android.com/apk/res/android"
-//    android:id="@+id/toggleTrackerCompoundButton"
-//    android:layout_height="wrap_content"
-//    android:layout_width="wrap_content"
-//    android:textColor="#8cc541"
-//    android:textStyle="bold"
-//    android:textSize="32dp"/>
 
     private ToggleButton toggleButton;
 
@@ -51,6 +44,11 @@ public class ToggleTrackerFragment extends ToggleTrackerBaseFragment {
         float scale = getResources().getDisplayMetrics().density;
         int pixels = (int) (32 * scale + 0.5f);
         toggleButton.setTextSize(pixels);
+        return toggleButton;
+    }
+
+    @Override
+    protected CompoundButton getToggleButton() {
         return toggleButton;
     }
 

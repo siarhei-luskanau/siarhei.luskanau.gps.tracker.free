@@ -56,6 +56,12 @@ public class TrackerActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        checkCallingServerSettings();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_tracker, menu);
@@ -90,6 +96,9 @@ public class TrackerActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
             }
         }
+    }
+
+    private void checkCallingServerSettings() {
     }
 
 }

@@ -56,7 +56,7 @@ public class SendLocationTask extends BaseTask {
     @Override
     public void doTask() throws Exception {
         // Log.d(context.getPackageName(), "Start SendLocationTask");
-        ServerEntity serverEntity = AppSettings.getActiveServer(context);
+        ServerEntity serverEntity = AppSettings.getServerEntity(context);
         if (AppConstants.SERVER_TYPE_SOCKET.equalsIgnoreCase(serverEntity.server_type)) {
             for (; ; ) {
                 List<LocationPacket> locationEntities = LocationDAO.queryNextLocations(context, 100);

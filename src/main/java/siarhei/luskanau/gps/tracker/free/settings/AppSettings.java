@@ -38,7 +38,10 @@ public class AppSettings {
     private static final String NTP_DIFFERENT_TIME = "NTP_DIFFERENT_TIME";
     private static final String NTP_SYNCHRONIZATION_TIME = "NTP_SYNCHRONIZATION_TIME";
     private static final String APP_SETTINGS_ENTITY = "APP_SETTINGS_ENTITY";
+    private static final String SERVER_ENTITY = "SERVER_ENTITY";
+    private static final String PACKET_COUNTER = "PACKET_COUNTER";
     private static AppSettingsEntity cachedAppSettingsEntity;
+    private static ServerEntity cachedServerEntity;
 
     public static LocationPacket getLastLocationPacket(Context context) {
         return AppConstants.GSON.fromJson(getPreferences(context).getString(LAST_LOCATION_PACKET, null), LocationPacket.class);
@@ -81,8 +84,6 @@ public class AppSettings {
         getPreferences(context).edit().putString(APP_SETTINGS_ENTITY, AppConstants.GSON.toJson(cachedAppSettingsEntity)).commit();
     }
 
-    private static final String PACKET_COUNTER = "PACKET_COUNTER";
-
     public static int getPacketCounter(Context context) {
         return getPreferences(context).getInt(PACKET_COUNTER, 0);
     }
@@ -112,30 +113,17 @@ public class AppSettings {
         context.sendBroadcast(new Intent(AppConstants.ACTION_TRACKER_STARTED_CHANGED));
     }
 
-    public static ServerEntity getActiveServer(Context context) {
-        getAppSettingsEntity(context);
-
-        if (cachedAppSettingsEntity.activeServerBean == null) {
-            AppSettingsEntity appSettings = AppSettings.getAppSettingsEntity(context);
-            cachedAppSettingsEntity.activeServerBean = ServerAssets.get(context).getServerEntity(appSettings.serverName);
-
-            if (cachedAppSettingsEntity.activeServerBean != null
-                    && cachedAppSettingsEntity.activeServerBean.custom) {
-                cachedAppSettingsEntity.activeServerBean = appSettings.customServerBean;
-            }
-
-            if (cachedAppSettingsEntity.activeServerBean != null) {
-                setActiveServer(context, cachedAppSettingsEntity.activeServerBean);
-            }
+    public static ServerEntity getServerEntity(Context context) {
+        if (cachedServerEntity == null) {
+            cachedServerEntity = AppConstants.GSON.fromJson(getPreferences(context).getString(SERVER_ENTITY, null), ServerEntity.class);
         }
 
-        return cachedAppSettingsEntity.activeServerBean;
+        return cachedServerEntity;
     }
 
-    public static void setActiveServer(Context context, ServerEntity value) {
-        getAppSettingsEntity(context);
-        cachedAppSettingsEntity.activeServerBean = value;
-        setAppSettingsEntity(context, cachedAppSettingsEntity);
+    public static void setServerEntity(Context context, ServerEntity value) {
+        cachedServerEntity = value;
+        getPreferences(context).edit().putString(SERVER_ENTITY, AppConstants.GSON.toJson(value)).commit();
     }
 
 }

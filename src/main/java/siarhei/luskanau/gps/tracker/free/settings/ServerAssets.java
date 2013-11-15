@@ -28,15 +28,27 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.utils.CryptUtils;
-import siarhei.luskanau.gps.tracker.free.utils.Utils;
-
 public class ServerAssets {
 
     private static ServerAssets INSTANCE;
-
     private List<ServerEntity> serverBeanList;
+
+    private ServerAssets(Context context) {
+//        try {
+//            String deviceId = Utils.getDeviceId(context);
+//            serverBeanList = new ArrayList<ServerEntity>();
+//            String json = new String(CryptUtils.getAssets(context, "servers.json"), "utf-8");
+//            List<ServerEntity> serverBeans = AppConstants.GSON.fromJson(json, ServerEntity.COLLECTION_TYPE);
+//            for (ServerEntity serverBean : serverBeans) {
+//                if (serverBean.deviceIds != null && !serverBean.deviceIds.contains(deviceId)) {
+//                    continue;
+//                }
+//                serverBeanList.add(serverBean);
+//            }
+//        } catch (Exception e) {
+//            serverBeanList = new ArrayList<ServerEntity>();
+//        }
+    }
 
     public static ServerAssets get(Context context) {
         if (INSTANCE == null) {
@@ -47,23 +59,6 @@ public class ServerAssets {
             }
         }
         return INSTANCE;
-    }
-
-    private ServerAssets(Context context) {
-        try {
-            String deviceId = Utils.getDeviceId(context);
-            serverBeanList = new ArrayList<ServerEntity>();
-            String json = new String(CryptUtils.getAssets(context, "servers.json"), "utf-8");
-            List<ServerEntity> serverBeans = AppConstants.GSON.fromJson(json, ServerEntity.COLLECTION_TYPE);
-            for (ServerEntity serverBean : serverBeans) {
-                if (serverBean.deviceIds != null && !serverBean.deviceIds.contains(deviceId)) {
-                    continue;
-                }
-                serverBeanList.add(serverBean);
-            }
-        } catch (Exception e) {
-            serverBeanList = new ArrayList<ServerEntity>();
-        }
     }
 
     public List<String> getServerNames() {

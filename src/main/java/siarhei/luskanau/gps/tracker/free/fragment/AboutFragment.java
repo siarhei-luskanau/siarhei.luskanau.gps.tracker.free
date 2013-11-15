@@ -32,10 +32,8 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.utils.CryptUtils;
+import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
 public class AboutFragment extends DialogFragment {
 
@@ -47,17 +45,11 @@ public class AboutFragment extends DialogFragment {
         builder.setTitle(R.string.menu_action_about);
         builder.setIcon(R.drawable.ic_action_about);
         try {
-            String message = new String(CryptUtils.getAssets(getActivity(), "about-" + Locale.getDefault().getLanguage()), "utf-8");
+            String message = new String(Utils.getBytes(getResources().openRawResource(R.raw.about)), "utf-8");
             builder.setMessage(Html.fromHtml(message));
         } catch (Throwable t1) {
-            try {
-                String message = new String(CryptUtils.getAssets(getActivity(), "about-en"), "utf-8");
-                builder.setMessage(Html.fromHtml(message));
-            } catch (Throwable t2) {
-                builder.setMessage(null);
-            }
+            builder.setMessage(null);
         }
-
         builder.setNeutralButton(android.R.string.ok, null);
         return builder.create();
     }

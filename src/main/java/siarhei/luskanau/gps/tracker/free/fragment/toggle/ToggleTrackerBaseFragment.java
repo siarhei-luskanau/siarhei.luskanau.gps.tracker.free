@@ -25,12 +25,11 @@ package siarhei.luskanau.gps.tracker.free.fragment.toggle;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.widget.CompoundButton;
 
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 
 public abstract class ToggleTrackerBaseFragment extends Fragment {
-
-    public static final String TAG = "ToggleTrackerBaseFragment";
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -41,7 +40,29 @@ public abstract class ToggleTrackerBaseFragment extends Fragment {
         } else {
             showStopState();
         }
+
+        getToggleButton().setEnabled(AppSettings.getServerEntity(getActivity()) != null);
+
+        getToggleButton().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                AppSettings.setTrackerStarted(getActivity(), isChecked);
+                if (isChecked) {
+                    showStartState();
+                } else {
+                    showStopState();
+                }
+            }
+        });
+
     }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    protected abstract CompoundButton getToggleButton();
 
     protected abstract void showStartState();
 

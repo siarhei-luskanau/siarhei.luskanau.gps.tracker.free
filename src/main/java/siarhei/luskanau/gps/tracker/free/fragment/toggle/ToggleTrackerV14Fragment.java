@@ -29,13 +29,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 public class ToggleTrackerV14Fragment extends ToggleTrackerBaseFragment {
-
-//    <Switch xmlns:android="http://schemas.android.com/apk/res/android"
-//    android:layout_height="wrap_content"
-//    android:layout_width="wrap_content"/>
 
     private Switch switchView;
 
@@ -43,6 +40,11 @@ public class ToggleTrackerV14Fragment extends ToggleTrackerBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         switchView = new Switch(getActivity());
+        return switchView;
+    }
+
+    @Override
+    protected CompoundButton getToggleButton() {
         return switchView;
     }
 
