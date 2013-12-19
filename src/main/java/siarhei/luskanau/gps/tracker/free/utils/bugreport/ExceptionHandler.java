@@ -79,7 +79,7 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
 
             String[] to = new String[]{"siarhei.luskanau@gmail.com"};
             String[] cc = null;
-            String subject = "Free-gps.net Tracker : Bug report";
+            String subject = "Free GPS Tracker : Bug report";
             SendMailer.send(context, to, cc, subject, builder.toString(), null);
         } catch (Throwable t) {
             // empty

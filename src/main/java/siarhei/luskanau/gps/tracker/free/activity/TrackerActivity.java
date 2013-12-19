@@ -26,20 +26,22 @@ package siarhei.luskanau.gps.tracker.free.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.fragment.AboutFragment;
+import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
+import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
-public class TrackerActivity extends ActionBarActivity {
+public class TrackerActivity extends BaseActivity {
 
     private static final String TAG = "TrackerActivity";
     private AQuery aq = new AQuery(this);
@@ -53,12 +55,27 @@ public class TrackerActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracker);
         aq.id(R.id.imeiTextView).text(getString(R.string.fragment_tracker_imei, Utils.getDeviceId(this)));
+
+        aq.id(R.id.editServerImageButton).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServersActivity.startServersActivity(TrackerActivity.this);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkCallingServerSettings();
+
+        ServerEntity serverEntity = AppSettings.getServerEntity(this);
+        if (serverEntity != null) {
+            aq.id(R.id.aboutServerImageButton).visible();
+            aq.id(R.id.serverNameImageButton).text(getString(R.string.fragment_tracker_server, serverEntity.name));
+        } else {
+            aq.id(R.id.aboutServerImageButton).gone();
+            aq.id(R.id.serverNameImageButton).text(getString(R.string.fragment_tracker_server, "---"));
+        }
     }
 
     @Override
@@ -96,9 +113,6 @@ public class TrackerActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
             }
         }
-    }
-
-    private void checkCallingServerSettings() {
     }
 
 }

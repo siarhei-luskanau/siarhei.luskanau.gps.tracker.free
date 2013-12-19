@@ -50,18 +50,24 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_general_show_notification">Show notification</string>
     <string name="fragment_settings_general_reset_disable_ad">Disable the Ad bar</string>
     <string name="fragment_settings_general_reset_packet_counter">Reset counter</string>
-    <string name="fragment_settings_general_warning_reset_counter">Do you want reset the counter?</string>
+    <string name="fragment_settings_general_warning_reset_counter">Do you want reset the counter?
+    </string>
     <string name="fragment_settings_general_language">Language</string>
 
     <!-- fragment_settings_internet.xml -->
     <string name="fragment_settings_internet_internet">Internet</string>
-    <string name="fragment_settings_internet_send_to_server_interval">Sending to server interval:</string>
+    <string name="fragment_settings_internet_send_to_server_interval">Sending to server interval:
+    </string>
     <string name="fragment_settings_internet_battery">Battery</string>
     <string name="fragment_settings_internet_stop_if_battery_low">Stop if battery low</string>
     <string name="fragment_settings_internet_start_if_battery_ok">Start if battery OK</string>
     <string name="fragment_settings_internet_charger">Charger</string>
-    <string name="fragment_settings_internet_stop_if_charger_disconnected">Stop if charger is disconnected</string>
-    <string name="fragment_settings_internet_start_if_charger_connected">Start if charger is connected</string>
+    <string name="fragment_settings_internet_stop_if_charger_disconnected">Stop if charger is
+        disconnected
+    </string>
+    <string name="fragment_settings_internet_start_if_charger_connected">Start if charger is
+        connected
+    </string>
 
     <!-- fragment_settings_location.xml -->
     <string name="service_providers_disable">Locations disable in phone settings.</string>
@@ -69,13 +75,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="settings_location_gps">GPS</string>
     <string name="settings_location_gps_distance_filter">GPS: distance filter</string>
     <string name="settings_location_wireless_network">Wireless network locations</string>
-    <string name="settings_location_wireless_network_distance_filter">Wireless locations: distance filter</string>
+    <string name="settings_location_wireless_network_distance_filter">Wireless locations: distance
+        filter
+    </string>
     <string name="settings_location_gsm">GSM cell information</string>
 
     <!-- fragment_tracker.xml -->
 
-    <string name="fragment_tracker_imei">IMEI: %s</string>
-    <string name="fragment_tracker_server">Server:</string>
+    <string name="fragment_tracker_imei">IMEI: %1$s</string>
+    <string name="fragment_tracker_server">Server: %1$s</string>
     <string name="fragment_tracker_packets">Packets:</string>
     <string name="fragment_tracker_date">Date:</string>
     <string name="fragment_tracker_source">Source:</string>

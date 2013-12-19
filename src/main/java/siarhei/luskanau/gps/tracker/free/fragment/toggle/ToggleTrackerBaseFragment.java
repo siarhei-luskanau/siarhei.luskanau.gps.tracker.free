@@ -34,15 +34,6 @@ public abstract class ToggleTrackerBaseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        if (AppSettings.isTrackerStarted(getActivity())) {
-            showStartState();
-        } else {
-            showStopState();
-        }
-
-        getToggleButton().setEnabled(AppSettings.getServerEntity(getActivity()) != null);
-
         getToggleButton().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -54,7 +45,20 @@ public abstract class ToggleTrackerBaseFragment extends Fragment {
                 }
             }
         });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (AppSettings.isTrackerStarted(getActivity())) {
+            showStartState();
+        } else {
+            showStopState();
+        }
+        if (AppSettings.getServerEntity(getActivity()) == null) {
+            getToggleButton().setEnabled(false);
+            AppSettings.setTrackerStarted(getActivity(), false);
+        }
     }
 
     @Override
