@@ -1,0 +1,56 @@
+[
+    {
+        "id": "server_id_06",
+        "name": "GPS-Trace Orange",
+        "site_url": "http://gps-trace.com/",
+        "server_type": "socket",
+        "server_address": "193.193.165.166",
+        "server_port": 98765,
+        "custom": false
+    },
+    {
+        "id": "server_id_01",
+        "name": "m.gps-tracker.com.ua",
+        "site_url": "http://m.gps-tracker.com.ua/",
+        "server_type": "socket",
+        "server_address": "m2m.dp.ua",
+        "server_port": 10056,
+        "custom": false
+    },
+    {
+        "id": "server_id_02",
+        "name": "m.free-gps.net",
+        "site_url": "http://m.free-gps.net/",
+        "server_type": "socket",
+        "server_address": "m2m.dp.ua",
+        "server_port": 10056,
+        "custom": false
+    },
+    {
+        "id": "server_id_03",
+        "name": "kontrol24.ru",
+        "site_url": "http://kontrol24.ru/",
+        "server_type": "socket",
+        "server_address": "176.9.59.107",
+        "server_port": 10056,
+        "custom": false
+    },
+    {
+        "id": "server_id_04",
+        "name": "maxicms.ru",
+        "site_url": "http://maxicms.ru/",
+        "server_type": "json_form",
+        "server_address": "http://tracker.maxicms.ru/tracker/set",
+        "server_port": 80,
+        "custom": false
+    },
+    {
+        "id": "server_id_05",
+        "name": "softmax.by",
+        "site_url": "http://178.124.135.194/demo/en_US/",
+        "server_type": "socket",
+        "server_address": "178.124.135.194",
+        "server_port": 9988,
+        "custom": false
+    }
+]

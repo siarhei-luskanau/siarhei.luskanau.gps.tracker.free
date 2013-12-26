@@ -26,17 +26,19 @@ package siarhei.luskanau.gps.tracker.free.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
-import com.androidquery.AQuery;
+import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.dao.ServerEntityDAO;
+import siarhei.luskanau.gps.tracker.free.fragment.ServerEntityItemFragment;
+import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 
 public class ServersActivity extends BaseActivity {
 
-    private static final String TAG = "ServersActivity";
-    private AQuery aq = new AQuery(this);
-    private ListView serverEntityListView;
+    private List<ServerEntity> serverEntities;
 
     public static void startServersActivity(Context context) {
         context.startActivity(new Intent(context, ServersActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -46,18 +48,46 @@ public class ServersActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servers);
-
-        serverEntityListView = aq.id(R.id.serverEntityListView).getListView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        updateLust();
+        updateServerEntities();
     }
 
-    private void updateLust() {
+    private void updateServerEntities() {
+        serverEntities = ServerEntityDAO.getServerEntities(this);
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
+        for (int i = serverEntities.size(); ; i++) {
+            String fragmentTag = ServerEntityItemFragment.TAG + i;
+            Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
+            if (fragment != null) {
+                fragmentManager.beginTransaction().remove(fragment).commit();
+            } else {
+                break;
+            }
+        }
+
+        for (int i = 0; i < serverEntities.size(); i++) {
+            ServerEntity serverEntity = serverEntities.get(i);
+            String fragmentTag = ServerEntityItemFragment.TAG + i;
+            ServerEntityItemFragment consignmentItemFragment = (ServerEntityItemFragment) fragmentManager.findFragmentByTag(fragmentTag);
+            if (consignmentItemFragment != null) {
+                consignmentItemFragment.updateServerEntity(serverEntity);
+            } else {
+                fragmentManager.beginTransaction().add(R.id.serverEntitiesLinearLayout, ServerEntityItemFragment.newInstance(i), fragmentTag).commit();
+            }
+        }
+
+    }
+
+    public ServerEntity getServerEntity(int position) {
+        if (serverEntities != null && position < serverEntities.size()) {
+            return serverEntities.get(position);
+        }
+        return null;
     }
 
 }

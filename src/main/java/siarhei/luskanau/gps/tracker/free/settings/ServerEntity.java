@@ -49,9 +49,6 @@ public class ServerEntity {
     @SerializedName("server_port")
     public int server_port;
 
-    @SerializedName("deviceIds")
-    public List<String> deviceIds;
-
     @SerializedName("custom")
     public boolean custom;
 

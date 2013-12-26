@@ -24,12 +24,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/serverItemRelativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.AppCompat.Light.ListView.DropDown">
+                android:clickable="true"
+                android:background="@drawable/abc_item_background_holo_light">
 
     <TextView
-            android:id="@+id/barcodeItemTextView"
+            android:id="@+id/serverNameTextView"
             style="@style/TrackerTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +45,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:focusable="false"
             android:src="@drawable/ic_action_edit"/>
 
 </RelativeLayout>

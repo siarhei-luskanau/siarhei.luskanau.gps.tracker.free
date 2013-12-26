@@ -23,14 +23,15 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-    <ListView
-            android:id="@+id/serverEntityListView"
+    <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/serverEntitiesLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</ScrollView>

@@ -58,12 +58,9 @@ public abstract class ToggleTrackerBaseFragment extends Fragment {
         if (AppSettings.getServerEntity(getActivity()) == null) {
             getToggleButton().setEnabled(false);
             AppSettings.setTrackerStarted(getActivity(), false);
+        } else {
+            getToggleButton().setEnabled(true);
         }
-    }
-
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
     }
 
     protected abstract CompoundButton getToggleButton();
