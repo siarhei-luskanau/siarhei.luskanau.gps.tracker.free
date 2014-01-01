@@ -36,6 +36,7 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.fragment.AboutFragment;
+import siarhei.luskanau.gps.tracker.free.fragment.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
@@ -60,6 +61,17 @@ public class TrackerActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ServersActivity.startServersActivity(TrackerActivity.this);
+            }
+        });
+        aq.id(R.id.aboutServerImageButton).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServerEntity serverEntity = AppSettings.getServerEntity(TrackerActivity.this);
+                if (serverEntity != null) {
+                    if (getSupportFragmentManager().findFragmentByTag(AboutServerDialogFragment.TAG) == null) {
+                        AboutServerDialogFragment.newInstance(serverEntity).show(getSupportFragmentManager(), AboutServerDialogFragment.TAG);
+                    }
+                }
             }
         });
     }

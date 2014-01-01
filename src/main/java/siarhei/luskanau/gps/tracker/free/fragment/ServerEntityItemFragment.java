@@ -33,6 +33,7 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.activity.ServersActivity;
+import siarhei.luskanau.gps.tracker.free.fragment.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.fragment.dialog.ConfirmServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 
@@ -61,7 +62,7 @@ public class ServerEntityItemFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        aq.id(R.id.serverItemRelativeLayout).clicked(new View.OnClickListener() {
+        aq.id(R.id.serverItemLinearLayout).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getArguments().containsKey(POSITION_ARG)) {
@@ -70,6 +71,20 @@ public class ServerEntityItemFragment extends Fragment {
                     ServerEntity serverEntity = serversActivity.getServerEntity(position);
                     if (getFragmentManager().findFragmentByTag(ConfirmServerDialogFragment.TAG) == null) {
                         ConfirmServerDialogFragment.newInstance(serverEntity).show(getFragmentManager(), ConfirmServerDialogFragment.TAG);
+                    }
+                }
+            }
+        });
+
+        aq.id(R.id.aboutServerImageButton).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = getArguments().getInt(POSITION_ARG);
+                ServersActivity serversActivity = (ServersActivity) getActivity();
+                ServerEntity serverEntity = serversActivity.getServerEntity(position);
+                if (serverEntity != null) {
+                    if (getFragmentManager().findFragmentByTag(AboutServerDialogFragment.TAG) == null) {
+                        AboutServerDialogFragment.newInstance(serverEntity).show(getFragmentManager(), AboutServerDialogFragment.TAG);
                     }
                 }
             }
@@ -87,6 +102,11 @@ public class ServerEntityItemFragment extends Fragment {
 
     public void updateServerEntity(ServerEntity serverEntity) {
         aq.id(R.id.serverNameTextView).text(serverEntity.name);
+        if (serverEntity.custom) {
+            aq.id(R.id.editServerImageButton).visible();
+        } else {
+            aq.id(R.id.editServerImageButton).gone();
+        }
     }
 
 }
