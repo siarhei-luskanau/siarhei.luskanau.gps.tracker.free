@@ -29,38 +29,26 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
               android:layout_height="wrap_content"
               android:background="@android:color/white">
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
-
-        <TextView
-                style="@style/TrackerTextViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name: "/>
-
-        <TextView
-                android:id="@+id/serverNameTextView"
-                style="@style/TrackerTextViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@null"/>
-
-    </LinearLayout>
+    <TextView
+            android:id="@+id/serverNameTextView"
+            style="@style/TrackerTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@null"/>
 
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="@dimen/component_gap">
 
-        <TextView
-                style="@style/TrackerTextViewStyle"
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Site: "/>
 
         <TextView
                 android:id="@+id/serverSiteUrlTextView"
-                style="@style/TrackerTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@null"/>
@@ -69,17 +57,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="@dimen/component_gap">
 
-        <TextView
-                style="@style/TrackerTextViewStyle"
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Type: "/>
 
         <TextView
                 android:id="@+id/serverTypeTextView"
-                style="@style/TrackerTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@null"/>
@@ -88,17 +75,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="@dimen/component_gap">
 
-        <TextView
-                style="@style/TrackerTextViewStyle"
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address: "/>
 
         <TextView
                 android:id="@+id/serverAddressTextView"
-                style="@style/TrackerTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@null"/>
@@ -107,21 +93,23 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="@dimen/component_gap">
 
-        <TextView
-                style="@style/TrackerTextViewStyle"
+    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Port: "/>
 
         <TextView
                 android:id="@+id/serverPortTextView"
-                style="@style/TrackerTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@null"/>
 
     </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="@dimen/component_gap"/>
 
 </LinearLayout>

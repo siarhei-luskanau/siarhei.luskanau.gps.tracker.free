@@ -33,7 +33,6 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.activity.ServersActivity;
-import siarhei.luskanau.gps.tracker.free.fragment.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.fragment.dialog.ConfirmServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 
@@ -76,20 +75,6 @@ public class ServerEntityItemFragment extends Fragment {
             }
         });
 
-        aq.id(R.id.aboutServerImageButton).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = getArguments().getInt(POSITION_ARG);
-                ServersActivity serversActivity = (ServersActivity) getActivity();
-                ServerEntity serverEntity = serversActivity.getServerEntity(position);
-                if (serverEntity != null) {
-                    if (getFragmentManager().findFragmentByTag(AboutServerDialogFragment.TAG) == null) {
-                        AboutServerDialogFragment.newInstance(serverEntity).show(getFragmentManager(), AboutServerDialogFragment.TAG);
-                    }
-                }
-            }
-        });
-
         if (getArguments().containsKey(POSITION_ARG)) {
             int position = getArguments().getInt(POSITION_ARG);
             ServersActivity serversActivity = (ServersActivity) getActivity();
@@ -102,6 +87,10 @@ public class ServerEntityItemFragment extends Fragment {
 
     public void updateServerEntity(ServerEntity serverEntity) {
         aq.id(R.id.serverNameTextView).text(serverEntity.name);
+        aq.id(R.id.serverSiteUrlTextView).text(serverEntity.site_url);
+        aq.id(R.id.serverTypeTextView).text(serverEntity.server_type);
+        aq.id(R.id.serverAddressTextView).text(serverEntity.server_address);
+        aq.id(R.id.serverPortTextView).text(String.valueOf(serverEntity.server_port));
         if (serverEntity.custom) {
             aq.id(R.id.editServerImageButton).visible();
         } else {

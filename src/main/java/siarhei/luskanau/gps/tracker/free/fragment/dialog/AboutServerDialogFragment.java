@@ -55,7 +55,6 @@ public class AboutServerDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY), ServerEntity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(serverEntity.name);
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_about_server, null);
         aq = new AQuery(view);
         builder.setView(view);
@@ -66,10 +65,10 @@ public class AboutServerDialogFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        aq.id(R.id.serverNameTextView).text(String.valueOf(serverEntity.name));
-        aq.id(R.id.serverSiteUrlTextView).text(String.valueOf(serverEntity.site_url));
-        aq.id(R.id.serverTypeTextView).text(String.valueOf(serverEntity.server_type));
-        aq.id(R.id.serverAddressTextView).text(String.valueOf(serverEntity.server_address));
+        aq.id(R.id.serverNameTextView).text(serverEntity.name);
+        aq.id(R.id.serverSiteUrlTextView).text(serverEntity.site_url);
+        aq.id(R.id.serverTypeTextView).text(serverEntity.server_type);
+        aq.id(R.id.serverAddressTextView).text(serverEntity.server_address);
         aq.id(R.id.serverPortTextView).text(String.valueOf(serverEntity.server_port));
     }
 
