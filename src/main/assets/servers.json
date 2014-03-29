@@ -18,24 +18,6 @@
         "custom": false
     },
     {
-        "id": "server_id_02",
-        "name": "m.free-gps.net",
-        "site_url": "http://m.free-gps.net/",
-        "server_type": "socket",
-        "server_address": "m2m.dp.ua",
-        "server_port": 10056,
-        "custom": false
-    },
-    {
-        "id": "server_id_03",
-        "name": "kontrol24.ru",
-        "site_url": "http://kontrol24.ru/",
-        "server_type": "socket",
-        "server_address": "176.9.59.107",
-        "server_port": 10056,
-        "custom": false
-    },
-    {
         "id": "server_id_04",
         "name": "maxicms.ru",
         "site_url": "http://maxicms.ru/",

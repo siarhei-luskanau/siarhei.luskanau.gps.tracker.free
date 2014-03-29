@@ -70,7 +70,7 @@ public class ServersActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_new: {
-                ServerEditActivity.startServerEditActivity(this);
+                ServerEditActivity.startServerEditActivity(this, null);
                 return true;
             }
             default: {

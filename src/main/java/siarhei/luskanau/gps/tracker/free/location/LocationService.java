@@ -64,8 +64,7 @@ public class LocationService extends Service {
     }
 
     public static void updateGpsListener(Context context) {
-        context.startService(new Intent(context, LocationService.class)
-                .setAction(ACTION_UPDATE_GPS_LISTENER));
+        context.startService(new Intent(context, LocationService.class).setAction(ACTION_UPDATE_GPS_LISTENER));
     }
 
     @Override

@@ -30,6 +30,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.androidquery.AQuery;
+
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.fragment.dialog.CheckServerDialogFragment;
@@ -38,20 +40,29 @@ import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 public class ServerEditActivity extends BaseActivity {
 
     private static final String SERVER_ENTITY = "SERVER_ENTITY";
+    private AQuery aq = new AQuery(this);
     private ServerEntity serverEntity;
 
-    public static void startServerEditActivity(Context context) {
-        context.startActivity(new Intent(context, ServerEditActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    public static void startServerEditActivity(Context context, ServerEntity serverEntity) {
+        Intent intent = new Intent(context, ServerEditActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (serverEntity != null) {
+            intent.putExtra(SERVER_ENTITY, AppConstants.GSON.toJson(serverEntity));
+        }
+        context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_edit_server);
+        setContentView(R.layout.activity_edit_server);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(SERVER_ENTITY)) {
             serverEntity = AppConstants.GSON.fromJson(savedInstanceState.getString(SERVER_ENTITY), ServerEntity.class);
-        } else {
+        } else if (getIntent() != null && getIntent().hasExtra(SERVER_ENTITY)) {
+            serverEntity = AppConstants.GSON.fromJson(getIntent().getStringExtra(SERVER_ENTITY), ServerEntity.class);
+        }
+        if (serverEntity == null) {
             serverEntity = new ServerEntity();
         }
     }
@@ -60,6 +71,26 @@ public class ServerEditActivity extends BaseActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(SERVER_ENTITY, AppConstants.GSON.toJson(serverEntity));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        aq.id(R.id.customServerAddressEditText).text(serverEntity.server_address);
+        if (serverEntity.server_port > 0) {
+            aq.id(R.id.customServerPortEditText).text(String.valueOf(serverEntity.server_port));
+        }
+
+
+        if (AppConstants.SERVER_TYPE_SOCKET.equalsIgnoreCase(serverEntity.server_type)) {
+            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
+        } else if (AppConstants.SERVER_TYPE_JSON_FORM.equalsIgnoreCase(serverEntity.server_type)) {
+            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(1);
+        } else if (AppConstants.SERVER_TYPE_JSON_BODY.equalsIgnoreCase(serverEntity.server_type)) {
+            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(2);
+        }
+
     }
 
     @Override
@@ -86,6 +117,29 @@ public class ServerEditActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
             }
         }
+    }
+
+    private ServerEntity createServer() {
+        ServerEntity serverEntity = new ServerEntity();
+
+        String serverType = aq.id(R.id.serverTypeSpinner).getSpinner().getSelectedItem().toString();
+        if (serverType.equals(getString(R.string.server_type_socket))) {
+            serverEntity.server_type = AppConstants.SERVER_TYPE_SOCKET;
+        } else if (serverType.equals(getString(R.string.server_type_json_body))) {
+            serverEntity.server_type = AppConstants.SERVER_TYPE_JSON_BODY;
+        } else if (serverType.equals(getString(R.string.server_type_json_form))) {
+            serverEntity.server_type = AppConstants.SERVER_TYPE_JSON_FORM;
+        }
+
+        serverEntity.name = aq.id(R.id.customServerNameEditText).getText().toString();
+        serverEntity.server_address = aq.id(R.id.customServerAddressEditText).getText().toString();
+        try {
+            serverEntity.server_port = Integer.parseInt(aq.id(R.id.customServerPortEditText).getText()
+                    .toString());
+        } catch (Exception e) {
+            serverEntity.server_port = 0;
+        }
+        return serverEntity;
     }
 
 }
