@@ -45,8 +45,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import siarhei.luskanau.gps.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class JsonHttpPostServer {
 

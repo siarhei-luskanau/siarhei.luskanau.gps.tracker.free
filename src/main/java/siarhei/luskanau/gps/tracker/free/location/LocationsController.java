@@ -31,10 +31,10 @@ import android.util.Log;
 import java.util.Date;
 import java.util.TimeZone;
 
-import siarhei.luskanau.gps.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.database.LocationDAO;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
+import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.utils.PhoneStateUtils;
 

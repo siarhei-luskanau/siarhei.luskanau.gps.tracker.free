@@ -34,8 +34,8 @@ import android.telephony.gsm.GsmCellLocation;
 
 import java.util.HashMap;
 
-import siarhei.luskanau.gps.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class LocationUtils {
 

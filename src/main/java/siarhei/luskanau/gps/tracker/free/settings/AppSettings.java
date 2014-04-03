@@ -28,9 +28,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import siarhei.luskanau.gps.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.location.LocationService;
+import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class AppSettings {
 

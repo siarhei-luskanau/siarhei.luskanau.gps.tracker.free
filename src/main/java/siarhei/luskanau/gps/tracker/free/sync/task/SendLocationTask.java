@@ -34,12 +34,12 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.List;
 
-import siarhei.luskanau.gps.shared.LocationPacket;
-import siarhei.luskanau.gps.shared.Tr151ModLocationPacketAdapter;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.database.LocationDAO;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
+import siarhei.luskanau.gps.tracker.free.shared.Tr151ModLocationPacketAdapter;
 import siarhei.luskanau.gps.tracker.free.sync.JsonHttpPostServer;
 import siarhei.luskanau.gps.tracker.free.sync.StatusResponseEntity;
 
