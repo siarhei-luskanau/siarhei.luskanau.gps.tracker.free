@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2013 Siarhei Luskanau
+Copyright (c) 2014 Siarhei Luskanau
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -24,14 +22,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/serverEntitiesLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:orientation="vertical"
+        android:id="@+id/serverEntitiesLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </ScrollView>

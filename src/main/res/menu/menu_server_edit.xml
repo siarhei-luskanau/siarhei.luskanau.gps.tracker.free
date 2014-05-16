@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2013 Siarhei Luskanau
+Copyright (c) 2014 Siarhei Luskanau
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -24,29 +22,29 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/menu_action_accept"
-            android:orderInCategory="100"
-            yourapp:showAsAction="ifRoom|withText"
-            android:title="@string/menu_action_save"
-            android:icon="@drawable/ic_action_accept"/>
+        android:id="@+id/menu_action_accept"
+        android:orderInCategory="100"
+        yourapp:showAsAction="ifRoom|withText"
+        android:title="@string/menu_action_save"
+        android:icon="@drawable/ic_action_accept" />
 
     <item
-            android:orderInCategory="900"
-            yourapp:showAsAction="ifRoom|withText"
-            android:title="@string/abc_action_menu_overflow_description"
-            android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_light">
+        android:orderInCategory="900"
+        yourapp:showAsAction="ifRoom|withText"
+        android:title="@string/abc_action_menu_overflow_description"
+        android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_light">
 
         <menu>
 
             <item
-                    android:id="@+id/menu_action_check"
-                    android:orderInCategory="100"
-                    yourapp:showAsAction="ifRoom|withText"
-                    android:title="@string/menu_action_check"
-                    android:icon="@drawable/ic_action_web_site"/>
+                android:id="@+id/menu_action_check"
+                android:orderInCategory="100"
+                yourapp:showAsAction="ifRoom|withText"
+                android:title="@string/menu_action_check"
+                android:icon="@drawable/ic_action_web_site" />
 
         </menu>
 

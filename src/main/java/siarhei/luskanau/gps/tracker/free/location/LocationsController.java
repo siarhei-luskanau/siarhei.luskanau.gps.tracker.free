@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Siarhei Luskanau
+ * Copyright (c) 2014 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.database.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.sync.SyncService;

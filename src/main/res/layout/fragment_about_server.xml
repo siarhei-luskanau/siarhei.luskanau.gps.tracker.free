@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2013 Siarhei Luskanau
+Copyright (c) 2014 Siarhei Luskanau
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -24,92 +22,97 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@android:color/white">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
 
     <TextView
-            android:id="@+id/serverNameTextView"
-            style="@style/TrackerTextViewStyle"
+        android:id="@+id/serverNameTextView"
+        style="@style/TrackerTextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="@null" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/component_gap">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@null"/>
-
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingLeft="@dimen/component_gap">
-
-    <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Site: "/>
+            android:text="Site: " />
 
         <TextView
-                android:id="@+id/serverSiteUrlTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@null"/>
+            android:id="@+id/serverSiteUrlTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@null" />
 
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingLeft="@dimen/component_gap">
-
-    <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Type: "/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/component_gap">
 
         <TextView
-                android:id="@+id/serverTypeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@null"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type: " />
+
+        <TextView
+            android:id="@+id/serverTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@null" />
 
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingLeft="@dimen/component_gap">
-
-    <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address: "/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/component_gap">
 
         <TextView
-                android:id="@+id/serverAddressTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@null"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address: " />
+
+        <TextView
+            android:id="@+id/serverAddressTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@null" />
 
     </LinearLayout>
 
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingLeft="@dimen/component_gap">
-
-    <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Port: "/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/component_gap">
 
         <TextView
-                android:id="@+id/serverPortTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@null"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Port: " />
+
+        <TextView
+            android:id="@+id/serverPortTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@null" />
 
     </LinearLayout>
 
-    <View android:layout_width="match_parent"
-          android:layout_height="@dimen/component_gap"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/component_gap" />
 
 </LinearLayout>

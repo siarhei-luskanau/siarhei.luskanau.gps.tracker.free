@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Siarhei Luskanau
+ * Copyright (c) 2014 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -51,23 +51,35 @@ public class ProgressDialogTaskCallback implements TaskCallback {
 
     @Override
     public void publishTaskProgress(CharSequence title, CharSequence message) {
-        if (activity != null) {
-            activity.showProgressDialog(title, message);
+        try {
+            if (activity != null) {
+                activity.showProgressDialog(title, message);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
         }
     }
 
     @Override
     public void showAlertDialog(CharSequence title, CharSequence message) {
-        if (activity != null) {
-            activity.showAlertDialog(title, message);
+        try {
+            if (activity != null) {
+                activity.showAlertDialog(title, message);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
         }
     }
 
     @Override
     public void onProgressDialogTaskFinished() {
-        if (activity != null) {
-            activity.hideProgressDialog();
-            activity.onProgressDialogTaskFinished();
+        try {
+            if (activity != null) {
+                activity.hideProgressDialog();
+                activity.onProgressDialogTaskFinished();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
         }
     }
 
@@ -84,6 +96,7 @@ public class ProgressDialogTaskCallback implements TaskCallback {
     @Override
     public void bindActivity(ProgressDialogActivity progressDialogActivity) {
         try {
+            activity = progressDialogActivity;
             if (activity != null) {
                 activity.showProgressDialog(progressAsyncTask.getTitle(), progressAsyncTask.getMessage());
             }

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2013 Siarhei Luskanau
+Copyright (c) 2014 Siarhei Luskanau
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -24,93 +22,93 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="siarhei.luskanau.gps.tracker.free">
+    package="siarhei.luskanau.gps.tracker.free">
 
     <supports-screens
-            android:anyDensity="true"
-            android:resizeable="true"
-            android:smallScreens="true"
-            android:normalScreens="true"
-            android:largeScreens="true"
-            android:xlargeScreens="true"/>
+        android:anyDensity="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true" />
 
     <uses-feature
-            android:name="android.hardware.telephony"
-            android:required="false"/>
+        android:name="android.hardware.telephony"
+        android:required="false" />
     <uses-feature
-            android:name="android.hardware.location"
-            android:required="false"/>
+        android:name="android.hardware.location"
+        android:required="false" />
     <uses-feature
-            android:name="android.hardware.location.network"
-            android:required="false"/>
+        android:name="android.hardware.location.network"
+        android:required="false" />
     <uses-feature
-            android:name="android.hardware.location.gps"
-            android:required="false"/>
+        android:name="android.hardware.location.gps"
+        android:required="false" />
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.BATTERY_STATS"/>
-    <uses-permission android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.net.conn.CONNECTIVITY_CHANGE" />
 
     <!-- GCM -->
     <permission
-            android:name="siarhei.luskanau.gps.tracker.free.permission.C2D_MESSAGE"
-            android:protectionLevel="signature"/>
+        android:name="siarhei.luskanau.gps.tracker.free.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
     <!-- GCM -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="siarhei.luskanau.gps.tracker.free.permission.C2D_MESSAGE"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="siarhei.luskanau.gps.tracker.free.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
-            android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerApplication"
-            android:label="@string/tracker_app_name"
-            android:icon="@drawable/ic_launcher"
-            android:theme="@style/Theme.TrackerTheme"
-            android:allowBackup="false">
+        android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerApplication"
+        android:label="@string/tracker_app_name"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/Theme.TrackerTheme"
+        android:allowBackup="false">
 
         <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version"/>
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity
-                android:name="siarhei.luskanau.gps.tracker.free.activity.MainActivity"
-                android:launchMode="singleInstance">
+            android:name="siarhei.luskanau.gps.tracker.free.activity.MainActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerActivity"/>
-        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.ServersActivity"/>
-        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.ServerEditActivity"/>
+        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerActivity" />
+        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.ServersActivity" />
+        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.ServerEditActivity" />
 
         <service
-                android:name="siarhei.luskanau.gps.tracker.free.sync.SyncService"
-                android:exported="false"/>
+            android:name="siarhei.luskanau.gps.tracker.free.sync.SyncService"
+            android:exported="false" />
         <service
-                android:name="siarhei.luskanau.gps.tracker.free.location.LocationService"
-                android:exported="false"/>
+            android:name="siarhei.luskanau.gps.tracker.free.location.LocationService"
+            android:exported="false" />
 
         <provider
-                android:name="siarhei.luskanau.gps.tracker.free.database.ContentProvider"
-                android:authorities="siarhei.luskanau.gps.tracker.free.provider"
-                android:exported="false"/>
+            android:name="siarhei.luskanau.gps.tracker.free.database.ContentProvider"
+            android:authorities="siarhei.luskanau.gps.tracker.free.provider"
+            android:exported="false" />
 
         <!-- GCM -->
         <receiver
-                android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmBroadcastReceiver"
-                android:permission="com.google.android.c2dm.permission.SEND">
+            android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <category android:name="siarhei.luskanau.gps.tracker.free"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="siarhei.luskanau.gps.tracker.free" />
             </intent-filter>
         </receiver>
-        <service android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmIntentService"/>
+        <service android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmIntentService" />
 
     </application>
 

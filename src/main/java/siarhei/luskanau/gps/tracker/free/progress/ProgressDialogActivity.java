@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Siarhei Luskanau
+ * Copyright (c) 2014 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,10 +24,10 @@
 package siarhei.luskanau.gps.tracker.free.progress;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 
-public class ProgressDialogActivity extends FragmentActivity {
+public class ProgressDialogActivity extends ActionBarActivity {
 
     @Override
     public void onStart() {

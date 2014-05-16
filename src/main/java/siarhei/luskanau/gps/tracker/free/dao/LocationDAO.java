@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Siarhei Luskanau
+ * Copyright (c) 2014 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.database;
+package siarhei.luskanau.gps.tracker.free.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,10 +33,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.database.ContentProvider;
+import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
-public class LocationDAO {
+public class LocationDAO extends BaseDAO {
 
     private final static String COUNT_SELECT = "count(*) as " + BaseColumns._COUNT;
     private final static Uri LOCATION_URI = Uri.withAppendedPath(ContentProvider.URI, LocationColumns.TABLE_NAME);
@@ -108,16 +110,6 @@ public class LocationDAO {
         LocationPacket locationEntity = AppConstants.GSON.fromJson(cursor.getString(cursor.getColumnIndex(LocationColumns.PACKET)), LocationPacket.class);
         locationEntity.rowId = cursor.getLong(cursor.getColumnIndex(LocationColumns._ID));
         return locationEntity;
-    }
-
-    protected static void close(Cursor cursor) {
-        try {
-            if (cursor != null) {
-                cursor.close();
-            }
-        } catch (Exception e) {
-            // do noting
-        }
     }
 
 }
