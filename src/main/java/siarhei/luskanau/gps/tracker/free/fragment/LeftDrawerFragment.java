@@ -33,11 +33,12 @@ import android.view.ViewGroup;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.activity.BaseDrawerActivity;
 import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
 
 public class LeftDrawerFragment extends Fragment {
 
-    public static final String TAG = LeftDrawerFragment.class.getCanonicalName();
+    public static final String TAG = "LeftDrawerFragment";
 
     private AQuery aq;
 
@@ -58,6 +59,8 @@ public class LeftDrawerFragment extends Fragment {
                 if (getFragmentManager().findFragmentByTag(AboutFragment.TAG) == null) {
                     new AboutFragment().show(getFragmentManager(), AboutFragment.TAG);
                 }
+                BaseDrawerActivity baseDrawerActivity = (BaseDrawerActivity) getActivity();
+                baseDrawerActivity.closeDrawers();
             }
         });
         aq.id(R.id.settingsTextView).clicked(new View.OnClickListener() {

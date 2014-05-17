@@ -34,7 +34,7 @@ import java.util.List;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 
-public class ServerEntityDAO {
+public class ServerEntityDAO extends BaseDAO {
 
     private static final String TAG = "ServerEntityDAO";
 

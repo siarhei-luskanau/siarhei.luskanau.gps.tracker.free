@@ -32,10 +32,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/aboutTextView"
+            android:id="@+id/settingsTextView"
             style="@style/LeftDrawerTextViewStyle"
-            android:drawableLeft="@drawable/ic_action_about"
-            android:text="@string/menu_action_about" />
+            android:drawableLeft="@drawable/ic_action_settings"
+            android:text="@string/fragment_left_drawer_settings" />
 
         <View
             android:layout_width="match_parent"
@@ -45,10 +45,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:background="?android:attr/listDivider" />
 
         <TextView
-            android:id="@+id/settingsTextView"
+            android:id="@+id/aboutTextView"
             style="@style/LeftDrawerTextViewStyle"
-            android:drawableLeft="@drawable/ic_action_settings"
-            android:text="@string/menu_action_settings" />
+            android:drawableLeft="@drawable/ic_action_about"
+            android:text="@string/fragment_left_drawer_about" />
 
         <View
             android:layout_width="match_parent"

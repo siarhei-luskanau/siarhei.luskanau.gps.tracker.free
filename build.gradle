@@ -51,6 +51,10 @@ android {
             zipAlign true
             runProguard false
             proguardFile 'proguard.cfg'
+            applicationVariants.all { variant ->
+                def file = variant.outputFile
+                variant.outputFile = new File(file.parent, "Free_GPS_Tracker-" + defaultConfig.versionName + ".apk")
+            }
         }
     }
 

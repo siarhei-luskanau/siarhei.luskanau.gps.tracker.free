@@ -26,18 +26,11 @@ package siarhei.luskanau.gps.tracker.free.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-
-import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.fragment.TrackerFragment;
 
 public class TrackerActivity extends BaseDrawerActivity {
-
-    private static final String TAG = "TrackerActivity";
-    private AQuery aq = new AQuery(this);
 
     public static void startTrackerActivity(Context context) {
         context.startActivity(new Intent(context, TrackerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -46,55 +39,9 @@ public class TrackerActivity extends BaseDrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_tracker);
-//        aq.id(R.id.imeiTextView).text(getString(R.string.fragment_tracker_imei, Utils.getDeviceId(this)));
-//
-//        aq.id(R.id.editServerImageButton).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ServersActivity.startServersActivity(TrackerActivity.this);
-//            }
-//        });
-//        aq.id(R.id.aboutServerImageButton).clicked(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ServerEntity serverEntity = AppSettings.getServerEntity(TrackerActivity.this);
-//                if (serverEntity != null) {
-//                    if (getSupportFragmentManager().findFragmentByTag(AboutServerDialogFragment.TAG) == null) {
-//                        AboutServerDialogFragment.newInstance(serverEntity).show(getSupportFragmentManager(), AboutServerDialogFragment.TAG);
-//                    }
-//                }
-//            }
-//        });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-//        ServerEntity serverEntity = AppSettings.getServerEntity(this);
-//        if (serverEntity != null) {
-//            aq.id(R.id.aboutServerImageButton).visible();
-//            aq.id(R.id.serverNameImageButton).text(getString(R.string.fragment_tracker_server, serverEntity.name));
-//        } else {
-//            aq.id(R.id.aboutServerImageButton).gone();
-//            aq.id(R.id.serverNameImageButton).text(getString(R.string.fragment_tracker_server, "---"));
-//        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_tracker, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            default: {
-                return super.onOptionsItemSelected(item);
-            }
+        if (getSupportFragmentManager().findFragmentByTag(TrackerFragment.TAG) == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.contentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
         }
     }
 

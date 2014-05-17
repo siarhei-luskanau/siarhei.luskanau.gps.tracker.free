@@ -42,7 +42,7 @@ public class AboutFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.menu_action_about);
+        builder.setTitle(R.string.fragment_left_drawer_about);
         builder.setIcon(R.drawable.ic_action_about);
         try {
             String message = new String(Utils.getBytes(getResources().openRawResource(R.raw.about)), "utf-8");
