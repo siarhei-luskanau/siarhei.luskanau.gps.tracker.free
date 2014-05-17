@@ -31,8 +31,8 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 
 public class ConfirmServerDialogFragment extends DialogFragment {
 

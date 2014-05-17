@@ -21,35 +21,28 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.activity;
+package siarhei.luskanau.gps.tracker.free.entity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
+import com.google.gson.annotations.SerializedName;
 
-import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
-import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
-import siarhei.luskanau.gps.tracker.free.sync.SyncService;
+public class LocationSettingsEntity {
 
-public class MainActivity extends Activity {
+    @SerializedName("isUseGpsProvider")
+    public boolean isUseGpsProvider = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @SerializedName("isUseNetwotkProvider")
+    public boolean isUseNetwotkProvider = true;
 
-        // Database will be created
-        BaseDAO.queryCount(this, LocationColumns.TABLE_NAME);
-        SyncService.ping(this);
+    @SerializedName("isUseGsmCellInfo")
+    public boolean isUseGsmCellInfo = false;
 
-        // Main activity has a single instance launch mode.
-        // Such approach allows us to have a single application instance
-        // but restore the activity stack when user press
-        // "Home" button and then launch application again
-        Intent intent = new Intent(this, TrackerActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
+    @SerializedName("timeFilter")
+    public long timeFilter = 60 * 1000;
 
-        finish();
-    }
+    @SerializedName("gpsDistanceFilter")
+    public long gpsDistanceFilter = 10;
+
+    @SerializedName("networkDistanceFilter")
+    public long networkDistanceFilter = 100;
 
 }

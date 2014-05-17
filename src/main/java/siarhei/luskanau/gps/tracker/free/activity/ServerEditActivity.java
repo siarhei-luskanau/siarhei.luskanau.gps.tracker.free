@@ -34,8 +34,8 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.fragment.dialog.CheckServerDialogFragment;
-import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 
 public class ServerEditActivity extends BaseActivity {
 

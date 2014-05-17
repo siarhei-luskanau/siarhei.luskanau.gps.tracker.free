@@ -25,7 +25,8 @@ package siarhei.luskanau.gps.tracker.free.activity;
 
 import android.app.Application;
 
-import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
+import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
 import siarhei.luskanau.gps.tracker.free.location.LocationService;
 import siarhei.luskanau.gps.tracker.free.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.utils.bugreport.ExceptionHandler;
@@ -38,7 +39,7 @@ public class TrackerApplication extends Application {
         ExceptionHandler.addExceptionHandler(this);
 
         // Database will be created
-        LocationDAO.getCountPacket(this);
+        BaseDAO.queryCount(this, LocationColumns.TABLE_NAME);
 
         LocationService.pingAntiKiller(this);
         SyncService.ping(this);

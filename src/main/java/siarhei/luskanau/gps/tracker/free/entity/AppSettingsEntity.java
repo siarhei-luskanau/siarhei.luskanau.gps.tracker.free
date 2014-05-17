@@ -21,19 +21,43 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.settings;
+package siarhei.luskanau.gps.tracker.free.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class InternetSettingsEntity {
+import java.util.Locale;
 
-    @SerializedName("isUseInternet")
-    public boolean isUseInternet = true;
+public class AppSettingsEntity {
 
-    @SerializedName("isUseWifiOny")
-    public boolean isUseWifiOny = false;
+    @SerializedName("EulaAccepted")
+    public boolean isEulaAccepted = false;
 
-    @SerializedName("locationInterval")
-    public int sendToServerInterval;
+    @Deprecated
+    @SerializedName("isTrackerStarted")
+    public boolean isTrackerStarted = false;
+
+    @SerializedName("autostart")
+    public boolean autostart = false;
+
+    @SerializedName("isShowNotification")
+    public boolean isShowNotification = true;
+
+    @SerializedName("internetSettingsEntity")
+    public InternetSettingsEntity internetSettingsEntity = new InternetSettingsEntity();
+
+    @SerializedName("batterySettings")
+    public BatterySettingsEntity batterySettings = new BatterySettingsEntity();
+
+    @SerializedName("locationSettings")
+    public LocationSettingsEntity locationSettings = new LocationSettingsEntity();
+
+    @SerializedName("language")
+    public String language = Locale.getDefault().getLanguage();
+
+    @SerializedName("serverName")
+    public String serverName = "m.free-gps.net";
+
+    @SerializedName("customServerBean")
+    public ServerEntity customServerBean;
 
 }

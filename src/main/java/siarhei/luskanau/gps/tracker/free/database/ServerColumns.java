@@ -21,22 +21,22 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.settings;
+package siarhei.luskanau.gps.tracker.free.database;
 
-import com.google.gson.annotations.SerializedName;
+import android.provider.BaseColumns;
 
-public class BatterySettingsEntity {
+public class ServerColumns implements BaseColumns {
 
-    @SerializedName("stopIfBatteryLow")
-    public boolean stopIfBatteryLow = true;
+    public static final String TABLE_NAME = "Server";
+    public static final String SERVER = "server";
 
-    @SerializedName("startIfBatteryOk")
-    public boolean startIfBatteryOk = true;
-
-    @SerializedName("stopIfPowerDisconnected")
-    public boolean stopIfPowerDisconnected = false;
-
-    @SerializedName("startIfPowerConnected")
-    public boolean startIfPowerConnected = false;
+    public static String queryCreateTable() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("CREATE TABLE ").append(TABLE_NAME).append(" ( \n\t");
+        builder.append(_ID).append(" INTEGER PRIMARY KEY, \n\t");
+        builder.append(SERVER).append(" TEXT \n");
+        builder.append(");");
+        return builder.toString();
+    }
 
 }

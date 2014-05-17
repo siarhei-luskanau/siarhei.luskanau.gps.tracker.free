@@ -35,9 +35,9 @@ import android.view.MenuItem;
 import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.dao.ServerEntityDAO;
+import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
+import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.fragment.ServerEntityItemFragment;
-import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 
 public class ServersActivity extends BaseActivity {
 
@@ -80,7 +80,16 @@ public class ServersActivity extends BaseActivity {
     }
 
     private void updateServerEntities() {
-        serverEntities = ServerEntityDAO.getServerEntities(this);
+        serverEntities = ServerDAO.getServers(this);
+        if (serverEntities == null || serverEntities.size() == 0) {
+            serverEntities = ServerDAO.getAssetsServers(this);
+            if (serverEntities != null) {
+                for (ServerEntity serverEntity : serverEntities) {
+                    ServerDAO.insertOrUpdate(this, serverEntity);
+                }
+            }
+            serverEntities = ServerDAO.getServers(this);
+        }
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         for (int i = serverEntities.size(); ; i++) {

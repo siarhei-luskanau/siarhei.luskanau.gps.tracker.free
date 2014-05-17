@@ -36,9 +36,9 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.activity.ServersActivity;
+import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.fragment.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
 public class TrackerFragment extends Fragment {

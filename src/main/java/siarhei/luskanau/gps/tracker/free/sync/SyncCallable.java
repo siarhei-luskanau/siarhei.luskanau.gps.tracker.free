@@ -29,8 +29,8 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
+import siarhei.luskanau.gps.tracker.free.entity.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.settings.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
 import siarhei.luskanau.gps.tracker.free.sync.task.SendLocationTask;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;

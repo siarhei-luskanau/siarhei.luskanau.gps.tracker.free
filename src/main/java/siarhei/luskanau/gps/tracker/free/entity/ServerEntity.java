@@ -21,43 +21,38 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.settings;
+package siarhei.luskanau.gps.tracker.free.entity;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.Locale;
+import java.lang.reflect.Type;
+import java.util.List;
 
-public class AppSettingsEntity {
+public class ServerEntity {
 
-    @SerializedName("EulaAccepted")
-    public boolean isEulaAccepted = false;
+    public static final Type COLLECTION_TYPE = new TypeToken<List<ServerEntity>>() {
+    }.getType();
 
-    @Deprecated
-    @SerializedName("isTrackerStarted")
-    public boolean isTrackerStarted = false;
+    @SerializedName("rowId")
+    public Long rowId;
 
-    @SerializedName("autostart")
-    public boolean autostart = false;
+    @SerializedName("name")
+    public String name;
 
-    @SerializedName("isShowNotification")
-    public boolean isShowNotification = true;
+    @SerializedName("site_url")
+    public String site_url;
 
-    @SerializedName("internetSettingsEntity")
-    public InternetSettingsEntity internetSettingsEntity = new InternetSettingsEntity();
+    @SerializedName("server_type")
+    public String server_type;
 
-    @SerializedName("batterySettings")
-    public BatterySettingsEntity batterySettings = new BatterySettingsEntity();
+    @SerializedName("server_address")
+    public String server_address;
 
-    @SerializedName("locationSettings")
-    public LocationSettingsEntity locationSettings = new LocationSettingsEntity();
+    @SerializedName("server_port")
+    public int server_port;
 
-    @SerializedName("language")
-    public String language = Locale.getDefault().getLanguage();
-
-    @SerializedName("serverName")
-    public String serverName = "m.free-gps.net";
-
-    @SerializedName("customServerBean")
-    public ServerEntity customServerBean;
+    @SerializedName("custom")
+    public boolean custom;
 
 }

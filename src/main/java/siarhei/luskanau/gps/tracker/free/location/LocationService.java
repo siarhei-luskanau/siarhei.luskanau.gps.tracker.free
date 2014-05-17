@@ -42,8 +42,8 @@ import java.util.Iterator;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.entity.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.settings.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.utils.PhoneStateUtils;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 

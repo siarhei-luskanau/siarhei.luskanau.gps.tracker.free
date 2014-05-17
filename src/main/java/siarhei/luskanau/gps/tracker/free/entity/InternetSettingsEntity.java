@@ -21,35 +21,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.settings;
+package siarhei.luskanau.gps.tracker.free.entity;
 
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.List;
+public class InternetSettingsEntity {
 
-public class ServerEntity {
+    @SerializedName("isUseInternet")
+    public boolean isUseInternet = true;
 
-    public static final Type COLLECTION_TYPE = new TypeToken<List<ServerEntity>>() {
-    }.getType();
+    @SerializedName("isUseWifiOny")
+    public boolean isUseWifiOny = false;
 
-    @SerializedName("name")
-    public String name;
-
-    @SerializedName("site_url")
-    public String site_url;
-
-    @SerializedName("server_type")
-    public String server_type;
-
-    @SerializedName("server_address")
-    public String server_address;
-
-    @SerializedName("server_port")
-    public int server_port;
-
-    @SerializedName("custom")
-    public boolean custom;
+    @SerializedName("locationInterval")
+    public int sendToServerInterval;
 
 }

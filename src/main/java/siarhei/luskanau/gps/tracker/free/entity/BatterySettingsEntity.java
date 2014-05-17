@@ -21,28 +21,22 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.settings;
+package siarhei.luskanau.gps.tracker.free.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LocationSettingsEntity {
+public class BatterySettingsEntity {
 
-    @SerializedName("isUseGpsProvider")
-    public boolean isUseGpsProvider = false;
+    @SerializedName("stopIfBatteryLow")
+    public boolean stopIfBatteryLow = true;
 
-    @SerializedName("isUseNetwotkProvider")
-    public boolean isUseNetwotkProvider = true;
+    @SerializedName("startIfBatteryOk")
+    public boolean startIfBatteryOk = true;
 
-    @SerializedName("isUseGsmCellInfo")
-    public boolean isUseGsmCellInfo = false;
+    @SerializedName("stopIfPowerDisconnected")
+    public boolean stopIfPowerDisconnected = false;
 
-    @SerializedName("timeFilter")
-    public long timeFilter = 60 * 1000;
-
-    @SerializedName("gpsDistanceFilter")
-    public long gpsDistanceFilter = 10;
-
-    @SerializedName("networkDistanceFilter")
-    public long networkDistanceFilter = 100;
+    @SerializedName("startIfPowerConnected")
+    public boolean startIfPowerConnected = false;
 
 }

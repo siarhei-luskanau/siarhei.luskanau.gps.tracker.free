@@ -34,7 +34,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private Context context;
 
     public DataBaseHelper(ContentProvider contentProvider) {
-        super(contentProvider.getContext(), contentProvider.getContext().getPackageName() + ".db", null, 13);
+        super(contentProvider.getContext(), contentProvider.getContext().getPackageName() + ".db", null, 14);
         context = contentProvider.getContext();
     }
 
@@ -50,6 +50,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             String sqlString;
             sqlString = LocationColumns.queryCreateTable();
             db.execSQL(sqlString);
+
+            sqlString = ServerColumns.queryCreateTable();
+            db.execSQL(sqlString);
         } catch (Throwable tr) {
             Log.e(TAG, "onCreate", tr);
         }
@@ -62,6 +65,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
             DataBaseSettings.clear(context);
 
+            queryDropTable(db, ServerColumns.TABLE_NAME);
             queryDropTable(db, LocationColumns.TABLE_NAME);
 
             onCreate(db);

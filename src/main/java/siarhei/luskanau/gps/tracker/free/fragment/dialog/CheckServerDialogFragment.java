@@ -39,7 +39,7 @@ import java.net.SocketAddress;
 import java.util.ArrayList;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.sync.JsonHttpPostServer;
 

@@ -137,6 +137,11 @@ public class Utils {
                 if (length > 0) {
                     byteArrayOutputStream.write(buffer, 0, length);
                 } else {
+                    try {
+                        Thread.sleep(300);
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage(), e);
+                    }
                 }
             }
         }

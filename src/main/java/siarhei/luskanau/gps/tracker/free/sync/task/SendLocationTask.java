@@ -36,8 +36,8 @@ import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.settings.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.shared.Tr151ModLocationPacketAdapter;
 import siarhei.luskanau.gps.tracker.free.sync.JsonHttpPostServer;
