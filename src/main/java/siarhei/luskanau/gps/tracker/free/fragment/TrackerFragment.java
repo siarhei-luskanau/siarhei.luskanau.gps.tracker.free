@@ -96,7 +96,7 @@ public class TrackerFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_tracker, menu);
+        //inflater.inflate(R.menu.menu_tracker, menu);
     }
 
     @Override

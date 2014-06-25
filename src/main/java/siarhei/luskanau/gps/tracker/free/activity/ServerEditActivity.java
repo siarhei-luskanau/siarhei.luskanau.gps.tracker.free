@@ -82,7 +82,6 @@ public class ServerEditActivity extends BaseActivity {
             aq.id(R.id.customServerPortEditText).text(String.valueOf(serverEntity.server_port));
         }
 
-
         if (AppConstants.SERVER_TYPE_SOCKET.equalsIgnoreCase(serverEntity.server_type)) {
             aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
         } else if (AppConstants.SERVER_TYPE_JSON_FORM.equalsIgnoreCase(serverEntity.server_type)) {

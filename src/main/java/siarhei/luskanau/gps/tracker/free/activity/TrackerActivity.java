@@ -26,11 +26,21 @@ package siarhei.luskanau.gps.tracker.free.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
+
+import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.fragment.TrackerFragment;
+import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 
 public class TrackerActivity extends BaseDrawerActivity {
+
+    protected AQuery aq = new AQuery(this);
 
     public static void startTrackerActivity(Context context) {
         context.startActivity(new Intent(context, TrackerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -42,6 +52,54 @@ public class TrackerActivity extends BaseDrawerActivity {
 
         if (getSupportFragmentManager().findFragmentByTag(TrackerFragment.TAG) == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.contentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_tracker, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        DrawerLayout drawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
+        FrameLayout leftDrawerFrameLayout = (FrameLayout) aq.id(R.id.leftDrawerFrameLayout).getView();
+        boolean drawerOpen = drawerLayout.isDrawerOpen(leftDrawerFrameLayout);
+        if (drawerOpen) {
+            menu.findItem(R.id.menu_item_action_play).setVisible(false);
+            menu.findItem(R.id.menu_item_action_stop).setVisible(false);
+        } else {
+            boolean isStarted = AppSettings.isTrackerStarted(this);
+            if (isStarted) {
+                menu.findItem(R.id.menu_item_action_play).setVisible(false);
+                menu.findItem(R.id.menu_item_action_stop).setVisible(true);
+            } else {
+                menu.findItem(R.id.menu_item_action_play).setVisible(true);
+                menu.findItem(R.id.menu_item_action_stop).setVisible(false);
+            }
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_action_play:
+                if (AppSettings.getServerEntity(this) != null) {
+                    AppSettings.setTrackerStarted(this, true);
+                } else {
+                    ServersActivity.startServersActivity(this);
+                }
+                supportInvalidateOptionsMenu();
+                return true;
+            case R.id.menu_item_action_stop:
+                AppSettings.setTrackerStarted(this, false);
+                supportInvalidateOptionsMenu();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

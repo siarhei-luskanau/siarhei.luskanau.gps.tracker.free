@@ -1,6 +1,6 @@
 [
     {
-        "id": "server_id_06",
+        "id": "server_id_01",
         "name": "GPS-Trace Orange",
         "site_url": "http://gps-trace.com/",
         "server_type": "socket",
@@ -9,7 +9,7 @@
         "custom": false
     },
     {
-        "id": "server_id_01",
+        "id": "server_id_02",
         "name": "m.gps-tracker.com.ua",
         "site_url": "http://m.gps-tracker.com.ua/",
         "server_type": "socket",
@@ -18,7 +18,7 @@
         "custom": false
     },
     {
-        "id": "server_id_04",
+        "id": "server_id_03",
         "name": "maxicms.ru",
         "site_url": "http://maxicms.ru/",
         "server_type": "json_form",
@@ -27,7 +27,7 @@
         "custom": false
     },
     {
-        "id": "server_id_05",
+        "id": "server_id_04",
         "name": "softmax.by",
         "site_url": "http://178.124.135.194/demo/en_US/",
         "server_type": "socket",
