@@ -23,61 +23,51 @@
 
 package siarhei.luskanau.gps.tracker.free.progress;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 
 public class ProgressDialogActivity extends ActionBarActivity {
 
+    private static final String TAG = "ProgressDialogActivity";
+
+    private BroadcastReceiver broadcastReceiver = new ProgressDialogBroadcastReceiver();
+
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-        ProgressBinder.getInstance().bindTask(this);
+        ProgressDialogBroadcast.registerReceiver(this, broadcastReceiver);
+        ProgressDialogFragment.refresh(ProgressDialogActivity.this);
     }
 
     @Override
-    public void onStop() {
-        ProgressBinder.getInstance().unbindTask(this);
+    protected void onStop() {
         super.onStop();
+        ProgressDialogBroadcast.unregisterReceiver(this, broadcastReceiver);
     }
 
-    public void showProgressDialog(CharSequence title, CharSequence message) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager == null) {
-            return;
+    private class ProgressDialogBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (ProgressDialogBroadcast.ACTION_ALERT_DIALOG_SHOW.equals(intent.getAction())) {
+                    CharSequence title = intent.getCharSequenceExtra(ProgressDialogBroadcast.TITLE_ARG);
+                    CharSequence message = intent.getCharSequenceExtra(ProgressDialogBroadcast.MESSAGE_ARG);
+                    AlertDialogFragment.show(ProgressDialogActivity.this, title, message);
+                } else if (ProgressDialogBroadcast.ACTION_PROGRESS_DIALOG_SHOW.equals(intent.getAction())) {
+                    CharSequence title = intent.getCharSequenceExtra(ProgressDialogBroadcast.TITLE_ARG);
+                    CharSequence message = intent.getCharSequenceExtra(ProgressDialogBroadcast.MESSAGE_ARG);
+                    String refreshAction = intent.getStringExtra(ProgressDialogBroadcast.REFRESH_ACTION_ARG);
+                    ProgressDialogFragment.show(ProgressDialogActivity.this, title, message, refreshAction);
+                } else if (ProgressDialogBroadcast.ACTION_PROGRESS_DIALOG_REMOVE.equals(intent.getAction())) {
+                    ProgressDialogFragment.remove(ProgressDialogActivity.this);
+                }
+            } catch (Exception e) {
+                Log.d(TAG, e.getMessage(), e);
+            }
         }
-        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) fragmentManager.findFragmentByTag(ProgressDialogFragment.TAG);
-        if (progressDialogFragment != null) {
-            progressDialogFragment.updateProgressDialog(title, message);
-        } else {
-            ProgressDialogFragment.newInstance(title, message).show(fragmentManager, ProgressDialogFragment.TAG);
-        }
-    }
-
-    public void hideProgressDialog() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager == null) {
-            return;
-        }
-        Fragment fragment = fragmentManager.findFragmentByTag(ProgressDialogFragment.TAG);
-        if (fragment != null) {
-            fragmentManager.beginTransaction().remove(fragment).commit();
-        }
-    }
-
-    public void showAlertDialog(CharSequence title, CharSequence message) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager == null) {
-            return;
-        }
-        Fragment fragment = fragmentManager.findFragmentByTag(AlertDialogFragment.TAG);
-        if (fragment != null) {
-            fragmentManager.beginTransaction().remove(fragment).commit();
-        }
-        AlertDialogFragment.newInstance(title, message).show(fragmentManager, AlertDialogFragment.TAG);
-    }
-
-    public void onProgressDialogTaskFinished() {
     }
 
 }

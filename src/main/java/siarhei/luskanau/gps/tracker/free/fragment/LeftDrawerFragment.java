@@ -53,17 +53,7 @@ public class LeftDrawerFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        aq.id(R.id.aboutTextView).clicked(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getFragmentManager().findFragmentByTag(AboutFragment.TAG) == null) {
-                    new AboutFragment().show(getFragmentManager(), AboutFragment.TAG);
-                }
-                BaseDrawerActivity baseDrawerActivity = (BaseDrawerActivity) getActivity();
-                baseDrawerActivity.closeDrawers();
-            }
-        });
-        aq.id(R.id.settingsTextView).clicked(new View.OnClickListener() {
+        aq.id(R.id.gcmMessageTextView).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new Thread(new Runnable() {
@@ -77,6 +67,27 @@ public class LeftDrawerFragment extends Fragment {
                         }
                     }
                 }).start();
+            }
+        });
+        aq.id(R.id.internetLeftDrawerTextView).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = getFragmentManager().findFragmentByTag(InternetSettingsFragment.TAG);
+                if (fragment == null) {
+                    getFragmentManager().beginTransaction().add(R.id.internetSettingsFrameLayout, new InternetSettingsFragment(), InternetSettingsFragment.TAG).commit();
+                } else {
+                    getFragmentManager().beginTransaction().remove(fragment).commit();
+                }
+            }
+        });
+        aq.id(R.id.aboutTextView).clicked(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getFragmentManager().findFragmentByTag(AboutFragment.TAG) == null) {
+                    new AboutFragment().show(getFragmentManager(), AboutFragment.TAG);
+                }
+                BaseDrawerActivity baseDrawerActivity = (BaseDrawerActivity) getActivity();
+                baseDrawerActivity.closeDrawers();
             }
         });
     }

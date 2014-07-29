@@ -32,10 +32,30 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/settingsTextView"
+            android:id="@+id/gcmMessageTextView"
             style="@style/LeftDrawerTextViewStyle"
-            android:drawableLeft="@drawable/ic_action_settings"
-            android:text="@string/fragment_left_drawer_settings" />
+            android:drawableLeft="@drawable/ic_action_help"
+            android:text="Gcm message"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/component_gap"
+            android:layout_marginRight="@dimen/component_gap"
+            android:background="?android:attr/listDivider"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/internetLeftDrawerTextView"
+            style="@style/LeftDrawerTextViewStyle"
+            android:drawableLeft="@drawable/ic_action_web_site"
+            android:text="@string/fragment_settings_internet_internet" />
+
+        <FrameLayout
+            android:id="@+id/internetSettingsFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <View
             android:layout_width="match_parent"
@@ -61,8 +81,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:clickable="true"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            android:clickable="true" />
 
     </LinearLayout>
 

@@ -27,6 +27,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -90,6 +91,11 @@ public abstract class BaseDrawerActivity extends BaseActivity {
     public void closeDrawers() {
         DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
         baseDrawerLayout.closeDrawers();
+    }
+
+    public void openDrawer() {
+        DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
+        baseDrawerLayout.openDrawer(Gravity.LEFT);
     }
 
 }

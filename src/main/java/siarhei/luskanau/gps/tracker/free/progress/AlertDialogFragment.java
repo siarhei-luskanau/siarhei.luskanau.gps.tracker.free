@@ -27,15 +27,34 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 public class AlertDialogFragment extends DialogFragment {
 
-    public static final String TAG = "AlertDialogFragment";
+    private static final String TAG = AlertDialogFragment.class.getCanonicalName();
 
     private static final String TITLE_ARG = "TITLE_ARG";
     private static final String MESSAGE_ARG = "MESSAGE_ARG";
 
-    public static AlertDialogFragment newInstance(CharSequence title, CharSequence message) {
+    private AlertDialog alertDialog;
+    private CharSequence title;
+    private CharSequence message;
+
+    public static void show(FragmentActivity activity, CharSequence title, CharSequence message) {
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(TAG);
+        if (fragment != null) {
+            if (fragment instanceof AlertDialogFragment) {
+                ((AlertDialogFragment) fragment).updateAlertDialog(title, message);
+            }
+        } else {
+            newInstance(title, message).show(fragmentManager, TAG);
+        }
+    }
+
+    private static AlertDialogFragment newInstance(CharSequence title, CharSequence message) {
         AlertDialogFragment fragment = new AlertDialogFragment();
         Bundle args = new Bundle();
         args.putCharSequence(TITLE_ARG, title);
@@ -46,14 +65,39 @@ public class AlertDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        CharSequence title = getArguments().getCharSequence(TITLE_ARG);
-        CharSequence message = getArguments().getCharSequence(MESSAGE_ARG);
+        if (savedInstanceState != null && savedInstanceState.containsKey(TITLE_ARG)) {
+            title = savedInstanceState.getCharSequence(TITLE_ARG);
+        } else if (getArguments().containsKey(TITLE_ARG)) {
+            title = getArguments().getCharSequence(TITLE_ARG);
+        }
+        if (savedInstanceState != null && savedInstanceState.containsKey(MESSAGE_ARG)) {
+            message = savedInstanceState.getCharSequence(MESSAGE_ARG);
+        } else if (getArguments().containsKey(MESSAGE_ARG)) {
+            message = getArguments().getCharSequence(MESSAGE_ARG);
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setCancelable(true);
-        return builder.create();
+        alertDialog = builder.create();
+        return alertDialog;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putCharSequence(TITLE_ARG, title);
+        outState.putCharSequence(MESSAGE_ARG, message);
+    }
+
+    private void updateAlertDialog(CharSequence title, CharSequence message) {
+        this.title = title;
+        this.message = message;
+        if (alertDialog != null) {
+            alertDialog.setTitle(title);
+            alertDialog.setMessage(message);
+        }
     }
 
 }

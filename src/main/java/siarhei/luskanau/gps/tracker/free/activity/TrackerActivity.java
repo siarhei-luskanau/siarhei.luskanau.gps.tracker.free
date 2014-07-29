@@ -53,6 +53,8 @@ public class TrackerActivity extends BaseDrawerActivity {
         if (getSupportFragmentManager().findFragmentByTag(TrackerFragment.TAG) == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.contentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
         }
+
+        openDrawer();
     }
 
     @Override

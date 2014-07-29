@@ -21,28 +21,34 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.progress;
+package siarhei.luskanau.gps.tracker.free.fragment;
 
-import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public interface TaskCallback {
+import com.androidquery.AQuery;
 
-    public Context getContext();
+import siarhei.luskanau.gps.tracker.free.R;
 
-    public void setProgressAsyncTask(ProgressAsyncTask<?> progressAsyncTask);
+public class InternetSettingsFragment extends Fragment {
 
-    public void publishTaskProgress(CharSequence title, CharSequence message);
+    public static final String TAG = "InternetSettingsFragment";
 
-    public void showAlertDialog(CharSequence title, CharSequence message);
+    private AQuery aq;
 
-    public void onProgressDialogTaskFinished();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_internet_settings, container, false);
+        aq = new AQuery(getActivity(), view);
+        return view;
+    }
 
-    public void registerTask(ProgressAsyncTask<?> resultProgressAsyncTask);
-
-    public void unregisterTask(ProgressAsyncTask<?> resultProgressAsyncTask);
-
-    public void bindActivity(ProgressDialogActivity progressDialogActivity);
-
-    public void unbindActivity(ProgressDialogActivity progressDialogActivity);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
 }
