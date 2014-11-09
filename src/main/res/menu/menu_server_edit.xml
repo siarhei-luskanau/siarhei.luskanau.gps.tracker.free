@@ -35,7 +35,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:orderInCategory="900"
         yourapp:showAsAction="ifRoom|withText"
         android:title="@string/abc_action_menu_overflow_description"
-        android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_light">
+        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha">
 
         <menu>
 

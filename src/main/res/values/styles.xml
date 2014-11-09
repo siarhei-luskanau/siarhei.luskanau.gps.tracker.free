@@ -30,7 +30,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <style name="TrackerTextViewStyle" parent="@android:style/Widget.TextView">
         <item name="android:paddingLeft">@dimen/component_gap</item>
         <item name="android:paddingRight">@dimen/component_gap</item>
-        <item name="android:minWidth">@dimen/abc_action_button_min_width</item>
+        <item name="android:minWidth">@dimen/abc_action_button_min_width_material</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -39,7 +39,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <item name="android:background">?attr/actionBarItemBackground</item>
         <item name="android:paddingLeft">@dimen/action_icon_gap</item>
         <item name="android:paddingRight">@dimen/action_icon_gap</item>
-        <item name="android:minWidth">@dimen/abc_action_button_min_width</item>
+        <item name="android:minWidth">@dimen/abc_action_button_min_width_material</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:gravity">center</item>
         <item name="android:maxLines">2</item>
@@ -48,7 +48,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <style name="LeftDrawerTextViewStyle" parent="@android:style/Widget.TextView">
         <item name="android:background">?attr/actionBarItemBackground</item>
         <item name="android:padding">@dimen/component_gap</item>
-        <item name="android:minWidth">@dimen/abc_action_button_min_width</item>
+        <item name="android:minWidth">@dimen/abc_action_button_min_width_material</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">16dp</item>
