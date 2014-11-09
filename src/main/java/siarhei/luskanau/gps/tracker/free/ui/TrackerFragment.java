@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.fragment;
+package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,16 +35,16 @@ import android.view.ViewGroup;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.activity.ServersActivity;
+import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.fragment.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
+import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
 public class TrackerFragment extends Fragment {
 
     public static final String TAG = "TrackerFragment";
-
+    private AppBroadcastController.AppBroadcastReceiver appBroadcastReceiver = new AppBroadcastController().createBroadcastReceiver(new InnerAppBroadcastCallback());
     private AQuery aq;
 
     @Override
@@ -83,6 +83,7 @@ public class TrackerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        appBroadcastReceiver.registerReceiver(getActivity());
         ServerEntity serverEntity = AppSettings.getServerEntity(getActivity());
         if (serverEntity != null) {
             aq.id(R.id.aboutServerImageButton).visible();
@@ -91,6 +92,12 @@ public class TrackerFragment extends Fragment {
             aq.id(R.id.aboutServerImageButton).gone();
             aq.id(R.id.serverNameImageButton).text(getString(R.string.fragment_tracker_server, "---"));
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        appBroadcastReceiver.unregisterReceiver(getActivity());
     }
 
     @Override
@@ -110,6 +117,12 @@ public class TrackerFragment extends Fragment {
             default: {
                 return super.onOptionsItemSelected(item);
             }
+        }
+    }
+
+    private class InnerAppBroadcastCallback extends AppBroadcastController.AppBroadcastCallback {
+        @Override
+        public void onLastPositionIsUpdated() {
         }
     }
 

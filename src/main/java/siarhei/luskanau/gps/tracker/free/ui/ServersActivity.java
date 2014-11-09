@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.activity;
+package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,9 +37,9 @@ import java.util.List;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.fragment.ServerEntityItemFragment;
+import siarhei.luskanau.gps.tracker.free.progress.ProgressDialogActivity;
 
-public class ServersActivity extends BaseActivity {
+public class ServersActivity extends ProgressDialogActivity {
 
     private List<ServerEntity> serverEntities;
 

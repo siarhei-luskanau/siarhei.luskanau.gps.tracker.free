@@ -21,55 +21,50 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.fragment.dialog;
+package siarhei.luskanau.gps.tracker.free.ui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
+import android.widget.TextView;
 
-import com.androidquery.AQuery;
-
-import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
-public class AboutServerDialogFragment extends DialogFragment {
+public class AboutFragment extends DialogFragment {
 
-    public static final String TAG = "AboutServerDialogFragment";
-    private static final String SERVER_ENTITY = "SERVER_ENTITY";
-    private AQuery aq;
-    private ServerEntity serverEntity;
-
-    public static AboutServerDialogFragment newInstance(ServerEntity serverEntity) {
-        AboutServerDialogFragment fragment = new AboutServerDialogFragment();
-        Bundle args = new Bundle();
-        args.putString(SERVER_ENTITY, AppConstants.GSON.toJson(serverEntity));
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public static final String TAG = "AboutFragment";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY), ServerEntity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_about_server, null);
-        aq = new AQuery(view);
-        builder.setView(view);
-        builder.setPositiveButton(android.R.string.ok, null);
+        builder.setTitle(R.string.fragment_left_drawer_about);
+        builder.setIcon(R.drawable.ic_action_about);
+        try {
+            String message = new String(Utils.getBytes(getResources().openRawResource(R.raw.about)), "utf-8");
+            builder.setMessage(Html.fromHtml(message));
+        } catch (Throwable t1) {
+            builder.setMessage(null);
+        }
+        builder.setNeutralButton(android.R.string.ok, null);
         return builder.create();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        aq.id(R.id.serverNameTextView).text(serverEntity.name);
-        aq.id(R.id.serverSiteUrlTextView).text(serverEntity.site_url);
-        aq.id(R.id.serverTypeTextView).text(serverEntity.server_type);
-        aq.id(R.id.serverAddressTextView).text(serverEntity.server_address);
-        aq.id(R.id.serverPortTextView).text(String.valueOf(serverEntity.server_port));
+        try {
+            TextView messageTextView = (TextView) getDialog().findViewById(android.R.id.message);
+            if (messageTextView != null) {
+                messageTextView.setMovementMethod(LinkMovementMethod.getInstance());
+            }
+        } catch (Throwable t) {
+            Log.e(TAG, t.toString(), t);
+        }
     }
 
 }

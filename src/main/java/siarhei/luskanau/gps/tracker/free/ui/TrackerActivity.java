@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.activity;
+package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +35,6 @@ import android.widget.FrameLayout;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.fragment.TrackerFragment;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 
 public class TrackerActivity extends BaseDrawerActivity {

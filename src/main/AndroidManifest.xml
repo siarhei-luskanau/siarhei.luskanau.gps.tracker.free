@@ -65,7 +65,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
-        android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerApplication"
+        android:name="siarhei.luskanau.gps.tracker.free.ui.TrackerApplication"
         android:label="@string/tracker_app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.TrackerTheme"
@@ -76,16 +76,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="siarhei.luskanau.gps.tracker.free.activity.MainActivity"
+            android:name="siarhei.luskanau.gps.tracker.free.ui.MainActivity"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.TrackerActivity" />
-        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.ServersActivity" />
-        <activity android:name="siarhei.luskanau.gps.tracker.free.activity.ServerEditActivity" />
+        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.TrackerActivity" />
+        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.ServersActivity" />
+        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.ServerEditActivity" />
 
         <service
             android:name="siarhei.luskanau.gps.tracker.free.sync.SyncService"

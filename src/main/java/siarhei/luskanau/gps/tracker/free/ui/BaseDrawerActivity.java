@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.activity;
+package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -34,9 +34,9 @@ import android.view.View;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.fragment.LeftDrawerFragment;
+import siarhei.luskanau.gps.tracker.free.progress.ProgressDialogActivity;
 
-public abstract class BaseDrawerActivity extends BaseActivity {
+public abstract class BaseDrawerActivity extends ProgressDialogActivity {
 
     protected AQuery aq = new AQuery(this);
     private ActionBarDrawerToggle actionBarDrawerToggle;

@@ -43,7 +43,7 @@ import java.math.BigDecimal;
 import java.util.Locale;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.activity.TrackerActivity;
+import siarhei.luskanau.gps.tracker.free.ui.TrackerActivity;
 
 public class Utils {
 

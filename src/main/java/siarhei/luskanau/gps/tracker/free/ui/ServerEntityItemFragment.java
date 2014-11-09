@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.fragment;
+package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,9 +32,8 @@ import android.view.ViewGroup;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.activity.ServersActivity;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.fragment.dialog.ConfirmServerDialogFragment;
+import siarhei.luskanau.gps.tracker.free.ui.dialog.ConfirmServerDialogFragment;
 
 public class ServerEntityItemFragment extends Fragment {
 

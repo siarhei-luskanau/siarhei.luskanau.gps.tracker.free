@@ -21,10 +21,35 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.activity;
+package siarhei.luskanau.gps.tracker.free.ui;
 
-import siarhei.luskanau.gps.tracker.free.progress.ProgressDialogActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 
-public abstract class BaseActivity extends ProgressDialogActivity {
+import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
+import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
+import siarhei.luskanau.gps.tracker.free.sync.SyncService;
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Database will be created
+        BaseDAO.queryCount(this, LocationColumns.TABLE_NAME);
+        SyncService.ping(this);
+
+        // Main activity has a single instance launch mode.
+        // Such approach allows us to have a single application instance
+        // but restore the activity stack when user press
+        // "Home" button and then launch application again
+        Intent intent = new Intent(this, TrackerActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+
+        finish();
+    }
 
 }

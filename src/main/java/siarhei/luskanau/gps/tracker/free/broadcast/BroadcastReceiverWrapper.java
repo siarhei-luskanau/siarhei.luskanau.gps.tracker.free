@@ -21,34 +21,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.fragment;
+package siarhei.luskanau.gps.tracker.free.broadcast;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.support.v4.content.LocalBroadcastManager;
 
-import com.androidquery.AQuery;
+public abstract class BroadcastReceiverWrapper<C extends BroadcastCallback> extends BroadcastReceiver {
 
-import siarhei.luskanau.gps.tracker.free.R;
+    public abstract void registerReceiver(Context context);
 
-public class InternetSettingsFragment extends Fragment {
-
-    public static final String TAG = "InternetSettingsFragment";
-
-    private AQuery aq;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_internet_settings, container, false);
-        aq = new AQuery(getActivity(), view);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void unregisterReceiver(Context context) {
+        LocalBroadcastManager.getInstance(context).unregisterReceiver(this);
     }
 
 }
