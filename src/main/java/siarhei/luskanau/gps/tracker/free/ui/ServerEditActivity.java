@@ -35,10 +35,10 @@ import com.androidquery.AQuery;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.progress.ProgressDialogActivity;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.CheckServerDialogFragment;
+import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
-public class ServerEditActivity extends ProgressDialogActivity {
+public class ServerEditActivity extends BaseProgressActivity {
 
     private static final String SERVER_ENTITY = "SERVER_ENTITY";
     private AQuery aq = new AQuery(this);

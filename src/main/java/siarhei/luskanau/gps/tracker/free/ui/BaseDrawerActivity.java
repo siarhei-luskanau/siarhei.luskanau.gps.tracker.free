@@ -34,9 +34,9 @@ import android.view.View;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.progress.ProgressDialogActivity;
+import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
-public abstract class BaseDrawerActivity extends ProgressDialogActivity {
+public abstract class BaseDrawerActivity extends BaseProgressActivity {
 
     protected AQuery aq = new AQuery(this);
     private ActionBarDrawerToggle actionBarDrawerToggle;

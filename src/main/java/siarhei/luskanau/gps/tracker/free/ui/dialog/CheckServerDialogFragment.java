@@ -28,7 +28,6 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import java.io.OutputStream;
@@ -39,6 +38,7 @@ import java.net.SocketAddress;
 import java.util.ArrayList;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.sync.JsonHttpPostServer;
@@ -105,13 +105,10 @@ public class CheckServerDialogFragment extends DialogFragment {
         protected void onPostExecute(Exception exception) {
             super.onPostExecute(exception);
             CheckServerDialogFragment.this.dismiss();
-            FragmentManager fragmentManager = getFragmentManager();
-            if (fragmentManager != null) {
-                if (exception != null) {
-                    AlertDialogFragment.newInstance("Error", exception.getMessage(), android.R.drawable.ic_dialog_alert).show(fragmentManager, "AlertDialogFragment");
-                } else {
-                    AlertDialogFragment.newInstance("Success", null, android.R.drawable.ic_dialog_info).show(fragmentManager, "AlertDialogFragment");
-                }
+            if (exception != null) {
+                ProgressBroadcastController.sendShowAlertDialogBroadcast(getActivity(), "Error", exception.getMessage());
+            } else {
+                ProgressBroadcastController.sendShowAlertDialogBroadcast(getActivity(), "Success", null);
             }
         }
     }

@@ -26,14 +26,14 @@ package siarhei.luskanau.gps.tracker.free.broadcast;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 public class AppBroadcastController extends BroadcastController<AppBroadcastController.AppBroadcastCallback, AppBroadcastController.AppBroadcastReceiver> {
 
     private static final String ACTION_LAST_POSITION_IS_UPDATED = "ACTION_LAST_POSITION_IS_UPDATED";
 
     public static void sendLastPositionIsUpdatedBroadcast(Context context) {
-        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_LAST_POSITION_IS_UPDATED));
+        sendBroadcast(context, new Intent(ACTION_LAST_POSITION_IS_UPDATED));
     }
 
     @Override
@@ -48,6 +48,7 @@ public class AppBroadcastController extends BroadcastController<AppBroadcastCont
 
     public static class AppBroadcastReceiver extends BroadcastReceiverWrapper<AppBroadcastCallback> {
 
+        private static final String TAG = "AppBroadcastReceiver";
         private AppBroadcastCallback broadcastCallback;
 
         public AppBroadcastReceiver(AppBroadcastCallback broadcastCallback) {
@@ -58,15 +59,19 @@ public class AppBroadcastController extends BroadcastController<AppBroadcastCont
         public void registerReceiver(Context context) {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(ACTION_LAST_POSITION_IS_UPDATED);
-            LocalBroadcastManager.getInstance(context).registerReceiver(this, intentFilter);
+            registerReceiver(context, this, intentFilter);
         }
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (ACTION_LAST_POSITION_IS_UPDATED.equals(intent.getAction())) {
-                if (broadcastCallback != null) {
-                    broadcastCallback.onLastPositionIsUpdated();
+            try {
+                if (ACTION_LAST_POSITION_IS_UPDATED.equals(intent.getAction())) {
+                    if (broadcastCallback != null) {
+                        broadcastCallback.onLastPositionIsUpdated();
+                    }
                 }
+            } catch (Exception e) {
+                Log.d(TAG, e.getMessage(), e);
             }
         }
 

@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.progress;
+package siarhei.luskanau.gps.tracker.free.ui.progress;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

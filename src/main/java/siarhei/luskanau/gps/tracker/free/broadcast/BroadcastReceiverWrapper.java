@@ -25,9 +25,14 @@ package siarhei.luskanau.gps.tracker.free.broadcast;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 
 public abstract class BroadcastReceiverWrapper<C extends BroadcastCallback> extends BroadcastReceiver {
+
+    protected static void registerReceiver(Context context, BroadcastReceiverWrapper broadcastReceiverWrapper, IntentFilter intentFilter) {
+        LocalBroadcastManager.getInstance(context).registerReceiver(broadcastReceiverWrapper, intentFilter);
+    }
 
     public abstract void registerReceiver(Context context);
 

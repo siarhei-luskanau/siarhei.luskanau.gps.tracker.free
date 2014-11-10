@@ -26,15 +26,21 @@ package siarhei.luskanau.gps.tracker.free.broadcast;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 public class ProgressBroadcastController extends BroadcastController<ProgressBroadcastController.ProgressBroadcastCallback, ProgressBroadcastController.ProgressBroadcastReceiver> {
 
     private static final String ACTION_SHOW_TOAST = "ACTION_SHOW_TOAST";
+    private static final String ACTION_SHOW_ALERT_DIALOG = "ACTION_SHOW_ALERT_DIALOG";
+    private static final String TITLE_ARG = "TITLE_ARG";
     private static final String MESSAGE_ARG = "MESSAGE_ARG";
 
     public static void sendShowToastBroadcast(Context context, CharSequence message) {
-        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent(ACTION_SHOW_TOAST).putExtra(MESSAGE_ARG, message));
+        sendBroadcast(context, new Intent(ACTION_SHOW_TOAST).putExtra(MESSAGE_ARG, message));
+    }
+
+    public static void sendShowAlertDialogBroadcast(Context context, CharSequence title, CharSequence message) {
+        sendBroadcast(context, new Intent(ACTION_SHOW_ALERT_DIALOG).putExtra(TITLE_ARG, title).putExtra(MESSAGE_ARG, message));
     }
 
     @Override
@@ -45,10 +51,14 @@ public class ProgressBroadcastController extends BroadcastController<ProgressBro
     public static class ProgressBroadcastCallback implements BroadcastCallback {
         public void onShowToast(Context context, CharSequence message) {
         }
+
+        public void onShowAlertDialog(CharSequence title, CharSequence message) {
+        }
     }
 
     public static class ProgressBroadcastReceiver extends BroadcastReceiverWrapper<ProgressBroadcastCallback> {
 
+        private static final String TAG = "ProgressBroadcastReceiver";
         private ProgressBroadcastCallback broadcastCallback;
 
         public ProgressBroadcastReceiver(ProgressBroadcastCallback broadcastCallback) {
@@ -59,16 +69,27 @@ public class ProgressBroadcastController extends BroadcastController<ProgressBro
         public void registerReceiver(Context context) {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(ACTION_SHOW_TOAST);
-            LocalBroadcastManager.getInstance(context).registerReceiver(this, intentFilter);
+            intentFilter.addAction(ACTION_SHOW_ALERT_DIALOG);
+            registerReceiver(context, this, intentFilter);
         }
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (ACTION_SHOW_TOAST.equals(intent.getAction())) {
-                CharSequence message = intent.getCharSequenceExtra(MESSAGE_ARG);
-                if (broadcastCallback != null) {
-                    broadcastCallback.onShowToast(context, message);
+            try {
+                if (ACTION_SHOW_TOAST.equals(intent.getAction())) {
+                    CharSequence message = intent.getCharSequenceExtra(MESSAGE_ARG);
+                    if (broadcastCallback != null) {
+                        broadcastCallback.onShowToast(context, message);
+                    }
+                } else if (ACTION_SHOW_ALERT_DIALOG.equals(intent.getAction())) {
+                    CharSequence title = intent.getCharSequenceExtra(TITLE_ARG);
+                    CharSequence message = intent.getCharSequenceExtra(MESSAGE_ARG);
+                    if (broadcastCallback != null) {
+                        broadcastCallback.onShowAlertDialog(title, message);
+                    }
                 }
+            } catch (Exception e) {
+                Log.d(TAG, e.getMessage(), e);
             }
         }
 
