@@ -21,10 +21,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui;
+package siarhei.luskanau.gps.tracker.free.ui.app;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -35,24 +33,19 @@ import android.widget.FrameLayout;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.service.TrackerService;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
+import siarhei.luskanau.gps.tracker.free.ui.drawer.BaseDrawerActivity;
 
-public class TrackerActivity extends BaseDrawerActivity {
+public class AppActivity extends BaseDrawerActivity implements AppController.AppControllerAware {
 
-    protected AQuery aq = new AQuery(this);
-
-    public static void startTrackerActivity(Context context) {
-        context.startActivity(new Intent(context, TrackerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-    }
+    private AppController appController = new AppController(this);
+    private AQuery aq = new AQuery(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getSupportFragmentManager().findFragmentByTag(TrackerFragment.TAG) == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.contentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
-        }
-
+        appController.onShowTrackerFragment();
         openDrawer();
     }
 
@@ -72,8 +65,7 @@ public class TrackerActivity extends BaseDrawerActivity {
             menu.findItem(R.id.menu_item_action_play).setVisible(false);
             menu.findItem(R.id.menu_item_action_stop).setVisible(false);
         } else {
-            boolean isStarted = AppSettings.isTrackerStarted(this);
-            if (isStarted) {
+            if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
                 menu.findItem(R.id.menu_item_action_play).setVisible(false);
                 menu.findItem(R.id.menu_item_action_stop).setVisible(true);
             } else {
@@ -89,19 +81,24 @@ public class TrackerActivity extends BaseDrawerActivity {
         switch (item.getItemId()) {
             case R.id.menu_item_action_play:
                 if (AppSettings.getServerEntity(this) != null) {
-                    AppSettings.setTrackerStarted(this, true);
+                    TrackerService.startTracking(this);
                 } else {
-                    ServersActivity.startServersActivity(this);
+                    appController.onShowServersFragment();
                 }
                 supportInvalidateOptionsMenu();
                 return true;
             case R.id.menu_item_action_stop:
-                AppSettings.setTrackerStarted(this, false);
+                TrackerService.stopTracking(this);
                 supportInvalidateOptionsMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public AppController getAppController() {
+        return appController;
     }
 
 }

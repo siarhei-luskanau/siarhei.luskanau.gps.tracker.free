@@ -30,7 +30,12 @@ import android.util.Log;
 
 public class AppBroadcastController extends BroadcastController<AppBroadcastController.AppBroadcastCallback, AppBroadcastController.AppBroadcastReceiver> {
 
+    private static final String ACTION_TRACKER_STARTED_STATE = "ACTION_TRACKER_STARTED_STATE";
     private static final String ACTION_LAST_POSITION_IS_UPDATED = "ACTION_LAST_POSITION_IS_UPDATED";
+
+    public static void sendTrackerStartedStateBroadcast(Context context) {
+        sendBroadcast(context, new Intent(ACTION_TRACKER_STARTED_STATE));
+    }
 
     public static void sendLastPositionIsUpdatedBroadcast(Context context) {
         sendBroadcast(context, new Intent(ACTION_LAST_POSITION_IS_UPDATED));
@@ -42,6 +47,9 @@ public class AppBroadcastController extends BroadcastController<AppBroadcastCont
     }
 
     public static class AppBroadcastCallback implements BroadcastCallback {
+        public void onTrackerStartedState() {
+        }
+
         public void onLastPositionIsUpdated() {
         }
     }
@@ -58,6 +66,7 @@ public class AppBroadcastController extends BroadcastController<AppBroadcastCont
         @Override
         public void registerReceiver(Context context) {
             IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(ACTION_TRACKER_STARTED_STATE);
             intentFilter.addAction(ACTION_LAST_POSITION_IS_UPDATED);
             registerReceiver(context, this, intentFilter);
         }
@@ -65,7 +74,11 @@ public class AppBroadcastController extends BroadcastController<AppBroadcastCont
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
-                if (ACTION_LAST_POSITION_IS_UPDATED.equals(intent.getAction())) {
+                if (ACTION_TRACKER_STARTED_STATE.equals(intent.getAction())) {
+                    if (broadcastCallback != null) {
+                        broadcastCallback.onTrackerStartedState();
+                    }
+                } else if (ACTION_LAST_POSITION_IS_UPDATED.equals(intent.getAction())) {
                     if (broadcastCallback != null) {
                         broadcastCallback.onLastPositionIsUpdated();
                     }

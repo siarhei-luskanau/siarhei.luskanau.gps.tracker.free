@@ -33,6 +33,7 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.ConfirmServerDialogFragment;
 
 public class ServerEntityItemFragment extends Fragment {
@@ -65,8 +66,8 @@ public class ServerEntityItemFragment extends Fragment {
             public void onClick(View v) {
                 if (getArguments().containsKey(POSITION_ARG)) {
                     int position = getArguments().getInt(POSITION_ARG);
-                    ServersActivity serversActivity = (ServersActivity) getActivity();
-                    ServerEntity serverEntity = serversActivity.getServerEntity(position);
+                    AppController.ServersListBusiness serversListBusiness = AppController.getBusiness(getActivity(), AppController.ServersListBusiness.class);
+                    ServerEntity serverEntity = serversListBusiness.getServerEntity(position);
                     if (getFragmentManager().findFragmentByTag(ConfirmServerDialogFragment.TAG) == null) {
                         ConfirmServerDialogFragment.newInstance(serverEntity).show(getFragmentManager(), ConfirmServerDialogFragment.TAG);
                     }
@@ -76,8 +77,8 @@ public class ServerEntityItemFragment extends Fragment {
 
         if (getArguments().containsKey(POSITION_ARG)) {
             int position = getArguments().getInt(POSITION_ARG);
-            ServersActivity serversActivity = (ServersActivity) getActivity();
-            ServerEntity serverEntity = serversActivity.getServerEntity(position);
+            AppController.ServersListBusiness serversListBusiness = AppController.getBusiness(getActivity(), AppController.ServersListBusiness.class);
+            ServerEntity serverEntity = serversListBusiness.getServerEntity(position);
             if (serverEntity != null) {
                 updateServerEntity(serverEntity);
             }

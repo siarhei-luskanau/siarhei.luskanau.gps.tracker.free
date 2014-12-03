@@ -43,7 +43,7 @@ import java.math.BigDecimal;
 import java.util.Locale;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.ui.TrackerActivity;
+import siarhei.luskanau.gps.tracker.free.ui.app.AppActivity;
 
 public class Utils {
 
@@ -85,8 +85,8 @@ public class Utils {
                 .setContentText(contentText);
 
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context)
-                .addParentStack(TrackerActivity.class)
-                .addNextIntent(new Intent(context, TrackerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                .addParentStack(AppActivity.class)
+                .addNextIntent(new Intent(context, AppActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
         PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         notificationBuilder.setContentIntent(resultPendingIntent);

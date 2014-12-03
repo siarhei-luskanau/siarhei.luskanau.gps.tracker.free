@@ -38,6 +38,7 @@ import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
+import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
@@ -64,7 +65,7 @@ public class TrackerFragment extends Fragment {
         aq.id(R.id.editServerImageButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ServersActivity.startServersActivity(getActivity());
+                AppController.get(getActivity()).onShowServersFragment();
             }
         });
         aq.id(R.id.aboutServerImageButton).clicked(new View.OnClickListener() {

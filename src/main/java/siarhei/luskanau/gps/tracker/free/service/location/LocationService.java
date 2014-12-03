@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.location;
+package siarhei.luskanau.gps.tracker.free.service.location;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -41,7 +41,6 @@ import android.util.Log;
 import java.util.Iterator;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.entity.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.utils.PhoneStateUtils;
@@ -81,19 +80,19 @@ public class LocationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
             if (ACTION_SAVE_INVALID_LOCATION.equals(intent.getAction())) {
-                if (AppSettings.isTrackerStarted(this) && locationListener != null) {
+                if (AppSettings.getAppSettingsEntity(this).isTrackerStarted && locationListener != null) {
                     locationListener.onLocationChanged(null);
                 }
             } else if (ACTION_UPDATE_GPS_LISTENER.equals(intent.getAction())) {
                 stopListenLocation();
-                if (AppSettings.isTrackerStarted(this)) {
+                if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
                     startListenLocation();
                 } else {
                     cancelAntiKillerPing(this);
                     stopSelf();
                 }
             } else if (ACTION_ANTI_KILLER.equals(intent.getAction())) {
-                if (AppSettings.isTrackerStarted(this)) {
+                if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
                     startListenLocation();
                 } else {
                     cancelAntiKillerPing(this);
@@ -102,7 +101,7 @@ public class LocationService extends Service {
                 }
             }
         } else {
-            if (AppSettings.isTrackerStarted(this)) {
+            if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
                 startListenLocation();
             } else {
                 cancelAntiKillerPing(this);
@@ -143,8 +142,6 @@ public class LocationService extends Service {
                     && !appSettingsEntity.locationSettings.isUseNetwotkProvider) {
                 startSaveInvalidPing(this, appSettingsEntity.locationSettings.timeFilter);
             }
-
-            showNotification();
         }
     }
 
@@ -155,15 +152,6 @@ public class LocationService extends Service {
             locationListener = null;
             cancelSaveInvalidPing(this);
             PhoneStateUtils.stopListen(this);
-            stopForeground(true);
-        }
-    }
-
-    private void showNotification() {
-        AppSettingsEntity appSettingsEntity = AppSettings.getAppSettingsEntity(this);
-        if (AppSettings.isTrackerStarted(this) && appSettingsEntity.isShowNotification) {
-            startForeground(R.drawable.ic_launcher, Utils.createNotification(this, getString(R.string.service_tracker_running)));
-        } else {
             stopForeground(true);
         }
     }

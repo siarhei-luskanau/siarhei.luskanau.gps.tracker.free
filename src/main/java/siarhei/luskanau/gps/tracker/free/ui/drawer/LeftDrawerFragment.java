@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui;
+package siarhei.luskanau.gps.tracker.free.ui.drawer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +34,7 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
+import siarhei.luskanau.gps.tracker.free.ui.InternetSettingsFragment;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutFragment;
 
 public class LeftDrawerFragment extends Fragment {

@@ -24,14 +24,12 @@
 package siarhei.luskanau.gps.tracker.free.settings;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.entity.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.location.LocationService;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class AppSettings {
@@ -102,24 +100,15 @@ public class AppSettings {
         getPreferences(context).edit().clear().commit();
     }
 
-    @SuppressWarnings("deprecation")
-    public static boolean isTrackerStarted(Context context) {
-        return getAppSettingsEntity(context).isTrackerStarted;
-    }
-
-    @SuppressWarnings("deprecation")
-    public static void setTrackerStarted(Context context, boolean value) {
+    public static void setIsTrackerStarted(Context context, boolean value) {
         cachedAppSettingsEntity.isTrackerStarted = value;
         setAppSettingsEntity(context, cachedAppSettingsEntity);
-        LocationService.updateGpsListener(context);
-        context.sendBroadcast(new Intent(AppConstants.ACTION_TRACKER_STARTED_CHANGED));
     }
 
     public static ServerEntity getServerEntity(Context context) {
         if (cachedServerEntity == null) {
             cachedServerEntity = AppConstants.GSON.fromJson(getPreferences(context).getString(SERVER_ENTITY, null), ServerEntity.class);
         }
-
         return cachedServerEntity;
     }
 

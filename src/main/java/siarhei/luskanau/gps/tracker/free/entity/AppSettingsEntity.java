@@ -32,12 +32,11 @@ public class AppSettingsEntity {
     @SerializedName("EulaAccepted")
     public boolean isEulaAccepted = false;
 
-    @Deprecated
     @SerializedName("isTrackerStarted")
     public boolean isTrackerStarted = false;
 
-    @SerializedName("autostart")
-    public boolean autostart = false;
+    @SerializedName("autoStart")
+    public boolean autoStart = false;
 
     @SerializedName("isShowNotification")
     public boolean isShowNotification = true;

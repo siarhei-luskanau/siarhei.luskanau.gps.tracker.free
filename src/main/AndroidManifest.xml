@@ -26,10 +26,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <supports-screens
         android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true"
-        android:normalScreens="true"
-        android:largeScreens="true"
         android:xlargeScreens="true" />
 
     <uses-feature
@@ -65,33 +65,36 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
-        android:name="siarhei.luskanau.gps.tracker.free.ui.TrackerApplication"
-        android:label="@string/tracker_app_name"
+        android:name="siarhei.luskanau.gps.tracker.free.ui.app.TrackerApplication"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
-        android:theme="@style/Theme.TrackerTheme"
-        android:allowBackup="false">
+        android:label="@string/tracker_app_name"
+        android:theme="@style/Theme.TrackerTheme">
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="siarhei.luskanau.gps.tracker.free.ui.MainActivity"
+            android:name="siarhei.luskanau.gps.tracker.free.ui.app.MainActivity"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.TrackerActivity" />
-        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.ServersActivity" />
-        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.ServerEditActivity" />
+        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.app.AppActivity" />
+
+        <service
+            android:name="siarhei.luskanau.gps.tracker.free.service.TrackerService"
+            android:exported="false" />
 
         <service
             android:name="siarhei.luskanau.gps.tracker.free.sync.SyncService"
             android:exported="false" />
+
         <service
-            android:name="siarhei.luskanau.gps.tracker.free.location.LocationService"
+            android:name="siarhei.luskanau.gps.tracker.free.service.location.LocationService"
             android:exported="false" />
 
         <provider

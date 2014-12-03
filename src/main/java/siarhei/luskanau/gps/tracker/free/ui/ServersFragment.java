@@ -23,54 +23,50 @@
 
 package siarhei.luskanau.gps.tracker.free.ui;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
 import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
+import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 
-public class ServersActivity extends BaseProgressActivity {
+public class ServersFragment extends Fragment implements AppController.ServersListBusiness {
 
     private List<ServerEntity> serverEntities;
 
-    public static void startServersActivity(Context context) {
-        context.startActivity(new Intent(context, ServersActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        View view = inflater.inflate(R.layout.activity_servers, container, false);
+        return view;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_servers);
-    }
-
-    @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         updateServerEntities();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_servers, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_new: {
-                ServerEditActivity.startServerEditActivity(this, null);
+                ServerEditActivity.startServerEditActivity(getActivity(), null);
                 return true;
             }
             default: {
@@ -80,17 +76,17 @@ public class ServersActivity extends BaseProgressActivity {
     }
 
     private void updateServerEntities() {
-        serverEntities = ServerDAO.getServers(this);
+        serverEntities = ServerDAO.getServers(getActivity());
         if (serverEntities == null || serverEntities.size() == 0) {
-            serverEntities = ServerDAO.getAssetsServers(this);
+            serverEntities = ServerDAO.getAssetsServers(getActivity());
             if (serverEntities != null) {
                 for (ServerEntity serverEntity : serverEntities) {
-                    ServerDAO.insertOrUpdate(this, serverEntity);
+                    ServerDAO.insertOrUpdate(getActivity(), serverEntity);
                 }
             }
-            serverEntities = ServerDAO.getServers(this);
+            serverEntities = ServerDAO.getServers(getActivity());
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getChildFragmentManager();
 
         for (int i = serverEntities.size(); ; i++) {
             String fragmentTag = ServerEntityItemFragment.TAG + i;

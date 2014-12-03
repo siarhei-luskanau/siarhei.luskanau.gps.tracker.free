@@ -48,7 +48,6 @@ public class AppConstants {
 
     public static final String SATELLITES = "satellites";
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss zzz", Locale.ENGLISH);
-    public static final String ACTION_TRACKER_STARTED_CHANGED = "siarhei.luskanau.tracker.ACTION_TRACKER_STARTED_CHANGED";
     public static final String ACTION_PACKET_COUNTER_CHANGED = "siarhei.luskanau.tracker.ACTION_PACKET_COUNTER_CHANGED";
     public static final String ACTION_LAST_LOCATION_PACKET_CHANGED = "siarhei.luskanau.tracker.ACTION_LAST_LOCATION_PACKET_CHANGED";
     public static final Type STRING_LIST_TYPE_TOKEN = new TypeToken<List<String>>() {

@@ -21,48 +21,35 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui;
+package siarhei.luskanau.gps.tracker.free.ui.app;
 
-import android.app.Application;
-import android.content.Context;
-import android.widget.Toast;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 
-import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
-import siarhei.luskanau.gps.tracker.free.location.LocationService;
 import siarhei.luskanau.gps.tracker.free.sync.SyncService;
-import siarhei.luskanau.gps.tracker.free.utils.bugreport.ExceptionHandler;
 
-public class TrackerApplication extends Application {
-
-    private ProgressBroadcastController.ProgressBroadcastReceiver progressBroadcastReceiver = new ProgressBroadcastController().createBroadcastReceiver(new InnerProgressBroadcastCallback());
+public class MainActivity extends Activity {
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        ExceptionHandler.addExceptionHandler(this);
-
-        progressBroadcastReceiver.registerReceiver(this);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // Database will be created
         BaseDAO.queryCount(this, LocationColumns.TABLE_NAME);
-
-        LocationService.pingAntiKiller(this);
         SyncService.ping(this);
-    }
 
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        progressBroadcastReceiver.unregisterReceiver(this);
-    }
+        // Main activity has a single instance launch mode.
+        // Such approach allows us to have a single application instance
+        // but restore the activity stack when user press
+        // "Home" button and then launch application again
+        Intent intent = new Intent(this, AppActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
 
-    private class InnerProgressBroadcastCallback extends ProgressBroadcastController.ProgressBroadcastCallback {
-        @Override
-        public void onShowToast(Context context, CharSequence message) {
-            Toast.makeText(TrackerApplication.this, message, Toast.LENGTH_LONG).show();
-        }
+        finish();
     }
 
 }

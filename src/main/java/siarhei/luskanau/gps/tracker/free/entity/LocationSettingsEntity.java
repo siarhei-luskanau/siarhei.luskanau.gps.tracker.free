@@ -28,7 +28,7 @@ import com.google.gson.annotations.SerializedName;
 public class LocationSettingsEntity {
 
     @SerializedName("isUseGpsProvider")
-    public boolean isUseGpsProvider = false;
+    public boolean isUseGpsProvider = true;
 
     @SerializedName("isUseNetwotkProvider")
     public boolean isUseNetwotkProvider = true;

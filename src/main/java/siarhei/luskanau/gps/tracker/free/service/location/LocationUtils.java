@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.location;
+package siarhei.luskanau.gps.tracker.free.service.location;
 
 import android.content.Context;
 import android.content.Intent;
