@@ -35,7 +35,7 @@ import java.util.List;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.database.ContentProvider;
 import siarhei.luskanau.gps.tracker.free.database.ServerColumns;
-import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
 public class ServerDAO extends BaseDAO {

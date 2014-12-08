@@ -31,7 +31,7 @@ import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
 import siarhei.luskanau.gps.tracker.free.service.location.LocationService;
-import siarhei.luskanau.gps.tracker.free.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.utils.bugreport.ExceptionHandler;
 
 public class TrackerApplication extends Application {
@@ -49,7 +49,7 @@ public class TrackerApplication extends Application {
         BaseDAO.queryCount(this, LocationColumns.TABLE_NAME);
 
         LocationService.pingAntiKiller(this);
-        SyncService.ping(this);
+        SyncService.sendPositions(this);
     }
 
     @Override

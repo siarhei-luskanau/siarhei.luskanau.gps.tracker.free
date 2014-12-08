@@ -34,7 +34,7 @@ import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.CheckServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
@@ -87,7 +87,7 @@ public class ServerEditActivity extends BaseProgressActivity {
             aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
         } else if (AppConstants.SERVER_TYPE_JSON_FORM.equalsIgnoreCase(serverEntity.server_type)) {
             aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(1);
-        } else if (AppConstants.SERVER_TYPE_JSON_BODY.equalsIgnoreCase(serverEntity.server_type)) {
+        } else if (AppConstants.SERVER_TYPE_REST.equalsIgnoreCase(serverEntity.server_type)) {
             aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(2);
         }
 
@@ -126,7 +126,7 @@ public class ServerEditActivity extends BaseProgressActivity {
         if (serverType.equals(getString(R.string.server_type_socket))) {
             serverEntity.server_type = AppConstants.SERVER_TYPE_SOCKET;
         } else if (serverType.equals(getString(R.string.server_type_json_body))) {
-            serverEntity.server_type = AppConstants.SERVER_TYPE_JSON_BODY;
+            serverEntity.server_type = AppConstants.SERVER_TYPE_REST;
         } else if (serverType.equals(getString(R.string.server_type_json_form))) {
             serverEntity.server_type = AppConstants.SERVER_TYPE_JSON_FORM;
         }

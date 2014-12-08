@@ -41,7 +41,6 @@ import android.util.Log;
 import java.util.Iterator;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.entity.AppSettingsEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.utils.PhoneStateUtils;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
@@ -119,17 +118,17 @@ public class LocationService extends Service {
             locationListener = new InnerLocationListener();
             PhoneStateUtils.startListen(this);
 
-            AppSettingsEntity appSettingsEntity = AppSettings.getAppSettingsEntity(this);
-            gpsLocationsController = new LocationsController(deviceId, appSettingsEntity.locationSettings.timeFilter, appSettingsEntity.locationSettings.gpsDistanceFilter);
-            if (appSettingsEntity.locationSettings.isUseGpsProvider) {
+            AppSettings.State appSettingsState = AppSettings.getAppSettingsEntity(this);
+            gpsLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.gpsDistanceFilter);
+            if (appSettingsState.locationSettings.isUseGpsProvider) {
                 try {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 } catch (Exception e) {
                     Log.e(getPackageName(), e.getMessage(), e);
                 }
             }
-            networkLocationsController = new LocationsController(deviceId, appSettingsEntity.locationSettings.timeFilter, appSettingsEntity.locationSettings.networkDistanceFilter);
-            if (appSettingsEntity.locationSettings.isUseNetwotkProvider) {
+            networkLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.networkDistanceFilter);
+            if (appSettingsState.locationSettings.isUseNetwotkProvider) {
                 try {
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                 } catch (Exception e) {
@@ -137,10 +136,10 @@ public class LocationService extends Service {
                 }
             }
 
-            if (appSettingsEntity.locationSettings.isUseGsmCellInfo
-                    && !appSettingsEntity.locationSettings.isUseGpsProvider
-                    && !appSettingsEntity.locationSettings.isUseNetwotkProvider) {
-                startSaveInvalidPing(this, appSettingsEntity.locationSettings.timeFilter);
+            if (appSettingsState.locationSettings.isUseGsmCellInfo
+                    && !appSettingsState.locationSettings.isUseGpsProvider
+                    && !appSettingsState.locationSettings.isUseNetwotkProvider) {
+                startSaveInvalidPing(this, appSettingsState.locationSettings.timeFilter);
             }
         }
     }

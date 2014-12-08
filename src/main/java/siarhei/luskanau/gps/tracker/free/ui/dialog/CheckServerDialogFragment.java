@@ -35,13 +35,10 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.util.ArrayList;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
-import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
-import siarhei.luskanau.gps.tracker.free.sync.JsonHttpPostServer;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 
 public class CheckServerDialogFragment extends DialogFragment {
 
@@ -89,11 +86,11 @@ public class CheckServerDialogFragment extends DialogFragment {
                     outputStream.close();
                     socket.close();
                 }
-                if (AppConstants.SERVER_TYPE_JSON_BODY.equalsIgnoreCase(serverEntity.server_type)) {
-                    JsonHttpPostServer.sendLocations(serverEntity.server_address, new ArrayList<LocationPacket>());
+                if (AppConstants.SERVER_TYPE_REST.equalsIgnoreCase(serverEntity.server_type)) {
+                    //SendJsonForm.sendLocations(serverEntity.server_address, new ArrayList<LocationPacket>());
                 }
                 if (AppConstants.SERVER_TYPE_JSON_FORM.equalsIgnoreCase(serverEntity.server_type)) {
-                    JsonHttpPostServer.sendLocationsForm(serverEntity.server_address, new ArrayList<LocationPacket>());
+                    //SendJsonForm.sendLocationsForm(serverEntity.server_address, new ArrayList<LocationPacket>());
                 }
             } catch (Exception e) {
                 return e;

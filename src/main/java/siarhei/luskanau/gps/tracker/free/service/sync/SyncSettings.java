@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.sync;
+package siarhei.luskanau.gps.tracker.free.service.sync;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -38,43 +38,43 @@ public class SyncSettings {
         getPreferences(context).edit().clear().commit();
     }
 
-    private static final String SYNC_BACKOFF_TIME_MS = "SYNC_BACKOFF_TIME_MS";
+    private static final String SYNC_BACK_OFF_TIME_MS = "SYNC_BACK_OFF_TIME_MS";
 
-    public static long getSyncBackoffTimeMs(Context context) {
-        return getPreferences(context).getLong(SYNC_BACKOFF_TIME_MS, 0);
+    public static long getSyncBackOffTimeMs(Context context) {
+        return getPreferences(context).getLong(SYNC_BACK_OFF_TIME_MS, 0);
     }
 
-    public static void setSyncBackoffTimeMs(Context context, long value) {
-        getPreferences(context).edit().putLong(SYNC_BACKOFF_TIME_MS, value).commit();
+    public static void setSyncBackOffTimeMs(Context context, long value) {
+        getPreferences(context).edit().putLong(SYNC_BACK_OFF_TIME_MS, value).commit();
     }
 
-    private static final String SYNC_BACKOFF_COUNT = "SYNC_BACKOFF_COUNT";
+    private static final String SYNC_BACK_OFF_COUNT = "SYNC_BACK_OFF_COUNT";
 
-    public static int getSyncBackoffCount(Context context) {
-        return getPreferences(context).getInt(SYNC_BACKOFF_COUNT, 0);
+    public static int getSyncBackOffCount(Context context) {
+        return getPreferences(context).getInt(SYNC_BACK_OFF_COUNT, 0);
     }
 
-    private static void setSyncBackoffCount(Context context, int value) {
-        getPreferences(context).edit().putInt(SYNC_BACKOFF_COUNT, value).commit();
+    private static void setSyncBackOffCount(Context context, int value) {
+        getPreferences(context).edit().putInt(SYNC_BACK_OFF_COUNT, value).commit();
     }
 
     public static long incBackoff(Context context) {
-        int count = getSyncBackoffCount(context);
+        int count = getSyncBackOffCount(context);
         if (count >= 10) {
             count = 0;
         }
         count++;
         long delay = (long) Math.pow(2, count);
         delay = delay * 1000;
-        setSyncBackoffTimeMs(context, System.currentTimeMillis() + delay);
-        setSyncBackoffCount(context, count);
+        setSyncBackOffTimeMs(context, System.currentTimeMillis() + delay);
+        setSyncBackOffCount(context, count);
         return delay;
     }
 
-    public static void clearBackoff(Context context) {
+    public static void clearBackOff(Context context) {
         SharedPreferences preferences = getPreferences(context);
-        if (preferences.contains(SYNC_BACKOFF_COUNT) && preferences.contains(SYNC_BACKOFF_TIME_MS)) {
-            preferences.edit().remove(SYNC_BACKOFF_COUNT).remove(SYNC_BACKOFF_TIME_MS).commit();
+        if (preferences.contains(SYNC_BACK_OFF_COUNT) && preferences.contains(SYNC_BACK_OFF_TIME_MS)) {
+            preferences.edit().remove(SYNC_BACK_OFF_COUNT).remove(SYNC_BACK_OFF_TIME_MS).commit();
         }
     }
 

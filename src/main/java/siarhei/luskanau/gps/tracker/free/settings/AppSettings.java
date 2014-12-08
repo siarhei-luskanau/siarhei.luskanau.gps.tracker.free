@@ -27,9 +27,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.Locale;
+
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.entity.AppSettingsEntity;
-import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class AppSettings {
@@ -40,7 +43,7 @@ public class AppSettings {
     private static final String APP_SETTINGS_ENTITY = "APP_SETTINGS_ENTITY";
     private static final String SERVER_ENTITY = "SERVER_ENTITY";
     private static final String PACKET_COUNTER = "PACKET_COUNTER";
-    private static AppSettingsEntity cachedAppSettingsEntity;
+    private static State cachedAppSettingsState;
     private static ServerEntity cachedServerEntity;
 
     public static LocationPacket getLastLocationPacket(Context context) {
@@ -67,21 +70,21 @@ public class AppSettings {
         getPreferences(context).edit().putLong(NTP_SYNCHRONIZATION_TIME, value).commit();
     }
 
-    public static AppSettingsEntity getAppSettingsEntity(Context context) {
-        if (cachedAppSettingsEntity != null) {
-            return cachedAppSettingsEntity;
+    public static State getAppSettingsEntity(Context context) {
+        if (cachedAppSettingsState != null) {
+            return cachedAppSettingsState;
         }
-        cachedAppSettingsEntity = AppConstants.GSON.fromJson(getPreferences(context).getString(APP_SETTINGS_ENTITY, null), AppSettingsEntity.class);
-        if (cachedAppSettingsEntity == null) {
-            cachedAppSettingsEntity = new AppSettingsEntity();
-            setAppSettingsEntity(context, cachedAppSettingsEntity);
+        cachedAppSettingsState = AppConstants.GSON.fromJson(getPreferences(context).getString(APP_SETTINGS_ENTITY, null), State.class);
+        if (cachedAppSettingsState == null) {
+            cachedAppSettingsState = new State();
+            setAppSettingsEntity(context, cachedAppSettingsState);
         }
-        return cachedAppSettingsEntity;
+        return cachedAppSettingsState;
     }
 
-    public static void setAppSettingsEntity(Context context, AppSettingsEntity value) {
-        cachedAppSettingsEntity = value;
-        getPreferences(context).edit().putString(APP_SETTINGS_ENTITY, AppConstants.GSON.toJson(cachedAppSettingsEntity)).commit();
+    public static void setAppSettingsEntity(Context context, State value) {
+        cachedAppSettingsState = value;
+        getPreferences(context).edit().putString(APP_SETTINGS_ENTITY, AppConstants.GSON.toJson(cachedAppSettingsState)).commit();
     }
 
     public static int getPacketCounter(Context context) {
@@ -101,8 +104,8 @@ public class AppSettings {
     }
 
     public static void setIsTrackerStarted(Context context, boolean value) {
-        cachedAppSettingsEntity.isTrackerStarted = value;
-        setAppSettingsEntity(context, cachedAppSettingsEntity);
+        cachedAppSettingsState.isTrackerStarted = value;
+        setAppSettingsEntity(context, cachedAppSettingsState);
     }
 
     public static ServerEntity getServerEntity(Context context) {
@@ -115,6 +118,77 @@ public class AppSettings {
     public static void setServerEntity(Context context, ServerEntity value) {
         cachedServerEntity = value;
         getPreferences(context).edit().putString(SERVER_ENTITY, AppConstants.GSON.toJson(value)).commit();
+    }
+
+    public static class State {
+        @SerializedName("EulaAccepted")
+        public boolean isEulaAccepted = false;
+
+        @SerializedName("isTrackerStarted")
+        public boolean isTrackerStarted = false;
+
+        @SerializedName("autoStart")
+        public boolean autoStart = false;
+
+        @SerializedName("isShowNotification")
+        public boolean isShowNotification = true;
+
+        @SerializedName("internetSettingsEntity")
+        public InternetSettingsEntity internetSettingsEntity = new InternetSettingsEntity();
+
+        @SerializedName("batterySettings")
+        public BatterySettingsEntity batterySettings = new BatterySettingsEntity();
+
+        @SerializedName("locationSettings")
+        public LocationSettingsEntity locationSettings = new LocationSettingsEntity();
+
+        @SerializedName("language")
+        public String language = Locale.getDefault().getLanguage();
+    }
+
+    public static class BatterySettingsEntity {
+        @SerializedName("stopIfBatteryLow")
+        public boolean stopIfBatteryLow = true;
+
+        @SerializedName("startIfBatteryOk")
+        public boolean startIfBatteryOk = true;
+
+        @SerializedName("stopIfPowerDisconnected")
+        public boolean stopIfPowerDisconnected = false;
+
+        @SerializedName("startIfPowerConnected")
+        public boolean startIfPowerConnected = false;
+    }
+
+    public static class InternetSettingsEntity {
+        @SerializedName("isUseInternet")
+        public boolean isUseInternet = true;
+
+        @SerializedName("isUseWifiOny")
+        public boolean isUseWifiOny = false;
+
+        @SerializedName("locationInterval")
+        public int sendToServerInterval;
+    }
+
+    public static class LocationSettingsEntity {
+        @SerializedName("isUseGpsProvider")
+        public boolean isUseGpsProvider = true;
+
+        @SerializedName("isUseNetwotkProvider")
+        public boolean isUseNetwotkProvider = true;
+
+        @SerializedName("isUseGsmCellInfo")
+        public boolean isUseGsmCellInfo = false;
+
+        @SerializedName("timeFilter")
+        public long timeFilter = 60 * 1000;
+
+        @SerializedName("gpsDistanceFilter")
+        public long gpsDistanceFilter = 10;
+
+        @SerializedName("networkDistanceFilter")
+        public long networkDistanceFilter = 100;
     }
 
 }

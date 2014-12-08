@@ -90,7 +90,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:exported="false" />
 
         <service
-            android:name="siarhei.luskanau.gps.tracker.free.sync.SyncService"
+            android:name="siarhei.luskanau.gps.tracker.free.service.sync.SyncService"
             android:exported="false" />
 
         <service

@@ -29,7 +29,7 @@ import android.os.Bundle;
 
 import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
-import siarhei.luskanau.gps.tracker.free.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 
 public class MainActivity extends Activity {
 
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 
         // Database will be created
         BaseDAO.queryCount(this, LocationColumns.TABLE_NAME);
-        SyncService.ping(this);
+        SyncService.sendPositions(this);
 
         // Main activity has a single instance launch mode.
         // Such approach allows us to have a single application instance

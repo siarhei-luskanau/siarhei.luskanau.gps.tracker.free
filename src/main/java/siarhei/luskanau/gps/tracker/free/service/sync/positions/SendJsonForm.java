@@ -21,8 +21,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.sync;
+package siarhei.luskanau.gps.tracker.free.service.sync.positions;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
@@ -32,7 +33,6 @@ import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
@@ -46,49 +46,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
+import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.model.SendLocationsResponseDTO;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
-public class JsonHttpPostServer {
+public class SendJsonForm {
 
-    private static final String TAG = "JsonHttpServer";
+    private static final String TAG = "SendJsonForm";
     private static final int CONNECTION_TIMEOUT = 7 * 1000;
     private static final boolean DEBUG = false;
 
-    public static String sendLocationsForm(String url, List<LocationPacket> locationEntities)
-            throws Exception {
-        String requestJsonString = AppConstants.GSON.toJson(locationEntities);
+    public static void sendLocationsForm(Context context) throws Exception {
+        ServerEntity serverEntity = AppSettings.getServerEntity(context);
 
-        HttpPost httpPost = new HttpPost(url);
-        httpPost.addHeader(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=UTF-8");
-        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("track", requestJsonString));
-        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        for (; ; ) {
+            List<LocationPacket> locationEntities = LocationDAO.queryNextLocations(context, 100);
+            if (locationEntities != null && locationEntities.size() > 0) {
 
-        if (DEBUG) {
-            Log.d(TAG, "Send request: " + httpPost.getURI() + " " + requestJsonString);
+                String requestJsonString = AppConstants.GSON.toJson(locationEntities);
+
+                HttpPost httpPost = new HttpPost(serverEntity.server_address);
+                httpPost.addHeader(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded;charset=UTF-8");
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("track", requestJsonString));
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                if (DEBUG) {
+                    Log.d(TAG, "Send request: " + httpPost.getURI() + " " + requestJsonString);
+                }
+                String responseJsonString = read(requestInputStream(httpPost));
+                if (DEBUG) {
+                    Log.d(TAG, "Received response: " + responseJsonString);
+                }
+
+                SendLocationsResponseDTO statusResponse = AppConstants.GSON.fromJson(responseJsonString, SendLocationsResponseDTO.class);
+                if (statusResponse != null && statusResponse.success) {
+                    LocationDAO.deleteLocations(context, locationEntities);
+                    incPacketCounter(context, locationEntities.size());
+                    Log.d(context.getPackageName(), "Packet is send: " + locationEntities.size() + " " + responseJsonString);
+                } else {
+                    Log.e(context.getPackageName(), "Packet is not send: " + responseJsonString);
+                    break;
+                }
+            } else {
+                break;
+            }
         }
-        String responseJsonString = read(requestInputStream(httpPost));
-        if (DEBUG) {
-            Log.d(TAG, "Received response: " + responseJsonString);
-        }
-        return responseJsonString;
-    }
-
-    public static String sendLocations(String url, List<LocationPacket> locationEntities) throws Exception {
-        String requestJsonString = AppConstants.GSON.toJson(locationEntities);
-
-        HttpPost httpPost = new HttpPost(url);
-        httpPost.addHeader(HTTP.CONTENT_TYPE, "application/json");
-        httpPost.setEntity(new StringEntity(requestJsonString));
-
-        if (DEBUG) {
-            Log.d(TAG, "Send request: " + httpPost.getURI() + " " + requestJsonString);
-        }
-        String responseJsonString = read(requestInputStream(httpPost));
-        if (DEBUG) {
-            Log.d(TAG, "Received response: " + responseJsonString);
-        }
-        return responseJsonString;
     }
 
     private static InputStream requestInputStream(HttpUriRequest httpUriRequest) throws Exception {
@@ -128,6 +134,11 @@ public class JsonHttpPostServer {
             }
         }
         return sb.toString();
+    }
+
+    private static void incPacketCounter(Context context, int count) {
+        AppSettings.setPacketCounter(context, AppSettings.getPacketCounter(context) + count);
+        AppBroadcastController.sendLastPositionIsUpdatedBroadcast(context);
     }
 
 }

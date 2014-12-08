@@ -37,7 +37,7 @@ import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
-import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 
 public class ServersFragment extends Fragment implements AppController.ServersListBusiness {

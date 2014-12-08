@@ -21,18 +21,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.sync.task;
+package siarhei.luskanau.gps.tracker.free.model;
 
-import android.content.Context;
+import com.google.gson.annotations.SerializedName;
 
-public abstract class BaseTask {
+import siarhei.luskanau.gps.tracker.free.ApiConstants;
 
-    protected Context context;
+public class SendLocationsResponseDTO {
 
-    public BaseTask(Context context) {
-        this.context = context;
-    }
+    @SerializedName(ApiConstants.sendLocationsResponse.success)
+    public boolean success;
 
-    abstract public void doTask() throws Exception;
+    @SerializedName(ApiConstants.sendLocationsResponse.message)
+    public String message;
 
 }

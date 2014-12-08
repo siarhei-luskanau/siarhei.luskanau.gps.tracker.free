@@ -31,8 +31,9 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.entity.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
+import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 
 public class ConfirmServerDialogFragment extends DialogFragment {
 
@@ -59,7 +60,7 @@ public class ConfirmServerDialogFragment extends DialogFragment {
                 ServerEntity serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY), ServerEntity.class);
                 if (activity != null && serverEntity != null) {
                     AppSettings.setServerEntity(activity, serverEntity);
-                    activity.finish();
+                    AppController.get(getActivity()).onShowTrackerFragment();
                 }
             }
         });

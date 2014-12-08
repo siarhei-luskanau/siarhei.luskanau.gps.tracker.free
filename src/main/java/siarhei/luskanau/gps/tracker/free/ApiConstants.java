@@ -21,28 +21,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.entity;
+package siarhei.luskanau.gps.tracker.free;
 
-import com.google.gson.annotations.SerializedName;
+public class ApiConstants {
 
-public class LocationSettingsEntity {
-
-    @SerializedName("isUseGpsProvider")
-    public boolean isUseGpsProvider = true;
-
-    @SerializedName("isUseNetwotkProvider")
-    public boolean isUseNetwotkProvider = true;
-
-    @SerializedName("isUseGsmCellInfo")
-    public boolean isUseGsmCellInfo = false;
-
-    @SerializedName("timeFilter")
-    public long timeFilter = 60 * 1000;
-
-    @SerializedName("gpsDistanceFilter")
-    public long gpsDistanceFilter = 10;
-
-    @SerializedName("networkDistanceFilter")
-    public long networkDistanceFilter = 100;
+    public static final class sendLocationsResponse {
+        public static final String success = "success";
+        public static final String message = "message";
+    }
 
 }

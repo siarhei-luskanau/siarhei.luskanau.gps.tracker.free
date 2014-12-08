@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.sync.task;
+package siarhei.luskanau.gps.tracker.free.service.sync.task;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -34,17 +34,13 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import siarhei.luskanau.gps.tracker.free.gcm.GcmSettings;
-import siarhei.luskanau.gps.tracker.free.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 
-public class GcmTask extends BaseTask {
+public class GcmTask extends SyncService.Task {
 
     private static final String TAG = "GcmTask";
     private static final String SENDER_ID = "437129776573";
     private static AtomicInteger atomicInteger = new AtomicInteger();
-
-    public GcmTask(Context context) {
-        super(context);
-    }
 
     public static void sendEchoMessage(Context context) {
         try {
@@ -61,7 +57,7 @@ public class GcmTask extends BaseTask {
                 googleCloudMessaging.send(SENDER_ID + "@gcm.googleapis.com", id, data);
                 Log.d(TAG, "Message " + id + " is sent");
             } else {
-                SyncService.ping(context);
+                SyncService.startTask(context, new GcmTask());
             }
         } catch (Exception e) {
             Log.d(TAG, e.toString(), e);
@@ -69,7 +65,7 @@ public class GcmTask extends BaseTask {
     }
 
     @Override
-    public void doTask() throws Exception {
+    public void doTask(Context context) throws Exception {
         // Check device for Play Services APK.
         if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(context) != ConnectionResult.SUCCESS) {
             return;

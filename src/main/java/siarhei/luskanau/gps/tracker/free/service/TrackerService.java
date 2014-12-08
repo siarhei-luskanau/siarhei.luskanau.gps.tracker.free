@@ -30,7 +30,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.entity.AppSettingsEntity;
+import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.service.location.LocationService;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
@@ -78,26 +78,28 @@ public class TrackerService extends Service {
 
     private void onHandleIntent(Intent intent) {
         if (intent != null && ACTION_START_TRACKING.equals(intent.getAction())) {
-            startPolling();
+            startTracking();
         } else if (intent != null && ACTION_STOP_TRACKING.equals(intent.getAction())) {
-            stopPolling();
+            stopTracking();
         }
         showNotification();
     }
 
-    private void startPolling() {
+    private void startTracking() {
         AppSettings.setIsTrackerStarted(this, true);
         LocationService.updateGpsListener(this);
+        AppBroadcastController.sendTrackerStartedStateBroadcast(this);
     }
 
-    private void stopPolling() {
+    private void stopTracking() {
         AppSettings.setIsTrackerStarted(this, false);
         LocationService.updateGpsListener(this);
+        AppBroadcastController.sendTrackerStartedStateBroadcast(this);
     }
 
     private void showNotification() {
-        AppSettingsEntity appSettingsEntity = AppSettings.getAppSettingsEntity(this);
-        if (appSettingsEntity.isTrackerStarted && appSettingsEntity.isShowNotification) {
+        AppSettings.State appSettingsState = AppSettings.getAppSettingsEntity(this);
+        if (appSettingsState.isTrackerStarted && appSettingsState.isShowNotification) {
             startForeground(R.drawable.ic_launcher, Utils.createNotification(this, getString(R.string.service_tracker_running)));
         } else {
             stopForeground(true);

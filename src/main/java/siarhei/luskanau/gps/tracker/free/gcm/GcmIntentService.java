@@ -30,7 +30,8 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import siarhei.luskanau.gps.tracker.free.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.service.sync.task.GcmTask;
 
 public class GcmIntentService extends IntentService {
 
@@ -50,7 +51,7 @@ public class GcmIntentService extends IntentService {
                 if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
                     Log.e(TAG, "Send error: " + extras.toString());
                     GcmSettings.setRegistrationId(this, null);
-                    SyncService.ping(this);
+                    SyncService.startTask(this, new GcmTask());
                 } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
                     Log.e(TAG, "Deleted messages on server: " + extras.toString());
                 } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {

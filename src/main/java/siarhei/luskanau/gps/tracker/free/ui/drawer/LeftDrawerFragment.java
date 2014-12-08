@@ -33,7 +33,8 @@ import android.view.ViewGroup;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.sync.task.GcmTask;
+import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.service.sync.task.GcmTask;
 import siarhei.luskanau.gps.tracker.free.ui.InternetSettingsFragment;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutFragment;
 
@@ -61,7 +62,7 @@ public class LeftDrawerFragment extends Fragment {
                     @Override
                     public void run() {
                         try {
-                            new GcmTask(getActivity()).doTask();
+                            SyncService.startTask(getActivity(), new GcmTask());
                             GcmTask.sendEchoMessage(getActivity());
                         } catch (Exception e) {
                             Log.d(TAG, e.toString(), e);

@@ -24,7 +24,6 @@
 package siarhei.luskanau.gps.tracker.free.service.location;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.util.Log;
 
@@ -32,10 +31,11 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
-import siarhei.luskanau.gps.tracker.free.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.utils.PhoneStateUtils;
 
 public class LocationsController {
@@ -68,9 +68,8 @@ public class LocationsController {
             }
 
             LocationDAO.insertOrUpdateLocationPacket(context, locationEntity);
-            context.sendBroadcast(new Intent(AppConstants.ACTION_PACKET_COUNTER_CHANGED));
-            context.sendBroadcast(new Intent(AppConstants.ACTION_LAST_LOCATION_PACKET_CHANGED));
-            SyncService.ping(context);
+            AppBroadcastController.sendLastPositionIsUpdatedBroadcast(context);
+            SyncService.sendPositions(context);
         } catch (Exception e) {
             Log.e(context.getPackageName(), "LocationReceiver.saveLocation", e);
         }

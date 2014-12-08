@@ -91,6 +91,10 @@ public class LocationDAO extends BaseDAO {
         return context.getContentResolver().delete(LOCATION_URI, whereClause.toString(), whereArgs);
     }
 
+    public static boolean hasLocations(Context context) {
+        return queryCount(context, LocationColumns.TABLE_NAME) > 0;
+    }
+
     private static ContentValues toContentValues(LocationPacket locationPacket) {
         ContentValues values = new ContentValues();
         values.put(LocationColumns.PACKET, AppConstants.GSON.toJson(locationPacket));
