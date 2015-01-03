@@ -31,6 +31,14 @@ import java.util.List;
 
 public class ServerEntity {
 
+    public static enum ServerType {
+        socket,
+        json_form,
+        rest,
+        wialon,
+        custom
+    }
+
     public static final Type COLLECTION_TYPE = new TypeToken<List<ServerEntity>>() {
     }.getType();
 
@@ -44,7 +52,7 @@ public class ServerEntity {
     public String site_url;
 
     @SerializedName("server_type")
-    public String server_type;
+    public ServerType serverType;
 
     @SerializedName("server_address")
     public String server_address;

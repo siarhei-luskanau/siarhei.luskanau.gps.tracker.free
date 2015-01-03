@@ -29,7 +29,6 @@ import android.util.Log;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
@@ -109,12 +108,19 @@ public class SendPositionsCallable implements Callable<Object> {
 
     private void sendPositions() throws Exception {
         ServerEntity serverEntity = AppSettings.getServerEntity(context);
-        if (AppConstants.SERVER_TYPE_SOCKET.equalsIgnoreCase(serverEntity.server_type)) {
-            new SendSocketTask().doTask(context);
-        } else if (AppConstants.SERVER_TYPE_REST.equalsIgnoreCase(serverEntity.server_type)) {
-            SendRestTask.doTask(context);
-        } else if (AppConstants.SERVER_TYPE_JSON_FORM.equalsIgnoreCase(serverEntity.server_type)) {
-            SendJsonForm.sendLocationsForm(context);
+        switch (serverEntity.serverType) {
+            case socket: {
+                new SendSocketTask().doTask(context);
+                break;
+            }
+            case rest: {
+                SendRestTask.doTask(context);
+                break;
+            }
+            case json_form: {
+                SendJsonForm.sendLocationsForm(context);
+                break;
+            }
         }
         //LocationDAO.deleteLocations(context, LocationDAO.queryNextLocations(context, 10));
     }

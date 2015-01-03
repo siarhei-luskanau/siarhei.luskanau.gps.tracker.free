@@ -74,23 +74,28 @@ public class CheckServerDialogFragment extends DialogFragment {
         @Override
         protected Exception doInBackground(Void... params) {
             try {
-                if (serverEntity == null || serverEntity.server_type == null || serverEntity.server_address == null) {
+                if (serverEntity == null || serverEntity.serverType == null || serverEntity.server_address == null) {
                     throw new NullPointerException();
                 }
 
-                if (AppConstants.SERVER_TYPE_SOCKET.equalsIgnoreCase(serverEntity.server_type)) {
-                    SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(serverEntity.server_address), serverEntity.server_port);
-                    Socket socket = new Socket();
-                    socket.connect(socketAddress, 5 * 1000);
-                    OutputStream outputStream = socket.getOutputStream();
-                    outputStream.close();
-                    socket.close();
-                }
-                if (AppConstants.SERVER_TYPE_REST.equalsIgnoreCase(serverEntity.server_type)) {
-                    //SendJsonForm.sendLocations(serverEntity.server_address, new ArrayList<LocationPacket>());
-                }
-                if (AppConstants.SERVER_TYPE_JSON_FORM.equalsIgnoreCase(serverEntity.server_type)) {
-                    //SendJsonForm.sendLocationsForm(serverEntity.server_address, new ArrayList<LocationPacket>());
+                switch (serverEntity.serverType) {
+                    case socket: {
+                        SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(serverEntity.server_address), serverEntity.server_port);
+                        Socket socket = new Socket();
+                        socket.connect(socketAddress, 5 * 1000);
+                        OutputStream outputStream = socket.getOutputStream();
+                        outputStream.close();
+                        socket.close();
+                        break;
+                    }
+                    case rest: {
+                        //SendJsonForm.sendLocations(serverEntity.server_address, new ArrayList<LocationPacket>());
+                        break;
+                    }
+                    case json_form: {
+                        //SendJsonForm.sendLocationsForm(serverEntity.server_address, new ArrayList<LocationPacket>());
+                        break;
+                    }
                 }
             } catch (Exception e) {
                 return e;

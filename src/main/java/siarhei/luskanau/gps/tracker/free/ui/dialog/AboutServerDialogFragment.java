@@ -67,7 +67,7 @@ public class AboutServerDialogFragment extends DialogFragment {
         super.onResume();
         aq.id(R.id.serverNameTextView).text(serverEntity.name);
         aq.id(R.id.serverSiteUrlTextView).text(serverEntity.site_url);
-        aq.id(R.id.serverTypeTextView).text(serverEntity.server_type);
+        aq.id(R.id.serverTypeTextView).text(serverEntity.serverType.toString());
         aq.id(R.id.serverAddressTextView).text(serverEntity.server_address);
         aq.id(R.id.serverPortTextView).text(String.valueOf(serverEntity.server_port));
     }

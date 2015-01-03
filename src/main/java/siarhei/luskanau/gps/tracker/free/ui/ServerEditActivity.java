@@ -83,14 +83,20 @@ public class ServerEditActivity extends BaseProgressActivity {
             aq.id(R.id.customServerPortEditText).text(String.valueOf(serverEntity.server_port));
         }
 
-        if (AppConstants.SERVER_TYPE_SOCKET.equalsIgnoreCase(serverEntity.server_type)) {
-            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
-        } else if (AppConstants.SERVER_TYPE_JSON_FORM.equalsIgnoreCase(serverEntity.server_type)) {
-            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(1);
-        } else if (AppConstants.SERVER_TYPE_REST.equalsIgnoreCase(serverEntity.server_type)) {
-            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(2);
+        switch (serverEntity.serverType) {
+            case socket: {
+                aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
+                break;
+            }
+            case json_form: {
+                aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(1);
+                break;
+            }
+            case rest: {
+                aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(2);
+                break;
+            }
         }
-
     }
 
     @Override
@@ -124,11 +130,11 @@ public class ServerEditActivity extends BaseProgressActivity {
 
         String serverType = aq.id(R.id.serverTypeSpinner).getSpinner().getSelectedItem().toString();
         if (serverType.equals(getString(R.string.server_type_socket))) {
-            serverEntity.server_type = AppConstants.SERVER_TYPE_SOCKET;
+            serverEntity.serverType = ServerEntity.ServerType.socket;
         } else if (serverType.equals(getString(R.string.server_type_json_body))) {
-            serverEntity.server_type = AppConstants.SERVER_TYPE_REST;
+            serverEntity.serverType = ServerEntity.ServerType.rest;
         } else if (serverType.equals(getString(R.string.server_type_json_form))) {
-            serverEntity.server_type = AppConstants.SERVER_TYPE_JSON_FORM;
+            serverEntity.serverType = ServerEntity.ServerType.json_form;
         }
 
         serverEntity.name = aq.id(R.id.customServerNameEditText).getText().toString();
