@@ -21,26 +21,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.app;
+package siarhei.luskanau.gps.tracker.free.protocol;
 
-import android.os.Bundle;
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 
-import siarhei.luskanau.gps.tracker.free.ui.drawer.BaseDrawerActivity;
+public interface BaseLocationAdapter<T> {
 
-public class AppActivity extends BaseDrawerActivity implements AppController.AppControllerAware {
+    public T fromLocationModel(LocationModel location);
 
-    private AppController appController = new AppController(this);
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        appController.onShowTrackerFragment();
-        openDrawer();
-    }
-
-    @Override
-    public AppController getAppController() {
-        return appController;
-    }
+    public LocationModel toLocationModel(T source);
 
 }

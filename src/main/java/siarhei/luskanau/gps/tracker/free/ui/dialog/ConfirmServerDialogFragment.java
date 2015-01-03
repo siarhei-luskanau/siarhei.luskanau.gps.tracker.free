@@ -23,44 +23,42 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.dialog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 
 public class ConfirmServerDialogFragment extends DialogFragment {
 
     public static final String TAG = "ConfirmServerDialogFragment";
-    private static final String SERVER_ENTITY = "SERVER_ENTITY";
+    private static final String POSITION_ARG = "POSITION_ARG";
 
-    public static ConfirmServerDialogFragment newInstance(ServerEntity serverEntity) {
+    public static ConfirmServerDialogFragment newInstance(int position) {
         ConfirmServerDialogFragment fragment = new ConfirmServerDialogFragment();
         Bundle args = new Bundle();
-        args.putString(SERVER_ENTITY, AppConstants.GSON.toJson(serverEntity));
+        args.putInt(POSITION_ARG, position);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ServerEntity serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY), ServerEntity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(serverEntity.name);
+        AppController.ServersListBusiness serversListBusiness = AppController.getBusiness(getActivity(), AppController.ServersListBusiness.class);
+        if (serversListBusiness != null) {
+            ServerEntity serverEntity = serversListBusiness.getServerEntity(getArguments().getInt(POSITION_ARG));
+            builder.setMessage(serverEntity.name);
+        }
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Activity activity = getActivity();
-                ServerEntity serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY), ServerEntity.class);
-                if (activity != null && serverEntity != null) {
-                    AppSettings.setServerEntity(activity, serverEntity);
-                    AppController.get(getActivity()).onShowTrackerFragment();
+                AppController.ServersListBusiness serversListBusiness = AppController.getBusiness(getActivity(), AppController.ServersListBusiness.class);
+                if (serversListBusiness != null) {
+                    serversListBusiness.onServerEntityConfirmed(getArguments().getInt(POSITION_ARG));
                 }
             }
         });

@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.shared;
+package siarhei.luskanau.gps.tracker.free.service.sync.tracking.adapter;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -31,7 +31,10 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Tr151ModLocationPacketAdapter implements BaseLocationPacketAdapter<Tr151ModPacket> {
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
+import siarhei.luskanau.gps.tracker.free.protocol.BaseLocationAdapter;
+
+public class Tr151ModLocationAdapter implements BaseLocationAdapter<Tr151ModLocationAdapter.Tr151ModPacket> {
 
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("ddMMyy", Locale.ENGLISH);
     private static final DateFormat TIME_FORMAT = new SimpleDateFormat("HHmmss", Locale.ENGLISH);
@@ -42,93 +45,93 @@ public class Tr151ModLocationPacketAdapter implements BaseLocationPacketAdapter<
     private static final DecimalFormat SPEED_FORMAT = new DecimalFormat("0.00");
     private static final DecimalFormat BEARING_FORMAT = new DecimalFormat("0");
 
-    public Tr151ModLocationPacketAdapter() {
+    public Tr151ModLocationAdapter() {
         DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
         TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
     }
 
     @Override
-    public Tr151ModPacket fromLocationPacket(LocationPacket locationPacket) {
-        if (locationPacket != null) {
+    public Tr151ModPacket fromLocationModel(LocationModel locationModel) {
+        if (locationModel != null) {
             Tr151ModPacket tr151ModPacket = new Tr151ModPacket();
-            tr151ModPacket.imei = locationPacket.deviceId;
-            if (locationPacket.time != null) {
-                tr151ModPacket.date = DATE_FORMAT.format(locationPacket.time);
-                tr151ModPacket.time = TIME_FORMAT.format(locationPacket.time);
+            tr151ModPacket.imei = locationModel.deviceId;
+            if (locationModel.time != null) {
+                tr151ModPacket.date = DATE_FORMAT.format(locationModel.time);
+                tr151ModPacket.time = TIME_FORMAT.format(locationModel.time);
             }
-            tr151ModPacket.longitude = longitudeToString(locationPacket.longitude);
-            tr151ModPacket.latitude = latitudeToString(locationPacket.latitude);
+            tr151ModPacket.longitude = longitudeToString(locationModel.longitude);
+            tr151ModPacket.latitude = latitudeToString(locationModel.latitude);
 
-            if (locationPacket.hasAltitude) {
-                tr151ModPacket.altitude = locationPacket.altitude;
-            }
-
-            if (locationPacket.hasSpeed) {
-                tr151ModPacket.speed = (double) locationPacket.speed;
+            if (locationModel.hasAltitude) {
+                tr151ModPacket.altitude = locationModel.altitude;
             }
 
-            if (locationPacket.hasBearing) {
-                tr151ModPacket.heading = (int) locationPacket.bearing;
+            if (locationModel.hasSpeed) {
+                tr151ModPacket.speed = (double) locationModel.speed;
             }
 
-            tr151ModPacket.satellites = locationPacket.satellites;
-            tr151ModPacket.signalStrength = locationPacket.signalStrength;
-            tr151ModPacket.battery = getBattery(locationPacket);
-            tr151ModPacket.mcc = locationPacket.mcc;
-            tr151ModPacket.mnc = locationPacket.mnc;
-            tr151ModPacket.lac = locationPacket.lac;
-            tr151ModPacket.cid = locationPacket.cid;
+            if (locationModel.hasBearing) {
+                tr151ModPacket.heading = (int) locationModel.bearing;
+            }
+
+            tr151ModPacket.satellites = locationModel.satellites;
+            tr151ModPacket.signalStrength = locationModel.signalStrength;
+            tr151ModPacket.battery = getBattery(locationModel);
+            tr151ModPacket.mcc = locationModel.mcc;
+            tr151ModPacket.mnc = locationModel.mnc;
+            tr151ModPacket.lac = locationModel.lac;
+            tr151ModPacket.cid = locationModel.cid;
             return tr151ModPacket;
         }
         return null;
     }
 
     @Override
-    public LocationPacket toLocationPacket(Tr151ModPacket source) {
+    public LocationModel toLocationModel(Tr151ModPacket source) {
         if (source != null) {
-            LocationPacket locationPacket = new LocationPacket();
-            locationPacket.deviceId = source.imei;
+            LocationModel locationModel = new LocationModel();
+            locationModel.deviceId = source.imei;
 
             try {
                 if (source.date != null && source.time != null) {
-                    locationPacket.time = DATETIME_FORMAT.parse(source.date + source.time);
+                    locationModel.time = DATETIME_FORMAT.parse(source.date + source.time);
                 }
             } catch (ParseException e) {
-                locationPacket.time = null;
+                locationModel.time = null;
                 e.printStackTrace();
             }
 
-            locationPacket.longitude = stringToLongitude(source.longitude);
-            locationPacket.latitude = stringToLatitude(source.latitude);
+            locationModel.longitude = stringToLongitude(source.longitude);
+            locationModel.latitude = stringToLatitude(source.latitude);
 
-            locationPacket.hasAltitude = source.altitude != null;
-            if (locationPacket.hasAltitude) {
-                locationPacket.altitude = source.altitude;
+            locationModel.hasAltitude = source.altitude != null;
+            if (locationModel.hasAltitude) {
+                locationModel.altitude = source.altitude;
             }
 
-            locationPacket.hasSpeed = source.speed != null;
-            if (locationPacket.hasSpeed) {
-                locationPacket.speed = source.speed.floatValue();
+            locationModel.hasSpeed = source.speed != null;
+            if (locationModel.hasSpeed) {
+                locationModel.speed = source.speed.floatValue();
             }
 
-            locationPacket.hasBearing = source.heading != null;
-            if (locationPacket.hasBearing) {
-                locationPacket.bearing = source.heading;
+            locationModel.hasBearing = source.heading != null;
+            if (locationModel.hasBearing) {
+                locationModel.bearing = source.heading;
             }
 
-            locationPacket.satellites = source.satellites;
-            locationPacket.signalStrength = source.signalStrength;
+            locationModel.satellites = source.satellites;
+            locationModel.signalStrength = source.signalStrength;
 
             if (source.battery != null) {
-                locationPacket.batteryScale = 100;
-                locationPacket.batteryLevel = (source.battery * locationPacket.batteryScale) / 7;
+                locationModel.batteryScale = 100;
+                locationModel.batteryLevel = (source.battery * locationModel.batteryScale) / 7;
             }
 
-            locationPacket.mcc = source.mcc;
-            locationPacket.mnc = source.mnc;
-            locationPacket.lac = source.lac;
-            locationPacket.cid = source.cid;
-            return locationPacket;
+            locationModel.mcc = source.mcc;
+            locationModel.mnc = source.mnc;
+            locationModel.lac = source.lac;
+            locationModel.cid = source.cid;
+            return locationModel;
         }
         return null;
     }
@@ -152,9 +155,9 @@ public class Tr151ModLocationPacketAdapter implements BaseLocationPacketAdapter<
     }
 
     private Double degreesToDecimal(String degreesString) {
-        int pointPoition = degreesString.indexOf('.');
-        String s1 = degreesString.substring(0, pointPoition);
-        String s2 = degreesString.substring(pointPoition + 1);
+        int pointPosition = degreesString.indexOf('.');
+        String s1 = degreesString.substring(0, pointPosition);
+        String s2 = degreesString.substring(pointPosition + 1);
         s2 = s1.substring(s1.length() - 2, s1.length()) + s2;
         s1 = s1.substring(0, s1.length() - 2);
         return Double.parseDouble(s1) + 10 * Double.parseDouble("0." + s2) / 6;
@@ -214,7 +217,7 @@ public class Tr151ModLocationPacketAdapter implements BaseLocationPacketAdapter<
         return null;
     }
 
-    private Integer getBattery(LocationPacket locationEntity) {
+    private Integer getBattery(LocationModel locationEntity) {
         if (locationEntity.batteryLevel != null && locationEntity.batteryScale != null) {
             if (locationEntity.batteryLevel >= 0 && locationEntity.batteryScale > 0) {
                 return Math.round(7 * locationEntity.batteryLevel / locationEntity.batteryScale);
@@ -388,6 +391,56 @@ public class Tr151ModLocationPacketAdapter implements BaseLocationPacketAdapter<
 
     private double round(double value, int scale) {
         return new BigDecimal(value).setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    public static class Tr151ModPacket {
+        public String imei;
+        public int status = 1;
+        public String gpsFix = "3";
+        /**
+         * ddmmyy
+         */
+        public String date;
+        /**
+         * hhmmss
+         */
+        public String time;
+        /**
+         * (E or W)dddmm.mmmm Example: E12129.2186 - > E 121°29.2186’
+         */
+        public String longitude;
+        /**
+         * (N or S)ddmm.mmmm Example: N2459.8915 - > N 24°59.8915’
+         */
+        public String latitude;
+        /**
+         * xxxxx.x unit: meters
+         */
+        public Double altitude;
+        /**
+         * xxxxx.xx unit: knots (1knots = 1.852km)
+         */
+        public Double speed;
+        /**
+         * ddd
+         */
+        public Integer heading;
+        /**
+         * xx
+         */
+        public Integer satellites;
+        /**
+         * 0-6
+         */
+        public Integer signalStrength;
+        /**
+         * 0-7
+         */
+        public Integer battery;
+        public String mcc;
+        public String mnc;
+        public Integer lac;
+        public Integer cid;
     }
 
 }

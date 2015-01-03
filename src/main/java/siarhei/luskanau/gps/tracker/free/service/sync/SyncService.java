@@ -38,7 +38,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import siarhei.luskanau.gps.tracker.free.service.sync.positions.SendPositionsCallable;
+import siarhei.luskanau.gps.tracker.free.service.sync.tracking.SendPositionsCallable;
 
 public class SyncService extends Service {
 

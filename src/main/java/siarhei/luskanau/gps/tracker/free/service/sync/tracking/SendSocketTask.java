@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.service.sync.positions;
+package siarhei.luskanau.gps.tracker.free.service.sync.tracking;
 
 import android.content.Context;
 import android.util.Log;
@@ -35,25 +35,25 @@ import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.service.sync.tracking.adapter.Tr151ModLocationAdapter;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
-import siarhei.luskanau.gps.tracker.free.shared.Tr151ModLocationPacketAdapter;
 
 public class SendSocketTask {
 
     private static Socket socket;
     private static OutputStream outputStream;
-    private Tr151ModLocationPacketAdapter packetAdapter = new Tr151ModLocationPacketAdapter();
+    private Tr151ModLocationAdapter packetAdapter = new Tr151ModLocationAdapter();
 
     public void doTask(Context context) throws Exception {
         ServerEntity serverEntity = AppSettings.getServerEntity(context);
         for (; ; ) {
-            List<LocationPacket> locationEntities = LocationDAO.queryNextLocations(context, 100);
+            List<LocationModel> locationEntities = LocationDAO.queryNextLocations(context, 100);
             if (locationEntities != null && locationEntities.size() > 0) {
                 openSocket(serverEntity.server_address, serverEntity.server_port);
-                for (LocationPacket locationEntity : locationEntities) {
-                    outputStream.write(packetAdapter.tr151ModPacketToString(packetAdapter.fromLocationPacket(locationEntity)).getBytes());
+                for (LocationModel locationEntity : locationEntities) {
+                    outputStream.write(packetAdapter.tr151ModPacketToString(packetAdapter.fromLocationModel(locationEntity)).getBytes());
                     outputStream.flush();
                 }
                 LocationDAO.deleteLocations(context, locationEntities);

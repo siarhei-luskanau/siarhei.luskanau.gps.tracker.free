@@ -35,14 +35,14 @@ import android.telephony.gsm.GsmCellLocation;
 import java.util.HashMap;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 
 public class LocationUtils {
 
     private static final IntentFilter BATTERY_INTENT_FILTER = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     private static final int BAD_VALUE_INT = -1;
 
-    public static void setLocation(LocationPacket locationEntity, Location location) {
+    public static void setLocation(LocationModel locationEntity, Location location) {
         if (location.hasAccuracy()) {
             locationEntity.hasAccuracy = true;
             locationEntity.accuracy = location.getAccuracy();
@@ -83,7 +83,7 @@ public class LocationUtils {
         }
     }
 
-    public static void setBatteryInfo(LocationPacket locationEntity, Context context) {
+    public static void setBatteryInfo(LocationModel locationEntity, Context context) {
         try {
             Bundle batteryExtras = context.getApplicationContext().registerReceiver(null, BATTERY_INTENT_FILTER).getExtras();
             int level = batteryExtras.getInt("level", -1);
@@ -97,7 +97,7 @@ public class LocationUtils {
         }
     }
 
-    public static void setGsmInfo(LocationPacket locationEntity, Context context) {
+    public static void setGsmInfo(LocationModel locationEntity, Context context) {
         try {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             CellLocation cellLocation = telephonyManager.getCellLocation();

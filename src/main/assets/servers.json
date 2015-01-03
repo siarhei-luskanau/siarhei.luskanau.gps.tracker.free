@@ -3,9 +3,9 @@
         "id": "server_id_01",
         "name": "GPS-Trace Orange",
         "site_url": "http://gps-trace.com/",
-        "server_type": "socket",
+        "server_type": "wialon",
         "server_address": "193.193.165.166",
-        "server_port": 98765,
+        "server_port": 20147,
         "custom": false
     },
     {

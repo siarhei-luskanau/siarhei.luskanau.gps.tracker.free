@@ -38,6 +38,7 @@ import java.util.List;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 
 public class ServersFragment extends Fragment implements AppController.ServersListBusiness {
@@ -46,7 +47,7 @@ public class ServersFragment extends Fragment implements AppController.ServersLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.activity_servers, container, false);
         return view;
     }
@@ -60,6 +61,13 @@ public class ServersFragment extends Fragment implements AppController.ServersLi
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_servers, menu);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        boolean isDrawerOpen = AppController.get(getActivity()).isDrawerOpen();
+        menu.findItem(R.id.menu_action_new).setVisible(!isDrawerOpen);
     }
 
     @Override
@@ -116,6 +124,15 @@ public class ServersFragment extends Fragment implements AppController.ServersLi
             return serverEntities.get(position);
         }
         return null;
+    }
+
+    @Override
+    public void onServerEntityConfirmed(int position) {
+        ServerEntity serverEntity = getServerEntity(position);
+        if (serverEntity != null) {
+            AppSettings.setServerEntity(getActivity(), serverEntity);
+            AppController.get(getActivity()).popBackStack();
+        }
     }
 
 }

@@ -25,11 +25,12 @@ package siarhei.luskanau.gps.tracker.free.ui.drawer;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.androidquery.AQuery;
 
@@ -38,7 +39,7 @@ import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
 public abstract class BaseDrawerActivity extends BaseProgressActivity {
 
-    protected AQuery aq = new AQuery(this);
+    private AQuery aq = new AQuery(this);
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -47,7 +48,7 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity {
         setContentView(R.layout.activity_base_drawer);
 
         DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, baseDrawerLayout, R.drawable.ic_drawer, R.string.tracker_app_name, R.string.tracker_app_name) {
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, baseDrawerLayout, R.string.tracker_app_name, R.string.tracker_app_name) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 supportInvalidateOptionsMenu();
@@ -96,6 +97,15 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity {
     public void openDrawer() {
         DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
         baseDrawerLayout.openDrawer(Gravity.LEFT);
+    }
+
+    public boolean isDrawerOpen() {
+        DrawerLayout drawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
+        FrameLayout leftDrawerFrameLayout = (FrameLayout) aq.id(R.id.leftDrawerFrameLayout).getView();
+        if (drawerLayout != null && leftDrawerFrameLayout != null) {
+            return drawerLayout.isDrawerOpen(leftDrawerFrameLayout);
+        }
+        return false;
     }
 
 }

@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.service.sync.positions;
+package siarhei.luskanau.gps.tracker.free.service.sync.tracking;
 
 import android.content.Context;
 import android.util.Log;
@@ -34,6 +34,7 @@ import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncSettings;
+import siarhei.luskanau.gps.tracker.free.service.sync.tracking.json.SendJsonForm;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 

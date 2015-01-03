@@ -32,8 +32,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Locale;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
-import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class AppSettings {
 
@@ -46,11 +46,11 @@ public class AppSettings {
     private static State cachedAppSettingsState;
     private static ServerEntity cachedServerEntity;
 
-    public static LocationPacket getLastLocationPacket(Context context) {
-        return AppConstants.GSON.fromJson(getPreferences(context).getString(LAST_LOCATION_PACKET, null), LocationPacket.class);
+    public static LocationModel getLastLocationPacket(Context context) {
+        return AppConstants.GSON.fromJson(getPreferences(context).getString(LAST_LOCATION_PACKET, null), LocationModel.class);
     }
 
-    public static void setLastLocationPacket(Context context, LocationPacket value) {
+    public static void setLastLocationPacket(Context context, LocationModel value) {
         getPreferences(context).edit().putString(LAST_LOCATION_PACKET, AppConstants.GSON.toJson(value)).commit();
     }
 

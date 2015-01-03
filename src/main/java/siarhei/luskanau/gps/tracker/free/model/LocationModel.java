@@ -21,14 +21,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.shared;
+package siarhei.luskanau.gps.tracker.free.model;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.Map;
 
-public class LocationPacket {
+public class LocationModel {
 
     @SerializedName("rowId")
     public Long rowId;

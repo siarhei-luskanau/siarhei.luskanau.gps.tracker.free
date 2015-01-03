@@ -23,15 +23,22 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.app;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
+
+import java.util.List;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.ServersFragment;
 import siarhei.luskanau.gps.tracker.free.ui.TrackerFragment;
+import siarhei.luskanau.gps.tracker.free.ui.drawer.BaseDrawerActivity;
 
 public class AppController {
+
+    private static final String TAG = "AppController";
 
     private FragmentActivity activity;
 
@@ -50,6 +57,14 @@ public class AppController {
         return (T) activity.getSupportFragmentManager().findFragmentByTag(type.getCanonicalName());
     }
 
+    public boolean isDrawerOpen() {
+        if (activity instanceof BaseDrawerActivity) {
+            BaseDrawerActivity baseDrawerActivity = (BaseDrawerActivity) activity;
+            return baseDrawerActivity.isDrawerOpen();
+        }
+        return false;
+    }
+
     public void onShowTrackerFragment() {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(TrackerFragment.TAG) == null) {
@@ -60,7 +75,34 @@ public class AppController {
     public void onShowServersFragment() {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(ServersFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.contentFrameLayout, new ServersFragment(), ServersFragment.TAG).commit();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.contentFrameLayout, new ServersFragment(), ServersFragment.TAG)
+                    .addToBackStack(ServersFragment.TAG)
+                    .commit();
+        }
+    }
+
+    public void popBackStack() {
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        fragmentManager.popBackStack();
+    }
+
+    private void logDebug() {
+        Log.d(TAG, "###########################");
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment != null) {
+                    Log.d(TAG, "FragmentManager.getFragments: " + fragment.getTag() + ": " + fragment.getClass().getSimpleName());
+                } else {
+                    Log.d(TAG, "FragmentManager.getFragments: null");
+                }
+            }
+        }
+        for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
+            FragmentManager.BackStackEntry backStackEntry = fragmentManager.getBackStackEntryAt(i);
+            Log.d(TAG, "FragmentManager.getBackStackEntryAt: " + i + ": " + backStackEntry.getName());
         }
     }
 
@@ -72,6 +114,8 @@ public class AppController {
         public static final String TAG = ServersListBusiness.class.getCanonicalName();
 
         public ServerEntity getServerEntity(int position);
+
+        public void onServerEntityConfirmed(int position);
     }
 
 }

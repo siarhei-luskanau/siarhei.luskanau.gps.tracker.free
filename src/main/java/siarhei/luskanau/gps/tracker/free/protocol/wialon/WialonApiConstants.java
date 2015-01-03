@@ -21,12 +21,29 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.shared;
+package siarhei.luskanau.gps.tracker.free.protocol.wialon;
 
-public interface BaseLocationPacketAdapter<T> {
+public class WialonApiConstants {
 
-    public T fromLocationPacket(LocationPacket locationPacket);
+    public static final class packetTypes {
+        public static final class login {
+            public static final String L = "L";
+            public static final String AL = "AL";
+            public static final String AL_1_SUCCESS = "1";
+            public static final String AL_0_REJECT = "0";
+            public static final String AL_01_ERROR_PASSWORD = "01";
+        }
 
-    public LocationPacket toLocationPacket(T source);
+        public static final class shortData {
+            public static final String SD = "SD";
+            public static final String ASD = "ASD";
+            public static final String ASD_STRUCTURE_ERROR = "-1";
+            public static final String ASD_0_INCORRECT_TIME = "0";
+            public static final String ASD_1_SUCCESS = "1";
+            public static final String ASD_10_ERROR_COORDINATES = "10";
+            public static final String ASD_11_ERROR_HEIGHT_SPEED_COURSE = "11";
+            public static final String ASD_12_ERROR_SATELLITES = "12";
+        }
+    }
 
 }

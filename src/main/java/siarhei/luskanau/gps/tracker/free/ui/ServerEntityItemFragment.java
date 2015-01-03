@@ -66,10 +66,8 @@ public class ServerEntityItemFragment extends Fragment {
             public void onClick(View v) {
                 if (getArguments().containsKey(POSITION_ARG)) {
                     int position = getArguments().getInt(POSITION_ARG);
-                    AppController.ServersListBusiness serversListBusiness = AppController.getBusiness(getActivity(), AppController.ServersListBusiness.class);
-                    ServerEntity serverEntity = serversListBusiness.getServerEntity(position);
                     if (getFragmentManager().findFragmentByTag(ConfirmServerDialogFragment.TAG) == null) {
-                        ConfirmServerDialogFragment.newInstance(serverEntity).show(getFragmentManager(), ConfirmServerDialogFragment.TAG);
+                        ConfirmServerDialogFragment.newInstance(position).show(getFragmentManager(), ConfirmServerDialogFragment.TAG);
                     }
                 }
             }

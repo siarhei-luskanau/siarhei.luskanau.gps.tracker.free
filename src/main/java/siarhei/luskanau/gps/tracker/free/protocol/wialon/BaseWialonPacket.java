@@ -21,26 +21,25 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.app;
+package siarhei.luskanau.gps.tracker.free.protocol.wialon;
 
-import android.os.Bundle;
+public abstract class BaseWialonPacket {
 
-import siarhei.luskanau.gps.tracker.free.ui.drawer.BaseDrawerActivity;
+    public static String NA = "NA";
+    public static String MESSAGE_SEPARATOR = ";";
 
-public class AppActivity extends BaseDrawerActivity implements AppController.AppControllerAware {
+    public abstract String getType();
 
-    private AppController appController = new AppController(this);
+    public abstract String getMessage();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        appController.onShowTrackerFragment();
-        openDrawer();
-    }
-
-    @Override
-    public AppController getAppController() {
-        return appController;
+    public String build() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("#");
+        builder.append(getType());
+        builder.append("#");
+        builder.append(getMessage());
+        builder.append("\r\n");
+        return builder.toString();
     }
 
 }

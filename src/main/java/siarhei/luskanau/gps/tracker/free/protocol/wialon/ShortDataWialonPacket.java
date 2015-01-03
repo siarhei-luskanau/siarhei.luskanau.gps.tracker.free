@@ -21,26 +21,37 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.app;
+package siarhei.luskanau.gps.tracker.free.protocol.wialon;
 
-import android.os.Bundle;
+public class ShortDataWialonPacket extends BaseWialonPacket {
 
-import siarhei.luskanau.gps.tracker.free.ui.drawer.BaseDrawerActivity;
-
-public class AppActivity extends BaseDrawerActivity implements AppController.AppControllerAware {
-
-    private AppController appController = new AppController(this);
+    public String date = NA;
+    public String time = NA;
+    public String lat1 = NA;
+    public String lat2 = NA;
+    public String lon1 = NA;
+    public String lon2 = NA;
+    public String speed = NA;
+    public String course = NA;
+    public String height = NA;
+    public String sats = NA;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        appController.onShowTrackerFragment();
-        openDrawer();
+    public String getType() {
+        return "SD";
     }
 
     @Override
-    public AppController getAppController() {
-        return appController;
+    public String getMessage() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(date).append(MESSAGE_SEPARATOR).append(time).append(MESSAGE_SEPARATOR);
+        builder.append(lat1).append(MESSAGE_SEPARATOR).append(lat2).append(MESSAGE_SEPARATOR);
+        builder.append(lon1).append(MESSAGE_SEPARATOR).append(lon2).append(MESSAGE_SEPARATOR);
+        builder.append(speed).append(MESSAGE_SEPARATOR);
+        builder.append(course).append(MESSAGE_SEPARATOR);
+        builder.append(height).append(MESSAGE_SEPARATOR);
+        builder.append(sats);
+        return builder.toString();
     }
 
 }

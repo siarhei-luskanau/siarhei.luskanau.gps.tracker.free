@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.shared;
+package siarhei.luskanau.gps.tracker.free.service.sync.tracking.adapter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,7 +36,10 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 import java.util.Date;
 
-public class JsonLocationPacketAdapter implements BaseLocationPacketAdapter<String> {
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
+import siarhei.luskanau.gps.tracker.free.protocol.BaseLocationAdapter;
+
+public class JsonLocationAdapter implements BaseLocationAdapter<String> {
 
     private final static JsonSerializer<Date> DATE_JSON_SERIALIZER = new JsonSerializer<Date>() {
         @Override
@@ -51,17 +54,19 @@ public class JsonLocationPacketAdapter implements BaseLocationPacketAdapter<Stri
             return json == null ? null : new Date(Long.valueOf(json.getAsString()));
         }
     };
-    private final static Gson GSON = new GsonBuilder().registerTypeAdapter(Date.class, DATE_JSON_SERIALIZER)
-            .registerTypeAdapter(Date.class, DATE_JSON_DESERIALIZER).create();
+    private final static Gson GSON = new GsonBuilder()
+            .registerTypeAdapter(Date.class, DATE_JSON_SERIALIZER)
+            .registerTypeAdapter(Date.class, DATE_JSON_DESERIALIZER)
+            .create();
 
     @Override
-    public String fromLocationPacket(LocationPacket locationPacket) {
-        return GSON.toJson(locationPacket);
+    public String fromLocationModel(LocationModel locationModel) {
+        return GSON.toJson(locationModel);
     }
 
     @Override
-    public LocationPacket toLocationPacket(String source) {
-        return GSON.fromJson(source, LocationPacket.class);
+    public LocationModel toLocationModel(String source) {
+        return GSON.fromJson(source, LocationModel.class);
     }
 
 }

@@ -21,56 +21,21 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.shared;
+package siarhei.luskanau.gps.tracker.free.protocol.wialon;
 
-public class Tr151ModPacket {
+public class LoginWialonPacket extends BaseWialonPacket {
 
     public String imei;
-    public int status = 1;
-    public String gpsFix = "M";
-    /**
-     * ddmmyy
-     */
-    public String date;
-    /**
-     * hhmmss
-     */
-    public String time;
-    /**
-     * (E or W)dddmm.mmmm Example: E12129.2186 - > E 121°29.2186’
-     */
-    public String longitude;
-    /**
-     * (N or S)ddmm.mmmm Example: N2459.8915 - > N 24°59.8915’
-     */
-    public String latitude;
-    /**
-     * xxxxx.x unit: meters
-     */
-    public Double altitude;
-    /**
-     * xxxxx.xx unit: knots (1knots = 1.852km)
-     */
-    public Double speed;
-    /**
-     * ddd
-     */
-    public Integer heading;
-    /**
-     * xx
-     */
-    public Integer satellites;
-    /**
-     * 0-6
-     */
-    public Integer signalStrength;
-    /**
-     * 0-7
-     */
-    public Integer battery;
-    public String mcc;
-    public String mnc;
-    public Integer lac;
-    public Integer cid;
+    public String password = NA;
+
+    @Override
+    public String getType() {
+        return "D";
+    }
+
+    @Override
+    public String getMessage() {
+        return new StringBuilder().append(imei).append(MESSAGE_SEPARATOR).append(password).toString();
+    }
 
 }

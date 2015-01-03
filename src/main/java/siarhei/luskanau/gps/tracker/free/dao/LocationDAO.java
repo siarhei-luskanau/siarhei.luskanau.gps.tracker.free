@@ -35,30 +35,30 @@ import java.util.List;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.database.ContentProvider;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class LocationDAO extends BaseDAO {
 
     private final static Uri LOCATION_URI = Uri.withAppendedPath(ContentProvider.URI, LocationColumns.TABLE_NAME);
 
-    public static long insertOrUpdateLocationPacket(Context context, LocationPacket locationPacket) {
-        ContentValues values = toContentValues(locationPacket);
-        if (locationPacket.rowId != null) {
+    public static long insertOrUpdateLocationPacket(Context context, LocationModel locationModel) {
+        ContentValues values = toContentValues(locationModel);
+        if (locationModel.rowId != null) {
             String selection = LocationColumns._ID + "=?";
-            String[] whereArgs = new String[]{String.valueOf(locationPacket.rowId)};
+            String[] whereArgs = new String[]{String.valueOf(locationModel.rowId)};
             context.getContentResolver().update(LOCATION_URI, values, selection, whereArgs);
         } else {
             Uri idUri = context.getContentResolver().insert(LOCATION_URI, values);
-            locationPacket.rowId = Long.parseLong(idUri.getPathSegments().get(1));
-            AppSettings.setLastLocationPacket(context, locationPacket);
+            locationModel.rowId = Long.parseLong(idUri.getPathSegments().get(1));
+            AppSettings.setLastLocationPacket(context, locationModel);
 
         }
-        return locationPacket.rowId;
+        return locationModel.rowId;
     }
 
-    public static List<LocationPacket> queryNextLocations(Context context, int limit) {
-        List<LocationPacket> packets = new ArrayList<LocationPacket>();
+    public static List<LocationModel> queryNextLocations(Context context, int limit) {
+        List<LocationModel> packets = new ArrayList<LocationModel>();
         Cursor cursor = null;
         try {
             cursor = context.getContentResolver().query(Uri.withAppendedPath(Uri.withAppendedPath(Uri.withAppendedPath(LOCATION_URI, null), null), String.valueOf(limit)), null, null, null, LocationColumns._ID);
@@ -73,7 +73,7 @@ public class LocationDAO extends BaseDAO {
         return packets;
     }
 
-    public static int deleteLocations(Context context, List<LocationPacket> packets) {
+    public static int deleteLocations(Context context, List<LocationModel> packets) {
         if (packets == null || packets.size() == 0) {
             return 0;
         }
@@ -95,14 +95,14 @@ public class LocationDAO extends BaseDAO {
         return queryCount(context, LocationColumns.TABLE_NAME) > 0;
     }
 
-    private static ContentValues toContentValues(LocationPacket locationPacket) {
+    private static ContentValues toContentValues(LocationModel locationModel) {
         ContentValues values = new ContentValues();
-        values.put(LocationColumns.PACKET, AppConstants.GSON.toJson(locationPacket));
+        values.put(LocationColumns.PACKET, AppConstants.GSON.toJson(locationModel));
         return values;
     }
 
-    private static LocationPacket fromCursor(Cursor cursor) {
-        LocationPacket locationEntity = AppConstants.GSON.fromJson(cursor.getString(cursor.getColumnIndex(LocationColumns.PACKET)), LocationPacket.class);
+    private static LocationModel fromCursor(Cursor cursor) {
+        LocationModel locationEntity = AppConstants.GSON.fromJson(cursor.getString(cursor.getColumnIndex(LocationColumns.PACKET)), LocationModel.class);
         locationEntity.rowId = cursor.getLong(cursor.getColumnIndex(LocationColumns._ID));
         return locationEntity;
     }

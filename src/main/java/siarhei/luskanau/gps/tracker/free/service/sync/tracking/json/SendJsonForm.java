@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.service.sync.positions;
+package siarhei.luskanau.gps.tracker.free.service.sync.tracking.json;
 
 import android.content.Context;
 import android.util.Log;
@@ -48,10 +48,10 @@ import java.util.List;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 import siarhei.luskanau.gps.tracker.free.model.SendLocationsResponseDTO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 
 public class SendJsonForm {
 
@@ -63,7 +63,7 @@ public class SendJsonForm {
         ServerEntity serverEntity = AppSettings.getServerEntity(context);
 
         for (; ; ) {
-            List<LocationPacket> locationEntities = LocationDAO.queryNextLocations(context, 100);
+            List<LocationModel> locationEntities = LocationDAO.queryNextLocations(context, 100);
             if (locationEntities != null && locationEntities.size() > 0) {
 
                 String requestJsonString = AppConstants.GSON.toJson(locationEntities);

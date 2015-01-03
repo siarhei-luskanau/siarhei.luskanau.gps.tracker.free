@@ -37,6 +37,7 @@ import com.androidquery.AQuery;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.service.TrackerService;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutServerDialogFragment;
@@ -104,17 +105,42 @@ public class TrackerFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        //inflater.inflate(R.menu.menu_tracker, menu);
+        inflater.inflate(R.menu.menu_tracker, menu);
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        boolean isDrawerOpen = AppController.get(getActivity()).isDrawerOpen();
+        if (isDrawerOpen) {
+            menu.findItem(R.id.menu_item_action_play).setVisible(false);
+            menu.findItem(R.id.menu_item_action_stop).setVisible(false);
+        } else {
+            if (AppSettings.getAppSettingsEntity(getActivity()).isTrackerStarted) {
+                menu.findItem(R.id.menu_item_action_play).setVisible(false);
+                menu.findItem(R.id.menu_item_action_stop).setVisible(true);
+            } else {
+                menu.findItem(R.id.menu_item_action_play).setVisible(true);
+                menu.findItem(R.id.menu_item_action_stop).setVisible(false);
+            }
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_item_action_play:
+                if (AppSettings.getServerEntity(getActivity()) != null) {
+                    TrackerService.startTracking(getActivity());
+                } else {
+                    AppController.get(getActivity()).onShowServersFragment();
+                }
+                getActivity().supportInvalidateOptionsMenu();
+                return true;
+            case R.id.menu_item_action_stop:
+                TrackerService.stopTracking(getActivity());
+                getActivity().supportInvalidateOptionsMenu();
+                return true;
             default: {
                 return super.onOptionsItemSelected(item);
             }

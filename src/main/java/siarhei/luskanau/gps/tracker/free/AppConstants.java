@@ -52,6 +52,7 @@ public class AppConstants {
     }.getType();
     public static final Type STRING_MAP_TYPE_TOKEN = new TypeToken<Map<String, String>>() {
     }.getType();
+    public static final String SERVER_TYPE_WIALON = "wialon";
     public static final String SERVER_TYPE_SOCKET = "socket";
     public static final String SERVER_TYPE_JSON_FORM = "json_form";
     public static final String SERVER_TYPE_REST = "rest";

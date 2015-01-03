@@ -33,9 +33,9 @@ import java.util.TimeZone;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
+import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
-import siarhei.luskanau.gps.tracker.free.shared.LocationPacket;
 import siarhei.luskanau.gps.tracker.free.utils.PhoneStateUtils;
 
 public class LocationsController {
@@ -53,7 +53,7 @@ public class LocationsController {
 
     public static void saveLocation(Context context, String deviceId, Location location, long timeMillis) {
         try {
-            LocationPacket locationEntity = new LocationPacket();
+            LocationModel locationEntity = new LocationModel();
             locationEntity.deviceId = deviceId;
             locationEntity.time = new Date(timeMillis);
             AppConstants.DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("GMT"));
