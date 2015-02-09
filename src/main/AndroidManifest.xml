@@ -102,6 +102,19 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:authorities="siarhei.luskanau.gps.tracker.free.provider"
             android:exported="false" />
 
+        <receiver android:name="siarhei.luskanau.gps.tracker.free.receiver.StaticReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+            </intent-filter>
+        </receiver>
+
         <!-- GCM -->
         <receiver
             android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmBroadcastReceiver"

@@ -47,7 +47,7 @@ public class BaseDAO {
         }
     }
 
-    public static synchronized long queryCount(Context context, String tableName) {
+    public static long queryCount(Context context, String tableName) {
         Cursor cursor = null;
         try {
             Uri uri = Uri.withAppendedPath(ContentProvider.URI, tableName);
@@ -61,7 +61,7 @@ public class BaseDAO {
         return -1;
     }
 
-    public static synchronized long queryCount(Context context, String inTables, String selection, String[] whereArgs) {
+    public static long queryCount(Context context, String inTables, String selection, String[] whereArgs) {
         Cursor cursor = null;
         try {
             Uri uri = Uri.withAppendedPath(ContentProvider.URI, inTables);

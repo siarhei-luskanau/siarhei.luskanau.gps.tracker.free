@@ -48,7 +48,6 @@ import siarhei.luskanau.gps.tracker.free.utils.Utils;
 public class LocationService extends Service {
 
     private static final String ACTION_UPDATE_GPS_LISTENER = "ACTION_UPDATE_GPS_LISTENER";
-    private static final String ACTION_ANTI_KILLER = "ACTION_ANTI_KILLER";
     private static final String ACTION_SAVE_INVALID_LOCATION = "ACTION_SAVE_INVALID_LOCATION";
     private LocationManager locationManager;
     private InnerLocationListener locationListener;
@@ -56,10 +55,6 @@ public class LocationService extends Service {
     private LocationsController networkLocationsController;
     private long ntpDifferentTime;
     private String deviceId;
-
-    public static void pingAntiKiller(Context context) {
-        context.startService(new Intent(context, LocationService.class).setAction(ACTION_ANTI_KILLER));
-    }
 
     public static void updateGpsListener(Context context) {
         context.startService(new Intent(context, LocationService.class).setAction(ACTION_UPDATE_GPS_LISTENER));
@@ -73,7 +68,6 @@ public class LocationService extends Service {
     @Override
     public void onCreate() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        startAntiKillerPing(this);
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -87,15 +81,6 @@ public class LocationService extends Service {
                 if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
                     startListenLocation();
                 } else {
-                    cancelAntiKillerPing(this);
-                    stopSelf();
-                }
-            } else if (ACTION_ANTI_KILLER.equals(intent.getAction())) {
-                if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
-                    startListenLocation();
-                } else {
-                    cancelAntiKillerPing(this);
-                    stopListenLocation();
                     stopSelf();
                 }
             }
@@ -103,7 +88,6 @@ public class LocationService extends Service {
             if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
                 startListenLocation();
             } else {
-                cancelAntiKillerPing(this);
                 stopListenLocation();
                 stopSelf();
             }
@@ -153,20 +137,6 @@ public class LocationService extends Service {
             PhoneStateUtils.stopListen(this);
             stopForeground(true);
         }
-    }
-
-    private void startAntiKillerPing(Context context) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 30 * 1000, getAntiKillerPendingIntent(context));
-    }
-
-    private void cancelAntiKillerPing(Context context) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(getAntiKillerPendingIntent(context));
-    }
-
-    private PendingIntent getAntiKillerPendingIntent(Context context) {
-        return PendingIntent.getService(context, 0, new Intent(context, LocationService.class).setAction(ACTION_ANTI_KILLER), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private void startSaveInvalidPing(Context context, long pingInterval) {

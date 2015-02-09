@@ -23,10 +23,13 @@
 
 package siarhei.luskanau.gps.tracker.free.service;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 
 import siarhei.luskanau.gps.tracker.free.R;
@@ -40,6 +43,7 @@ public class TrackerService extends Service {
     private static final String TAG = "TrackerService";
     private static final String ACTION_START_TRACKING = "ACTION_START_TRACKING";
     private static final String ACTION_STOP_TRACKING = "ACTION_STOP_TRACKING";
+    private static final String ACTION_ANTI_KILLER = "ACTION_ANTI_KILLER";
 
     public static void startTracking(Context context) {
         context.startService(new Intent(context, TrackerService.class).setAction(ACTION_START_TRACKING));
@@ -47,6 +51,10 @@ public class TrackerService extends Service {
 
     public static void stopTracking(Context context) {
         context.startService(new Intent(context, TrackerService.class).setAction(ACTION_STOP_TRACKING));
+    }
+
+    public static void pingAntiKiller(Context context) {
+        context.startService(new Intent(context, LocationService.class).setAction(ACTION_ANTI_KILLER));
     }
 
     @Override
@@ -81,17 +89,27 @@ public class TrackerService extends Service {
             startTracking();
         } else if (intent != null && ACTION_STOP_TRACKING.equals(intent.getAction())) {
             stopTracking();
+        } else if (ACTION_ANTI_KILLER.equals(intent.getAction())) {
+            Log.d(TAG, ACTION_ANTI_KILLER);
+            if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
+                LocationService.updateGpsListener(this);
+                //TODO sendTask
+            } else {
+                cancelAntiKillerPing(this);
+            }
         }
         showNotification();
     }
 
     private void startTracking() {
+        startAntiKillerPing(this);
         AppSettings.setIsTrackerStarted(this, true);
         LocationService.updateGpsListener(this);
         AppBroadcastController.sendTrackerStartedStateBroadcast(this);
     }
 
     private void stopTracking() {
+        cancelAntiKillerPing(this);
         AppSettings.setIsTrackerStarted(this, false);
         LocationService.updateGpsListener(this);
         AppBroadcastController.sendTrackerStartedStateBroadcast(this);
@@ -104,6 +122,20 @@ public class TrackerService extends Service {
         } else {
             stopForeground(true);
         }
+    }
+
+    private void startAntiKillerPing(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 30 * 1000, getAntiKillerPendingIntent(context));
+    }
+
+    private void cancelAntiKillerPing(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(getAntiKillerPendingIntent(context));
+    }
+
+    private PendingIntent getAntiKillerPendingIntent(Context context) {
+        return PendingIntent.getService(context, 0, new Intent(context, LocationService.class).setAction(ACTION_ANTI_KILLER), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
 }
