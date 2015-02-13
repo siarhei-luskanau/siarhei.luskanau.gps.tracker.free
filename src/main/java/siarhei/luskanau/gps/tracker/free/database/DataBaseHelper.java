@@ -28,13 +28,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DataBaseHelper";
+    private static final boolean DEBUG = true;
+    private static final int DATABASE_VERSION = 14;
     private Context context;
 
     public DataBaseHelper(ContentProvider contentProvider) {
-        super(contentProvider.getContext(), contentProvider.getContext().getPackageName() + ".db", null, 14);
+        super(contentProvider.getContext(), contentProvider.getContext().getPackageName() + ".db", null, DATABASE_VERSION);
         context = contentProvider.getContext();
     }
 
@@ -58,24 +64,111 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void cleanDatabase(SQLiteDatabase db) {
+        Log.d(TAG, "Cleaning database which will destroy all old data");
+
+        DataBaseSettings.clear(context);
+
+        queryDropTable(db, ServerColumns.TABLE_NAME);
+        queryDropTable(db, LocationColumns.TABLE_NAME);
+
+        onCreate(db);
+    }
+
+    private void queryDropTable(SQLiteDatabase db, String tableName) {
+        db.execSQL("DROP TABLE IF EXISTS " + tableName);
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
-            Log.d(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
-
-            DataBaseSettings.clear(context);
-
-            queryDropTable(db, ServerColumns.TABLE_NAME);
-            queryDropTable(db, LocationColumns.TABLE_NAME);
-
-            onCreate(db);
+            try {
+                makeChanges(db, oldVersion, newVersion);
+            } catch (Throwable tr) {
+                Log.e(TAG, tr.getMessage(), tr);
+                cleanDatabase(db);
+            }
         } catch (Throwable tr) {
             Log.e(TAG, "onUpgrade", tr);
         }
     }
 
-    private void queryDropTable(SQLiteDatabase db, String tableName) {
-        db.execSQL("DROP TABLE IF EXISTS " + tableName);
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        try {
+            try {
+                makeChanges(db, oldVersion, newVersion);
+            } catch (Throwable tr) {
+                Log.e(TAG, tr.getMessage(), tr);
+                cleanDatabase(db);
+            }
+        } catch (Throwable tr) {
+            Log.e(TAG, "onUpgrade", tr);
+        }
+    }
+
+    private void makeChanges(SQLiteDatabase db, int oldVersion, int newVersion) throws Exception {
+        int toVersion = DATABASE_VERSION;
+        int fromVersion = 0;
+        if (oldVersion != DATABASE_VERSION) {
+            fromVersion = oldVersion;
+        }
+        if (newVersion != DATABASE_VERSION) {
+            fromVersion = newVersion;
+        }
+
+        if (toVersion > fromVersion) {
+            Log.d(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion);
+            for (int i = fromVersion; i < toVersion; i++) {
+                String fileName = "upgrade_" + i + "_to_" + (i + 1) + ".sql";
+                InputStream inputStream = context.getResources().getAssets().open(fileName);
+                String upgradeString = new String(read(inputStream), "UTF-8").trim();
+                inputStream.close();
+                String[] sqlStrings = upgradeString.split(";");
+                if (sqlStrings != null) {
+                    for (String sqlString : sqlStrings) {
+                        if (DEBUG) {
+                            Log.d(TAG, "onUpgrade: " + fileName + ": " + sqlString);
+                        }
+                        if (sqlString.length() > 0) {
+                            db.execSQL(sqlString);
+                        }
+                    }
+                }
+            }
+        } else {
+            Log.d(TAG, "Downgrading database from version " + oldVersion + " to " + newVersion);
+            for (int i = fromVersion; i > toVersion; i--) {
+                String fileName = "downgrade_" + i + "_to_" + (i - 1) + ".sql";
+                InputStream inputStream = context.getResources().getAssets().open(fileName);
+                String sqlString = new String(read(inputStream), "UTF-8").trim();
+                inputStream.close();
+                if (DEBUG) {
+                    Log.d(TAG, "onDowngrade: " + fileName + ": " + sqlString);
+                }
+                if (sqlString.length() > 0) {
+                    db.execSQL(sqlString);
+                }
+            }
+        }
+    }
+
+    private byte[] read(InputStream inputStream) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        while ((read = inputStream.read(buffer)) != -1) {
+            if (read > 0) {
+                byteArrayOutputStream.write(buffer, 0, read);
+            } else {
+                try {
+                    Thread.sleep(300);
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage(), e);
+                }
+            }
+        }
+        byteArrayOutputStream.flush();
+        return byteArrayOutputStream.toByteArray();
     }
 
 }
