@@ -108,4 +108,13 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isDrawerOpen()) {
+            closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }

@@ -74,13 +74,18 @@ public class AppBroadcastController extends BroadcastController<AppBroadcastCont
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
-                if (ACTION_TRACKER_STARTED_STATE.equals(intent.getAction())) {
-                    if (broadcastCallback != null) {
-                        broadcastCallback.onTrackerStartedState();
+                switch (intent.getAction()) {
+                    case ACTION_TRACKER_STARTED_STATE: {
+                        if (broadcastCallback != null) {
+                            broadcastCallback.onTrackerStartedState();
+                        }
+                        break;
                     }
-                } else if (ACTION_LAST_POSITION_IS_UPDATED.equals(intent.getAction())) {
-                    if (broadcastCallback != null) {
-                        broadcastCallback.onLastPositionIsUpdated();
+                    case ACTION_LAST_POSITION_IS_UPDATED: {
+                        if (broadcastCallback != null) {
+                            broadcastCallback.onLastPositionIsUpdated();
+                        }
+                        break;
                     }
                 }
             } catch (Exception e) {

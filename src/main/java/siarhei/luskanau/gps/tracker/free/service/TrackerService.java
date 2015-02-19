@@ -85,17 +85,26 @@ public class TrackerService extends Service {
     }
 
     private void onHandleIntent(Intent intent) {
-        if (intent != null && ACTION_START_TRACKING.equals(intent.getAction())) {
-            startTracking();
-        } else if (intent != null && ACTION_STOP_TRACKING.equals(intent.getAction())) {
-            stopTracking();
-        } else if (ACTION_ANTI_KILLER.equals(intent.getAction())) {
-            Log.d(TAG, ACTION_ANTI_KILLER);
-            if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
-                LocationService.updateGpsListener(this);
-                //TODO sendTask
-            } else {
-                cancelAntiKillerPing(this);
+        if (intent != null && intent.getAction() != null) {
+            switch (intent.getAction()) {
+                case ACTION_START_TRACKING: {
+                    startTracking();
+                    break;
+                }
+                case ACTION_STOP_TRACKING: {
+                    stopTracking();
+                    break;
+                }
+                case ACTION_ANTI_KILLER: {
+                    Log.d(TAG, ACTION_ANTI_KILLER);
+                    if (AppSettings.getAppSettingsEntity(this).isTrackerStarted) {
+                        LocationService.updateGpsListener(this);
+                        //TODO sendTask
+                    } else {
+                        cancelAntiKillerPing(this);
+                    }
+                    break;
+                }
             }
         }
         showNotification();
@@ -118,7 +127,7 @@ public class TrackerService extends Service {
     private void showNotification() {
         AppSettings.State appSettingsState = AppSettings.getAppSettingsEntity(this);
         if (appSettingsState.isTrackerStarted && appSettingsState.isShowNotification) {
-            startForeground(R.drawable.ic_launcher, Utils.createNotification(this, getString(R.string.service_tracker_running)));
+            startForeground(R.id.tracker_service_notification_id, Utils.createNotification(this, getString(R.string.service_tracker_running)));
         } else {
             stopForeground(true);
         }

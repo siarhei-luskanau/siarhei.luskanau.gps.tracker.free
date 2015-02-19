@@ -76,16 +76,21 @@ public class ProgressBroadcastController extends BroadcastController<ProgressBro
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
-                if (ACTION_SHOW_TOAST.equals(intent.getAction())) {
-                    CharSequence message = intent.getCharSequenceExtra(MESSAGE_ARG);
-                    if (broadcastCallback != null) {
-                        broadcastCallback.onShowToast(context, message);
+                switch (intent.getAction()) {
+                    case ACTION_SHOW_TOAST: {
+                        CharSequence message = intent.getCharSequenceExtra(MESSAGE_ARG);
+                        if (broadcastCallback != null) {
+                            broadcastCallback.onShowToast(context, message);
+                        }
+                        break;
                     }
-                } else if (ACTION_SHOW_ALERT_DIALOG.equals(intent.getAction())) {
-                    CharSequence title = intent.getCharSequenceExtra(TITLE_ARG);
-                    CharSequence message = intent.getCharSequenceExtra(MESSAGE_ARG);
-                    if (broadcastCallback != null) {
-                        broadcastCallback.onShowAlertDialog(title, message);
+                    case ACTION_SHOW_ALERT_DIALOG: {
+                        CharSequence title = intent.getCharSequenceExtra(TITLE_ARG);
+                        CharSequence message = intent.getCharSequenceExtra(MESSAGE_ARG);
+                        if (broadcastCallback != null) {
+                            broadcastCallback.onShowAlertDialog(title, message);
+                        }
+                        break;
                     }
                 }
             } catch (Exception e) {
