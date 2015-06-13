@@ -69,7 +69,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/tracker_app_name"
-        android:theme="@style/Theme.TrackerTheme">
+        android:theme="@style/Theme.AppTheme">
 
         <meta-data
             android:name="com.google.android.gms.version"

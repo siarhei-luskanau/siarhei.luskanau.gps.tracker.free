@@ -23,8 +23,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.TrackerTheme" parent="Theme.AppCompat.Light">
-        <item name="android:imageButtonStyle">@style/TrackerImageButtonStyle</item>
+    <style name="Theme.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
     <style name="TrackerTextViewStyle" parent="@android:style/Widget.TextView">

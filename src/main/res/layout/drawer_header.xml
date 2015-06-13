@@ -1,7 +1,7 @@
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2014 Siarhei Luskanau
+Copyright (c) 2015 Siarhei Luskanau
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -21,33 +21,28 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primary">
 
-    <item
-        android:id="@+id/menu_action_accept"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"
-        android:title="@string/menu_action_save"
-        android:icon="@drawable/ic_action_accept" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
 
-    <item
-        android:orderInCategory="900"
-        app:showAsAction="ifRoom|withText"
-        android:title="@string/abc_action_menu_overflow_description"
-        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha">
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageView"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/tracker_app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
 
-        <menu>
-
-            <item
-                android:id="@+id/menu_action_check"
-                android:orderInCategory="100"
-                app:showAsAction="ifRoom|withText"
-                android:title="@string/menu_action_check"
-                android:icon="@drawable/ic_action_web_site" />
-
-        </menu>
-
-    </item>
-
-</menu>
+</RelativeLayout>

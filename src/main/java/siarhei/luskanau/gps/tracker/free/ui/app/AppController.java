@@ -34,7 +34,6 @@ import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.ServersFragment;
 import siarhei.luskanau.gps.tracker.free.ui.TrackerFragment;
-import siarhei.luskanau.gps.tracker.free.ui.drawer.BaseDrawerActivity;
 
 public class AppController {
 

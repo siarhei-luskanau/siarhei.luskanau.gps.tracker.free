@@ -22,19 +22,19 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/menu_item_action_play"
         android:orderInCategory="240"
-        yourapp:showAsAction="always|collapseActionView"
+        app:showAsAction="always|collapseActionView"
         android:icon="@drawable/ic_action_play"
         android:title="@null" />
 
     <item
         android:id="@+id/menu_item_action_stop"
         android:orderInCategory="240"
-        yourapp:showAsAction="always|collapseActionView"
+        app:showAsAction="always|collapseActionView"
         android:icon="@drawable/ic_action_stop"
         android:title="@null" />
 

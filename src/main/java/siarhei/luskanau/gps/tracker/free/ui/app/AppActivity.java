@@ -25,8 +25,6 @@ package siarhei.luskanau.gps.tracker.free.ui.app;
 
 import android.os.Bundle;
 
-import siarhei.luskanau.gps.tracker.free.ui.drawer.BaseDrawerActivity;
-
 public class AppActivity extends BaseDrawerActivity implements AppController.AppControllerAware {
 
     private AppController appController = new AppController(this);

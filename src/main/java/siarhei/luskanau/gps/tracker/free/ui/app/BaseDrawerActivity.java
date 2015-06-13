@@ -21,12 +21,16 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.drawer;
+package siarhei.luskanau.gps.tracker.free.ui.app;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,10 +39,15 @@ import android.widget.FrameLayout;
 import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.service.sync.task.GcmTask;
+import siarhei.luskanau.gps.tracker.free.ui.InternetSettingsFragment;
+import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutFragment;
 import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
 public abstract class BaseDrawerActivity extends BaseProgressActivity {
 
+    private static final String TAG = "BaseDrawerActivity";
     private AQuery aq = new AQuery(this);
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -46,6 +55,8 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_drawer);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.appToolbar));
 
         DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, baseDrawerLayout, R.string.tracker_app_name, R.string.tracker_app_name) {
@@ -64,9 +75,43 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        if (getSupportFragmentManager().findFragmentByTag(LeftDrawerFragment.TAG) == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.leftDrawerFrameLayout, new LeftDrawerFragment(), LeftDrawerFragment.TAG).commit();
-        }
+        NavigationView navigationView = (NavigationView) aq.id(R.id.navigationView).getView();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                switch (menuItem.getItemId()) {
+                    case R.id.drawer_item_gcm: {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    SyncService.startTask(BaseDrawerActivity.this, new GcmTask());
+                                    GcmTask.sendEchoMessage(BaseDrawerActivity.this);
+                                } catch (Exception e) {
+                                    Log.d(TAG, e.toString(), e);
+                                }
+                            }
+                        }).start();
+                    }
+                    case R.id.drawer_item_internet: {
+                        Fragment fragment = getSupportFragmentManager().findFragmentByTag(InternetSettingsFragment.TAG);
+                        if (fragment == null) {
+                            getSupportFragmentManager().beginTransaction().add(R.id.contentFrameLayout, new InternetSettingsFragment(), InternetSettingsFragment.TAG).commit();
+                        } else {
+                            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                        }
+                    }
+                    case R.id.drawer_item_about: {
+                        if (getSupportFragmentManager().findFragmentByTag(AboutFragment.TAG) == null) {
+                            new AboutFragment().show(getSupportFragmentManager(), AboutFragment.TAG);
+                        }
+                    }
+                }
+                closeDrawers();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -101,7 +146,7 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity {
 
     public boolean isDrawerOpen() {
         DrawerLayout drawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
-        FrameLayout leftDrawerFrameLayout = (FrameLayout) aq.id(R.id.leftDrawerFrameLayout).getView();
+        FrameLayout leftDrawerFrameLayout = (FrameLayout) aq.id(R.id.navigationView).getView();
         if (drawerLayout != null && leftDrawerFrameLayout != null) {
             return drawerLayout.isDrawerOpen(leftDrawerFrameLayout);
         }
