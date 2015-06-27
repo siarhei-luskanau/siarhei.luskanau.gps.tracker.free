@@ -21,16 +21,34 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.app;
+package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class AppActivity extends BaseDrawerActivity {
+import com.androidquery.AQuery;
+
+import siarhei.luskanau.gps.tracker.free.R;
+
+public class SettingsFragment extends Fragment {
+
+    public static final String TAG = "SettingsFragment";
+
+    private AQuery aq;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        openDrawer();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_internet_settings, container, false);
+        aq = new AQuery(getActivity(), view);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
 }

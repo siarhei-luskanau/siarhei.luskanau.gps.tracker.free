@@ -33,6 +33,7 @@ import java.util.List;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.ServersFragment;
+import siarhei.luskanau.gps.tracker.free.ui.SettingsFragment;
 import siarhei.luskanau.gps.tracker.free.ui.TrackerFragment;
 
 public class AppController {
@@ -68,6 +69,13 @@ public class AppController {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(TrackerFragment.TAG) == null) {
             fragmentManager.beginTransaction().replace(R.id.contentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
+        }
+    }
+
+    public void onShowSettingsFragment() {
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        if (fragmentManager.findFragmentByTag(SettingsFragment.TAG) == null) {
+            fragmentManager.beginTransaction().replace(R.id.contentFrameLayout, new SettingsFragment(), SettingsFragment.TAG).commit();
         }
     }
 

@@ -30,9 +30,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:title="Gcm message" />
 
         <item
-            android:id="@+id/drawer_item_internet"
-            android:icon="@drawable/ic_action_web_site"
-            android:title="@string/fragment_settings_internet_internet" />
+            android:id="@+id/drawer_item_preferences"
+            android:icon="@drawable/ic_action_settings"
+            android:title="@string/fragment_left_drawer_preferences" />
 
         <item
             android:id="@+id/drawer_item_about"

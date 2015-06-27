@@ -26,7 +26,6 @@ package siarhei.luskanau.gps.tracker.free.ui.app;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -41,11 +40,9 @@ import com.androidquery.AQuery;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.service.sync.task.GcmTask;
-import siarhei.luskanau.gps.tracker.free.ui.InternetSettingsFragment;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutFragment;
-import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
-public abstract class BaseDrawerActivity extends BaseProgressActivity {
+public abstract class BaseDrawerActivity extends BaseAppControllerActivity {
 
     private static final String TAG = "BaseDrawerActivity";
     private AQuery aq = new AQuery(this);
@@ -93,19 +90,17 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity {
                                 }
                             }
                         }).start();
+                        break;
                     }
-                    case R.id.drawer_item_internet: {
-                        Fragment fragment = getSupportFragmentManager().findFragmentByTag(InternetSettingsFragment.TAG);
-                        if (fragment == null) {
-                            getSupportFragmentManager().beginTransaction().add(R.id.contentFrameLayout, new InternetSettingsFragment(), InternetSettingsFragment.TAG).commit();
-                        } else {
-                            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                        }
+                    case R.id.drawer_item_preferences: {
+                        appController.onShowSettingsFragment();
+                        break;
                     }
                     case R.id.drawer_item_about: {
                         if (getSupportFragmentManager().findFragmentByTag(AboutFragment.TAG) == null) {
                             new AboutFragment().show(getSupportFragmentManager(), AboutFragment.TAG);
                         }
+                        break;
                     }
                 }
                 closeDrawers();

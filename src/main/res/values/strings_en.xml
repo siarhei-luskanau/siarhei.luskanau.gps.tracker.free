@@ -27,7 +27,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="service_tracker_running">Tracker is running</string>
 
     <!-- fragment_left_drawer.xml -->
-    <string name="fragment_left_drawer_settings">Preferences</string>
+    <string name="fragment_left_drawer_preferences">Preferences</string>
     <string name="fragment_left_drawer_about">About</string>
 
     <!-- menu -->
