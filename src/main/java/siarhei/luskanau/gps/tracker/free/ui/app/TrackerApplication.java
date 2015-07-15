@@ -27,6 +27,8 @@ import android.app.Application;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
@@ -41,6 +43,7 @@ public class TrackerApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        LeakCanary.install(this);
         ExceptionHandler.addExceptionHandler(this);
 
         progressBroadcastReceiver.registerReceiver(this);
