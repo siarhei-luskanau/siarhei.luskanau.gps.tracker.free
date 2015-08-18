@@ -40,9 +40,9 @@ public class AppController {
 
     private static final String TAG = "AppController";
 
-    private FragmentActivity activity;
+    private BaseDrawerActivity activity;
 
-    public AppController(FragmentActivity activity) {
+    public AppController(BaseDrawerActivity activity) {
         this.activity = activity;
     }
 
@@ -58,24 +58,20 @@ public class AppController {
     }
 
     public boolean isDrawerOpen() {
-        if (activity instanceof BaseDrawerActivity) {
-            BaseDrawerActivity baseDrawerActivity = (BaseDrawerActivity) activity;
-            return baseDrawerActivity.isDrawerOpen();
-        }
-        return false;
+        return activity.isDrawerOpen();
     }
 
     public void onShowTrackerFragment() {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(TrackerFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.contentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
+            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
         }
     }
 
     public void onShowSettingsFragment() {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(SettingsFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.contentFrameLayout, new SettingsFragment(), SettingsFragment.TAG).commit();
+            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new SettingsFragment(), SettingsFragment.TAG).commit();
         }
     }
 
@@ -83,7 +79,7 @@ public class AppController {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(ServersFragment.TAG) == null) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.contentFrameLayout, new ServersFragment(), ServersFragment.TAG)
+                    .replace(R.id.appContentFrameLayout, new ServersFragment(), ServersFragment.TAG)
                     .addToBackStack(ServersFragment.TAG)
                     .commit();
         }

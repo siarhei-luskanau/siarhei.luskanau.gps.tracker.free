@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Siarhei Luskanau
+ * Copyright (c) 2015 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -21,25 +21,38 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.app;
+package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
+import com.androidquery.AQuery;
 
-public class BaseAppControllerActivity extends BaseProgressActivity implements AppController.AppControllerAware {
+import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
 
-    protected AppController appController = new AppController(this);
+public abstract class SimpleAppBarFragment extends BaseAppBarFragment {
+
+    private AQuery aq;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        appController.onShowTrackerFragment();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_app_bar_simple, container, false);
+        aq = new AQuery(getActivity(), view);
+        return view;
     }
 
     @Override
-    public AppController getAppController() {
-        return appController;
+    protected void updateToolbar() {
+        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
+        Toolbar toolbar = (Toolbar) aq.id(R.id.appToolbar).getView();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setHomeButtonEnabled(true);
+        activity.updateDrawerToggle(true);
     }
 
 }

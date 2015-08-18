@@ -28,7 +28,6 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -41,19 +40,19 @@ import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.service.sync.task.GcmTask;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutFragment;
+import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
-public abstract class BaseDrawerActivity extends BaseAppControllerActivity {
+public abstract class BaseDrawerActivity extends BaseProgressActivity implements AppController.AppControllerAware {
 
     private static final String TAG = "BaseDrawerActivity";
     private AQuery aq = new AQuery(this);
+    protected AppController appController = new AppController(this);
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_drawer);
-
-        setSupportActionBar((Toolbar) findViewById(R.id.appToolbar));
 
         DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, baseDrawerLayout, R.string.tracker_app_name, R.string.tracker_app_name) {
@@ -68,9 +67,6 @@ public abstract class BaseDrawerActivity extends BaseAppControllerActivity {
             }
         };
         baseDrawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
         NavigationView navigationView = (NavigationView) aq.id(R.id.navigationView).getView();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -129,6 +125,20 @@ public abstract class BaseDrawerActivity extends BaseAppControllerActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isDrawerOpen()) {
+            closeDrawers();
+        } else {
+            openDrawer();
+        }
+    }
+
+    @Override
+    public AppController getAppController() {
+        return appController;
+    }
+
     public void closeDrawers() {
         DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
         baseDrawerLayout.closeDrawers();
@@ -148,12 +158,12 @@ public abstract class BaseDrawerActivity extends BaseAppControllerActivity {
         return false;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (isDrawerOpen()) {
-            closeDrawers();
-        } else {
-            super.onBackPressed();
+    public void updateDrawerToggle(boolean showDrawerToggle) {
+        if (actionBarDrawerToggle != null) {
+            actionBarDrawerToggle.setDrawerIndicatorEnabled(showDrawerToggle);
+            if (showDrawerToggle) {
+                actionBarDrawerToggle.syncState();
+            }
         }
     }
 

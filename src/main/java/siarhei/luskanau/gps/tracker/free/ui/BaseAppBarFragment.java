@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Siarhei Luskanau
+ * Copyright (c) 2015 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -21,33 +21,25 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.progress;
+package siarhei.luskanau.gps.tracker.free.ui;
 
-import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
-import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
+public abstract class BaseAppBarFragment extends Fragment {
 
-public abstract class BaseProgressActivity extends AppCompatActivity {
-
-    private ProgressBroadcastController.ProgressBroadcastReceiver progressBroadcastReceiver = new ProgressBroadcastController().createBroadcastReceiver(new InnerProgressBroadcastCallback());
+    protected abstract void updateToolbar();
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        progressBroadcastReceiver.registerReceiver(this);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        updateToolbar();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        progressBroadcastReceiver.unregisterReceiver(this);
-    }
-
-    private class InnerProgressBroadcastCallback extends ProgressBroadcastController.ProgressBroadcastCallback {
-        @Override
-        public void onShowAlertDialog(CharSequence title, CharSequence message) {
-            AlertDialogFragment.show(BaseProgressActivity.this, title, message);
-        }
+    public void onResume() {
+        super.onResume();
+        updateToolbar();
     }
 
 }

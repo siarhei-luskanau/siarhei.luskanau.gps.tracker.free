@@ -30,6 +30,7 @@ public class AppActivity extends BaseDrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appController.onShowTrackerFragment();
         openDrawer();
     }
 
