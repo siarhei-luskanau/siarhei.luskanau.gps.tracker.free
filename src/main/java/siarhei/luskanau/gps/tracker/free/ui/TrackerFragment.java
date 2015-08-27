@@ -44,7 +44,6 @@ public class TrackerFragment extends SimpleAppBarFragment {
 
     public static final String TAG = "TrackerFragment";
     private AppBroadcastController.AppBroadcastReceiver appBroadcastReceiver = new AppBroadcastController().createBroadcastReceiver(new InnerAppBroadcastCallback());
-    ;
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
@@ -55,7 +54,7 @@ public class TrackerFragment extends SimpleAppBarFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        aq.id(R.id.imeiTextView).text(getString(R.string.fragment_tracker_imei, Utils.getDeviceId(getActivity())));
+        aq.id(R.id.imeiTextView).text(getString(R.string.fragment_tracker_imei, Utils.getDeviceId(getContext())));
 
         aq.id(R.id.editServerImageButton).clicked(new View.OnClickListener() {
             @Override
@@ -66,7 +65,7 @@ public class TrackerFragment extends SimpleAppBarFragment {
         aq.id(R.id.aboutServerImageButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ServerEntity serverEntity = AppSettings.getServerEntity(getActivity());
+                ServerEntity serverEntity = AppSettings.getServerEntity(getContext());
                 if (serverEntity != null) {
                     if (getFragmentManager().findFragmentByTag(AboutServerDialogFragment.TAG) == null) {
                         AboutServerDialogFragment.newInstance(serverEntity).show(getFragmentManager(), AboutServerDialogFragment.TAG);
@@ -79,8 +78,8 @@ public class TrackerFragment extends SimpleAppBarFragment {
     @Override
     public void onResume() {
         super.onResume();
-        appBroadcastReceiver.registerReceiver(getActivity());
-        ServerEntity serverEntity = AppSettings.getServerEntity(getActivity());
+        appBroadcastReceiver.registerReceiver(getContext());
+        ServerEntity serverEntity = AppSettings.getServerEntity(getContext());
         if (serverEntity != null) {
             aq.id(R.id.aboutServerImageButton).visible();
             aq.id(R.id.serverNameImageButton).text(getString(R.string.fragment_tracker_server, serverEntity.name));
@@ -93,7 +92,7 @@ public class TrackerFragment extends SimpleAppBarFragment {
     @Override
     public void onPause() {
         super.onPause();
-        appBroadcastReceiver.unregisterReceiver(getActivity());
+        appBroadcastReceiver.unregisterReceiver(getContext());
     }
 
     @Override
@@ -110,7 +109,7 @@ public class TrackerFragment extends SimpleAppBarFragment {
             menu.findItem(R.id.menu_item_action_play).setVisible(false);
             menu.findItem(R.id.menu_item_action_stop).setVisible(false);
         } else {
-            if (AppSettings.getAppSettingsEntity(getActivity()).isTrackerStarted) {
+            if (AppSettings.getAppSettingsEntity(getContext()).isTrackerStarted) {
                 menu.findItem(R.id.menu_item_action_play).setVisible(false);
                 menu.findItem(R.id.menu_item_action_stop).setVisible(true);
             } else {
@@ -124,15 +123,15 @@ public class TrackerFragment extends SimpleAppBarFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_action_play:
-                if (AppSettings.getServerEntity(getActivity()) != null) {
-                    TrackerService.startTracking(getActivity());
+                if (AppSettings.getServerEntity(getContext()) != null) {
+                    TrackerService.startTracking(getContext());
                 } else {
                     AppController.get(getActivity()).onShowServersFragment();
                 }
                 getActivity().supportInvalidateOptionsMenu();
                 return true;
             case R.id.menu_item_action_stop:
-                TrackerService.stopTracking(getActivity());
+                TrackerService.stopTracking(getContext());
                 getActivity().supportInvalidateOptionsMenu();
                 return true;
             default: {

@@ -42,10 +42,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="layout_eula_accept">Accept</string>
     <string name="layout_eula_refuse">Cancel</string>
 
-    <!-- fragment_settings_tab.xml -->
-    <string name="fragment_settings_tab_general">General</string>
-    <string name="fragment_settings_tab_internet_battery">Internet Battery</string>
-    <string name="fragment_settings_tab_location">Location</string>
+    <!-- fragment_settings_tabs.xml -->
+    <string name="fragment_settings_tabs_general">General</string>
+    <string name="fragment_settings_tabs_internet_battery">Internet Battery</string>
+    <string name="fragment_settings_tabs_location">Location</string>
 
     <!-- fragment_settings_general.xml -->
     <string name="fragment_settings_general_server">Server</string>

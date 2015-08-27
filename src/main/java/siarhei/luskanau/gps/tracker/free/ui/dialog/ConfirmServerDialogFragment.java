@@ -47,7 +47,7 @@ public class ConfirmServerDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         AppController.ServersListBusiness serversListBusiness = AppController.getBusiness(getActivity(), AppController.ServersListBusiness.class);
         if (serversListBusiness != null) {
             ServerEntity serverEntity = serversListBusiness.getServerEntity(getArguments().getInt(POSITION_ARG));

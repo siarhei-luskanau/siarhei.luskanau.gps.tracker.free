@@ -59,7 +59,7 @@ public abstract class SimpleAppBarFragment extends BaseAppBarFragment {
         BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
         Toolbar toolbar = (Toolbar) aq.id(R.id.appToolbar).getView();
         activity.setSupportActionBar(toolbar);
-     }
+    }
 
     @Override
     protected void updateAppBar() {

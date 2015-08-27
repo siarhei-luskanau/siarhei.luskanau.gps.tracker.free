@@ -23,6 +23,7 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -36,14 +37,25 @@ import android.widget.TextView;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.ui.SimpleAppBarFragment;
+import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
 
-public class SettingsFragment extends SimpleAppBarFragment {
+public class SettingsTabsFragment extends SimpleAppBarFragment {
 
-    public static final String TAG = "SettingsFragment";
+    public static final String TAG = "SettingsTabsFragment";
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate(R.layout.fragment_settings_tabs, container, false);
+    }
+
+    @Override
+    protected void updateAppBar() {
+        super.updateAppBar();
+        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setHomeButtonEnabled(true);
+        activity.updateDrawerToggle(false);
+        activity.getSupportActionBar().setSubtitle(R.string.menu_drawer_settings);
     }
 
     @Override
@@ -52,7 +64,7 @@ public class SettingsFragment extends SimpleAppBarFragment {
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
         ViewPager viewPager = (ViewPager) aq.id(R.id.settingsViewPager).getView();
-        viewPager.setAdapter(new SettingsFragmentPagerAdapter(getFragmentManager()));
+        viewPager.setAdapter(new SettingsFragmentPagerAdapter(getFragmentManager(), getContext()));
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) aq.id(R.id.settingsTabLayout).getView();
@@ -60,10 +72,21 @@ public class SettingsFragment extends SimpleAppBarFragment {
     }
 
     private static class SettingsFragmentPagerAdapter extends FragmentPagerAdapter {
-        private String tabTitles[] = new String[]{"Tab1", "Tab2", "Tab3"};
+        private String tabTitles[];
+        private Fragment tabFragmentClasses[];
 
-        public SettingsFragmentPagerAdapter(FragmentManager fragmentManager) {
+        public SettingsFragmentPagerAdapter(FragmentManager fragmentManager, Context context) {
             super(fragmentManager);
+            tabTitles = new String[]{
+                    context.getString(R.string.fragment_settings_tabs_general),
+                    context.getString(R.string.fragment_settings_tabs_internet_battery),
+                    context.getString(R.string.fragment_settings_tabs_location)
+            };
+            tabFragmentClasses = new Fragment[]{
+                    new GeneralPreferenceFragment(),
+                    PageFragment.newInstance(2),
+                    PageFragment.newInstance(3)
+            };
         }
 
         @Override
@@ -73,7 +96,7 @@ public class SettingsFragment extends SimpleAppBarFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return PageFragment.newInstance(position + 1);
+            return tabFragmentClasses[position];
         }
 
         @Override

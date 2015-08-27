@@ -42,7 +42,7 @@ import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 
 public class CheckServerDialogFragment extends DialogFragment {
 
-    public static final String TAG = "CheckServerDialogFragment";
+    public static final String TAG = "CheckServerDialogFragme";
     private static final String SERVER_ENTITY_ARG = "SERVER_ENTITY_ARG";
 
     public static CheckServerDialogFragment newInstance(ServerEntity serverEntity) {
@@ -57,7 +57,7 @@ public class CheckServerDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ServerEntity serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY_ARG), ServerEntity.class);
         Log.e(TAG, AppConstants.GSON.toJson(serverEntity));
-        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("connecting...");
         progressDialog.setIndeterminate(true);
         new CheckAsyncTask(serverEntity).execute();
@@ -108,9 +108,9 @@ public class CheckServerDialogFragment extends DialogFragment {
             super.onPostExecute(exception);
             CheckServerDialogFragment.this.dismiss();
             if (exception != null) {
-                ProgressBroadcastController.sendShowAlertDialogBroadcast(getActivity(), "Error", exception.getMessage());
+                ProgressBroadcastController.sendShowAlertDialogBroadcast(getContext(), "Error", exception.getMessage());
             } else {
-                ProgressBroadcastController.sendShowAlertDialogBroadcast(getActivity(), "Success", null);
+                ProgressBroadcastController.sendShowAlertDialogBroadcast(getContext(), "Success", null);
             }
         }
     }

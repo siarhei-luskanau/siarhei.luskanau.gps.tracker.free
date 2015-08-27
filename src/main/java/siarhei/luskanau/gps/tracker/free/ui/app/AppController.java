@@ -34,8 +34,8 @@ import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.AboutFragment;
 import siarhei.luskanau.gps.tracker.free.ui.ServersFragment;
-import siarhei.luskanau.gps.tracker.free.ui.settings.SettingsFragment;
 import siarhei.luskanau.gps.tracker.free.ui.TrackerFragment;
+import siarhei.luskanau.gps.tracker.free.ui.settings.SettingsTabsFragment;
 
 public class AppController {
 
@@ -75,8 +75,8 @@ public class AppController {
 
     public void onShowSettingsFragment() {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        if (fragmentManager.findFragmentByTag(SettingsFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new SettingsFragment(), SettingsFragment.TAG).commit();
+        if (fragmentManager.findFragmentByTag(SettingsTabsFragment.TAG) == null) {
+            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new SettingsTabsFragment(), SettingsTabsFragment.TAG).commit();
         }
     }
 
@@ -90,10 +90,7 @@ public class AppController {
     public void onShowServersFragment() {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(ServersFragment.TAG) == null) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.appContentFrameLayout, new ServersFragment(), ServersFragment.TAG)
-                    .addToBackStack(ServersFragment.TAG)
-                    .commit();
+            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new ServersFragment(), ServersFragment.TAG).commit();
         }
     }
 

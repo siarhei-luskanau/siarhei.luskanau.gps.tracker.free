@@ -23,7 +23,6 @@
 
 package siarhei.luskanau.gps.tracker.free.ui;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -40,16 +39,26 @@ import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
+import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
 
-public class ServersFragment extends Fragment implements AppController.ServersListBusiness {
+public class ServersFragment extends SimpleAppBarFragment implements AppController.ServersListBusiness {
 
     private List<ServerEntity> serverEntities;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //setHasOptionsMenu(true);
+    protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.activity_servers, container, false);
         return view;
+    }
+
+    @Override
+    protected void updateAppBar() {
+        super.updateAppBar();
+        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setHomeButtonEnabled(true);
+        activity.updateDrawerToggle(false);
+        activity.getSupportActionBar().setSubtitle(R.string.fragment_settings_general_server);
     }
 
     @Override
@@ -74,7 +83,7 @@ public class ServersFragment extends Fragment implements AppController.ServersLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_new: {
-                ServerEditActivity.startServerEditActivity(getActivity(), null);
+                ServerEditActivity.startServerEditActivity(getContext(), null);
                 return true;
             }
             default: {
@@ -84,15 +93,15 @@ public class ServersFragment extends Fragment implements AppController.ServersLi
     }
 
     private void updateServerEntities() {
-        serverEntities = ServerDAO.getServers(getActivity());
+        serverEntities = ServerDAO.getServers(getContext());
         if (serverEntities == null || serverEntities.size() == 0) {
-            serverEntities = ServerDAO.getAssetsServers(getActivity());
+            serverEntities = ServerDAO.getAssetsServers(getContext());
             if (serverEntities != null) {
                 for (ServerEntity serverEntity : serverEntities) {
-                    ServerDAO.insertOrUpdate(getActivity(), serverEntity);
+                    ServerDAO.insertOrUpdate(getContext(), serverEntity);
                 }
             }
-            serverEntities = ServerDAO.getServers(getActivity());
+            serverEntities = ServerDAO.getServers(getContext());
         }
         FragmentManager fragmentManager = getChildFragmentManager();
 
@@ -130,7 +139,7 @@ public class ServersFragment extends Fragment implements AppController.ServersLi
     public void onServerEntityConfirmed(int position) {
         ServerEntity serverEntity = getServerEntity(position);
         if (serverEntity != null) {
-            AppSettings.setServerEntity(getActivity(), serverEntity);
+            AppSettings.setServerEntity(getContext(), serverEntity);
             AppController.get(getActivity()).popBackStack();
         }
     }

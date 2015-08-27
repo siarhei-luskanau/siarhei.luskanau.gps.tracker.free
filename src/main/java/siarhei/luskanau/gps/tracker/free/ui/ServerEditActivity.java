@@ -82,20 +82,23 @@ public class ServerEditActivity extends BaseProgressActivity {
         if (serverEntity.server_port > 0) {
             aq.id(R.id.customServerPortEditText).text(String.valueOf(serverEntity.server_port));
         }
-
-        switch (serverEntity.serverType) {
-            case socket: {
-                aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
-                break;
+        if (serverEntity.serverType != null) {
+            switch (serverEntity.serverType) {
+                case socket: {
+                    aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
+                    break;
+                }
+                case json_form: {
+                    aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(1);
+                    break;
+                }
+                case rest: {
+                    aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(2);
+                    break;
+                }
             }
-            case json_form: {
-                aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(1);
-                break;
-            }
-            case rest: {
-                aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(2);
-                break;
-            }
+        } else {
+            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
         }
     }
 

@@ -75,7 +75,7 @@ public class AlertDialogFragment extends DialogFragment {
         } else if (getArguments().containsKey(MESSAGE_ARG)) {
             message = getArguments().getCharSequence(MESSAGE_ARG);
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton(android.R.string.ok, null);

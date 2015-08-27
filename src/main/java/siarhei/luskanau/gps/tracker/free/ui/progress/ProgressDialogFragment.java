@@ -104,7 +104,7 @@ public class ProgressDialogFragment extends DialogFragment {
         } else if (getArguments().containsKey(REFRESH_ACTION_ARG)) {
             refreshAction = getArguments().getString(REFRESH_ACTION_ARG);
         }
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle(title);
         progressDialog.setIcon(0);
         progressDialog.setMessage(message);
@@ -116,7 +116,7 @@ public class ProgressDialogFragment extends DialogFragment {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    // ProgressBinder.getInstance().cancelTask((ProgressDialogActivity) getActivity());
+                    // ProgressBinder.getInstance().cancelTask((ProgressDialogActivity) getContext());
                     return true;
                 }
                 return false;
@@ -145,7 +145,7 @@ public class ProgressDialogFragment extends DialogFragment {
 
     private void sendRefreshBroadcast() {
         if (refreshAction != null) {
-            LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent(refreshAction));
+            LocalBroadcastManager.getInstance(getContext()).sendBroadcast(new Intent(refreshAction));
         }
     }
 

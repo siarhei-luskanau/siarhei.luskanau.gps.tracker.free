@@ -27,7 +27,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     android:layout_height="wrap_content"
     android:background="@android:color/white">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/serverNameTextView"
         style="@style/TrackerTextViewStyle"
         android:layout_width="wrap_content"
@@ -41,12 +41,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/component_gap">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Site: " />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/serverSiteUrlTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,12 +60,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/component_gap">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Type: " />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/serverTypeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,12 +79,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/component_gap">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Address: " />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/serverAddressTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,12 +98,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/component_gap">
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Port: " />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/serverPortTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
