@@ -28,18 +28,21 @@ import android.support.v4.app.Fragment;
 
 public abstract class BaseAppBarFragment extends Fragment {
 
-    protected abstract void updateToolbar();
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        updateToolbar();
+        setupAppBar();
+        updateAppBar();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updateToolbar();
+        updateAppBar();
     }
+
+    protected abstract void setupAppBar();
+
+    protected abstract void updateAppBar();
 
 }

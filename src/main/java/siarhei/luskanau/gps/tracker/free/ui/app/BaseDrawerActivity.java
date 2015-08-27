@@ -39,14 +39,14 @@ import com.androidquery.AQuery;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.service.sync.task.GcmTask;
-import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutFragment;
+import siarhei.luskanau.gps.tracker.free.ui.TrackerFragment;
 import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
 public abstract class BaseDrawerActivity extends BaseProgressActivity implements AppController.AppControllerAware {
 
     private static final String TAG = "BaseDrawerActivity";
-    private AQuery aq = new AQuery(this);
     protected AppController appController = new AppController(this);
+    private AQuery aq = new AQuery(this);
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -74,7 +74,7 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity implements
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
-                    case R.id.drawer_item_gcm: {
+                    case R.id.menu_drawer_item_gcm: {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -88,14 +88,16 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity implements
                         }).start();
                         break;
                     }
-                    case R.id.drawer_item_preferences: {
+                    case R.id.menu_drawer_item_home: {
+                        appController.onShowHomeFragment();
+                        break;
+                    }
+                    case R.id.menu_drawer_item_settings: {
                         appController.onShowSettingsFragment();
                         break;
                     }
-                    case R.id.drawer_item_about: {
-                        if (getSupportFragmentManager().findFragmentByTag(AboutFragment.TAG) == null) {
-                            new AboutFragment().show(getSupportFragmentManager(), AboutFragment.TAG);
-                        }
+                    case R.id.menu_drawer_item_about: {
+                        appController.onShowAboutFragment();
                         break;
                     }
                 }
@@ -127,7 +129,9 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity implements
 
     @Override
     public void onBackPressed() {
-        if (isDrawerOpen()) {
+        if (getSupportFragmentManager().findFragmentByTag(TrackerFragment.TAG) == null) {
+            appController.onShowHomeFragment();
+        } else if (isDrawerOpen()) {
             closeDrawers();
         } else {
             openDrawer();

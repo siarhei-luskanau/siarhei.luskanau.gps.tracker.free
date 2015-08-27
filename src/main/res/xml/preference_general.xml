@@ -1,0 +1,72 @@
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2015 Siarhei Luskanau
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="inline_preferences">
+
+        <CheckBoxPreference
+            android:key="CheckBoxPreference"
+            android:summary="summary_CheckBoxPreference"
+            android:title="title_CheckBoxPreference" />
+
+        <SwitchPreferenceCompat
+            android:key="SwitchPreferenceCompat"
+            android:summary="summary_SwitchPreferenceCompat"
+            android:title="title_SwitchPreferenceCompat" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="dialog_based_preferences">
+
+        <EditTextPreference
+            android:dialogTitle="dialog_title_EditTextPreference"
+            android:key="EditTextPreference"
+            android:summary="summary_EditTextPreference"
+            android:title="title_EditTextPreference" />
+
+        <ListPreference
+            android:dialogTitle="dialog_title_ListPreference"
+            android:entries="@array/language_strings"
+            android:entryValues="@array/language_values"
+            android:key="ListPreference"
+            android:summary="summary_ListPreference"
+            android:title="title_ListPreference" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="launch_preferences">
+
+        <PreferenceScreen
+            android:summary="summary_intent_preference"
+            android:title="title_intent_preference">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://www.android.com" />
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,103 @@
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2015 Siarhei Luskanau
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<resources>
+
+    <string-array name="server_type_strings">
+        <item>@string/server_type_socket</item>
+        <item>@string/server_type_json_form</item>
+        <item>@string/server_type_json_body</item>
+    </string-array>
+    <string-array name="send_to_server_period_strings">
+        <item>Immediately</item>
+        <item>1 min</item>
+        <item>10 min</item>
+        <item>60 min</item>
+        <item>Manual</item>
+    </string-array>
+
+    <integer-array name="send_to_server_period_values">
+        <item>0</item>
+        <item>60000</item>
+        <item>600000</item>
+        <item>3600000</item>
+        <item>-1</item>
+    </integer-array>
+
+    <string-array name="time_filter_strings">
+        <item>Don\'t use</item>
+        <item>1 min</item>
+        <item>10 min</item>
+        <item>60 min</item>
+    </string-array>
+
+    <integer-array name="time_filter_values">
+        <item>0</item>
+        <item>60000</item>
+        <item>600000</item>
+        <item>3600000</item>
+    </integer-array>
+
+    <string-array name="gps_location_distance_filter_strings">
+        <item>Don\'t use</item>
+        <item>10 m</item>
+        <item>100 m</item>
+        <item>1000 m</item>
+    </string-array>
+
+    <integer-array name="gps_location_distance_filter_values">
+        <item>0</item>
+        <item>10</item>
+        <item>100</item>
+        <item>1000</item>
+    </integer-array>
+
+    <string-array name="network_location_distance_filter_strings">
+        <item>Don\'t use</item>
+        <item>100 m</item>
+        <item>500 m</item>
+        <item>5000 m</item>
+    </string-array>
+
+    <integer-array name="network_location_distance_filter_values">
+        <item>0</item>
+        <item>100</item>
+        <item>500</item>
+        <item>5000</item>
+    </integer-array>
+
+    <string-array name="language_strings">
+        <item>English</item>
+        <item>Русский</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>en</item>
+        <item>ru</item>
+    </string-array>
+    <string-array name="internet_strings">
+        <item>Any available</item>
+        <item>Wi-Fi</item>
+        <item>Offline</item>
+    </string-array>
+
+</resources>

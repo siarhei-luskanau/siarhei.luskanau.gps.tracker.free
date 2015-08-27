@@ -21,50 +21,51 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.dialog;
+package siarhei.luskanau.gps.tracker.free.ui;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
-public class AboutFragment extends DialogFragment {
+public class AboutFragment extends SimpleAppBarFragment {
 
     public static final String TAG = "AboutFragment";
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.fragment_left_drawer_about);
-        builder.setIcon(R.drawable.ic_action_about);
-        try {
-            String message = new String(Utils.getBytes(getResources().openRawResource(R.raw.about)), "utf-8");
-            builder.setMessage(Html.fromHtml(message));
-        } catch (Throwable t1) {
-            builder.setMessage(null);
-        }
-        builder.setNeutralButton(android.R.string.ok, null);
-        return builder.create();
+    protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_about, container, false);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         try {
-            TextView messageTextView = (TextView) getDialog().findViewById(android.R.id.message);
-            if (messageTextView != null) {
-                messageTextView.setMovementMethod(LinkMovementMethod.getInstance());
-            }
+            String message = new String(Utils.getBytes(getResources().openRawResource(R.raw.about)), "utf-8");
+            TextView messageTextView = aq.id(R.id.aboutTextView).getTextView();
+            messageTextView.setText(Html.fromHtml(message));
+            messageTextView.setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Throwable t) {
             Log.e(TAG, t.toString(), t);
         }
+    }
+
+    @Override
+    protected void updateAppBar() {
+        super.updateAppBar();
+        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setHomeButtonEnabled(true);
+        activity.updateDrawerToggle(false);
+        activity.getSupportActionBar().setSubtitle(R.string.menu_drawer_about);
     }
 
 }

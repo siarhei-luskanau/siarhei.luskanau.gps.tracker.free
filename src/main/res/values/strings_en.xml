@@ -26,9 +26,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="tracker_app_name">Free GPS Tracker</string>
     <string name="service_tracker_running">Tracker is running</string>
 
-    <!-- fragment_left_drawer.xml -->
-    <string name="fragment_left_drawer_preferences">Preferences</string>
-    <string name="fragment_left_drawer_about">About</string>
+    <!-- menu_drawer.xml -->
+    <string name="menu_drawer_home">Home</string>
+    <string name="menu_drawer_settings">Settings</string>
+    <string name="menu_drawer_about">About</string>
 
     <!-- menu -->
     <string name="menu_action_new">New</string>
