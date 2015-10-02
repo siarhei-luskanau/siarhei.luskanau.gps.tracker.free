@@ -94,10 +94,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <item>en</item>
         <item>ru</item>
     </string-array>
-    <string-array name="internet_strings">
-        <item>Any available</item>
-        <item>Wi-Fi</item>
-        <item>Offline</item>
+    <string-array name="preference_internet_strings">
+        <item>@string/preference_internet_any</item>
+        <item>@string/preference_internet_wifi</item>
+        <item>@string/preference_internet_offline</item>
     </string-array>
 
 </resources>

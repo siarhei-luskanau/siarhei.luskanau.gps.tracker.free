@@ -70,11 +70,11 @@ public class SendPositionsCallable implements Callable<Object> {
                         isAllowSendToServer = false;
                     }
                     // check use Internet
-                    if (!appSettingsState.internetSettingsEntity.isUseInternet) {
+                    if (appSettingsState.internetSettingsEntity.internetType == AppSettings.InternetType.OFFLINE_TYPE) {
                         isAllowSendToServer = false;
                     }
                     // check use Wi-Fi only
-                    if (appSettingsState.internetSettingsEntity.isUseWifiOny
+                    if (appSettingsState.internetSettingsEntity.internetType == AppSettings.InternetType.WIFI_TYPE
                             && !Utils.isWifiNetworkType(context)) {
                         isAllowSendToServer = false;
                     }

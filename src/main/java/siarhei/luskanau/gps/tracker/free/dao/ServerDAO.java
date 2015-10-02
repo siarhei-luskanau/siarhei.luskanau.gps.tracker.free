@@ -41,16 +41,19 @@ import siarhei.luskanau.gps.tracker.free.utils.Utils;
 public class ServerDAO extends BaseDAO {
 
     private static final String TAG = "ServerDAO";
-    private final static Uri SERVER_URI = Uri.withAppendedPath(ContentProvider.URI, ServerColumns.TABLE_NAME);
+
+    public static Uri getUri(Context context) {
+        return  Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), ServerColumns.TABLE_NAME);
+    }
 
     public static long insertOrUpdate(Context context, ServerEntity serverEntity) {
         ContentValues values = toContentValues(serverEntity);
         if (serverEntity.rowId != null) {
             String selection = ServerColumns._ID + "=?";
             String[] whereArgs = new String[]{String.valueOf(serverEntity.rowId)};
-            context.getContentResolver().update(SERVER_URI, values, selection, whereArgs);
+            context.getContentResolver().update(getUri(context), values, selection, whereArgs);
         } else {
-            Uri idUri = context.getContentResolver().insert(SERVER_URI, values);
+            Uri idUri = context.getContentResolver().insert(getUri(context), values);
             serverEntity.rowId = Long.parseLong(idUri.getPathSegments().get(1));
         }
         return serverEntity.rowId;
@@ -61,7 +64,7 @@ public class ServerDAO extends BaseDAO {
         try {
             String selection = ServerColumns._ID + "=?";
             String[] whereArgs = new String[]{String.valueOf(rowId)};
-            cursor = context.getContentResolver().query(SERVER_URI, null, selection, whereArgs, null);
+            cursor = context.getContentResolver().query(getUri(context), null, selection, whereArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
                 return fromCursor(cursor);
             }
@@ -75,7 +78,7 @@ public class ServerDAO extends BaseDAO {
         List<ServerEntity> list = new ArrayList<ServerEntity>();
         Cursor cursor = null;
         try {
-            cursor = context.getContentResolver().query(SERVER_URI, null, null, null, null);
+            cursor = context.getContentResolver().query(getUri(context), null, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     list.add(fromCursor(cursor));

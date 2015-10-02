@@ -1,7 +1,7 @@
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2014 Siarhei Luskanau
+Copyright (c) 2015 Siarhei Luskanau
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -21,14 +21,16 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/menu_action_new"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"
-        android:title="@string/menu_action_new"
-        android:icon="@drawable/ic_add_24dp" />
+    <PreferenceCategory android:title="@string/preference_internet_category">
 
-</menu>
+        <ListPreference
+            android:icon="@drawable/ic_settings_24dp"
+            android:key="@string/internet_type_preference_key"
+            android:persistent="false"
+            android:title="@string/preference_internet_type" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

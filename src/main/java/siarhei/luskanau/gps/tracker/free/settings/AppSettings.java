@@ -120,6 +120,12 @@ public class AppSettings {
         getPreferences(context).edit().putString(SERVER_ENTITY, AppConstants.GSON.toJson(value)).commit();
     }
 
+    public enum InternetType {
+        ANY_TYPE,
+        WIFI_TYPE,
+        OFFLINE_TYPE
+    }
+
     public static class State {
         @SerializedName("EulaAccepted")
         public boolean isEulaAccepted = false;
@@ -161,14 +167,18 @@ public class AppSettings {
     }
 
     public static class InternetSettingsEntity {
-        @SerializedName("isUseInternet")
-        public boolean isUseInternet = true;
+//        @SerializedName("isUseInternet")
+//        public boolean isUseInternet = true;
+//
+//        @SerializedName("isUseWifiOny")
+//        public boolean isUseWifiOny = false;
 
-        @SerializedName("isUseWifiOny")
-        public boolean isUseWifiOny = false;
+        @SerializedName("internetType")
+        public InternetType internetType = InternetType.ANY_TYPE;
 
         @SerializedName("locationInterval")
         public int sendToServerInterval;
+
     }
 
     public static class LocationSettingsEntity {

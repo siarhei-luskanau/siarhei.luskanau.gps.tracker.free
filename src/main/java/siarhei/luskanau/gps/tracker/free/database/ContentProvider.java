@@ -24,6 +24,7 @@
 package siarhei.luskanau.gps.tracker.free.database;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -31,13 +32,13 @@ import java.util.List;
 
 public class ContentProvider extends android.content.ContentProvider {
 
-    public static final String AUTHORITY = "siarhei.luskanau.gps.tracker.free.provider";
-
-    public static final Uri URI = Uri.parse("content://" + AUTHORITY);
-
     public static final String RAW_QUERY_SEGMENT = "rawQuery";
 
     private DataBaseHelper dataBaseHelper;
+
+    public static Uri getProviderAuthorityUri(Context context) {
+        return  Uri.parse("content://" + context.getPackageName() + ".provider");
+    }
 
     @Override
     public boolean onCreate() {

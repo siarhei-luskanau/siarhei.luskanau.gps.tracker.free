@@ -3,10 +3,10 @@ apply plugin: "android"
 
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.+'
+        classpath 'com.android.tools.build:gradle:1.4.0-beta4'
     }
 //    dependencies {
 //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.+'
@@ -20,7 +20,7 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23'
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "siarhei.luskanau.gps.tracker.free"
@@ -63,9 +63,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:design:23.+'
-    compile 'com.android.support:preference-v7:23.+'
-    compile 'com.google.android.gms:play-services-gcm:7.5.0'
+    compile 'com.android.support:design:23.0.1'
+    compile 'com.android.support:preference-v7:23.0.1'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
     compile 'com.googlecode.android-query:android-query:0.25.9'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.squareup.retrofit:retrofit:1.9.0'

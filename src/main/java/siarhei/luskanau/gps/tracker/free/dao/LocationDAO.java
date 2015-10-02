@@ -40,16 +40,18 @@ import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 
 public class LocationDAO extends BaseDAO {
 
-    private final static Uri LOCATION_URI = Uri.withAppendedPath(ContentProvider.URI, LocationColumns.TABLE_NAME);
+    public static Uri getUri(Context context) {
+        return  Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), LocationColumns.TABLE_NAME);
+    }
 
     public static long insertOrUpdateLocationPacket(Context context, LocationModel locationModel) {
         ContentValues values = toContentValues(locationModel);
         if (locationModel.rowId != null) {
             String selection = LocationColumns._ID + "=?";
             String[] whereArgs = new String[]{String.valueOf(locationModel.rowId)};
-            context.getContentResolver().update(LOCATION_URI, values, selection, whereArgs);
+            context.getContentResolver().update(getUri(context), values, selection, whereArgs);
         } else {
-            Uri idUri = context.getContentResolver().insert(LOCATION_URI, values);
+            Uri idUri = context.getContentResolver().insert(getUri(context), values);
             locationModel.rowId = Long.parseLong(idUri.getPathSegments().get(1));
             AppSettings.setLastLocationPacket(context, locationModel);
 
@@ -61,7 +63,7 @@ public class LocationDAO extends BaseDAO {
         List<LocationModel> packets = new ArrayList<LocationModel>();
         Cursor cursor = null;
         try {
-            cursor = context.getContentResolver().query(Uri.withAppendedPath(Uri.withAppendedPath(Uri.withAppendedPath(LOCATION_URI, null), null), String.valueOf(limit)), null, null, null, LocationColumns._ID);
+            cursor = context.getContentResolver().query(Uri.withAppendedPath(Uri.withAppendedPath(Uri.withAppendedPath(getUri(context), null), null), String.valueOf(limit)), null, null, null, LocationColumns._ID);
             if (cursor.moveToFirst()) {
                 do {
                     packets.add(fromCursor(cursor));
@@ -88,7 +90,7 @@ public class LocationDAO extends BaseDAO {
             whereClause.append("?");
         }
         whereClause.append(")");
-        return context.getContentResolver().delete(LOCATION_URI, whereClause.toString(), whereArgs);
+        return context.getContentResolver().delete(getUri(context), whereClause.toString(), whereArgs);
     }
 
     public static boolean hasLocations(Context context) {

@@ -26,25 +26,24 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <item
         android:id="@+id/menu_action_accept"
+        android:icon="@drawable/ic_done_24dp"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"
         android:title="@string/menu_action_save"
-        android:icon="@drawable/ic_action_accept" />
+        app:showAsAction="ifRoom|withText" />
 
     <item
+        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
         android:orderInCategory="900"
-        app:showAsAction="ifRoom|withText"
         android:title="@string/abc_action_menu_overflow_description"
-        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha">
+        app:showAsAction="ifRoom|withText">
 
         <menu>
 
             <item
                 android:id="@+id/menu_action_check"
                 android:orderInCategory="100"
-                app:showAsAction="ifRoom|withText"
                 android:title="@string/menu_action_check"
-                android:icon="@drawable/ic_action_web_site" />
+                app:showAsAction="ifRoom|withText" />
 
         </menu>
 

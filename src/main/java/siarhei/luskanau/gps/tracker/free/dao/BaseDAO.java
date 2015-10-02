@@ -50,7 +50,7 @@ public class BaseDAO {
     public static long queryCount(Context context, String tableName) {
         Cursor cursor = null;
         try {
-            Uri uri = Uri.withAppendedPath(ContentProvider.URI, tableName);
+            Uri uri = Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), tableName);
             cursor = context.getContentResolver().query(uri, new String[]{COUNT_SELECT}, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 return cursor.getLong(cursor.getColumnIndex(BaseColumns._COUNT));
@@ -64,7 +64,7 @@ public class BaseDAO {
     public static long queryCount(Context context, String inTables, String selection, String[] whereArgs) {
         Cursor cursor = null;
         try {
-            Uri uri = Uri.withAppendedPath(ContentProvider.URI, inTables);
+            Uri uri = Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), inTables);
             cursor = context.getContentResolver().query(uri, new String[]{COUNT_SELECT}, selection, whereArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
                 return cursor.getLong(cursor.getColumnIndex(BaseColumns._COUNT));

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Siarhei Luskanau
+ * Copyright (c) 2015 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -83,8 +83,8 @@ public class SettingsTabsFragment extends SimpleAppBarFragment {
                     context.getString(R.string.fragment_settings_tabs_location)
             };
             tabFragmentClasses = new Fragment[]{
-                    new GeneralPreferenceFragment(),
-                    PageFragment.newInstance(2),
+                    new GeneralSettingsFragment(),
+                    new InternetSettingsFragment(),
                     PageFragment.newInstance(3)
             };
         }

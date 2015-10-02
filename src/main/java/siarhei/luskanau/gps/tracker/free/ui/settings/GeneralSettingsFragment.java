@@ -28,7 +28,7 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 
 import siarhei.luskanau.gps.tracker.free.R;
 
-public class GeneralPreferenceFragment extends PreferenceFragmentCompat {
+public class GeneralSettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

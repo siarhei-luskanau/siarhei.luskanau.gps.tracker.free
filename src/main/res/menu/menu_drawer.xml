@@ -35,12 +35,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
         <item
             android:id="@+id/menu_drawer_item_settings"
-            android:icon="@drawable/ic_action_settings"
+            android:icon="@drawable/ic_settings_24dp"
             android:title="@string/menu_drawer_settings" />
 
         <item
             android:id="@+id/menu_drawer_item_about"
-            android:icon="@drawable/ic_action_about"
+            android:icon="@drawable/ic_info_outline_24dp"
             android:title="@string/menu_drawer_about" />
 
     </group>
