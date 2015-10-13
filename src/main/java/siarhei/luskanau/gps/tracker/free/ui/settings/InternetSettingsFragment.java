@@ -42,9 +42,7 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
 
     private void onInternetTypePreferenceCreate() {
         AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
-        ListPreference internetTypePreference = (ListPreference) findPreference(getString(R.string.internet_type_preference_key));
-        internetTypePreference.setEntries(R.array.preference_internet_strings);
-        internetTypePreference.setEntryValues(R.array.preference_internet_strings);
+        ListPreference internetTypePreference = (ListPreference) findPreference(getString(R.string.preference_key_internet_type));
         switch (state.internetSettingsEntity.internetType) {
             case ANY_TYPE: {
                 internetTypePreference.setValueIndex(0);
@@ -69,10 +67,10 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
         internetTypePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                ListPreference internetTypePreference = (ListPreference) findPreference(getString(R.string.internet_type_preference_key));
+                ListPreference internetTypePreference = (ListPreference) findPreference(getString(R.string.preference_key_internet_type));
                 internetTypePreference.setSummary(newValue.toString());
                 AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
-                switch (internetTypePreference.findIndexOfValue(internetTypePreference.getValue())) {
+                switch (internetTypePreference.findIndexOfValue(newValue.toString())) {
                     case 0: {
                         state.internetSettingsEntity.internetType = AppSettings.InternetType.ANY_TYPE;
                         break;

@@ -90,10 +90,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <item>English</item>
         <item>Русский</item>
     </string-array>
-    <string-array name="language_values">
-        <item>en</item>
-        <item>ru</item>
-    </string-array>
+
     <string-array name="preference_internet_strings">
         <item>@string/preference_internet_any</item>
         <item>@string/preference_internet_wifi</item>

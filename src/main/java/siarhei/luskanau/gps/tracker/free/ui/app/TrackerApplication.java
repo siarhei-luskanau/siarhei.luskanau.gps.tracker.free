@@ -25,15 +25,19 @@ package siarhei.luskanau.gps.tracker.free.ui.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.widget.Toast;
 
 import com.squareup.leakcanary.LeakCanary;
+
+import java.util.Locale;
 
 import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
 import siarhei.luskanau.gps.tracker.free.service.TrackerService;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
+import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.utils.bugreport.ExceptionHandler;
 
 public class TrackerApplication extends Application {
@@ -45,6 +49,7 @@ public class TrackerApplication extends Application {
         super.onCreate();
         LeakCanary.install(this);
         ExceptionHandler.addExceptionHandler(this);
+        updateLocale();
 
         progressBroadcastReceiver.registerReceiver(this);
 
@@ -59,6 +64,36 @@ public class TrackerApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
         progressBroadcastReceiver.unregisterReceiver(this);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        updateLocale();
+    }
+
+    private void updateLocale() {
+        Locale locale = null;
+        AppSettings.State state = AppSettings.getAppSettingsEntity(this);
+        if (state.language == null) {
+            state.language = AppSettings.Language.EN;
+            AppSettings.setAppSettingsEntity(this, state);
+        }
+        switch (state.language) {
+            case EN: {
+                locale = Locale.ENGLISH;
+                break;
+            }
+            case RU: {
+                locale = new Locale("ru");
+                break;
+            }
+        }
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
     }
 
     private class InnerProgressBroadcastCallback extends ProgressBroadcastController.ProgressBroadcastCallback {

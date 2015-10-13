@@ -23,16 +23,68 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
+import siarhei.luskanau.gps.tracker.free.ui.app.AppActivity;
 
 public class GeneralSettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preference_general);
+
+        onLanguagePreferenceCreate();
+    }
+
+    private void onLanguagePreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        ListPreference languagePreference = (ListPreference) findPreference(getString(R.string.preference_key_language));
+        switch (state.language) {
+            case EN: {
+                languagePreference.setValueIndex(0);
+                languagePreference.setSummary(getResources().getStringArray(R.array.language_strings)[0]);
+                break;
+            }
+            case RU: {
+                languagePreference.setValueIndex(1);
+                languagePreference.setSummary(getResources().getStringArray(R.array.language_strings)[1]);
+                break;
+            }
+        }
+        languagePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                ListPreference languagePreference = (ListPreference) findPreference(getString(R.string.preference_key_language));
+                languagePreference.setSummary(newValue.toString());
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                switch (languagePreference.findIndexOfValue(newValue.toString())) {
+                    case 0: {
+                        if (state.language == AppSettings.Language.EN) {
+                            return true;
+                        }
+                        state.language = AppSettings.Language.EN;
+                        break;
+                    }
+                    case 1: {
+                        if (state.language == AppSettings.Language.RU) {
+                            return true;
+                        }
+                        state.language = AppSettings.Language.RU;
+                        break;
+                    }
+                }
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                startActivity(new Intent(getContext(), AppActivity.class));
+                System.exit(0);
+                return true;
+            }
+        });
     }
 
 }

@@ -29,8 +29,6 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Locale;
-
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.model.LocationModel;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
@@ -126,6 +124,11 @@ public class AppSettings {
         OFFLINE_TYPE
     }
 
+    public enum Language {
+        EN,
+        RU
+    }
+
     public static class State {
         @SerializedName("EulaAccepted")
         public boolean isEulaAccepted = false;
@@ -149,7 +152,7 @@ public class AppSettings {
         public LocationSettingsEntity locationSettings = new LocationSettingsEntity();
 
         @SerializedName("language")
-        public String language = Locale.getDefault().getLanguage();
+        public Language language;
     }
 
     public static class BatterySettingsEntity {
@@ -167,18 +170,10 @@ public class AppSettings {
     }
 
     public static class InternetSettingsEntity {
-//        @SerializedName("isUseInternet")
-//        public boolean isUseInternet = true;
-//
-//        @SerializedName("isUseWifiOny")
-//        public boolean isUseWifiOny = false;
-
         @SerializedName("internetType")
         public InternetType internetType = InternetType.ANY_TYPE;
-
         @SerializedName("locationInterval")
         public int sendToServerInterval;
-
     }
 
     public static class LocationSettingsEntity {

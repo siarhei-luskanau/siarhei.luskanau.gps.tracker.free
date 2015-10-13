@@ -1,0 +1,42 @@
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2014 Siarhei Luskanau
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<resources>
+
+    <string name="tracker_app_name">Free-gps.net Tracker</string>
+    <string name="service_tracker_running">Трекер запущен</string>
+
+    <!-- menu_drawer.xml -->
+    <string name="menu_drawer_home">Начало</string>
+    <string name="menu_drawer_settings">Настройки</string>
+    <string name="menu_drawer_about">О программе</string>
+
+    <!-- fragment_settings_tabs.xml -->
+    <string name="fragment_settings_tabs_general">Общие</string>
+    <string name="fragment_settings_tabs_internet_battery">Интернет Батарея</string>
+    <string name="fragment_settings_tabs_location">Местоположение</string>
+
+    <!-- fragment_settings_general.xml -->
+    <string name="fragment_settings_general_language">Язык</string>
+
+</resources>

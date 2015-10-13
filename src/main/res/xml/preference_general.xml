@@ -23,49 +23,34 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="inline_preferences">
+    <CheckBoxPreference
+        android:key="CheckBoxPreference"
+        android:persistent="false"
+        android:summary="summary_CheckBoxPreference"
+        android:title="title_CheckBoxPreference" />
 
-        <CheckBoxPreference
-            android:key="CheckBoxPreference"
-            android:summary="summary_CheckBoxPreference"
-            android:title="title_CheckBoxPreference" />
+    <SwitchPreferenceCompat
+        android:key="SwitchPreferenceCompat"
+        android:persistent="false"
+        android:summary="summary_SwitchPreferenceCompat"
+        android:title="title_SwitchPreferenceCompat" />
 
-        <SwitchPreferenceCompat
-            android:key="SwitchPreferenceCompat"
-            android:summary="summary_SwitchPreferenceCompat"
-            android:title="title_SwitchPreferenceCompat" />
+    <EditTextPreference
+        android:dialogTitle="dialog_title_EditTextPreference"
+        android:key="EditTextPreference"
+        android:persistent="false"
+        android:summary="summary_EditTextPreference"
+        android:title="title_EditTextPreference" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="dialog_based_preferences">
-
-        <EditTextPreference
-            android:dialogTitle="dialog_title_EditTextPreference"
-            android:key="EditTextPreference"
-            android:summary="summary_EditTextPreference"
-            android:title="title_EditTextPreference" />
+    <PreferenceCategory android:title="General">
 
         <ListPreference
-            android:dialogTitle="dialog_title_ListPreference"
             android:entries="@array/language_strings"
-            android:entryValues="@array/language_values"
-            android:key="ListPreference"
-            android:summary="summary_ListPreference"
-            android:title="title_ListPreference" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="launch_preferences">
-
-        <PreferenceScreen
-            android:summary="summary_intent_preference"
-            android:title="title_intent_preference">
-
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="http://www.android.com" />
-
-        </PreferenceScreen>
+            android:entryValues="@array/language_strings"
+            android:icon="@drawable/ic_language_24dp"
+            android:key="@string/preference_key_language"
+            android:persistent="false"
+            android:title="@string/fragment_settings_general_language" />
 
     </PreferenceCategory>
 

@@ -48,7 +48,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_tabs_location">Location</string>
 
     <!--preference_internet.xml-->
-    <string name="internet_type_preference_key">internet_type_preference_key</string>
+    <string name="preference_key_internet_type">preference_key_internet_type</string>
     <string name="preference_internet_category">Internet</string>
     <string name="preference_internet_type">Internet type</string>
     <string name="preference_internet_any">Any available</string>
@@ -57,6 +57,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
     <!-- fragment_settings_general.xml -->
+    <string name="preference_key_language">preference_key_language</string>
     <string name="fragment_settings_general_server">Server</string>
     <string name="fragment_settings_general_edit_custom_server">Edit custom server</string>
     <string name="fragment_settings_general_autostart">Autostart</string>
