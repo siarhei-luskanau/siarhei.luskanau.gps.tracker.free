@@ -42,7 +42,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:gravity="center"
         android:padding="8dp"
         android:text="@string/tracker_app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

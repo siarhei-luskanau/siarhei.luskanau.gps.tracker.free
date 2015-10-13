@@ -26,11 +26,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/menu_drawer_item_gcm"
-            android:title="Gcm message" />
-
-        <item
             android:id="@+id/menu_drawer_item_home"
+            android:icon="@drawable/ic_home_24dp"
             android:title="@string/menu_drawer_home" />
 
         <item
@@ -42,6 +39,19 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:id="@+id/menu_drawer_item_about"
             android:icon="@drawable/ic_info_outline_24dp"
             android:title="@string/menu_drawer_about" />
+
+        <item android:title="Testing">
+            <menu>
+                <group android:checkableBehavior="single">
+
+                    <item
+                        android:id="@+id/menu_drawer_item_gcm"
+                        android:icon="@drawable/ic_info_outline_24dp"
+                        android:title="Gcm message" />
+
+                </group>
+            </menu>
+        </item>
 
     </group>
 

@@ -25,6 +25,7 @@ package siarhei.luskanau.gps.tracker.free.ui.app;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -69,42 +70,7 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity implements
         baseDrawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         NavigationView navigationView = (NavigationView) aq.id(R.id.navigationView).getView();
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                menuItem.setChecked(true);
-                switch (menuItem.getItemId()) {
-                    case R.id.menu_drawer_item_gcm: {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    SyncService.startTask(BaseDrawerActivity.this, new GcmTask());
-                                    GcmTask.sendEchoMessage(BaseDrawerActivity.this);
-                                } catch (Exception e) {
-                                    Log.d(TAG, e.toString(), e);
-                                }
-                            }
-                        }).start();
-                        break;
-                    }
-                    case R.id.menu_drawer_item_home: {
-                        appController.onShowHomeFragment();
-                        break;
-                    }
-                    case R.id.menu_drawer_item_settings: {
-                        appController.onShowSettingsFragment();
-                        break;
-                    }
-                    case R.id.menu_drawer_item_about: {
-                        appController.onShowAboutFragment();
-                        break;
-                    }
-                }
-                closeDrawers();
-                return true;
-            }
-        });
+        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedListener());
     }
 
     @Override
@@ -162,12 +128,53 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity implements
         return false;
     }
 
+    public void setCheckedNavigationMenuItem(@IdRes int menuItemId) {
+        NavigationView navigationView = (NavigationView) aq.id(R.id.navigationView).getView();
+        navigationView.setCheckedItem(menuItemId);
+    }
+
     public void updateDrawerToggle(boolean showDrawerToggle) {
         if (actionBarDrawerToggle != null) {
             actionBarDrawerToggle.setDrawerIndicatorEnabled(showDrawerToggle);
             if (showDrawerToggle) {
                 actionBarDrawerToggle.syncState();
             }
+        }
+    }
+
+    private class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {
+        @Override
+        public boolean onNavigationItemSelected(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.menu_drawer_item_gcm: {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                SyncService.startTask(BaseDrawerActivity.this, new GcmTask());
+                                GcmTask.sendEchoMessage(BaseDrawerActivity.this);
+                            } catch (Exception e) {
+                                Log.d(TAG, e.toString(), e);
+                            }
+                        }
+                    }).start();
+                    break;
+                }
+                case R.id.menu_drawer_item_home: {
+                    appController.onShowHomeFragment();
+                    break;
+                }
+                case R.id.menu_drawer_item_settings: {
+                    appController.onShowSettingsFragment();
+                    break;
+                }
+                case R.id.menu_drawer_item_about: {
+                    appController.onShowAboutFragment();
+                    break;
+                }
+            }
+            closeDrawers();
+            return true;
         }
     }
 

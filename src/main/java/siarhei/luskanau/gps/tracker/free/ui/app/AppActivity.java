@@ -25,12 +25,15 @@ package siarhei.luskanau.gps.tracker.free.ui.app;
 
 import android.os.Bundle;
 
+import siarhei.luskanau.gps.tracker.free.R;
+
 public class AppActivity extends BaseDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appController.onShowHomeFragment();
+        setCheckedNavigationMenuItem(R.id.menu_drawer_item_home);
         openDrawer();
     }
 
