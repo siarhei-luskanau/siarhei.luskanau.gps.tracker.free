@@ -44,26 +44,27 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
 
     private void onLanguagePreferenceCreate() {
         AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
-        ListPreference languagePreference = (ListPreference) findPreference(getString(R.string.preference_key_language));
+        ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_language));
+        CharSequence[] entries = listPreference.getEntries();
         switch (state.language) {
             case EN: {
-                languagePreference.setValueIndex(0);
-                languagePreference.setSummary(getResources().getStringArray(R.array.language_strings)[0]);
+                listPreference.setValueIndex(0);
+                listPreference.setSummary(entries[0]);
                 break;
             }
             case RU: {
-                languagePreference.setValueIndex(1);
-                languagePreference.setSummary(getResources().getStringArray(R.array.language_strings)[1]);
+                listPreference.setValueIndex(1);
+                listPreference.setSummary(entries[1]);
                 break;
             }
         }
-        languagePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        listPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                ListPreference languagePreference = (ListPreference) findPreference(getString(R.string.preference_key_language));
-                languagePreference.setSummary(newValue.toString());
+                ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_language));
+                listPreference.setSummary(newValue.toString());
                 AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
-                switch (languagePreference.findIndexOfValue(newValue.toString())) {
+                switch (listPreference.findIndexOfValue(newValue.toString())) {
                     case 0: {
                         if (state.language == AppSettings.Language.EN) {
                             return true;

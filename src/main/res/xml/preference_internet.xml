@@ -31,14 +31,13 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:persistent="false"
         android:title="@string/preference_internet_type" />
 
-
     <ListPreference
-        android:entries="@array/send_to_server_period_strings"
-        android:entryValues="@array/send_to_server_period_strings"
+        android:entries="@array/send_to_server_interval_strings"
+        android:entryValues="@array/send_to_server_interval_strings"
         android:icon="@drawable/ic_settings_24dp"
-        android:key="interval"
+        android:key="@string/preference_key_send_to_server_interval"
         android:persistent="false"
-        android:title="interval" />
+        android:title="@string/preference_internet_send_to_server_interval" />
 
     <PreferenceCategory android:title="battery">
 

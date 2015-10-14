@@ -28,21 +28,13 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <item>@string/server_type_json_form</item>
         <item>@string/server_type_json_body</item>
     </string-array>
-    <string-array name="send_to_server_period_strings">
-        <item>Immediately</item>
-        <item>1 min</item>
-        <item>10 min</item>
-        <item>60 min</item>
-        <item>Manual</item>
+    <string-array name="send_to_server_interval_strings">
+        <item>@string/preference_send_to_server_interval_immediately</item>
+        <item>@string/preference_send_to_server_interval_min_1</item>
+        <item>@string/preference_send_to_server_interval_min_10</item>
+        <item>@string/preference_send_to_server_interval_min_60</item>
+        <item>@string/preference_send_to_server_interval_min_manual</item>
     </string-array>
-
-    <integer-array name="send_to_server_period_values">
-        <item>0</item>
-        <item>60000</item>
-        <item>600000</item>
-        <item>3600000</item>
-        <item>-1</item>
-    </integer-array>
 
     <string-array name="time_filter_strings">
         <item>Don\'t use</item>

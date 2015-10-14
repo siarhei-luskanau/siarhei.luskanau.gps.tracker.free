@@ -38,39 +38,38 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
         addPreferencesFromResource(R.xml.preference_internet);
 
         onInternetTypePreferenceCreate();
+        onSendToServerIntervalPreferenceCreate();
     }
 
     private void onInternetTypePreferenceCreate() {
         AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
-        ListPreference internetTypePreference = (ListPreference) findPreference(getString(R.string.preference_key_internet_type));
+        ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_internet_type));
+        CharSequence[] entries = listPreference.getEntries();
         switch (state.internetSettingsEntity.internetType) {
+            default:
             case ANY_TYPE: {
-                internetTypePreference.setValueIndex(0);
-                internetTypePreference.setSummary(R.string.preference_internet_any);
+                listPreference.setValueIndex(0);
+                listPreference.setSummary(entries[0]);
                 break;
             }
             case WIFI_TYPE: {
-                internetTypePreference.setValueIndex(1);
-                internetTypePreference.setSummary(R.string.preference_internet_wifi);
+                listPreference.setValueIndex(1);
+                listPreference.setSummary(entries[1]);
                 break;
             }
             case OFFLINE_TYPE: {
-                internetTypePreference.setValueIndex(2);
-                internetTypePreference.setSummary(R.string.preference_internet_offline);
-                break;
-            }
-            default: {
-                internetTypePreference.setSummary(state.internetSettingsEntity.internetType.toString());
+                listPreference.setValueIndex(2);
+                listPreference.setSummary(entries[2]);
                 break;
             }
         }
-        internetTypePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        listPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                ListPreference internetTypePreference = (ListPreference) findPreference(getString(R.string.preference_key_internet_type));
-                internetTypePreference.setSummary(newValue.toString());
+                ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_internet_type));
+                listPreference.setSummary(newValue.toString());
                 AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
-                switch (internetTypePreference.findIndexOfValue(newValue.toString())) {
+                switch (listPreference.findIndexOfValue(newValue.toString())) {
                     case 0: {
                         state.internetSettingsEntity.internetType = AppSettings.InternetType.ANY_TYPE;
                         break;
@@ -81,6 +80,72 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
                     }
                     case 2: {
                         state.internetSettingsEntity.internetType = AppSettings.InternetType.OFFLINE_TYPE;
+                        break;
+                    }
+                }
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                return true;
+            }
+        });
+    }
+
+    private void onSendToServerIntervalPreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_send_to_server_interval));
+        CharSequence[] entries = listPreference.getEntries();
+        switch (state.internetSettingsEntity.sendToServerInterval) {
+            default:
+            case AppSettings.SendToServerInterval.IMMEDIATELY: {
+                listPreference.setValueIndex(0);
+                listPreference.setSummary(entries[0]);
+                break;
+            }
+            case AppSettings.SendToServerInterval.MINUTES_1: {
+                listPreference.setValueIndex(1);
+                listPreference.setSummary(entries[1]);
+                break;
+            }
+            case AppSettings.SendToServerInterval.MINUTES_10: {
+                listPreference.setValueIndex(2);
+                listPreference.setSummary(entries[2]);
+                break;
+            }
+            case AppSettings.SendToServerInterval.MINUTES_60: {
+                listPreference.setValueIndex(3);
+                listPreference.setSummary(entries[3]);
+                break;
+            }
+            case AppSettings.SendToServerInterval.MANUAL: {
+                listPreference.setValueIndex(4);
+                listPreference.setSummary(entries[4]);
+                break;
+            }
+        }
+        listPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_send_to_server_interval));
+                listPreference.setSummary(newValue.toString());
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                switch (listPreference.findIndexOfValue(newValue.toString())) {
+                    case 0: {
+                        state.internetSettingsEntity.sendToServerInterval = AppSettings.SendToServerInterval.IMMEDIATELY;
+                        break;
+                    }
+                    case 1: {
+                        state.internetSettingsEntity.sendToServerInterval = AppSettings.SendToServerInterval.MINUTES_1;
+                        break;
+                    }
+                    case 2: {
+                        state.internetSettingsEntity.sendToServerInterval = AppSettings.SendToServerInterval.MINUTES_10;
+                        break;
+                    }
+                    case 3: {
+                        state.internetSettingsEntity.sendToServerInterval = AppSettings.SendToServerInterval.MINUTES_60;
+                        break;
+                    }
+                    case 4: {
+                        state.internetSettingsEntity.sendToServerInterval = AppSettings.SendToServerInterval.MANUAL;
                         break;
                     }
                 }

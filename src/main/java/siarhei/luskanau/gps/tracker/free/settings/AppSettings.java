@@ -129,6 +129,14 @@ public class AppSettings {
         RU
     }
 
+    public static class SendToServerInterval {
+        public static final int IMMEDIATELY = 0;
+        public static final int MINUTES_1 = 60000;
+        public static final int MINUTES_10 = 600000;
+        public static final int MINUTES_60 = 3600000;
+        public static final int MANUAL = -1;
+    }
+
     public static class State {
         @SerializedName("EulaAccepted")
         public boolean isEulaAccepted = false;
@@ -172,7 +180,7 @@ public class AppSettings {
     public static class InternetSettingsEntity {
         @SerializedName("internetType")
         public InternetType internetType = InternetType.ANY_TYPE;
-        @SerializedName("locationInterval")
+        @SerializedName("sendToServerInterval")
         public int sendToServerInterval;
     }
 
