@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.SwitchPreferenceCompat;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
@@ -39,6 +40,10 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
 
         onInternetTypePreferenceCreate();
         onSendToServerIntervalPreferenceCreate();
+        onBatteryLowPreferenceCreate();
+        onBatteryOkPreferenceCreate();
+        onChargerDisconnectedPreferenceCreate();
+        onChargerConnectedPreferenceCreate();
     }
 
     private void onInternetTypePreferenceCreate() {
@@ -149,6 +154,66 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
                         break;
                     }
                 }
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                return true;
+            }
+        });
+    }
+
+    private void onBatteryLowPreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_stop_if_battery_low));
+        switchPreferenceCompat.setChecked(state.batterySettings.stopIfBatteryLow);
+        switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                state.batterySettings.stopIfBatteryLow = Boolean.parseBoolean(newValue.toString());
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                return true;
+            }
+        });
+    }
+
+    private void onBatteryOkPreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_start_if_battery_ok));
+        switchPreferenceCompat.setChecked(state.batterySettings.startIfBatteryOk);
+        switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                state.batterySettings.startIfBatteryOk = Boolean.parseBoolean(newValue.toString());
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                return true;
+            }
+        });
+    }
+
+    private void onChargerDisconnectedPreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_stop_if_charger_disconnected));
+        switchPreferenceCompat.setChecked(state.batterySettings.stopIfChargerDisconnected);
+        switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                state.batterySettings.stopIfChargerDisconnected = Boolean.parseBoolean(newValue.toString());
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                return true;
+            }
+        });
+    }
+
+    private void onChargerConnectedPreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_start_if_charger_connected));
+        switchPreferenceCompat.setChecked(state.batterySettings.startIfChargerConnected);
+        switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                state.batterySettings.startIfChargerConnected = Boolean.parseBoolean(newValue.toString());
                 AppSettings.setAppSettingsEntity(getContext(), state);
                 return true;
             }

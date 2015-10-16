@@ -37,35 +37,37 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:icon="@drawable/ic_settings_24dp"
         android:key="@string/preference_key_send_to_server_interval"
         android:persistent="false"
-        android:title="@string/preference_internet_send_to_server_interval" />
+        android:title="@string/preference_send_to_server_interval" />
 
-    <PreferenceCategory android:title="battery">
+    <PreferenceCategory android:title="@string/preference_battery">
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_battery_20_24dp"
-            android:key="stop_battery"
+            android:key="@string/preference_key_stop_if_battery_low"
             android:persistent="false"
-            android:title="stop_battery" />
+            android:title="@string/preference_battery_stop_if_low" />
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_battery_90_24dp"
-            android:key="start_battery"
+            android:key="@string/preference_key_start_if_battery_ok"
             android:persistent="false"
-            android:title="start_battery" />
+            android:title="@string/preference_battery_start_if_ok" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="charger">
+    <PreferenceCategory android:title="@string/preference_charger">
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_battery_charging_20_24dp"
-            android:key="stop_charger"
-            android:title="stop_charger" />
+            android:key="@string/preference_key_stop_if_charger_disconnected"
+            android:persistent="false"
+            android:title="@string/preference_charger_stop_if_disconnected" />
 
         <SwitchPreferenceCompat
             android:icon="@drawable/ic_battery_charging_90_24dp"
-            android:key="start_charger"
-            android:title="start_charger" />
+            android:key="@string/preference_key_start_if_charger_connected"
+            android:persistent="false"
+            android:title="@string/preference_charger_start_if_connected" />
 
     </PreferenceCategory>
 

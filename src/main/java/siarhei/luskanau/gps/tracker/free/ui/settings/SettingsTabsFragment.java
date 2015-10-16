@@ -62,11 +62,11 @@ public class SettingsTabsFragment extends SimpleAppBarFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        SettingsFragmentPagerAdapter pagerAdapter = new SettingsFragmentPagerAdapter(getChildFragmentManager(), getContext());
         ViewPager viewPager = (ViewPager) aq.id(R.id.settingsViewPager).getView();
-        viewPager.setAdapter(new SettingsFragmentPagerAdapter(getFragmentManager(), getContext()));
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
 
-        // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) aq.id(R.id.settingsTabLayout).getView();
         tabLayout.setupWithViewPager(viewPager);
     }

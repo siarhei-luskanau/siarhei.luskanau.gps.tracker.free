@@ -170,11 +170,11 @@ public class AppSettings {
         @SerializedName("startIfBatteryOk")
         public boolean startIfBatteryOk = true;
 
-        @SerializedName("stopIfPowerDisconnected")
-        public boolean stopIfPowerDisconnected = false;
+        @SerializedName("stopIfChargerDisconnected")
+        public boolean stopIfChargerDisconnected = false;
 
-        @SerializedName("startIfPowerConnected")
-        public boolean startIfPowerConnected = false;
+        @SerializedName("startIfChargerConnected")
+        public boolean startIfChargerConnected = false;
     }
 
     public static class InternetSettingsEntity {

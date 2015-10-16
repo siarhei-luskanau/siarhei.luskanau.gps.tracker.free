@@ -38,7 +38,7 @@ public class StaticReceiver extends BroadcastReceiver {
         if (context != null && intent != null) {
             if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
                 AppSettings.State appSettingsEntity = AppSettings.getAppSettingsEntity(context);
-                boolean startIfPowerConnected = appSettingsEntity.batterySettings.startIfPowerConnected && Utils.isPowerConnected(context);
+                boolean startIfPowerConnected = appSettingsEntity.batterySettings.startIfChargerConnected && Utils.isPowerConnected(context);
                 if (appSettingsEntity.autoStart || startIfPowerConnected) {
                     TrackerService.startTracking(context);
                 } else {

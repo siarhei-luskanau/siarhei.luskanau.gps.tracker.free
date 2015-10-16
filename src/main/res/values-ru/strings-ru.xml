@@ -23,7 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <resources>
 
-    <string name="tracker_app_name">Free-gps.net Tracker</string>
+    <string name="tracker_app_name">Free GPS Tracker</string>
     <string name="service_tracker_running">Трекер запущен</string>
 
     <!-- menu_drawer.xml -->
@@ -40,17 +40,27 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_general_language">Язык</string>
 
     <!--preference_internet.xml-->
-    <!--<string name="preference_internet_category">Интернет</string>-->
     <string name="preference_internet_type">Интернет</string>
     <string name="preference_internet_any">Любое доступное</string>
     <string name="preference_internet_wifi">Wi-Fi</string>
     <string name="preference_internet_offline">Оффлайн</string>
 
-    <string name="preference_internet_send_to_server_interval">Отправлять данные на сервер не чаше чем:</string>
+    <!--preference_send_to_server_interval-->
+    <string name="preference_send_to_server_interval">Отправлять данные на сервер не чаше чем:</string>
     <string name="preference_send_to_server_interval_immediately">Немедленно</string>
     <string name="preference_send_to_server_interval_min_1">1 мин</string>
     <string name="preference_send_to_server_interval_min_10">10 мин</string>
     <string name="preference_send_to_server_interval_min_60">60 мин</string>
     <string name="preference_send_to_server_interval_min_manual">Вручную</string>
+
+    <!--preference_battery-->
+    <string name="preference_battery">Аккумулятор</string>
+    <string name="preference_battery_stop_if_low">Стоп при малом заряде аккумулятора</string>
+    <string name="preference_battery_start_if_ok">Старт при достаточном заряде аккумулятора</string>
+
+    <!--preference_charger-->
+    <string name="preference_charger">Зарядное устройство</string>
+    <string name="preference_charger_stop_if_disconnected">Стоп при отключении зарядного устройства</string>
+    <string name="preference_charger_start_if_connected">Старт при подключении зарядного устройства</string>
 
 </resources>
