@@ -28,10 +28,15 @@ import android.os.Bundle;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.SwitchPreferenceCompat;
 
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.ui.app.AppActivity;
+import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
+import siarhei.luskanau.gps.tracker.free.ui.dialog.ResetCounterDialogFragment;
 
 public class GeneralSettingsFragment extends PreferenceFragmentCompat {
 
@@ -39,7 +44,76 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preference_general);
 
+        onServerPreferenceCreate();
+        onAutostartPreferenceCreate();
+        onNotificationPreferenceCreate();
+        onAdPreferenceCreate();
+        onResetCounterPreferenceCreate();
         onLanguagePreferenceCreate();
+    }
+
+    private void onServerPreferenceCreate() {
+        PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference(getString(R.string.preference_key_server));
+        ServerEntity serverEntity = AppSettings.getServerEntity(getContext());
+        preferenceScreen.setSummary(serverEntity.name);
+        preferenceScreen.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                AppController.get(getActivity()).onShowServersFragment();
+                return true;
+            }
+        });
+    }
+
+    private void onAutostartPreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_autostart));
+        switchPreferenceCompat.setChecked(state.autoStart);
+        switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                state.autoStart = Boolean.parseBoolean(newValue.toString());
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                return true;
+            }
+        });
+    }
+
+    private void onNotificationPreferenceCreate() {
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+        SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_show_notification));
+        switchPreferenceCompat.setChecked(state.isShowNotification);
+        switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
+                state.isShowNotification = Boolean.parseBoolean(newValue.toString());
+                AppSettings.setAppSettingsEntity(getContext(), state);
+                return true;
+            }
+        });
+    }
+
+    private void onAdPreferenceCreate() {
+        SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_disable_ad));
+        switchPreferenceCompat.setEnabled(false);
+    }
+
+    private void onResetCounterPreferenceCreate() {
+        int packetCounter = AppSettings.getPacketCounter(getContext());
+        PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference(getString(R.string.preference_key_reset_packet_counter));
+        preferenceScreen.setSummary(String.valueOf(packetCounter));
+        preferenceScreen.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                int packetCounter = AppSettings.getPacketCounter(getContext());
+                PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference(getString(R.string.preference_key_reset_packet_counter));
+                preferenceScreen.setSummary(String.valueOf(packetCounter));
+                new ResetCounterDialogFragment().show(getActivity().getSupportFragmentManager(), ResetCounterDialogFragment.TAG);
+                return true;
+            }
+        });
     }
 
     private void onLanguagePreferenceCreate() {

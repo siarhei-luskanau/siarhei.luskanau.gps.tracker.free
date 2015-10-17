@@ -48,6 +48,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_tabs_location">Location</string>
 
     <!--preference_key-->
+    <string name="preference_key_server">preference_key_server</string>
+    <string name="preference_key_autostart">preference_key_autostart</string>
+    <string name="preference_key_show_notification">preference_key_show_notification</string>
+    <string name="preference_key_disable_ad">preference_key_disable_ad</string>
+    <string name="preference_key_reset_packet_counter">preference_key_reset_packet_counter</string>
     <string name="preference_key_language">preference_key_language</string>
     <string name="preference_key_internet_type">preference_key_internet_type</string>
     <string name="preference_key_send_to_server_interval">preference_key_send_to_server_interval</string>
@@ -56,16 +61,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="preference_key_stop_if_charger_disconnected">preference_key_stop_if_charger_disconnected</string>
     <string name="preference_key_start_if_charger_connected">preference_key_start_if_charger_connected</string>
 
-    <string name="fragment_settings_general_server">Server</string>
-    <!--<string name="fragment_settings_general_edit_custom_server">Edit custom server</string>-->
-    <!--<string name="fragment_settings_general_autostart">Autostart</string>-->
-    <!--<string name="fragment_settings_general_show_notification">Show notification</string>-->
-    <!--<string name="fragment_settings_general_reset_disable_ad">Disable the Ad bar</string>-->
-    <!--<string name="fragment_settings_general_reset_packet_counter">Reset counter</string>-->
-    <!--<string name="fragment_settings_general_warning_reset_counter">Do you want reset the counter?</string>-->
-
+   <!--<string name="fragment_settings_general_edit_custom_server">Edit custom server</string>-->
 
     <!-- fragment_settings_general.xml -->
+    <string name="fragment_settings_general_server">Server</string>
+    <string name="fragment_settings_general_autostart">Autostart</string>
+    <string name="fragment_settings_general_show_notification">Show notification</string>
+    <string name="fragment_settings_general_disable_ad">Disable the Ad bar</string>
+    <string name="fragment_settings_general_reset_packet_counter">Reset counter</string>
+    <string name="fragment_settings_general_warning_reset_counter">Do you want reset the counter?</string>
     <string name="fragment_settings_general_language">Language</string>
 
     <!--preference_internet.xml-->

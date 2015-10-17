@@ -37,6 +37,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_tabs_location">Местоположение</string>
 
     <!-- fragment_settings_general.xml -->
+    <string name="fragment_settings_general_server">Сервер</string>
+    <string name="fragment_settings_general_autostart">Автостарт</string>
+    <string name="fragment_settings_general_show_notification">Показывать уведомления</string>
+    <string name="fragment_settings_general_disable_ad">Убрать рекламу</string>
+    <string name="fragment_settings_general_reset_packet_counter">Обнулить счетчик</string>
+    <string name="fragment_settings_general_warning_reset_counter">Обнулить счетчик?</string>
     <string name="fragment_settings_general_language">Язык</string>
 
     <!--preference_internet.xml-->

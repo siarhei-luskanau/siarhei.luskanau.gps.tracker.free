@@ -23,35 +23,42 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckBoxPreference
-        android:key="CheckBoxPreference"
+    <PreferenceScreen
+        android:icon="@drawable/ic_public_24dp"
+        android:key="@string/preference_key_server"
         android:persistent="false"
-        android:summary="summary_CheckBoxPreference"
-        android:title="title_CheckBoxPreference" />
+        android:title="@string/fragment_settings_general_server" />
 
     <SwitchPreferenceCompat
-        android:key="SwitchPreferenceCompat"
+        android:icon="@drawable/ic_play_arrow_24dp"
+        android:key="@string/preference_key_autostart"
         android:persistent="false"
-        android:summary="summary_SwitchPreferenceCompat"
-        android:title="title_SwitchPreferenceCompat" />
+        android:title="@string/fragment_settings_general_autostart" />
 
-    <EditTextPreference
-        android:dialogTitle="dialog_title_EditTextPreference"
-        android:key="EditTextPreference"
+    <SwitchPreferenceCompat
+        android:icon="@drawable/ic_announcement_24dp"
+        android:key="@string/preference_key_show_notification"
         android:persistent="false"
-        android:summary="summary_EditTextPreference"
-        android:title="title_EditTextPreference" />
+        android:title="@string/fragment_settings_general_show_notification" />
 
-    <PreferenceCategory android:title="General">
+    <SwitchPreferenceCompat
+        android:icon="@drawable/ic_settings_24dp"
+        android:key="@string/preference_key_disable_ad"
+        android:persistent="false"
+        android:title="@string/fragment_settings_general_disable_ad" />
 
-        <ListPreference
-            android:entries="@array/language_strings"
-            android:entryValues="@array/language_strings"
-            android:icon="@drawable/ic_language_24dp"
-            android:key="@string/preference_key_language"
-            android:persistent="false"
-            android:title="@string/fragment_settings_general_language" />
+    <PreferenceScreen
+        android:icon="@drawable/ic_highlight_remove_24dp"
+        android:key="@string/preference_key_reset_packet_counter"
+        android:persistent="false"
+        android:title="@string/fragment_settings_general_reset_packet_counter" />
 
-    </PreferenceCategory>
+    <ListPreference
+        android:entries="@array/language_strings"
+        android:entryValues="@array/language_strings"
+        android:icon="@drawable/ic_language_24dp"
+        android:key="@string/preference_key_language"
+        android:persistent="false"
+        android:title="@string/fragment_settings_general_language" />
 
 </PreferenceScreen>

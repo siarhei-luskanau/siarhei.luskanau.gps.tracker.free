@@ -26,7 +26,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <ListPreference
         android:entries="@array/preference_internet_strings"
         android:entryValues="@array/preference_internet_strings"
-        android:icon="@drawable/ic_settings_24dp"
+        android:icon="@drawable/ic_public_24dp"
         android:key="@string/preference_key_internet_type"
         android:persistent="false"
         android:title="@string/preference_internet_type" />
@@ -34,7 +34,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <ListPreference
         android:entries="@array/send_to_server_interval_strings"
         android:entryValues="@array/send_to_server_interval_strings"
-        android:icon="@drawable/ic_settings_24dp"
+        android:icon="@drawable/ic_timer_24dp"
         android:key="@string/preference_key_send_to_server_interval"
         android:persistent="false"
         android:title="@string/preference_send_to_server_interval" />
