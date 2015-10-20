@@ -1,0 +1,44 @@
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2015 Siarhei Luskanau
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<resources>
+
+    <!--preference_key-->
+    <string name="preference_key_server">preference_key_server</string>
+    <string name="preference_key_autostart">preference_key_autostart</string>
+    <string name="preference_key_show_notification">preference_key_show_notification</string>
+    <string name="preference_key_disable_ad">preference_key_disable_ad</string>
+    <string name="preference_key_reset_packet_counter">preference_key_reset_packet_counter</string>
+    <string name="preference_key_language">preference_key_language</string>
+    <string name="preference_key_internet_type">preference_key_internet_type</string>
+    <string name="preference_key_send_to_server_interval">preference_key_send_to_server_interval</string>
+    <string name="preference_key_stop_if_battery_low">preference_key_stop_if_battery_low</string>
+    <string name="preference_key_start_if_battery_ok">preference_key_start_if_battery_ok</string>
+    <string name="preference_key_stop_if_charger_disconnected">preference_key_stop_if_charger_disconnected</string>
+    <string name="preference_key_start_if_charger_connected">preference_key_start_if_charger_connected</string>
+    <string name="preference_key_location_filter_time">preference_key_location_filter_time</string>
+    <string name="preference_key_location_filter_gps">preference_key_location_filter_gps</string>
+    <string name="preference_key_location_filter_network">preference_key_location_filter_network</string>
+    <string name="preference_key_location_filter_gsm">preference_key_location_filter_gsm</string>
+
+</resources>

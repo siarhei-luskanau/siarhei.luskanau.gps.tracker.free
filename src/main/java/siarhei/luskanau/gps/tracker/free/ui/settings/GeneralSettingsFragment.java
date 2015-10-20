@@ -55,7 +55,11 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
     private void onServerPreferenceCreate() {
         PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference(getString(R.string.preference_key_server));
         ServerEntity serverEntity = AppSettings.getServerEntity(getContext());
-        preferenceScreen.setSummary(serverEntity.name);
+        if (serverEntity != null) {
+            preferenceScreen.setSummary(serverEntity.name);
+        } else {
+            preferenceScreen.setSummary(null);
+        }
         preferenceScreen.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {

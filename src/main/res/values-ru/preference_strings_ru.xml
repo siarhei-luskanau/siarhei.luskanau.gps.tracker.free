@@ -1,0 +1,61 @@
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2015 Siarhei Luskanau
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<resources>
+
+    <!--preference_internet.xml-->
+    <string name="preference_internet_type">Интернет</string>
+    <string name="preference_internet_any">Любое доступное</string>
+    <string name="preference_internet_wifi">Wi-Fi</string>
+    <string name="preference_internet_offline">Оффлайн</string>
+
+    <!--preference_send_to_server_interval-->
+    <string name="preference_send_to_server_interval">Отправлять данные на сервер не чаше чем:</string>
+    <string name="preference_send_to_server_interval_immediately">Немедленно</string>
+    <string name="preference_send_to_server_interval_min_1">1 мин</string>
+    <string name="preference_send_to_server_interval_min_10">10 мин</string>
+    <string name="preference_send_to_server_interval_min_60">60 мин</string>
+    <string name="preference_send_to_server_interval_min_manual">Вручную</string>
+
+    <!--preference_battery-->
+    <string name="preference_battery">Аккумулятор</string>
+    <string name="preference_battery_stop_if_low">Стоп при малом заряде аккумулятора</string>
+    <string name="preference_battery_start_if_ok">Старт при достаточном заряде аккумулятора</string>
+
+    <!--preference_charger-->
+    <string name="preference_charger">Зарядное устройство</string>
+    <string name="preference_charger_stop_if_disconnected">Стоп при отключении зарядного устройства</string>
+    <string name="preference_charger_start_if_connected">Старт при подключении зарядного устройства</string>
+
+    <!--preference_location_filter_gps-->
+    <!--preference_location_filter_network-->
+    <!--preference_location_filter_gsm-->
+
+    <!--preference_location_filter_time-->
+    <string name="preference_location_filter_time">Интервал опр. позиции</string>
+    <string name="preference_location_filter_time_dont_use">Не использовать</string>
+    <string name="preference_location_filter_time_min_1">1 мин</string>
+    <string name="preference_location_filter_time_min_10">10 мин</string>
+    <string name="preference_location_filter_time_min_60">60 мин</string>
+
+</resources>

@@ -35,33 +35,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="menu_action_new">New</string>
     <string name="menu_action_save">Save</string>
     <string name="menu_action_check">Check</string>
-    <!--<string name="menu_send_packets">Send packets</string>-->
-
-    <!-- eula -->
-    <!--<string name="layout_eula_title">Free GPS Tracker EULA</string>-->
-    <!--<string name="layout_eula_accept">Accept</string>-->
-    <!--<string name="layout_eula_refuse">Cancel</string>-->
 
     <!-- fragment_settings_tabs.xml -->
     <string name="fragment_settings_tabs_general">General</string>
     <string name="fragment_settings_tabs_internet_battery">Internet Battery</string>
     <string name="fragment_settings_tabs_location">Location</string>
-
-    <!--preference_key-->
-    <string name="preference_key_server">preference_key_server</string>
-    <string name="preference_key_autostart">preference_key_autostart</string>
-    <string name="preference_key_show_notification">preference_key_show_notification</string>
-    <string name="preference_key_disable_ad">preference_key_disable_ad</string>
-    <string name="preference_key_reset_packet_counter">preference_key_reset_packet_counter</string>
-    <string name="preference_key_language">preference_key_language</string>
-    <string name="preference_key_internet_type">preference_key_internet_type</string>
-    <string name="preference_key_send_to_server_interval">preference_key_send_to_server_interval</string>
-    <string name="preference_key_stop_if_battery_low">preference_key_stop_if_battery_low</string>
-    <string name="preference_key_start_if_battery_ok">preference_key_start_if_battery_ok</string>
-    <string name="preference_key_stop_if_charger_disconnected">preference_key_stop_if_charger_disconnected</string>
-    <string name="preference_key_start_if_charger_connected">preference_key_start_if_charger_connected</string>
-
-   <!--<string name="fragment_settings_general_edit_custom_server">Edit custom server</string>-->
 
     <!-- fragment_settings_general.xml -->
     <string name="fragment_settings_general_server">Server</string>
@@ -72,33 +50,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_general_warning_reset_counter">Do you want reset the counter?</string>
     <string name="fragment_settings_general_language">Language</string>
 
-    <!--preference_internet.xml-->
-    <string name="preference_internet_type">Internet type</string>
-    <string name="preference_internet_any">Any available</string>
-    <string name="preference_internet_wifi">Wi-Fi</string>
-    <string name="preference_internet_offline">Offline</string>
-
-    <!--preference_send_to_server_interval-->
-    <string name="preference_send_to_server_interval">Sending to server interval:</string>
-    <string name="preference_send_to_server_interval_immediately">Immediately</string>
-    <string name="preference_send_to_server_interval_min_1">1 min</string>
-    <string name="preference_send_to_server_interval_min_10">10 min</string>
-    <string name="preference_send_to_server_interval_min_60">60 min</string>
-    <string name="preference_send_to_server_interval_min_manual">Manual</string>
-
-    <!--preference_battery-->
-    <string name="preference_battery">Battery</string>
-    <string name="preference_battery_stop_if_low">Stop if battery low</string>
-    <string name="preference_battery_start_if_ok">Start if battery OK</string>
-
-    <!--preference_charger-->
-    <string name="preference_charger">Charger</string>
-    <string name="preference_charger_stop_if_disconnected">Stop if charger is disconnected</string>
-    <string name="preference_charger_start_if_connected">Start if charger is connected</string>
-
     <!-- fragment_settings_location.xml -->
     <!--<string name="service_providers_disable">Locations disable in phone settings.</string>-->
-    <!--<string name="settings_location_interval_prompt">Location update interval</string>-->
     <!--<string name="settings_location_gps">GPS</string>-->
     <!--<string name="settings_location_gps_distance_filter">GPS: distance filter</string>-->
     <!--<string name="settings_location_wireless_network">Wireless network locations</string>-->
@@ -108,30 +61,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <!-- fragment_tracker.xml -->
     <string name="fragment_tracker_imei">IMEI: %1$s</string>
     <string name="fragment_tracker_server">Server: %1$s</string>
-    <!--<string name="fragment_tracker_packets">Packets:</string>-->
-    <!--<string name="fragment_tracker_date">Date:</string>-->
-    <!--<string name="fragment_tracker_source">Source:</string>-->
-    <!--<string name="fragment_tracker_source_gps">GPS</string>-->
-    <!--<string name="fragment_tracker_source_mobile">Wireless networks.\nLow accuracy.</string>-->
-    <!--<string name="fragment_tracker_position">Position:</string>-->
-    <!--<string name="fragment_tracker_speed">Speed:</string>-->
-    <!--<string name="fragment_tracker_meters_per_sec">m/s</string>-->
-    <!--<string name="fragment_tracker_satellites">Satellites:</string>-->
-    <!--<string name="fragment_tracker_accuracy">Accuracy:</string>-->
-    <!--<string name="fragment_tracker_accuracy_meter">m.</string>-->
-    <!--<string name="fragment_tracker_operator">Operator:</string>-->
-    <!--<string name="fragment_tracker_mcc">MCC:</string>-->
-    <!--<string name="fragment_tracker_mnc">MNC:</string>-->
-    <!--<string name="fragment_tracker_lac">LAC:</string>-->
-    <!--<string name="fragment_tracker_cid">CID:</string>-->
 
     <!-- fragment_edit_server.xml -->
     <string name="fragment_edit_server_name">Server name</string>
     <string name="fragment_edit_server_type">Server type</string>
     <string name="fragment_edit_server_address">Server address</string>
     <string name="fragment_edit_server_port">Server port</string>
-    <!--<string name="fragment_edit_server_check">Check server</string>-->
-    <!--<string name="fragment_edit_server_save">Save</string>-->
 
     <!-- fragment_edit_server.xml -->
     <string name="server_type_socket">Socket</string>

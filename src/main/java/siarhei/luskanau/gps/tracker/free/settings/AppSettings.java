@@ -137,6 +137,29 @@ public class AppSettings {
         public static final int MANUAL = -1;
     }
 
+    public static class FilterTimeInterval {
+        public static final int IMMEDIATELY = 0;
+        public static final int MINUTES_1 = 60000;
+        public static final int MINUTES_10 = 600000;
+        public static final int MINUTES_60 = 3600000;
+    }
+
+    public static class FilterGpsLocations {
+        public static final int DONT_USE = -1;
+        public static final int USE = 0;
+        public static final int FILTER_10_M = 10;
+        public static final int FILTER_100_M = 100;
+        public static final int FILTER_1000_M = 1000;
+    }
+
+    public static class FilterNetworkLocations {
+        public static final int DONT_USE = -1;
+        public static final int USE = 0;
+        public static final int FILTER_100_M = 100;
+        public static final int FILTER_500_M = 500;
+        public static final int FILTER_5000_M = 5000;
+    }
+
     public static class State {
         @SerializedName("EulaAccepted")
         public boolean isEulaAccepted = false;
@@ -181,27 +204,21 @@ public class AppSettings {
         @SerializedName("internetType")
         public InternetType internetType = InternetType.ANY_TYPE;
         @SerializedName("sendToServerInterval")
-        public int sendToServerInterval;
+        public int sendToServerInterval = SendToServerInterval.IMMEDIATELY;
     }
 
     public static class LocationSettingsEntity {
-        @SerializedName("isUseGpsProvider")
-        public boolean isUseGpsProvider = true;
-
-        @SerializedName("isUseNetwotkProvider")
-        public boolean isUseNetwotkProvider = true;
-
         @SerializedName("isUseGsmCellInfo")
         public boolean isUseGsmCellInfo = false;
 
         @SerializedName("timeFilter")
-        public long timeFilter = 60 * 1000;
+        public int timeFilter = FilterTimeInterval.MINUTES_1;
 
-        @SerializedName("gpsDistanceFilter")
-        public long gpsDistanceFilter = 10;
+        @SerializedName("filterGpsLocations")
+        public int filterGpsLocations = FilterGpsLocations.DONT_USE;
 
-        @SerializedName("networkDistanceFilter")
-        public long networkDistanceFilter = 100;
+        @SerializedName("filterNetworkLocations")
+        public int filterNetworkLocations = FilterNetworkLocations.FILTER_100_M;
     }
 
 }

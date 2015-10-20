@@ -103,16 +103,17 @@ public class LocationService extends Service {
             PhoneStateUtils.startListen(this);
 
             AppSettings.State appSettingsState = AppSettings.getAppSettingsEntity(this);
-            gpsLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.gpsDistanceFilter);
-            if (appSettingsState.locationSettings.isUseGpsProvider) {
+            gpsLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.filterGpsLocations);
+            if (appSettingsState.locationSettings.filterGpsLocations != AppSettings.FilterGpsLocations.DONT_USE) {
                 try {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 } catch (Exception e) {
                     Log.e(getPackageName(), e.getMessage(), e);
                 }
             }
-            networkLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.networkDistanceFilter);
-            if (appSettingsState.locationSettings.isUseNetwotkProvider) {
+            networkLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.filterNetworkLocations);
+
+            if (appSettingsState.locationSettings.filterNetworkLocations != AppSettings.FilterNetworkLocations.DONT_USE) {
                 try {
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                 } catch (Exception e) {
@@ -121,8 +122,8 @@ public class LocationService extends Service {
             }
 
             if (appSettingsState.locationSettings.isUseGsmCellInfo
-                    && !appSettingsState.locationSettings.isUseGpsProvider
-                    && !appSettingsState.locationSettings.isUseNetwotkProvider) {
+                    && appSettingsState.locationSettings.filterGpsLocations != AppSettings.FilterGpsLocations.DONT_USE
+                    && appSettingsState.locationSettings.filterNetworkLocations != AppSettings.FilterNetworkLocations.DONT_USE) {
                 startSaveInvalidPing(this, appSettingsState.locationSettings.timeFilter);
             }
         }

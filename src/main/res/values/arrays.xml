@@ -23,61 +23,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <resources>
 
-    <string-array name="server_type_strings">
-        <item>@string/server_type_socket</item>
-        <item>@string/server_type_json_form</item>
-        <item>@string/server_type_json_body</item>
-    </string-array>
-    <string-array name="send_to_server_interval_strings">
-        <item>@string/preference_send_to_server_interval_immediately</item>
-        <item>@string/preference_send_to_server_interval_min_1</item>
-        <item>@string/preference_send_to_server_interval_min_10</item>
-        <item>@string/preference_send_to_server_interval_min_60</item>
-        <item>@string/preference_send_to_server_interval_min_manual</item>
-    </string-array>
-
-    <string-array name="time_filter_strings">
-        <item>Don\'t use</item>
-        <item>1 min</item>
-        <item>10 min</item>
-        <item>60 min</item>
-    </string-array>
-
-    <integer-array name="time_filter_values">
-        <item>0</item>
-        <item>60000</item>
-        <item>600000</item>
-        <item>3600000</item>
-    </integer-array>
-
-    <string-array name="gps_location_distance_filter_strings">
-        <item>Don\'t use</item>
-        <item>10 m</item>
-        <item>100 m</item>
-        <item>1000 m</item>
-    </string-array>
-
-    <integer-array name="gps_location_distance_filter_values">
-        <item>0</item>
-        <item>10</item>
-        <item>100</item>
-        <item>1000</item>
-    </integer-array>
-
-    <string-array name="network_location_distance_filter_strings">
-        <item>Don\'t use</item>
-        <item>100 m</item>
-        <item>500 m</item>
-        <item>5000 m</item>
-    </string-array>
-
-    <integer-array name="network_location_distance_filter_values">
-        <item>0</item>
-        <item>100</item>
-        <item>500</item>
-        <item>5000</item>
-    </integer-array>
-
     <string-array name="language_strings">
         <item>English</item>
         <item>Русский</item>
@@ -87,6 +32,43 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <item>@string/preference_internet_any</item>
         <item>@string/preference_internet_wifi</item>
         <item>@string/preference_internet_offline</item>
+    </string-array>
+
+    <string-array name="send_to_server_interval_strings">
+        <item>@string/preference_send_to_server_interval_immediately</item>
+        <item>@string/preference_send_to_server_interval_min_1</item>
+        <item>@string/preference_send_to_server_interval_min_10</item>
+        <item>@string/preference_send_to_server_interval_min_60</item>
+        <item>@string/preference_send_to_server_interval_min_manual</item>
+    </string-array>
+
+    <string-array name="location_filter_gps_strings">
+        <item>Don\'t use GPS</item>
+        <item>Use GPS</item>
+        <item>Use GPS: filter 10 m</item>
+        <item>Use GPS: filter 100 m</item>
+        <item>Use GPS: filter 1000 m</item>
+    </string-array>
+
+    <string-array name="location_filter_network_strings">
+        <item>Don\'t use network locations</item>
+        <item>Use network locations</item>
+        <item>Use network locations: filter 100 m</item>
+        <item>Use network locations: filter 500 m</item>
+        <item>Use network locations: filter 5000 m</item>
+    </string-array>
+
+    <string-array name="location_filter_time_strings">
+        <item>@string/preference_location_filter_time_dont_use</item>
+        <item>@string/preference_location_filter_time_min_1</item>
+        <item>@string/preference_location_filter_time_min_10</item>
+        <item>@string/preference_location_filter_time_min_60</item>
+    </string-array>
+
+    <string-array name="server_type_strings">
+        <item>@string/server_type_socket</item>
+        <item>@string/server_type_json_form</item>
+        <item>@string/server_type_json_body</item>
     </string-array>
 
 </resources>

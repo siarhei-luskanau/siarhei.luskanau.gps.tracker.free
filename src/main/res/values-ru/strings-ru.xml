@@ -31,6 +31,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="menu_drawer_settings">Настройки</string>
     <string name="menu_drawer_about">О программе</string>
 
+    <!-- menu -->
+    <string name="menu_action_new">Новый</string>
+    <string name="menu_action_save">Сахранить</string>
+    <string name="menu_action_check">Проверить</string>
+
     <!-- fragment_settings_tabs.xml -->
     <string name="fragment_settings_tabs_general">Общие</string>
     <string name="fragment_settings_tabs_internet_battery">Интернет Батарея</string>
@@ -44,29 +49,5 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_general_reset_packet_counter">Обнулить счетчик</string>
     <string name="fragment_settings_general_warning_reset_counter">Обнулить счетчик?</string>
     <string name="fragment_settings_general_language">Язык</string>
-
-    <!--preference_internet.xml-->
-    <string name="preference_internet_type">Интернет</string>
-    <string name="preference_internet_any">Любое доступное</string>
-    <string name="preference_internet_wifi">Wi-Fi</string>
-    <string name="preference_internet_offline">Оффлайн</string>
-
-    <!--preference_send_to_server_interval-->
-    <string name="preference_send_to_server_interval">Отправлять данные на сервер не чаше чем:</string>
-    <string name="preference_send_to_server_interval_immediately">Немедленно</string>
-    <string name="preference_send_to_server_interval_min_1">1 мин</string>
-    <string name="preference_send_to_server_interval_min_10">10 мин</string>
-    <string name="preference_send_to_server_interval_min_60">60 мин</string>
-    <string name="preference_send_to_server_interval_min_manual">Вручную</string>
-
-    <!--preference_battery-->
-    <string name="preference_battery">Аккумулятор</string>
-    <string name="preference_battery_stop_if_low">Стоп при малом заряде аккумулятора</string>
-    <string name="preference_battery_start_if_ok">Старт при достаточном заряде аккумулятора</string>
-
-    <!--preference_charger-->
-    <string name="preference_charger">Зарядное устройство</string>
-    <string name="preference_charger_stop_if_disconnected">Стоп при отключении зарядного устройства</string>
-    <string name="preference_charger_start_if_connected">Старт при подключении зарядного устройства</string>
 
 </resources>

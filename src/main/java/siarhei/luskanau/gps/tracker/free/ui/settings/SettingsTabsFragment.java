@@ -33,7 +33,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.ui.SimpleAppBarFragment;
@@ -85,7 +84,7 @@ public class SettingsTabsFragment extends SimpleAppBarFragment {
             tabFragmentClasses = new Fragment[]{
                     new GeneralSettingsFragment(),
                     new InternetSettingsFragment(),
-                    PageFragment.newInstance(3)
+                    new LocationSettingsFragment()
             };
         }
 
@@ -103,34 +102,6 @@ public class SettingsTabsFragment extends SimpleAppBarFragment {
         public CharSequence getPageTitle(int position) {
             return tabTitles[position];
         }
-    }
-
-    public static class PageFragment extends Fragment {
-        public static final String ARG_PAGE = "ARG_PAGE";
-
-        private int mPage;
-
-        public static PageFragment newInstance(int page) {
-            Bundle args = new Bundle();
-            args.putInt(ARG_PAGE, page);
-            PageFragment fragment = new PageFragment();
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            mPage = getArguments().getInt(ARG_PAGE);
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            TextView textView = new TextView(getContext());
-            textView.setText("Fragment #" + mPage);
-            return textView;
-        }
-
     }
 
 }
