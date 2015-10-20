@@ -23,19 +23,9 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.app;
 
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-
-import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
@@ -47,50 +37,20 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity implements
 
     private static final String TAG = "BaseDrawerActivity";
     protected AppController appController = new AppController(this);
-    private AQuery aq = new AQuery(this);
-    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base_drawer);
-
-        DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, baseDrawerLayout, R.string.tracker_app_name, R.string.tracker_app_name) {
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                supportInvalidateOptionsMenu();
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                supportInvalidateOptionsMenu();
-            }
-        };
-        baseDrawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        NavigationView navigationView = (NavigationView) aq.id(R.id.navigationView).getView();
-        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedListener());
+    protected int getNavigationHeaderResId() {
+        return R.layout.drawer_header;
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        actionBarDrawerToggle.syncState();
+    protected int getNavigationMenuResId() {
+        return R.menu.menu_drawer;
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    protected NavigationView.OnNavigationItemSelectedListener getNavigationItemSelectedListener() {
+        return new NavigationItemSelectedListener();
     }
 
     @Override
@@ -107,39 +67,6 @@ public abstract class BaseDrawerActivity extends BaseProgressActivity implements
     @Override
     public AppController getAppController() {
         return appController;
-    }
-
-    public void closeDrawers() {
-        DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
-        baseDrawerLayout.closeDrawers();
-    }
-
-    public void openDrawer() {
-        DrawerLayout baseDrawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
-        baseDrawerLayout.openDrawer(Gravity.LEFT);
-    }
-
-    public boolean isDrawerOpen() {
-        DrawerLayout drawerLayout = (DrawerLayout) aq.id(R.id.baseDrawerLayout).getView();
-        FrameLayout leftDrawerFrameLayout = (FrameLayout) aq.id(R.id.navigationView).getView();
-        if (drawerLayout != null && leftDrawerFrameLayout != null) {
-            return drawerLayout.isDrawerOpen(leftDrawerFrameLayout);
-        }
-        return false;
-    }
-
-    public void setCheckedNavigationMenuItem(@IdRes int menuItemId) {
-        NavigationView navigationView = (NavigationView) aq.id(R.id.navigationView).getView();
-        navigationView.setCheckedItem(menuItemId);
-    }
-
-    public void updateDrawerToggle(boolean showDrawerToggle) {
-        if (actionBarDrawerToggle != null) {
-            actionBarDrawerToggle.setDrawerIndicatorEnabled(showDrawerToggle);
-            if (showDrawerToggle) {
-                actionBarDrawerToggle.syncState();
-            }
-        }
     }
 
     private class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {

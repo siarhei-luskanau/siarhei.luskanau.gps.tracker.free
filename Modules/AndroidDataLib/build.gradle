@@ -1,6 +1,6 @@
 //The MIT License (MIT)
 //
-//Copyright (c) 2014 Siarhei Luskanau
+//Copyright (c) 2015 Siarhei Luskanau
 //
 //Permission is hereby granted, free of charge, to any person obtaining a copy of
 //this software and associated documentation files (the "Software"), to deal in
@@ -19,17 +19,22 @@
 //IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.4.0-beta6'
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion 7
+        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
-    }
+dependencies {
+    compile 'com.android.support:design:' + project.SUPPORT_LIBRARY_VERSION
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
 }

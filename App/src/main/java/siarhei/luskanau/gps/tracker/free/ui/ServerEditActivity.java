@@ -26,6 +26,7 @@ package siarhei.luskanau.gps.tracker.free.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,7 +39,7 @@ import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.CheckServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
-public class ServerEditActivity extends BaseProgressActivity {
+public class ServerEditActivity extends AppCompatActivity {
 
     private static final String SERVER_ENTITY = "SERVER_ENTITY";
     private AQuery aq = new AQuery(this);
