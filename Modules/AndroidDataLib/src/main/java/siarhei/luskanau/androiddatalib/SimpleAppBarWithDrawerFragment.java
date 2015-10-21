@@ -21,32 +21,21 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui;
+package siarhei.luskanau.androiddatalib;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.androidquery.AQuery;
-
-import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
-import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
-
-public abstract class SimpleAppBarFragment extends BaseAppBarFragment {
-
-    protected AQuery aq;
+public abstract class SimpleAppBarWithDrawerFragment extends BaseAppBarWithDrawerFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_app_bar_simple, container, false);
-        aq = new AQuery(getActivity(), view);
-        FrameLayout appBarFragmentContentFrameLayout = (FrameLayout) aq.id(R.id.appBarFragmentContentFrameLayout).getView();
+        FrameLayout appBarFragmentContentFrameLayout = (FrameLayout) view.findViewById(R.id.appBarFragmentContentFrameLayout);
         View contentView = onCreateContentView(inflater, appBarFragmentContentFrameLayout);
         if (contentView != null) {
             appBarFragmentContentFrameLayout.addView(contentView);
@@ -55,31 +44,11 @@ public abstract class SimpleAppBarFragment extends BaseAppBarFragment {
     }
 
     @Override
-    protected void setupAppBar() {
+    public void onSetupAppBar() {
         BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
-        Toolbar toolbar = (Toolbar) aq.id(R.id.appToolbar).getView();
+        Toolbar toolbar = (Toolbar) getView().findViewById(R.id.appToolbar);
         activity.setSupportActionBar(toolbar);
-    }
-
-    @Override
-    protected void updateAppBar() {
-        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setHomeButtonEnabled(true);
-        activity.updateDrawerToggle(true);
-        activity.getSupportActionBar().setSubtitle(null);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                AppController.get(getActivity()).onShowHomeFragment();
-                return true;
-            default: {
-                return super.onOptionsItemSelected(item);
-            }
-        }
     }
 
     abstract protected View onCreateContentView(LayoutInflater inflater, ViewGroup container);

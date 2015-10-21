@@ -31,6 +31,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.androidquery.AQuery;
+
+import siarhei.luskanau.androiddatalib.SimpleAppBarWithDrawerFragment;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
@@ -40,14 +43,25 @@ import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.AboutServerDialogFragment;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
-public class TrackerFragment extends SimpleAppBarFragment {
+public class TrackerFragment extends SimpleAppBarWithDrawerFragment {
 
     public static final String TAG = "TrackerFragment";
+    protected AQuery aq;
     private AppBroadcastController.AppBroadcastReceiver appBroadcastReceiver = new AppBroadcastController().createBroadcastReceiver(new InnerAppBroadcastCallback());
+
+    public static TrackerFragment newInstance(int menuItemId) {
+        TrackerFragment fragment = new TrackerFragment();
+        Bundle args = new Bundle();
+        setMenuItemId(args, menuItemId);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_tracker, container, false);
+        View view = inflater.inflate(R.layout.fragment_tracker, container, false);
+        aq = new AQuery(getActivity(), view);
+        return view;
     }
 
     @Override
@@ -104,18 +118,12 @@ public class TrackerFragment extends SimpleAppBarFragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        boolean isDrawerOpen = AppController.get(getActivity()).isDrawerOpen();
-        if (isDrawerOpen) {
+        if (AppSettings.getAppSettingsEntity(getContext()).isTrackerStarted) {
             menu.findItem(R.id.menu_item_action_play).setVisible(false);
-            menu.findItem(R.id.menu_item_action_stop).setVisible(false);
+            menu.findItem(R.id.menu_item_action_stop).setVisible(true);
         } else {
-            if (AppSettings.getAppSettingsEntity(getContext()).isTrackerStarted) {
-                menu.findItem(R.id.menu_item_action_play).setVisible(false);
-                menu.findItem(R.id.menu_item_action_stop).setVisible(true);
-            } else {
-                menu.findItem(R.id.menu_item_action_play).setVisible(true);
-                menu.findItem(R.id.menu_item_action_stop).setVisible(false);
-            }
+            menu.findItem(R.id.menu_item_action_play).setVisible(true);
+            menu.findItem(R.id.menu_item_action_stop).setVisible(false);
         }
     }
 

@@ -68,8 +68,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:hint="@string/fragment_edit_server_address" />
 
         <android.support.v7.widget.AppCompatTextView
-            style="@style/TrackerTextViewStyle"
             android:id="@+id/serverPortCaptionTextView"
+            style="@style/TrackerTextViewStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_edit_server_port" />

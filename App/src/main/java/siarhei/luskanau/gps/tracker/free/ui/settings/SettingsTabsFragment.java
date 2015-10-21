@@ -30,17 +30,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import siarhei.luskanau.androiddatalib.SimpleAppBarWithDrawerFragment;
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.ui.SimpleAppBarFragment;
-import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
 
-public class SettingsTabsFragment extends SimpleAppBarFragment {
+public class SettingsTabsFragment extends SimpleAppBarWithDrawerFragment {
 
     public static final String TAG = "SettingsTabsFragment";
+
+    public static SettingsTabsFragment newInstance(int menuItemId) {
+        SettingsTabsFragment fragment = new SettingsTabsFragment();
+        Bundle args = new Bundle();
+        setMenuItemId(args, menuItemId);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
@@ -48,25 +56,16 @@ public class SettingsTabsFragment extends SimpleAppBarFragment {
     }
 
     @Override
-    protected void updateAppBar() {
-        super.updateAppBar();
-        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setHomeButtonEnabled(true);
-        activity.updateDrawerToggle(false);
-        activity.getSupportActionBar().setSubtitle(R.string.menu_drawer_settings);
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(R.string.menu_drawer_settings);
 
         SettingsFragmentPagerAdapter pagerAdapter = new SettingsFragmentPagerAdapter(getChildFragmentManager(), getContext());
-        ViewPager viewPager = (ViewPager) aq.id(R.id.settingsViewPager).getView();
+        ViewPager viewPager = (ViewPager) getView().findViewById(R.id.settingsViewPager);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(pagerAdapter.getCount());
 
-        TabLayout tabLayout = (TabLayout) aq.id(R.id.settingsTabLayout).getView();
+        TabLayout tabLayout = (TabLayout) getView().findViewById(R.id.settingsTabLayout);
         tabLayout.setupWithViewPager(viewPager);
     }
 

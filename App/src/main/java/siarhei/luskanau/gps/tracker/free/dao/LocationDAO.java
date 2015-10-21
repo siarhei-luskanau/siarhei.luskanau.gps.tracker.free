@@ -41,7 +41,7 @@ import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 public class LocationDAO extends BaseDAO {
 
     public static Uri getUri(Context context) {
-        return  Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), LocationColumns.TABLE_NAME);
+        return Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), LocationColumns.TABLE_NAME);
     }
 
     public static long insertOrUpdateLocationPacket(Context context, LocationModel locationModel) {

@@ -88,19 +88,14 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(final Thread thread, final Throwable throwable) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    handleException(context, throwable, null);
-                    if (previousHandler != null) {
-                        previousHandler.uncaughtException(thread, throwable);
-                    }
-                } catch (Exception e) {
-                    // empty
-                }
-            }
-        }).start();
+        try {
+            handleException(context, throwable, null);
+        } catch (Exception e) {
+            // empty
+        }
+        if (previousHandler != null) {
+            previousHandler.uncaughtException(thread, throwable);
+        }
     }
 
     public void handleMessage(final String message) {

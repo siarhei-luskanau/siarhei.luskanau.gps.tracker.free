@@ -23,8 +23,10 @@
 
 package siarhei.luskanau.gps.tracker.free.ui;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,14 +36,14 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import siarhei.luskanau.androiddatalib.SimpleAppBarWithUpFragment;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.settings.AppSettings;
 import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
-import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
 
-public class ServersFragment extends SimpleAppBarFragment implements AppController.ServersListBusiness {
+public class ServersFragment extends SimpleAppBarWithUpFragment implements AppController.ServersListBusiness {
 
     private List<ServerEntity> serverEntities;
 
@@ -52,13 +54,9 @@ public class ServersFragment extends SimpleAppBarFragment implements AppControll
     }
 
     @Override
-    protected void updateAppBar() {
-        super.updateAppBar();
-        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setHomeButtonEnabled(true);
-        activity.updateDrawerToggle(false);
-        activity.getSupportActionBar().setSubtitle(R.string.fragment_settings_general_server);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(R.string.fragment_settings_general_server);
     }
 
     @Override
@@ -70,13 +68,6 @@ public class ServersFragment extends SimpleAppBarFragment implements AppControll
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_servers, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        boolean isDrawerOpen = AppController.get(getActivity()).isDrawerOpen();
-        menu.findItem(R.id.menu_action_new).setVisible(!isDrawerOpen);
     }
 
     @Override

@@ -31,6 +31,23 @@ import java.util.List;
 
 public class ServerEntity {
 
+    public static final Type COLLECTION_TYPE = new TypeToken<List<ServerEntity>>() {
+    }.getType();
+    @SerializedName("rowId")
+    public Long rowId;
+    @SerializedName("name")
+    public String name;
+    @SerializedName("site_url")
+    public String site_url;
+    @SerializedName("server_type")
+    public ServerType serverType;
+    @SerializedName("server_address")
+    public String server_address;
+    @SerializedName("server_port")
+    public int server_port;
+    @SerializedName("custom")
+    public boolean custom;
+
     public static enum ServerType {
         socket,
         json_form,
@@ -38,29 +55,5 @@ public class ServerEntity {
         wialon,
         custom
     }
-
-    public static final Type COLLECTION_TYPE = new TypeToken<List<ServerEntity>>() {
-    }.getType();
-
-    @SerializedName("rowId")
-    public Long rowId;
-
-    @SerializedName("name")
-    public String name;
-
-    @SerializedName("site_url")
-    public String site_url;
-
-    @SerializedName("server_type")
-    public ServerType serverType;
-
-    @SerializedName("server_address")
-    public String server_address;
-
-    @SerializedName("server_port")
-    public int server_port;
-
-    @SerializedName("custom")
-    public boolean custom;
 
 }

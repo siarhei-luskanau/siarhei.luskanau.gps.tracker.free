@@ -37,7 +37,6 @@ import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.CheckServerDialogFragment;
-import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
 public class ServerEditActivity extends AppCompatActivity {
 

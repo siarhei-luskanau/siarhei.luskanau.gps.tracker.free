@@ -25,50 +25,24 @@ package siarhei.luskanau.androiddatalib;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
+import android.widget.FrameLayout;
 
-public abstract class DrawerActivity extends AppCompatActivity {
+public abstract class BaseDrawerActivity extends AppCompatActivity {
 
     protected DrawerLayout drawerLayout;
-    protected ActionBarDrawerToggle actionBarDrawerToggle;
     protected NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-
         drawerLayout = (DrawerLayout) findViewById(R.id.baseDrawerLayout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open_drawer_content_desc, R.string.close_drawer_content_desc) {
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                supportInvalidateOptionsMenu();
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                supportInvalidateOptionsMenu();
-            }
-        };
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        navigationView.inflateHeaderView(getNavigationHeaderResId());
-        navigationView.inflateMenu(getNavigationMenuResId());
-        navigationView.setNavigationItemSelectedListener(getNavigationItemSelectedListener());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        setupNavigationView(navigationView);
     }
 
     public void closeDrawers() {
@@ -87,22 +61,26 @@ public abstract class DrawerActivity extends AppCompatActivity {
     }
 
     public void setCheckedNavigationMenuItem(int menuItemId) {
-        navigationView.setCheckedItem(menuItemId);
-    }
-
-    public void updateDrawerToggle(boolean showDrawerToggle) {
-        if (actionBarDrawerToggle != null) {
-            actionBarDrawerToggle.setDrawerIndicatorEnabled(showDrawerToggle);
-            if (showDrawerToggle) {
-                actionBarDrawerToggle.syncState();
-            }
+        if (navigationView != null) {
+            navigationView.setCheckedItem(menuItemId);
         }
     }
 
-    protected abstract int getNavigationHeaderResId();
+    public DrawerLayout getDrawerLayout() {
+        return drawerLayout;
+    }
 
-    protected abstract int getNavigationMenuResId();
+    public void onShowDrawerFragment(BaseDrawerFragment fragment, String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.findFragmentByTag(tag) == null) {
+            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, fragment, tag).commit();
+        }
+    }
 
-    protected abstract NavigationView.OnNavigationItemSelectedListener getNavigationItemSelectedListener();
+    public FrameLayout getAppContentFrameLayout() {
+        return (FrameLayout) findViewById(R.id.appContentFrameLayout);
+    }
+
+    protected abstract void setupNavigationView(NavigationView navigationView);
 
 }

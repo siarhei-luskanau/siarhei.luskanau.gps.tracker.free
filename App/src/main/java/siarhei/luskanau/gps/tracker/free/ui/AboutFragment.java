@@ -24,6 +24,7 @@
 package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -32,13 +33,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import siarhei.luskanau.androiddatalib.SimpleAppBarWithDrawerFragment;
 import siarhei.luskanau.gps.tracker.free.R;
-import siarhei.luskanau.gps.tracker.free.ui.app.BaseDrawerActivity;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
-public class AboutFragment extends SimpleAppBarFragment {
+public class AboutFragment extends SimpleAppBarWithDrawerFragment {
 
     public static final String TAG = "AboutFragment";
+
+    public static AboutFragment newInstance(int menuItemId) {
+        AboutFragment fragment = new AboutFragment();
+        Bundle args = new Bundle();
+        setMenuItemId(args, menuItemId);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
@@ -48,24 +57,15 @@ public class AboutFragment extends SimpleAppBarFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(R.string.menu_drawer_about);
         try {
             String message = new String(Utils.getBytes(getResources().openRawResource(R.raw.about)), "utf-8");
-            TextView messageTextView = aq.id(R.id.aboutTextView).getTextView();
+            TextView messageTextView = (TextView) getView().findViewById(R.id.aboutTextView);
             messageTextView.setText(Html.fromHtml(message));
             messageTextView.setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Throwable t) {
             Log.e(TAG, t.toString(), t);
         }
-    }
-
-    @Override
-    protected void updateAppBar() {
-        super.updateAppBar();
-        BaseDrawerActivity activity = (BaseDrawerActivity) getActivity();
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setHomeButtonEnabled(true);
-        activity.updateDrawerToggle(false);
-        activity.getSupportActionBar().setSubtitle(R.string.menu_drawer_about);
     }
 
 }

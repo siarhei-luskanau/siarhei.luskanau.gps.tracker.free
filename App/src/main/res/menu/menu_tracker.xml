@@ -26,16 +26,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <item
         android:id="@+id/menu_item_action_play"
-        android:orderInCategory="240"
-        app:showAsAction="always|collapseActionView"
         android:icon="@drawable/ic_play_arrow_24dp"
-        android:title="@null" />
+        android:orderInCategory="240"
+        android:title="@null"
+        app:showAsAction="always|collapseActionView" />
 
     <item
         android:id="@+id/menu_item_action_stop"
-        android:orderInCategory="240"
-        app:showAsAction="always|collapseActionView"
         android:icon="@drawable/ic_stop_24dp"
-        android:title="@null" />
+        android:orderInCategory="240"
+        android:title="@null"
+        app:showAsAction="always|collapseActionView" />
 
 </menu>

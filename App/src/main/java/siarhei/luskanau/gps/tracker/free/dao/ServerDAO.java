@@ -43,7 +43,7 @@ public class ServerDAO extends BaseDAO {
     private static final String TAG = "ServerDAO";
 
     public static Uri getUri(Context context) {
-        return  Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), ServerColumns.TABLE_NAME);
+        return Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), ServerColumns.TABLE_NAME);
     }
 
     public static long insertOrUpdate(Context context, ServerEntity serverEntity) {

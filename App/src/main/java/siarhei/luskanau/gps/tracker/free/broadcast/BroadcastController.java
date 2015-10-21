@@ -29,10 +29,10 @@ import android.support.v4.content.LocalBroadcastManager;
 
 public abstract class BroadcastController<C extends BroadcastCallback, R extends BroadcastReceiverWrapper> {
 
-    public abstract R createBroadcastReceiver(C broadcastCallback);
-
     protected static void sendBroadcast(Context context, Intent intent) {
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
+
+    public abstract R createBroadcastReceiver(C broadcastCallback);
 
 }

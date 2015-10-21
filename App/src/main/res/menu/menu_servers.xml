@@ -26,9 +26,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <item
         android:id="@+id/menu_action_new"
+        android:icon="@drawable/ic_add_24dp"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom|withText"
         android:title="@string/menu_action_new"
-        android:icon="@drawable/ic_add_24dp" />
+        app:showAsAction="ifRoom|withText" />
 
 </menu>

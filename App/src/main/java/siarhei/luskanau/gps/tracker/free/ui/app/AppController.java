@@ -41,9 +41,9 @@ public class AppController {
 
     private static final String TAG = "AppController";
 
-    private BaseDrawerActivity activity;
+    private AppActivity activity;
 
-    public AppController(BaseDrawerActivity activity) {
+    public AppController(AppActivity activity) {
         this.activity = activity;
     }
 
@@ -58,33 +58,20 @@ public class AppController {
         return (T) activity.getSupportFragmentManager().findFragmentByTag(type.getCanonicalName());
     }
 
-    public boolean isDrawerOpen() {
-        return activity.isDrawerOpen();
-    }
-
     public void onShowHomeFragment() {
         onShowTrackerFragment();
     }
 
     public void onShowTrackerFragment() {
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        if (fragmentManager.findFragmentByTag(TrackerFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new TrackerFragment(), TrackerFragment.TAG).commit();
-        }
+        activity.onShowDrawerFragment(TrackerFragment.newInstance(R.id.menu_drawer_item_home), TrackerFragment.TAG);
     }
 
     public void onShowSettingsFragment() {
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        if (fragmentManager.findFragmentByTag(SettingsTabsFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new SettingsTabsFragment(), SettingsTabsFragment.TAG).commit();
-        }
+        activity.onShowDrawerFragment(SettingsTabsFragment.newInstance(R.id.menu_drawer_item_settings), SettingsTabsFragment.TAG);
     }
 
     public void onShowAboutFragment() {
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        if (fragmentManager.findFragmentByTag(AboutFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new AboutFragment(), AboutFragment.TAG).commit();
-        }
+        activity.onShowDrawerFragment(AboutFragment.newInstance(R.id.menu_drawer_item_about), AboutFragment.TAG);
     }
 
     public void onShowServersFragment() {

@@ -27,9 +27,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     android:fillViewport="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:id="@+id/serverEntitiesLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
 </ScrollView>

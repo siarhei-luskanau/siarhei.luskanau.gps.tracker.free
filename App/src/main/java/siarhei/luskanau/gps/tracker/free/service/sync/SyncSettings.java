@@ -29,6 +29,10 @@ import android.content.SharedPreferences;
 public class SyncSettings {
 
     private static final String SHARED_PREFERENCES_NAME = "siarhei.luskanau.gps.tracker.free.SyncSettings";
+    private static final String SYNC_BACK_OFF_TIME_MS = "SYNC_BACK_OFF_TIME_MS";
+    private static final String SYNC_BACK_OFF_COUNT = "SYNC_BACK_OFF_COUNT";
+    private static final String SEND_TO_SERVER_TIME_MS = "SEND_TO_SERVER_TIME_MS";
+    private static final String SEND_TO_SERVER_IMMEDIATELY = "SEND_TO_SERVER_IMMEDIATELY";
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -38,8 +42,6 @@ public class SyncSettings {
         getPreferences(context).edit().clear().commit();
     }
 
-    private static final String SYNC_BACK_OFF_TIME_MS = "SYNC_BACK_OFF_TIME_MS";
-
     public static long getSyncBackOffTimeMs(Context context) {
         return getPreferences(context).getLong(SYNC_BACK_OFF_TIME_MS, 0);
     }
@@ -47,8 +49,6 @@ public class SyncSettings {
     public static void setSyncBackOffTimeMs(Context context, long value) {
         getPreferences(context).edit().putLong(SYNC_BACK_OFF_TIME_MS, value).commit();
     }
-
-    private static final String SYNC_BACK_OFF_COUNT = "SYNC_BACK_OFF_COUNT";
 
     public static int getSyncBackOffCount(Context context) {
         return getPreferences(context).getInt(SYNC_BACK_OFF_COUNT, 0);
@@ -78,8 +78,6 @@ public class SyncSettings {
         }
     }
 
-    private static final String SEND_TO_SERVER_TIME_MS = "SEND_TO_SERVER_TIME_MS";
-
     public static long getSendToServerTimeMs(Context context) {
         return getPreferences(context).getLong(SEND_TO_SERVER_TIME_MS, 0);
     }
@@ -87,8 +85,6 @@ public class SyncSettings {
     public static void setSendToServerTimeMs(Context context, long value) {
         getPreferences(context).edit().putLong(SEND_TO_SERVER_TIME_MS, value).commit();
     }
-
-    private static final String SEND_TO_SERVER_IMMEDIATELY = "SEND_TO_SERVER_IMMEDIATELY";
 
     public static boolean isSendToServerImmediately(Context context) {
         return getPreferences(context).getBoolean(SEND_TO_SERVER_IMMEDIATELY, false);

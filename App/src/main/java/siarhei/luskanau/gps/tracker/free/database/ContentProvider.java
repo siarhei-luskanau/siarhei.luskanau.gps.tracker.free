@@ -37,7 +37,7 @@ public class ContentProvider extends android.content.ContentProvider {
     private DataBaseHelper dataBaseHelper;
 
     public static Uri getProviderAuthorityUri(Context context) {
-        return  Uri.parse("content://" + context.getPackageName() + ".provider");
+        return Uri.parse("content://" + context.getPackageName() + ".provider");
     }
 
     @Override
