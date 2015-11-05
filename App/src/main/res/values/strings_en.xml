@@ -73,4 +73,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="server_type_json_form">JSON Form</string>
     <string name="server_type_json_body">JSON body</string>
 
+    <!--fragment_about.xml-->
+    <string name="fragment_about_email">Email</string>
+    <string name="fragment_about_linkedin">LinkedIn</string>
+    <string name="fragment_about_github">Source code</string>
+
 </resources>

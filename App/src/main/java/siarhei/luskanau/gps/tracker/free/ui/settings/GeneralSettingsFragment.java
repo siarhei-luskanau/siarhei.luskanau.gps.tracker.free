@@ -63,7 +63,7 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
         preferenceScreen.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                AppController.get(getActivity()).onShowServersFragment();
+                AppController.get(getActivity()).onShowServersFragmentWithBackStack();
                 return true;
             }
         });

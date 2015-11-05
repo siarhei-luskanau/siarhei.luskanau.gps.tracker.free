@@ -21,52 +21,72 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/imeiTextView"
-            style="@style/TrackerTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/fragment_tracker_imei"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/serverNameImageButton"
+                android:id="@+id/imeiTextView"
                 style="@style/TrackerTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_tracker_server" />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/fragment_tracker_imei"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
 
-            <ImageButton
-                android:id="@+id/aboutServerImageButton"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_info_outline_24dp" />
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/editServerImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mode_edit_24dp" />
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/serverNameImageButton"
+                    style="@style/TrackerTextViewStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_tracker_server" />
+
+                <ImageButton
+                    android:id="@+id/aboutServerImageButton"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_info_outline_24dp"
+                    android:background="?attr/selectableItemBackground"/>
+
+                <ImageButton
+                    android:id="@+id/editServerImageButton"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_mode_edit_24dp"
+                    android:background="?attr/selectableItemBackground"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/startStopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/activity_padding"
+        android:layout_marginRight="@dimen/activity_padding"
+        android:src="@drawable/ic_play_arrow_24dp" />
+
+</RelativeLayout>

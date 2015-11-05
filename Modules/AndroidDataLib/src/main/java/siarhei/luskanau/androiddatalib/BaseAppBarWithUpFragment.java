@@ -24,14 +24,41 @@
 package siarhei.luskanau.androiddatalib;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.view.MenuItem;
 import android.view.View;
 
 public abstract class BaseAppBarWithUpFragment extends BaseDrawerFragment {
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         onSetupAppBar();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (android.R.id.home == item.getItemId()) {
+            onUpClicked();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void onUpClicked() {
+        BaseDrawerActivity activity = getBaseDrawerActivity();
+        if (activity != null) {
+            FragmentManager fragmentManager = activity.getSupportFragmentManager();
+            if (fragmentManager.getBackStackEntryCount() > 0) {
+                fragmentManager.popBackStack();
+            }
+        }
     }
 
     protected abstract void onSetupAppBar();

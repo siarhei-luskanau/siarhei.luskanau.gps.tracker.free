@@ -24,6 +24,7 @@
 package siarhei.luskanau.androiddatalib;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,14 @@ public abstract class SimpleAppBarWithDrawerFragment extends BaseAppBarWithDrawe
         Toolbar toolbar = (Toolbar) getView().findViewById(R.id.appToolbar);
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    protected CoordinatorLayout getCoordinatorLayout() {
+        View view = getView();
+        if (view != null) {
+            return (CoordinatorLayout) view.findViewById(R.id.coordinatorLayout);
+        }
+        return null;
     }
 
     abstract protected View onCreateContentView(LayoutInflater inflater, ViewGroup container);

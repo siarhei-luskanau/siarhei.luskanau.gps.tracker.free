@@ -74,10 +74,10 @@ public class AppController {
         activity.onShowDrawerFragment(AboutFragment.newInstance(R.id.menu_drawer_item_about), AboutFragment.TAG);
     }
 
-    public void onShowServersFragment() {
+    public void onShowServersFragmentWithBackStack() {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         if (fragmentManager.findFragmentByTag(ServersFragment.TAG) == null) {
-            fragmentManager.beginTransaction().replace(R.id.appContentFrameLayout, new ServersFragment(), ServersFragment.TAG).commit();
+            fragmentManager.beginTransaction().addToBackStack(ServersFragment.TAG).replace(R.id.appContentFrameLayout, new ServersFragment(), ServersFragment.TAG).commit();
         }
     }
 

@@ -24,10 +24,8 @@
 package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -64,16 +62,43 @@ public class TrackerFragment extends SimpleAppBarWithDrawerFragment {
         return view;
     }
 
+    protected FloatingActionButton getFloatingActionButton() {
+        View view = getView();
+        if (view != null) {
+            return (FloatingActionButton) getView().findViewById(R.id.startStopButton);
+        }
+        return null;
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        getFloatingActionButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                if (true) {
+//                    Snackbar.make(getCoordinatorLayout(), "startStopButton", Snackbar.LENGTH_SHORT).show();
+//                } else
+                if (AppSettings.getServerEntity(getContext()) != null) {
+                    if (AppSettings.getAppSettingsEntity(getContext()).isTrackerStarted) {
+                        TrackerService.stopTracking(getContext());
+                    } else {
+                        TrackerService.startTracking(getContext());
+                    }
+                } else {
+                    AppController.get(getActivity()).onShowServersFragmentWithBackStack();
+                }
+                updateIU();
+            }
+        });
 
         aq.id(R.id.imeiTextView).text(getString(R.string.fragment_tracker_imei, Utils.getDeviceId(getContext())));
 
         aq.id(R.id.editServerImageButton).clicked(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppController.get(getActivity()).onShowServersFragment();
+                AppController.get(getActivity()).onShowServersFragmentWithBackStack();
             }
         });
         aq.id(R.id.aboutServerImageButton).clicked(new View.OnClickListener() {
@@ -93,6 +118,18 @@ public class TrackerFragment extends SimpleAppBarWithDrawerFragment {
     public void onResume() {
         super.onResume();
         appBroadcastReceiver.registerReceiver(getContext());
+        updateIU();
+    }
+
+    private void updateIU() {
+        FloatingActionButton floatingActionButton = getFloatingActionButton();
+
+        if (AppSettings.getAppSettingsEntity(getContext()).isTrackerStarted) {
+            floatingActionButton.setImageResource(R.drawable.ic_stop_24dp);
+        } else {
+            floatingActionButton.setImageResource(R.drawable.ic_play_arrow_24dp);
+        }
+
         ServerEntity serverEntity = AppSettings.getServerEntity(getContext());
         if (serverEntity != null) {
             aq.id(R.id.aboutServerImageButton).visible();
@@ -107,45 +144,6 @@ public class TrackerFragment extends SimpleAppBarWithDrawerFragment {
     public void onPause() {
         super.onPause();
         appBroadcastReceiver.unregisterReceiver(getContext());
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_tracker, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        if (AppSettings.getAppSettingsEntity(getContext()).isTrackerStarted) {
-            menu.findItem(R.id.menu_item_action_play).setVisible(false);
-            menu.findItem(R.id.menu_item_action_stop).setVisible(true);
-        } else {
-            menu.findItem(R.id.menu_item_action_play).setVisible(true);
-            menu.findItem(R.id.menu_item_action_stop).setVisible(false);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_action_play:
-                if (AppSettings.getServerEntity(getContext()) != null) {
-                    TrackerService.startTracking(getContext());
-                } else {
-                    AppController.get(getActivity()).onShowServersFragment();
-                }
-                getActivity().supportInvalidateOptionsMenu();
-                return true;
-            case R.id.menu_item_action_stop:
-                TrackerService.stopTracking(getContext());
-                getActivity().supportInvalidateOptionsMenu();
-                return true;
-            default: {
-                return super.onOptionsItemSelected(item);
-            }
-        }
     }
 
     private class InnerAppBroadcastCallback extends AppBroadcastController.AppBroadcastCallback {

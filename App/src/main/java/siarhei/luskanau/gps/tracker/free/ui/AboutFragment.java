@@ -23,6 +23,8 @@
 
 package siarhei.luskanau.gps.tracker.free.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -40,6 +42,9 @@ import siarhei.luskanau.gps.tracker.free.utils.Utils;
 public class AboutFragment extends SimpleAppBarWithDrawerFragment {
 
     public static final String TAG = "AboutFragment";
+    private static final String LINKEDIN_URL = "https://www.linkedin.com/pub/siarhei-luskanau/50/84b/23a";
+    private static final String GITHUB_URL = "https://github.com/siarhei-luskanau/siarhei.luskanau.gps.tracker.free";
+    private static final String COM_LINKEDIN_ANDROID = "com.linkedin.android";
 
     public static AboutFragment newInstance(int menuItemId) {
         AboutFragment fragment = new AboutFragment();
@@ -66,6 +71,34 @@ public class AboutFragment extends SimpleAppBarWithDrawerFragment {
         } catch (Throwable t) {
             Log.e(TAG, t.toString(), t);
         }
+
+        getView().findViewById(R.id.aboutTextView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        getView().findViewById(R.id.linkedinTextView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setPackage(COM_LINKEDIN_ANDROID);
+                    intent.setData(Uri.parse("linkedin://profile/AAIAAArNr44BDpR6PxbNkmzBRgKrvXQX3ltAibc"));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.d(TAG, e.getMessage(), e);
+                    startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(LINKEDIN_URL)));
+                }
+            }
+        });
+
+        getView().findViewById(R.id.githubTextView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(GITHUB_URL)));
+            }
+        });
     }
 
 }

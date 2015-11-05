@@ -51,7 +51,7 @@ public class AppActivity extends BaseProgressActivity implements AppController.A
 
     @Override
     protected void setupNavigationView(NavigationView navigationView) {
-        navigationView.inflateHeaderView(R.layout.drawer_header);
+        navigationView.inflateHeaderView(R.layout.layout_navigation_header);
         navigationView.inflateMenu(R.menu.menu_navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedListener());
     }
