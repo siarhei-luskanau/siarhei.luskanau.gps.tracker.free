@@ -32,7 +32,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 import java.util.Locale;
 
-import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
+import siarhei.luskanau.androidbroadcastlib.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
 import siarhei.luskanau.gps.tracker.free.service.TrackerService;

@@ -28,6 +28,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
+import siarhei.luskanau.androidbroadcastlib.BroadcastCallback;
+import siarhei.luskanau.androidbroadcastlib.BroadcastController;
+import siarhei.luskanau.androidbroadcastlib.BroadcastReceiverWrapper;
+
 public class AppBroadcastController extends BroadcastController<AppBroadcastController.AppBroadcastCallback, AppBroadcastController.AppBroadcastReceiver> {
 
     private static final String ACTION_TRACKER_STARTED_STATE = "ACTION_TRACKER_STARTED_STATE";

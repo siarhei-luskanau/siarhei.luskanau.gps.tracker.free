@@ -1,2 +1,3 @@
 include ':App'
 include ':Modules:AndroidDataLib'
+include ':Modules:AndroidBroadcastLib'

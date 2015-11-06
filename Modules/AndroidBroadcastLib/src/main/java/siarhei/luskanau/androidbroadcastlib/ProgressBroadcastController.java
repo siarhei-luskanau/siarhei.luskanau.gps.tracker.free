@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.broadcast;
+package siarhei.luskanau.androidbroadcastlib;
 
 import android.content.Context;
 import android.content.Intent;
@@ -58,7 +58,7 @@ public class ProgressBroadcastController extends BroadcastController<ProgressBro
 
     public static class ProgressBroadcastReceiver extends BroadcastReceiverWrapper<ProgressBroadcastCallback> {
 
-        private static final String TAG = "ProgressBroadcastReceiver";
+        private static final String TAG = "BroadcastReceiver";
         private ProgressBroadcastCallback broadcastCallback;
 
         public ProgressBroadcastReceiver(ProgressBroadcastCallback broadcastCallback) {

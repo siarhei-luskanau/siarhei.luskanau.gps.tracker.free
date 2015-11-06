@@ -21,7 +21,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.broadcast;
+package siarhei.luskanau.androidbroadcastlib;
 
-public interface BroadcastCallback {
+import android.content.Context;
+import android.content.Intent;
+
+public abstract class BroadcastController<C extends BroadcastCallback, R extends BroadcastReceiverWrapper> {
+
+    protected static void sendBroadcast(Context context, Intent intent) {
+        context.sendBroadcast(intent);
+    }
+
+    public abstract R createBroadcastReceiver(C broadcastCallback);
+
 }

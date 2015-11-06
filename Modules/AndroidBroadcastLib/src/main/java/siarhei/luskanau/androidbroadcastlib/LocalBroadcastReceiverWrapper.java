@@ -21,32 +21,23 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.ui.progress;
+package siarhei.luskanau.androidbroadcastlib;
 
-import siarhei.luskanau.androiddatalib.BaseDrawerActivity;
-import siarhei.luskanau.androidbroadcastlib.ProgressBroadcastController;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 
-public abstract class BaseProgressActivity extends BaseDrawerActivity {
+public abstract class LocalBroadcastReceiverWrapper<C extends BroadcastCallback> extends BroadcastReceiver {
 
-    private ProgressBroadcastController.ProgressBroadcastReceiver progressBroadcastReceiver = new ProgressBroadcastController().createBroadcastReceiver(new InnerProgressBroadcastCallback());
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        progressBroadcastReceiver.registerReceiver(this);
+    protected static void registerReceiver(Context context, LocalBroadcastReceiverWrapper broadcastReceiverWrapper, IntentFilter intentFilter) {
+        LocalBroadcastManager.getInstance(context).registerReceiver(broadcastReceiverWrapper, intentFilter);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        progressBroadcastReceiver.unregisterReceiver(this);
-    }
+    public abstract void registerReceiver(Context context);
 
-    private class InnerProgressBroadcastCallback extends ProgressBroadcastController.ProgressBroadcastCallback {
-        @Override
-        public void onShowAlertDialog(CharSequence title, CharSequence message) {
-            AlertDialogFragment.show(BaseProgressActivity.this, title, message);
-        }
+    public void unregisterReceiver(Context context) {
+        LocalBroadcastManager.getInstance(context).unregisterReceiver(this);
     }
 
 }

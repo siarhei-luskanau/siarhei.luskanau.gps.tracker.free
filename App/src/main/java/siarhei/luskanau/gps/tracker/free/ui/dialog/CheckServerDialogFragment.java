@@ -36,8 +36,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
+import siarhei.luskanau.androidbroadcastlib.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.broadcast.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 
 public class CheckServerDialogFragment extends DialogFragment {
