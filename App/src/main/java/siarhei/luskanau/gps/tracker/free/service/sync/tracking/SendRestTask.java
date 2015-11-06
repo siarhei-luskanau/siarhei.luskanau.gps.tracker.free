@@ -31,10 +31,10 @@ import com.squareup.okhttp.OkHttpClient;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
-import retrofit.converter.GsonConverter;
+import retrofit.Call;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
@@ -52,7 +52,9 @@ public class SendRestTask {
         for (; ; ) {
             List<LocationModel> locationEntities = LocationDAO.queryNextLocations(context, 100);
             if (locationEntities != null && locationEntities.size() > 0) {
-                String result = restClient.send(locationEntities);
+                Call<String> call = restClient.send(locationEntities);
+                Response<String> response = call.execute();
+                String result = response.body();
                 Log.d(context.getPackageName(), "result: " + result);
                 LocationDAO.deleteLocations(context, locationEntities);
                 incPacketCounter(context, locationEntities.size());
@@ -68,9 +70,9 @@ public class SendRestTask {
         AppBroadcastController.sendLastPositionIsUpdatedBroadcast(context);
     }
 
-    private static interface RestClient {
+    private interface RestClient {
         @GET("/api/tracker")
-        public String send(@Body List<LocationModel> list);
+        Call<String> send(@Body List<LocationModel> list);
     }
 
     public static class RestClientBuilder {
@@ -80,17 +82,9 @@ public class SendRestTask {
             OkHttpClient okClient = new OkHttpClient();
             okClient.setConnectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS);
             okClient.setReadTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS);
-            return new RestAdapter.Builder()
-                    .setEndpoint(serverUrl)
-                    .setClient(new OkClient(okClient))
-                    .setConverter(new GsonConverter(AppConstants.GSON))
-                    .setRequestInterceptor(new RequestInterceptor() {
-                        @Override
-                        public void intercept(RequestInterceptor.RequestFacade requestFacade) {
-                            requestFacade.addHeader("Connection", "close");
-                        }
-                    })
-                    .setLogLevel(RestAdapter.LogLevel.HEADERS)
+            return new Retrofit.Builder()
+                    .baseUrl(serverUrl)
+                    .addConverterFactory(GsonConverterFactory.create(AppConstants.GSON))
                     .build()
                     .create(RestClient.class);
         }
