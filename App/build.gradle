@@ -19,31 +19,28 @@
 //IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-apply plugin: "android"
+apply plugin: "com.android.application"
 
 android {
-    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
         applicationId "siarhei.luskanau.gps.tracker.free"
-        versionCode 34
-        versionName "4.0.34"
+        minSdkVersion 9
+        targetSdkVersion project.targetSdkVersion
+        versionCode project.versionCode
+        versionName project.versionName
     }
 
-//    signingConfigs {
-//        def storeProperties = new Properties()
-//        storeProperties.load(new FileInputStream(file("keystore/debug.keystore.properties")))
-//
-//        debug {
-//            storeFile file(storeProperties['store.path'])
-//            storePassword storeProperties['store.password']
-//            keyAlias storeProperties['key.alias']
-//            keyPassword storeProperties['key.password']
-//        }
-//    }
+    signingConfigs {
+        debugConfig {
+            storeFile file('../debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
 
     buildTypes {
         release {
