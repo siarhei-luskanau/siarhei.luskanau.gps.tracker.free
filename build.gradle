@@ -37,7 +37,7 @@ allprojects {
 ext {
     compileSdkVersion = 23
     targetSdkVersion = compileSdkVersion
-    buildToolsVersion = "23.0.1"
+    buildToolsVersion = "23.0.2"
     versionCode = 34
     versionName = '4.0.34'
 

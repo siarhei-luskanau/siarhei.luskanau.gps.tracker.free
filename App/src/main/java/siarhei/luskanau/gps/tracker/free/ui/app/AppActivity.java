@@ -31,7 +31,6 @@ import android.widget.FrameLayout;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
 import siarhei.luskanau.gps.tracker.free.service.sync.task.GcmTask;
-import siarhei.luskanau.gps.tracker.free.ui.TrackerFragment;
 import siarhei.luskanau.gps.tracker.free.ui.progress.BaseProgressActivity;
 
 public class AppActivity extends BaseProgressActivity implements AppController.AppControllerAware {
@@ -60,8 +59,8 @@ public class AppActivity extends BaseProgressActivity implements AppController.A
     public void onBackPressed() {
         if (isDrawerOpen()) {
             closeDrawers();
-        } else if (getSupportFragmentManager().findFragmentByTag(TrackerFragment.TAG) == null) {
-            appController.onShowTrackerFragment();
+        } else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
         } else {
             openDrawer();
         }
@@ -104,7 +103,6 @@ public class AppActivity extends BaseProgressActivity implements AppController.A
                 }
             }
             closeDrawers();
-
             return true;
         }
     }

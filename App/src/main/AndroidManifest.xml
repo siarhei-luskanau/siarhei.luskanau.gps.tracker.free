@@ -84,7 +84,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             </intent-filter>
         </activity>
         <activity android:name="siarhei.luskanau.gps.tracker.free.ui.app.AppActivity" />
-        <activity android:name="siarhei.luskanau.gps.tracker.free.ui.ServerEditActivity" />
 
         <service
             android:name="siarhei.luskanau.gps.tracker.free.service.TrackerService"

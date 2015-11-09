@@ -62,16 +62,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_info_outline_24dp"
-                    android:background="?attr/selectableItemBackground"/>
+                    android:background="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_info_outline_24dp" />
 
                 <ImageButton
                     android:id="@+id/editServerImageButton"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_mode_edit_24dp"
-                    android:background="?attr/selectableItemBackground"/>
+                    android:background="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_mode_edit_24dp" />
 
             </LinearLayout>
 

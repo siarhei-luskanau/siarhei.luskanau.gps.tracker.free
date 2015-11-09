@@ -23,8 +23,8 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.progress;
 
-import siarhei.luskanau.androiddatalib.BaseDrawerActivity;
 import siarhei.luskanau.androidbroadcastlib.ProgressBroadcastController;
+import siarhei.luskanau.androiddatalib.BaseDrawerActivity;
 
 public abstract class BaseProgressActivity extends BaseDrawerActivity {
 

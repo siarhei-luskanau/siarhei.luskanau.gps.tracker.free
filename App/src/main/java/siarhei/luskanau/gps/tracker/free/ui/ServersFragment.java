@@ -28,6 +28,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -46,7 +49,7 @@ public class ServersFragment extends SimpleAppBarWithUpFragment implements AppCo
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.activity_servers, container, false);
+        View view = inflater.inflate(R.layout.fragment_servers, container, false);
         return view;
     }
 
@@ -60,6 +63,25 @@ public class ServersFragment extends SimpleAppBarWithUpFragment implements AppCo
     public void onResume() {
         super.onResume();
         updateServerEntities();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_servers, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_action_add: {
+                AppController.get(getActivity()).onShowServerEditFragmentWithBackStack(null);
+                return true;
+            }
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
+        }
     }
 
     private void updateServerEntities() {

@@ -23,45 +23,54 @@
 
 package siarhei.luskanau.gps.tracker.free.ui;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.androidquery.AQuery;
 
+import siarhei.luskanau.androiddatalib.SimpleAppBarWithUpFragment;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.CheckServerDialogFragment;
 
-public class ServerEditActivity extends AppCompatActivity {
+public class ServerEditFragment extends SimpleAppBarWithUpFragment {
 
-    private static final String SERVER_ENTITY = "SERVER_ENTITY";
-    private AQuery aq = new AQuery(this);
+    public static final String TAG = "ServerEditFragment";
+    private static final String SERVER_ENTITY_ARG = "SERVER_ENTITY_ARG";
+    private AQuery aq;
     private ServerEntity serverEntity;
 
-    public static void startServerEditActivity(Context context, ServerEntity serverEntity) {
-        Intent intent = new Intent(context, ServerEditActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if (serverEntity != null) {
-            intent.putExtra(SERVER_ENTITY, AppConstants.GSON.toJson(serverEntity));
-        }
-        context.startActivity(intent);
+    public static ServerEditFragment newInstance(ServerEntity serverEntity) {
+        ServerEditFragment fragment = new ServerEditFragment();
+        Bundle args = new Bundle();
+        args.putString(SERVER_ENTITY_ARG, AppConstants.GSON.toJson(serverEntity));
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_server);
+    protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
+        View view = inflater.inflate(R.layout.fragment_edit_server, container, false);
+        aq = new AQuery(getActivity(), view);
+        return view;
+    }
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(SERVER_ENTITY)) {
-            serverEntity = AppConstants.GSON.fromJson(savedInstanceState.getString(SERVER_ENTITY), ServerEntity.class);
-        } else if (getIntent() != null && getIntent().hasExtra(SERVER_ENTITY)) {
-            serverEntity = AppConstants.GSON.fromJson(getIntent().getStringExtra(SERVER_ENTITY), ServerEntity.class);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(R.string.fragment_settings_general_server);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(SERVER_ENTITY_ARG)) {
+            serverEntity = AppConstants.GSON.fromJson(savedInstanceState.getString(SERVER_ENTITY_ARG), ServerEntity.class);
+        } else if (getArguments() != null && getArguments().containsKey(SERVER_ENTITY_ARG)) {
+            serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY_ARG), ServerEntity.class);
         }
         if (serverEntity == null) {
             serverEntity = new ServerEntity();
@@ -71,11 +80,11 @@ public class ServerEditActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(SERVER_ENTITY, AppConstants.GSON.toJson(serverEntity));
+        outState.putString(SERVER_ENTITY_ARG, AppConstants.GSON.toJson(serverEntity));
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         aq.id(R.id.customServerAddressEditText).text(serverEntity.server_address);
@@ -103,22 +112,21 @@ public class ServerEditActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_server_edit, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_accept: {
-                finish();
+                onUpClicked();
                 return true;
             }
             case R.id.menu_action_check: {
-                if (getSupportFragmentManager().findFragmentByTag(CheckServerDialogFragment.TAG) == null) {
-                    CheckServerDialogFragment.newInstance(serverEntity).show(getSupportFragmentManager(), CheckServerDialogFragment.TAG);
+                if (getActivity().getSupportFragmentManager().findFragmentByTag(CheckServerDialogFragment.TAG) == null) {
+                    CheckServerDialogFragment.newInstance(serverEntity).show(getActivity().getSupportFragmentManager(), CheckServerDialogFragment.TAG);
                 }
                 return true;
             }
