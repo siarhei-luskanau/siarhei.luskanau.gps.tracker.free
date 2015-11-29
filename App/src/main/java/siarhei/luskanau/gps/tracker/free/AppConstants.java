@@ -81,6 +81,6 @@ public class AppConstants {
             .registerTypeAdapter(byte[].class, BYTE_ARRAY_JSON_DESERIALIZER)
             .registerTypeAdapter(Date.class, DATE_JSON_SERIALIZER)
             .registerTypeAdapter(Date.class, DATE_JSON_DESERIALIZER)
-            .setPrettyPrinting().create();
+            .setPrettyPrinting().serializeNulls().create();
 
 }

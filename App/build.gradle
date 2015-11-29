@@ -29,12 +29,12 @@ android {
         applicationId "siarhei.luskanau.gps.tracker.free"
         minSdkVersion 9
         targetSdkVersion project.targetSdkVersion
-        versionCode project.versionCode
-        versionName project.versionName
-    }
+        versionCode 34
+        versionName '4.0.34'
+   }
 
     signingConfigs {
-        debugConfig {
+        debug {
             storeFile file('../debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
@@ -44,7 +44,7 @@ android {
 
     buildTypes {
         release {
-            //signingConfig signingConfigs.debug
+            signingConfig signingConfigs.debug
             debuggable true
             zipAlignEnabled true
             minifyEnabled false
