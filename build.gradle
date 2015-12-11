@@ -35,10 +35,9 @@ allprojects {
 }
 
 ext {
-    compileSdkVersion = 23
-    targetSdkVersion = compileSdkVersion
-    buildToolsVersion = "23.0.2"
-
+    COMPILE_SDK_VERSION = 23
+    BUILD_TOOLS_VERSION = "23.0.2"
+    TARGET_SDK_VERSION = COMPILE_SDK_VERSION
     SUPPORT_LIBRARY_VERSION = "23.1.1"
     PLAY_SERVICES_VERSION = "8.3.0"
 }
