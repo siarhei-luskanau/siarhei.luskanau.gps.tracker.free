@@ -32,7 +32,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+        android:icon="@drawable/ic_more_vert_24dp"
         android:orderInCategory="900"
         android:title="@string/abc_action_menu_overflow_description"
         app:showAsAction="ifRoom|withText">

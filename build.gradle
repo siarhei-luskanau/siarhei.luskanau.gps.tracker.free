@@ -24,7 +24,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:2.0.0-beta5'
     }
 }
 
@@ -39,6 +39,6 @@ ext {
     targetSdkVersion = compileSdkVersion
     buildToolsVersion = "23.0.2"
 
-    SUPPORT_LIBRARY_VERSION = "23.1.1"
-    PLAY_SERVICES_VERSION = "8.3.0"
+    SUPPORT_LIBRARY_VERSION = "23.2.0"
+    PLAY_SERVICES_VERSION = "8.4.0"
 }
