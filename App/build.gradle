@@ -22,13 +22,13 @@
 apply plugin: "com.android.application"
 
 android {
-    compileSdkVersion project.compileSdkVersion
-    buildToolsVersion project.buildToolsVersion
+    compileSdkVersion project.COMPILE_SDK_VERSION
+    buildToolsVersion project.BUILD_TOOLS_VERSION
 
     defaultConfig {
         applicationId "siarhei.luskanau.gps.tracker.free"
         minSdkVersion 9
-        targetSdkVersion project.targetSdkVersion
+        targetSdkVersion project.TARGET_SDK_VERSION
         versionCode 34
         versionName '4.0.34'
    }
@@ -65,8 +65,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':Modules:AndroidDataLib')
     compile project(':Modules:AndroidBroadcastLib')
-    compile 'com.android.support:preference-v7:' + project.SUPPORT_LIBRARY_VERSION
-    compile 'com.google.android.gms:play-services-gcm:' + project.PLAY_SERVICES_VERSION
+    compile "com.android.support:preference-v7:${project.SUPPORT_LIBRARY_VERSION}"
+    compile "com.google.android.gms:play-services-gcm:${project.PLAY_SERVICES_VERSION}"
     compile 'com.googlecode.android-query:android-query:0.25.9'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
