@@ -27,15 +27,13 @@ import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,35 +50,47 @@ public class AppConstants {
     }.getType();
     public static final Type STRING_MAP_TYPE_TOKEN = new TypeToken<Map<String, String>>() {
     }.getType();
-    private final static JsonSerializer<byte[]> BYTE_ARRAY_JSON_SERIALIZER = new JsonSerializer<byte[]>() {
-        @Override
-        public JsonElement serialize(byte[] src, Type typeOfSrc, JsonSerializationContext context) {
-            return src == null ? null : new JsonPrimitive(Base64.encodeToString(src, Base64.DEFAULT));
-        }
-    };
-    private final static JsonDeserializer<byte[]> BYTE_ARRAY_JSON_DESERIALIZER = new JsonDeserializer<byte[]>() {
-        @Override
-        public byte[] deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            return json == null ? null : Base64.decode(json.getAsString(), Base64.DEFAULT);
-        }
-    };
-    private final static JsonSerializer<Date> DATE_JSON_SERIALIZER = new JsonSerializer<Date>() {
-        @Override
-        public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-            return src == null ? null : new JsonPrimitive(String.valueOf(src.getTime()));
-        }
-    };
-    private final static JsonDeserializer<Date> DATE_JSON_DESERIALIZER = new JsonDeserializer<Date>() {
-        @Override
-        public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            return json == null ? null : new Date(Long.valueOf(json.getAsString()));
-        }
-    };
+
     public final static Gson GSON = new GsonBuilder()
-            .registerTypeAdapter(byte[].class, BYTE_ARRAY_JSON_SERIALIZER)
-            .registerTypeAdapter(byte[].class, BYTE_ARRAY_JSON_DESERIALIZER)
-            .registerTypeAdapter(Date.class, DATE_JSON_SERIALIZER)
-            .registerTypeAdapter(Date.class, DATE_JSON_DESERIALIZER)
+            .registerTypeAdapter(byte[].class, new ByteArrayJsonAdapter())
+            .registerTypeAdapter(Date.class, new DateJsonAdapter())
             .setPrettyPrinting().serializeNulls().create();
+
+    public static class ByteArrayJsonAdapter extends TypeAdapter<byte[]> {
+        @Override
+        public void write(JsonWriter out, byte[] value) throws IOException {
+            if (value != null) {
+                out.value(Base64.encodeToString(value, Base64.DEFAULT));
+            } else if (out.getSerializeNulls()) {
+                out.nullValue();
+            }
+        }
+
+        @Override
+        public byte[] read(JsonReader in) throws IOException {
+            JsonElement jsonElement = GSON.fromJson(in, JsonElement.class);
+            if (jsonElement != null && jsonElement.isJsonPrimitive()) {
+                return Base64.decode(jsonElement.getAsString(), Base64.DEFAULT);
+            }
+            return null;
+        }
+    }
+
+    public static class DateJsonAdapter extends TypeAdapter<Date> {
+        @Override
+        public void write(JsonWriter out, Date value) throws IOException {
+            if (value != null) {
+                out.value(value.getTime());
+            } else if (out.getSerializeNulls()) {
+                out.nullValue();
+            }
+        }
+
+        @Override
+        public Date read(JsonReader in) throws IOException {
+            JsonElement jsonElement = GSON.fromJson(in, JsonElement.class);
+            return new Date(jsonElement.getAsLong());
+        }
+    }
 
 }
