@@ -56,12 +56,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     <!-- GCM -->
     <permission
-        android:name="${applicationId}.permission.C2D_MESSAGE"
+        android:name="${packageName}.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
     <!-- GCM -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+    <uses-permission android:name="${packageName}.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
@@ -99,7 +99,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
         <provider
             android:name="siarhei.luskanau.gps.tracker.free.database.ContentProvider"
-            android:authorities="${applicationId}.provider"
+            android:authorities="${packageName}.provider"
             android:exported="false" />
 
         <receiver android:name="siarhei.luskanau.gps.tracker.free.receiver.StaticReceiver">
@@ -121,7 +121,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="${applicationId}" />
+                <category android:name="${packageName}" />
             </intent-filter>
         </receiver>
         <service android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmIntentService" />

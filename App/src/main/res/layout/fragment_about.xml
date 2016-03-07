@@ -22,6 +22,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -31,7 +32,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatTextView
+        <TextView
             android:id="@+id/aboutTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,38 +43,80 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatButton
+            <LinearLayout
                 android:id="@+id/emailTextView"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_email_24dp"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/fragment_about_email" />
+                android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatButton
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:tint="@color/accent"
+                    app:srcCompat="@drawable/ic_email_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/fragment_about_email"
+                    android:textAllCaps="true"
+                    android:textColor="@color/accent" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/linkedinTextView"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_linkedin_box_24dp"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/fragment_about_linkedin" />
+                android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatButton
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:tint="@color/accent"
+                    app:srcCompat="@drawable/ic_linkedin_box_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/fragment_about_linkedin"
+                    android:textAllCaps="true"
+                    android:textColor="@color/accent" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/githubTextView"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_github_box_24dp"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="@string/fragment_about_github" />
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:tint="@color/accent"
+                    app:srcCompat="@drawable/ic_github_box_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/fragment_about_github"
+                    android:textAllCaps="true"
+                    android:textColor="@color/accent" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

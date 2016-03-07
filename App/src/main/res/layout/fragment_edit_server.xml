@@ -31,50 +31,46 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatTextView
-            style="@style/TrackerTextViewStyle"
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_edit_server_name" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/customServerNameEditText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/fragment_edit_server_name" />
 
-        <android.support.v7.widget.AppCompatTextView
-            style="@style/TrackerTextViewStyle"
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_edit_server_type" />
 
-        <android.support.v7.widget.AppCompatSpinner
+        <Spinner
             android:id="@+id/serverTypeSpinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:prompt="@string/fragment_edit_server_type" />
 
-        <android.support.v7.widget.AppCompatTextView
-            style="@style/TrackerTextViewStyle"
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_edit_server_address" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/customServerAddressEditText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/fragment_edit_server_address" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <TextView
             android:id="@+id/serverPortCaptionTextView"
-            style="@style/TrackerTextViewStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_edit_server_port" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/customServerPortEditText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

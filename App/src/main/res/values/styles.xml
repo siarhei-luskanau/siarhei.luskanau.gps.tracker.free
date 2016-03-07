@@ -23,7 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
@@ -32,14 +32,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <item name="android:statusBarColor">@android:color/transparent</item>
 
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
-    </style>
-
-    <style name="TrackerTextViewStyle" parent="@android:style/Widget.TextView">
-        <item name="android:paddingLeft">@dimen/component_gap</item>
-        <item name="android:paddingRight">@dimen/component_gap</item>
-        <item name="android:minWidth">@dimen/abc_action_button_min_width_material</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="android:gravity">center_vertical</item>
     </style>
 
 </resources>

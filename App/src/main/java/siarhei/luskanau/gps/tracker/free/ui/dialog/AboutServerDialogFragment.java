@@ -27,20 +27,14 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import com.androidquery.AQuery;
 
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 
 public class AboutServerDialogFragment extends DialogFragment {
 
     public static final String TAG = "AboutServerDialogFragment";
     private static final String SERVER_ENTITY = "SERVER_ENTITY";
-    private AQuery aq;
     private ServerEntity serverEntity;
 
     public static AboutServerDialogFragment newInstance(ServerEntity serverEntity) {
@@ -55,21 +49,15 @@ public class AboutServerDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         serverEntity = AppConstants.GSON.fromJson(getArguments().getString(SERVER_ENTITY), ServerEntity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_about_server, null);
-        aq = new AQuery(view);
-        builder.setView(view);
+        builder.setTitle(serverEntity.name);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Site: ").append(serverEntity.site_url).append("\n");
+        stringBuilder.append("Type: ").append(serverEntity.serverType.toString()).append("\n");
+        stringBuilder.append("Address: ").append(serverEntity.server_address).append("\n");
+        stringBuilder.append("Port: ").append(serverEntity.server_port);
+        builder.setMessage(stringBuilder.toString());
         builder.setPositiveButton(android.R.string.ok, null);
         return builder.create();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        aq.id(R.id.serverNameTextView).text(serverEntity.name);
-        aq.id(R.id.serverSiteUrlTextView).text(serverEntity.site_url);
-        aq.id(R.id.serverTypeTextView).text(serverEntity.serverType.toString());
-        aq.id(R.id.serverAddressTextView).text(serverEntity.server_address);
-        aq.id(R.id.serverPortTextView).text(String.valueOf(serverEntity.server_port));
     }
 
 }
