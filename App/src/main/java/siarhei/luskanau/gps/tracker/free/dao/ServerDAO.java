@@ -23,83 +23,42 @@
 
 package siarhei.luskanau.gps.tracker.free.dao;
 
-import android.content.ContentValues;
+import android.content.ContentUris;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
+import android.provider.BaseColumns;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.qbusict.cupboard.CupboardFactory;
+import nl.qbusict.cupboard.ProviderCompartment;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
-import siarhei.luskanau.gps.tracker.free.database.ContentProvider;
-import siarhei.luskanau.gps.tracker.free.database.ServerColumns;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.provider.AppContract;
 import siarhei.luskanau.gps.tracker.free.utils.Utils;
 
-public class ServerDAO extends BaseDAO {
+public class ServerDAO {
 
     private static final String TAG = "ServerDAO";
 
-    public static Uri getUri(Context context) {
-        return Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), ServerColumns.TABLE_NAME);
-    }
-
-    public static long insertOrUpdate(Context context, ServerEntity serverEntity) {
-        ContentValues values = toContentValues(serverEntity);
-        if (serverEntity.rowId != null) {
-            String selection = ServerColumns._ID + "=?";
-            String[] whereArgs = new String[]{String.valueOf(serverEntity.rowId)};
-            context.getContentResolver().update(getUri(context), values, selection, whereArgs);
-        } else {
-            Uri idUri = context.getContentResolver().insert(getUri(context), values);
-            serverEntity.rowId = Long.parseLong(idUri.getPathSegments().get(1));
-        }
-        return serverEntity.rowId;
+    public static Uri putServer(Context context, ServerEntity server) {
+        Uri uri = CupboardFactory.cupboard().withContext(context).put(AppContract.SERVER_URI, server);
+        return uri;
     }
 
     public static ServerEntity getServerByRowId(Context context, long rowId) {
-        Cursor cursor = null;
-        try {
-            String selection = ServerColumns._ID + "=?";
-            String[] whereArgs = new String[]{String.valueOf(rowId)};
-            cursor = context.getContentResolver().query(getUri(context), null, selection, whereArgs, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                return fromCursor(cursor);
-            }
-        } finally {
-            close(cursor);
-        }
-        return null;
+        Uri uri = ContentUris.withAppendedId(AppContract.SERVER_URI, rowId);
+        ServerEntity server = CupboardFactory.cupboard().withContext(context).get(uri, ServerEntity.class);
+        return server;
     }
 
     public static List<ServerEntity> getServers(Context context) {
-        List<ServerEntity> list = new ArrayList<ServerEntity>();
-        Cursor cursor = null;
-        try {
-            cursor = context.getContentResolver().query(getUri(context), null, null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    list.add(fromCursor(cursor));
-                } while (cursor.moveToNext());
-            }
-        } finally {
-            close(cursor);
-        }
-        return list;
-    }
-
-    private static ContentValues toContentValues(ServerEntity serverEntity) {
-        ContentValues values = new ContentValues();
-        values.put(ServerColumns.SERVER, AppConstants.GSON.toJson(serverEntity));
-        return values;
-    }
-
-    private static ServerEntity fromCursor(Cursor cursor) {
-        ServerEntity serverEntity = AppConstants.GSON.fromJson(cursor.getString(cursor.getColumnIndex(ServerColumns.SERVER)), ServerEntity.class);
-        serverEntity.rowId = cursor.getLong(cursor.getColumnIndex(ServerColumns._ID));
-        return serverEntity;
+        ProviderCompartment.QueryBuilder queryBuilder = CupboardFactory.cupboard().withContext(context).query(AppContract.SERVER_URI, ServerEntity.class);
+        List<ServerEntity> serverList = queryBuilder.list();
+        queryBuilder.orderBy(BaseColumns._ID + " ASC");
+        return serverList;
     }
 
     public static List<ServerEntity> getAssetsServers(Context context) {

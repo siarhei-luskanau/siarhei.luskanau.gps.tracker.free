@@ -37,6 +37,7 @@ import com.androidquery.AQuery;
 import siarhei.luskanau.androiddatalib.SimpleAppBarWithUpFragment;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
+import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.CheckServerDialogFragment;
 
@@ -121,6 +122,7 @@ public class ServerEditFragment extends SimpleAppBarWithUpFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_accept: {
+                createServer();
                 onUpClicked();
                 return true;
             }
@@ -136,27 +138,27 @@ public class ServerEditFragment extends SimpleAppBarWithUpFragment {
         }
     }
 
-    private ServerEntity createServer() {
+    private void createServer() {
         ServerEntity serverEntity = new ServerEntity();
 
-        String serverType = aq.id(R.id.serverTypeSpinner).getSpinner().getSelectedItem().toString();
-        if (serverType.equals(getString(R.string.server_type_socket))) {
-            serverEntity.serverType = ServerEntity.ServerType.socket;
-        } else if (serverType.equals(getString(R.string.server_type_json_body))) {
-            serverEntity.serverType = ServerEntity.ServerType.rest;
-        } else if (serverType.equals(getString(R.string.server_type_json_form))) {
-            serverEntity.serverType = ServerEntity.ServerType.json_form;
-        }
+//        String serverType = aq.id(R.id.serverTypeSpinner).getSpinner().getSelectedItem().toString();
+//        if (serverType.equals(getString(R.string.server_type_socket))) {
+//            serverEntity.serverType = ServerEntity.ServerType.socket;
+//        } else if (serverType.equals(getString(R.string.server_type_json_body))) {
+//            serverEntity.serverType = ServerEntity.ServerType.rest;
+//        } else if (serverType.equals(getString(R.string.server_type_json_form))) {
+//            serverEntity.serverType = ServerEntity.ServerType.json_form;
+//        }
+        serverEntity.serverType = ServerEntity.ServerType.socket;
 
         serverEntity.name = aq.id(R.id.customServerNameEditText).getText().toString();
         serverEntity.server_address = aq.id(R.id.customServerAddressEditText).getText().toString();
         try {
-            serverEntity.server_port = Integer.parseInt(aq.id(R.id.customServerPortEditText).getText()
-                    .toString());
+            serverEntity.server_port = Integer.parseInt(aq.id(R.id.customServerPortEditText).getText().toString());
         } catch (Exception e) {
             serverEntity.server_port = 0;
         }
-        return serverEntity;
+        ServerDAO.putServer(getContext(), serverEntity);
     }
 
 }

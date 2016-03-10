@@ -102,6 +102,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:authorities="${packageName}.provider"
             android:exported="false" />
 
+        <provider
+            android:name="siarhei.luskanau.gps.tracker.free.provider.AppContentProvider"
+            android:authorities="${packageName}.cupboard_provider"
+            android:exported="false" />
+
         <receiver android:name="siarhei.luskanau.gps.tracker.free.receiver.StaticReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

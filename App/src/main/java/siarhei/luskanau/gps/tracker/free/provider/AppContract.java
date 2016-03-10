@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Siarhei Luskanau
+ * Copyright (c) 2016 Siarhei Luskanau
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -21,47 +21,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.model;
+package siarhei.luskanau.gps.tracker.free.provider;
 
-import android.provider.BaseColumns;
+import android.net.Uri;
 
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
+import nl.littlerobots.cupboard.tools.provider.UriHelper;
+import siarhei.luskanau.gps.tracker.free.BuildConfig;
+import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
 
-import java.lang.reflect.Type;
-import java.util.List;
+public class AppContract {
 
-import nl.qbusict.cupboard.annotation.Column;
-import nl.qbusict.cupboard.annotation.Index;
-
-public class ServerEntity {
-
-    public static final Type COLLECTION_TYPE = new TypeToken<List<ServerEntity>>() {
-    }.getType();
-
-    @Index
-    @Column(BaseColumns._ID)
-    @SerializedName("rowId")
-    public Long rowId;
-    @SerializedName("name")
-    public String name;
-    @SerializedName("site_url")
-    public String site_url;
-    @SerializedName("server_type")
-    public ServerType serverType;
-    @SerializedName("server_address")
-    public String server_address;
-    @SerializedName("server_port")
-    public int server_port;
-    @SerializedName("custom")
-    public boolean custom;
-
-    public static enum ServerType {
-        socket,
-        json_form,
-        rest,
-        wialon,
-        custom
-    }
+    public static final String AUTHORITY = BuildConfig.APPLICATION_ID + ".cupboard_provider";
+    private static UriHelper URI_HELPER = UriHelper.with(AUTHORITY);
+    public static final Uri SERVER_URI = URI_HELPER.getUri(ServerEntity.class);
 
 }

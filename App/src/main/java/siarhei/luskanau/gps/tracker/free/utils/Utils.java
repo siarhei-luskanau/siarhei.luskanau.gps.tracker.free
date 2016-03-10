@@ -57,9 +57,13 @@ public class Utils {
 
     public static String getDeviceId(final Context context) {
         String deviceId = null;
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        if (telephonyManager != null) {
-            deviceId = telephonyManager.getDeviceId();
+        try {
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (telephonyManager != null) {
+                deviceId = telephonyManager.getDeviceId();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
         }
         if (deviceId == null) {
             deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);

@@ -72,9 +72,16 @@ public class AboutFragment extends SimpleAppBarWithDrawerFragment {
             Log.e(TAG, t.toString(), t);
         }
 
-        getView().findViewById(R.id.aboutTextView).setOnClickListener(new View.OnClickListener() {
+        getView().findViewById(R.id.emailTextView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"siarhei.luskanau@gmail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Free GPS Tracker");
+                getContext().startActivity(intent);
             }
         });
 

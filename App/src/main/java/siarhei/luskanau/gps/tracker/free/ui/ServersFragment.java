@@ -34,6 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import siarhei.luskanau.androiddatalib.SimpleAppBarWithUpFragment;
@@ -45,7 +46,7 @@ import siarhei.luskanau.gps.tracker.free.ui.app.AppController;
 
 public class ServersFragment extends SimpleAppBarWithUpFragment implements AppController.ServersListBusiness {
 
-    private List<ServerEntity> serverEntities;
+    private List<ServerEntity> serverEntities = new ArrayList<>();
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container) {
@@ -85,16 +86,15 @@ public class ServersFragment extends SimpleAppBarWithUpFragment implements AppCo
     }
 
     private void updateServerEntities() {
-        serverEntities = ServerDAO.getServers(getContext());
-        if (serverEntities == null || serverEntities.size() == 0) {
-            serverEntities = ServerDAO.getAssetsServers(getContext());
-            if (serverEntities != null) {
-                for (ServerEntity serverEntity : serverEntities) {
-                    ServerDAO.insertOrUpdate(getContext(), serverEntity);
-                }
-            }
-            serverEntities = ServerDAO.getServers(getContext());
+        List<ServerEntity> assetsServers = ServerDAO.getAssetsServers(getContext());
+        if (assetsServers != null) {
+            serverEntities.addAll(assetsServers);
         }
+        List<ServerEntity> databaseServers = ServerDAO.getServers(getContext());
+        if (databaseServers != null) {
+            serverEntities.addAll(databaseServers);
+        }
+
         FragmentManager fragmentManager = getChildFragmentManager();
 
         for (int i = serverEntities.size(); ; i++) {
