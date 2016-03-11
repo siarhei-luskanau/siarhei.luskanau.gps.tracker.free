@@ -22,60 +22,67 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="fill_parent"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_edit_server_name" />
+            app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/customServerNameEditText"
-            android:layout_width="fill_parent"
+            <EditText
+                android:id="@+id/customServerNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fragment_edit_server_name" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/fragment_edit_server_name" />
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/customServerAddressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fragment_edit_server_address" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/customServerPortEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fragment_edit_server_port"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_edit_server_type" />
+            android:text="@string/fragment_edit_server_type"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <Spinner
             android:id="@+id/serverTypeSpinner"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:prompt="@string/fragment_edit_server_type" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment_edit_server_address" />
-
-        <EditText
-            android:id="@+id/customServerAddressEditText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/fragment_edit_server_address" />
-
-        <TextView
-            android:id="@+id/serverPortCaptionTextView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment_edit_server_port" />
-
-        <EditText
-            android:id="@+id/customServerPortEditText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/fragment_edit_server_port"
-            android:inputType="number" />
 
     </LinearLayout>
 
