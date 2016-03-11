@@ -72,6 +72,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:theme="@style/Theme.AppTheme">
 
         <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ee5fe32948918d6d0a8eae6d4e224850a3109eb4" />
+
+        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 

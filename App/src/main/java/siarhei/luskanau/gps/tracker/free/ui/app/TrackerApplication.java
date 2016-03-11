@@ -28,10 +28,12 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.Locale;
 
+import io.fabric.sdk.android.Fabric;
 import siarhei.luskanau.androidbroadcastlib.ProgressBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.BaseDAO;
 import siarhei.luskanau.gps.tracker.free.database.LocationColumns;
@@ -47,6 +49,7 @@ public class TrackerApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         LeakCanary.install(this);
         ExceptionHandler.addExceptionHandler(this);
         updateLocale();
