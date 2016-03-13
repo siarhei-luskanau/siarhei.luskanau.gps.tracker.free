@@ -31,6 +31,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.androidquery.AQuery;
 
@@ -39,14 +40,23 @@ import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.dao.ServerDAO;
 import siarhei.luskanau.gps.tracker.free.model.ServerEntity;
+import siarhei.luskanau.gps.tracker.free.model.ServerType;
 import siarhei.luskanau.gps.tracker.free.ui.dialog.CheckServerDialogFragment;
 
 public class ServerEditFragment extends SimpleAppBarWithUpFragment {
 
     public static final String TAG = "ServerEditFragment";
     private static final String SERVER_ENTITY_ARG = "SERVER_ENTITY_ARG";
+    private static final ServerType[] SERVER_TYPES = new ServerType[]{
+            ServerType.SOCKET,
+            ServerType.WIALON,
+            ServerType.JSON,
+            ServerType.JSON_FORM
+    };
+
     private AQuery aq;
     private ServerEntity serverEntity;
+
 
     public static ServerEditFragment newInstance(ServerEntity serverEntity) {
         ServerEditFragment fragment = new ServerEditFragment();
@@ -76,6 +86,9 @@ public class ServerEditFragment extends SimpleAppBarWithUpFragment {
         if (serverEntity == null) {
             serverEntity = new ServerEntity();
         }
+
+        ArrayAdapter<ServerType> adapter = new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, SERVER_TYPES);
+        aq.id(R.id.serverTypeSpinner).getSpinner().setAdapter(adapter);
     }
 
     @Override
@@ -92,23 +105,12 @@ public class ServerEditFragment extends SimpleAppBarWithUpFragment {
         if (serverEntity.server_port > 0) {
             aq.id(R.id.customServerPortEditText).text(String.valueOf(serverEntity.server_port));
         }
-        if (serverEntity.serverType != null) {
-            switch (serverEntity.serverType) {
-                case socket: {
-                    aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
-                    break;
-                }
-                case json_form: {
-                    aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(1);
-                    break;
-                }
-                case rest: {
-                    aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(2);
-                    break;
-                }
+        aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
+        for (int i = 0; i < SERVER_TYPES.length; i++) {
+            if (SERVER_TYPES[i] == serverEntity.serverType) {
+                aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(i);
+                break;
             }
-        } else {
-            aq.id(R.id.serverTypeSpinner).getSpinner().setSelection(0);
         }
     }
 
@@ -149,7 +151,7 @@ public class ServerEditFragment extends SimpleAppBarWithUpFragment {
 //        } else if (serverType.equals(getString(R.string.server_type_json_form))) {
 //            serverEntity.serverType = ServerEntity.ServerType.json_form;
 //        }
-        serverEntity.serverType = ServerEntity.ServerType.socket;
+        serverEntity.serverType = ServerType.SOCKET;
 
         serverEntity.name = aq.id(R.id.customServerNameEditText).getText().toString();
         serverEntity.server_address = aq.id(R.id.customServerAddressEditText).getText().toString();

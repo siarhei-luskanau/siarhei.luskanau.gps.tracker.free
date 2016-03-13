@@ -109,15 +109,15 @@ public class SendPositionsCallable implements Callable<Object> {
     private void sendPositions() throws Exception {
         ServerEntity serverEntity = AppSettings.getServerEntity(context);
         switch (serverEntity.serverType) {
-            case socket: {
+            case SOCKET: {
                 new SendSocketTask().doTask(context);
                 break;
             }
-            case rest: {
+            case JSON: {
                 SendRestTask.doTask(context);
                 break;
             }
-            case json_form: {
+            case JSON_FORM: {
                 SendJsonForm.sendLocationsForm(context);
                 break;
             }

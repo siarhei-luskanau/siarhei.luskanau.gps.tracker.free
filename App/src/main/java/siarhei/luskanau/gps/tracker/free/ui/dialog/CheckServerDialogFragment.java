@@ -79,7 +79,7 @@ public class CheckServerDialogFragment extends DialogFragment {
                 }
 
                 switch (serverEntity.serverType) {
-                    case socket: {
+                    case SOCKET: {
                         SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(serverEntity.server_address), serverEntity.server_port);
                         Socket socket = new Socket();
                         socket.connect(socketAddress, 5 * 1000);
@@ -88,11 +88,11 @@ public class CheckServerDialogFragment extends DialogFragment {
                         socket.close();
                         break;
                     }
-                    case rest: {
+                    case JSON: {
                         //SendJsonForm.sendLocations(serverEntity.server_address, new ArrayList<LocationPacket>());
                         break;
                     }
-                    case json_form: {
+                    case JSON_FORM: {
                         //SendJsonForm.sendLocationsForm(serverEntity.server_address, new ArrayList<LocationPacket>());
                         break;
                     }

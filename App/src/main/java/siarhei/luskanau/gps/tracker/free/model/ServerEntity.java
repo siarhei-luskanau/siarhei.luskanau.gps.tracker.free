@@ -56,12 +56,4 @@ public class ServerEntity {
     @SerializedName("custom")
     public boolean custom;
 
-    public static enum ServerType {
-        socket,
-        json_form,
-        rest,
-        wialon,
-        custom
-    }
-
 }
