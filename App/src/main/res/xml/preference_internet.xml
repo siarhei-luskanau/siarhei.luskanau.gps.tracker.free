@@ -26,7 +26,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <ListPreference
         android:entries="@array/preference_internet_strings"
         android:entryValues="@array/preference_internet_strings"
-        android:icon="@drawable/ic_public_24dp"
         android:key="@string/preference_key_internet_type"
         android:persistent="false"
         android:title="@string/preference_internet_type" />
@@ -34,7 +33,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <ListPreference
         android:entries="@array/send_to_server_interval_strings"
         android:entryValues="@array/send_to_server_interval_strings"
-        android:icon="@drawable/ic_timer_24dp"
         android:key="@string/preference_key_send_to_server_interval"
         android:persistent="false"
         android:title="@string/preference_send_to_server_interval" />
@@ -42,13 +40,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <PreferenceCategory android:title="@string/preference_battery">
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_battery_20_24dp"
             android:key="@string/preference_key_stop_if_battery_low"
             android:persistent="false"
             android:title="@string/preference_battery_stop_if_low" />
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_battery_90_24dp"
             android:key="@string/preference_key_start_if_battery_ok"
             android:persistent="false"
             android:title="@string/preference_battery_start_if_ok" />
@@ -58,13 +54,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <PreferenceCategory android:title="@string/preference_charger">
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_battery_charging_20_24dp"
             android:key="@string/preference_key_stop_if_charger_disconnected"
             android:persistent="false"
             android:title="@string/preference_charger_stop_if_disconnected" />
 
         <SwitchPreferenceCompat
-            android:icon="@drawable/ic_battery_charging_90_24dp"
             android:key="@string/preference_key_start_if_charger_connected"
             android:persistent="false"
             android:title="@string/preference_charger_start_if_connected" />

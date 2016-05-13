@@ -23,7 +23,9 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.settings;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -45,39 +47,39 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onGpsFilterPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_location_filter_gps));
         CharSequence[] entries = listPreference.getEntries();
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switch (state.locationSettings.filterGpsLocations) {
             default:
             case AppSettings.FilterGpsLocations.DONT_USE: {
                 listPreference.setValueIndex(0);
                 listPreference.setSummary(entries[0]);
-                listPreference.setIcon(R.drawable.ic_location_off_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_location_off_24dp));
                 break;
             }
             case AppSettings.FilterGpsLocations.USE: {
                 listPreference.setValueIndex(1);
                 listPreference.setSummary(entries[1]);
-                listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                 break;
             }
             case AppSettings.FilterGpsLocations.FILTER_10_M: {
                 listPreference.setValueIndex(2);
                 listPreference.setSummary(entries[2]);
-                listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                 break;
             }
             case AppSettings.FilterGpsLocations.FILTER_100_M: {
                 listPreference.setValueIndex(3);
                 listPreference.setSummary(entries[3]);
-                listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                 break;
             }
             case AppSettings.FilterGpsLocations.FILTER_1000_M: {
                 listPreference.setValueIndex(4);
                 listPreference.setSummary(entries[4]);
-                listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                 break;
             }
         }
@@ -90,27 +92,27 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
                 switch (listPreference.findIndexOfValue(newValue.toString())) {
                     case 0: {
                         state.locationSettings.filterGpsLocations = AppSettings.FilterGpsLocations.DONT_USE;
-                        listPreference.setIcon(R.drawable.ic_location_off_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_location_off_24dp));
                         break;
                     }
                     case 1: {
                         state.locationSettings.filterGpsLocations = AppSettings.FilterGpsLocations.USE;
-                        listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                         break;
                     }
                     case 2: {
                         state.locationSettings.filterGpsLocations = AppSettings.FilterGpsLocations.FILTER_10_M;
-                        listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                         break;
                     }
                     case 3: {
                         state.locationSettings.filterGpsLocations = AppSettings.FilterGpsLocations.FILTER_100_M;
-                        listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                         break;
                     }
                     case 4: {
                         state.locationSettings.filterGpsLocations = AppSettings.FilterGpsLocations.FILTER_1000_M;
-                        listPreference.setIcon(R.drawable.ic_location_on_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_location_on_24dp));
                         break;
                     }
                 }
@@ -121,39 +123,39 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onWirelessFilterPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_location_filter_network));
         CharSequence[] entries = listPreference.getEntries();
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switch (state.locationSettings.filterNetworkLocations) {
             default:
             case AppSettings.FilterNetworkLocations.DONT_USE: {
                 listPreference.setValueIndex(0);
                 listPreference.setSummary(entries[0]);
-                listPreference.setIcon(R.drawable.ic_signal_wifi_off_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_off_24dp));
                 break;
             }
             case AppSettings.FilterNetworkLocations.USE: {
                 listPreference.setValueIndex(1);
                 listPreference.setSummary(entries[1]);
-                listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                 break;
             }
             case AppSettings.FilterNetworkLocations.FILTER_100_M: {
                 listPreference.setValueIndex(2);
                 listPreference.setSummary(entries[2]);
-                listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                 break;
             }
             case AppSettings.FilterNetworkLocations.FILTER_500_M: {
                 listPreference.setValueIndex(3);
                 listPreference.setSummary(entries[3]);
-                listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                 break;
             }
             case AppSettings.FilterNetworkLocations.FILTER_5000_M: {
                 listPreference.setValueIndex(4);
                 listPreference.setSummary(entries[4]);
-                listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                 break;
             }
         }
@@ -166,27 +168,27 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
                 switch (listPreference.findIndexOfValue(newValue.toString())) {
                     case 0: {
                         state.locationSettings.filterNetworkLocations = AppSettings.FilterNetworkLocations.DONT_USE;
-                        listPreference.setIcon(R.drawable.ic_signal_wifi_off_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_off_24dp));
                         break;
                     }
                     case 1: {
                         state.locationSettings.filterNetworkLocations = AppSettings.FilterNetworkLocations.USE;
-                        listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                         break;
                     }
                     case 2: {
                         state.locationSettings.filterNetworkLocations = AppSettings.FilterNetworkLocations.FILTER_100_M;
-                        listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                         break;
                     }
                     case 3: {
                         state.locationSettings.filterNetworkLocations = AppSettings.FilterNetworkLocations.FILTER_500_M;
-                        listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                         break;
                     }
                     case 4: {
                         state.locationSettings.filterNetworkLocations = AppSettings.FilterNetworkLocations.FILTER_5000_M;
-                        listPreference.setIcon(R.drawable.ic_signal_wifi_4_bar_24dp);
+                        listPreference.setIcon(getIcon(R.drawable.ic_signal_wifi_4_bar_24dp));
                         break;
                     }
                 }
@@ -197,13 +199,13 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onGsmFilterPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_location_filter_gsm));
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switchPreferenceCompat.setChecked(state.locationSettings.isUseGsmCellInfo);
         if (state.locationSettings.isUseGsmCellInfo) {
-            switchPreferenceCompat.setIcon(R.drawable.ic_signal_cellular_4_bar_24dp);
+            switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_signal_cellular_4_bar_24dp));
         } else {
-            switchPreferenceCompat.setIcon(R.drawable.ic_signal_cellular_off_24dp);
+            switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_signal_cellular_off_24dp));
         }
         switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -213,9 +215,9 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
                 AppSettings.setAppSettingsEntity(getContext(), state);
                 SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_location_filter_gsm));
                 if (state.locationSettings.isUseGsmCellInfo) {
-                    switchPreferenceCompat.setIcon(R.drawable.ic_signal_cellular_4_bar_24dp);
+                    switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_signal_cellular_4_bar_24dp));
                 } else {
-                    switchPreferenceCompat.setIcon(R.drawable.ic_signal_cellular_off_24dp);
+                    switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_signal_cellular_off_24dp));
                 }
                 return true;
             }
@@ -223,9 +225,10 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onTimeIntervalPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_location_filter_time));
+        listPreference.setIcon(getIcon(R.drawable.ic_timer_24dp));
         CharSequence[] entries = listPreference.getEntries();
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switch (state.locationSettings.timeFilter) {
             default:
             case AppSettings.FilterTimeInterval.IMMEDIATELY: {
@@ -277,6 +280,10 @@ public class LocationSettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+    }
+
+    private Drawable getIcon(int resId) {
+        return VectorDrawableCompat.create(getResources(), resId, null);
     }
 
 }

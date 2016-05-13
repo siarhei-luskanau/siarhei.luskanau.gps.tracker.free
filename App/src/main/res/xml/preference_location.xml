@@ -27,7 +27,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:dependency="@string/preference_key_location_filter_gps"
         android:entries="@array/location_filter_gps_strings"
         android:entryValues="@array/location_filter_gps_strings"
-        android:icon="@drawable/ic_location_on_24dp"
         android:key="@string/preference_key_location_filter_gps"
         android:persistent="false"
         android:title="GPS locationg" />
@@ -35,13 +34,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <ListPreference
         android:entries="@array/location_filter_network_strings"
         android:entryValues="@array/location_filter_network_strings"
-        android:icon="@drawable/ic_signal_wifi_4_bar_24dp"
         android:key="@string/preference_key_location_filter_network"
         android:persistent="false"
         android:title="Network locations" />
 
     <SwitchPreferenceCompat
-        android:icon="@drawable/ic_signal_cellular_4_bar_24dp"
         android:key="@string/preference_key_location_filter_gsm"
         android:persistent="false"
         android:summary="mcc, mnc, cid, lac"
@@ -50,7 +47,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <ListPreference
         android:entries="@array/location_filter_time_strings"
         android:entryValues="@array/location_filter_time_strings"
-        android:icon="@drawable/ic_timer_24dp"
         android:key="@string/preference_key_location_filter_time"
         android:persistent="false"
         android:title="@string/preference_location_filter_time" />

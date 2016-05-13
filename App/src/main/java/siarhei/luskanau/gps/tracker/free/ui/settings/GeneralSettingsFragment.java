@@ -24,7 +24,9 @@
 package siarhei.luskanau.gps.tracker.free.ui.settings;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -54,6 +56,7 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
 
     private void onServerPreferenceCreate() {
         PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference(getString(R.string.preference_key_server));
+        preferenceScreen.setIcon(getIcon(R.drawable.ic_public_24dp));
         ServerEntity serverEntity = AppSettings.getServerEntity(getContext());
         if (serverEntity != null) {
             preferenceScreen.setSummary(serverEntity.name);
@@ -70,8 +73,9 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onAutostartPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_autostart));
+        switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_play_arrow_24dp));
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switchPreferenceCompat.setChecked(state.autoStart);
         switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -85,8 +89,9 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onNotificationPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_show_notification));
+        switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_announcement_24dp));
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switchPreferenceCompat.setChecked(state.isShowNotification);
         switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -101,12 +106,14 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
 
     private void onAdPreferenceCreate() {
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_disable_ad));
+        switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_settings_24dp));
         switchPreferenceCompat.setEnabled(false);
     }
 
     private void onResetCounterPreferenceCreate() {
-        int packetCounter = AppSettings.getPacketCounter(getContext());
         PreferenceScreen preferenceScreen = (PreferenceScreen) findPreference(getString(R.string.preference_key_reset_packet_counter));
+        preferenceScreen.setIcon(getIcon(R.drawable.ic_highlight_remove_24dp));
+        int packetCounter = AppSettings.getPacketCounter(getContext());
         preferenceScreen.setSummary(String.valueOf(packetCounter));
         preferenceScreen.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -121,9 +128,10 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onLanguagePreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_language));
+        listPreference.setIcon(getIcon(R.drawable.ic_language_24dp));
         CharSequence[] entries = listPreference.getEntries();
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switch (state.language) {
             case EN: {
                 listPreference.setValueIndex(0);
@@ -164,6 +172,10 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+    }
+
+    private Drawable getIcon(int resId) {
+        return VectorDrawableCompat.create(getResources(), resId, null);
     }
 
 }

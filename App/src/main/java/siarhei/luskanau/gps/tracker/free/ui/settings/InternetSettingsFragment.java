@@ -23,7 +23,9 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.settings;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -47,9 +49,10 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onInternetTypePreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_internet_type));
+        listPreference.setIcon(getIcon(R.drawable.ic_public_24dp));
         CharSequence[] entries = listPreference.getEntries();
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switch (state.internetSettingsEntity.internetType) {
             default:
             case ANY_TYPE: {
@@ -95,9 +98,10 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onSendToServerIntervalPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         ListPreference listPreference = (ListPreference) findPreference(getString(R.string.preference_key_send_to_server_interval));
+        listPreference.setIcon(getIcon(R.drawable.ic_timer_24dp));
         CharSequence[] entries = listPreference.getEntries();
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switch (state.internetSettingsEntity.sendToServerInterval) {
             default:
             case AppSettings.SendToServerInterval.IMMEDIATELY: {
@@ -161,8 +165,9 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onBatteryLowPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_stop_if_battery_low));
+        switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_battery_20_24dp));
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switchPreferenceCompat.setChecked(state.batterySettings.stopIfBatteryLow);
         switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -176,8 +181,9 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onBatteryOkPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_start_if_battery_ok));
+        switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_battery_90_24dp));
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switchPreferenceCompat.setChecked(state.batterySettings.startIfBatteryOk);
         switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -191,8 +197,9 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onChargerDisconnectedPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_stop_if_charger_disconnected));
+        switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_battery_charging_20_24dp));
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switchPreferenceCompat.setChecked(state.batterySettings.stopIfChargerDisconnected);
         switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -206,8 +213,9 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void onChargerConnectedPreferenceCreate() {
-        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         SwitchPreferenceCompat switchPreferenceCompat = (SwitchPreferenceCompat) findPreference(getString(R.string.preference_key_start_if_charger_connected));
+        switchPreferenceCompat.setIcon(getIcon(R.drawable.ic_battery_charging_90_24dp));
+        AppSettings.State state = AppSettings.getAppSettingsEntity(getContext());
         switchPreferenceCompat.setChecked(state.batterySettings.startIfChargerConnected);
         switchPreferenceCompat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -218,6 +226,10 @@ public class InternetSettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+    }
+
+    private Drawable getIcon(int resId) {
+        return VectorDrawableCompat.create(getResources(), resId, null);
     }
 
 }
