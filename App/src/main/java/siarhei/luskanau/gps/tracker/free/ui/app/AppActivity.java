@@ -23,10 +23,15 @@
 
 package siarhei.luskanau.gps.tracker.free.ui.app;
 
-import android.support.design.widget.NavigationView;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.Nullable;
+
+import com.google.android.material.navigation.NavigationView;
 
 import siarhei.luskanau.gps.tracker.free.R;
 import siarhei.luskanau.gps.tracker.free.service.sync.SyncService;
@@ -37,6 +42,23 @@ public class AppActivity extends BaseProgressActivity implements AppController.A
 
     private static final String TAG = "BaseDrawerActivity";
     protected AppController appController = new AppController(this);
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (isDrawerOpen()) {
+                    closeDrawers();
+                } else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    openDrawer();
+                }
+            }
+        });
+    }
 
     @Override
     protected void onResume() {
@@ -56,17 +78,6 @@ public class AppActivity extends BaseProgressActivity implements AppController.A
     }
 
     @Override
-    public void onBackPressed() {
-        if (isDrawerOpen()) {
-            closeDrawers();
-        } else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            openDrawer();
-        }
-    }
-
-    @Override
     public AppController getAppController() {
         return appController;
     }
@@ -74,33 +85,24 @@ public class AppActivity extends BaseProgressActivity implements AppController.A
     private class NavigationItemSelectedListener implements NavigationView.OnNavigationItemSelectedListener {
         @Override
         public boolean onNavigationItemSelected(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.menu_drawer_item_gcm: {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                SyncService.startTask(AppActivity.this, new GcmTask());
-                                GcmTask.sendEchoMessage(AppActivity.this);
-                            } catch (Exception e) {
-                                Log.d(TAG, e.toString(), e);
-                            }
+            if (menuItem.getItemId() == R.id.menu_drawer_item_gcm) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            SyncService.startTask(AppActivity.this, new GcmTask());
+                            GcmTask.sendEchoMessage(AppActivity.this);
+                        } catch (Exception e) {
+                            Log.d(TAG, e.toString(), e);
                         }
-                    }).start();
-                    break;
-                }
-                case R.id.menu_drawer_item_home: {
-                    appController.onShowTrackerFragment();
-                    break;
-                }
-                case R.id.menu_drawer_item_settings: {
-                    appController.onShowSettingsFragment();
-                    break;
-                }
-                case R.id.menu_drawer_item_about: {
-                    appController.onShowAboutFragment();
-                    break;
-                }
+                    }
+                }).start();
+            } else if (menuItem.getItemId() == R.id.menu_drawer_item_home) {
+                appController.onShowTrackerFragment();
+            } else if (menuItem.getItemId() == R.id.menu_drawer_item_settings) {
+                appController.onShowSettingsFragment();
+            } else if (menuItem.getItemId() == R.id.menu_drawer_item_about) {
+                appController.onShowAboutFragment();
             }
             closeDrawers();
             return true;

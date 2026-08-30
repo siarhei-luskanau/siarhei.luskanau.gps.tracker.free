@@ -26,7 +26,8 @@ package siarhei.luskanau.androidbroadcastlib;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public abstract class LocalBroadcastReceiverWrapper<C extends BroadcastCallback> extends BroadcastReceiver {
 

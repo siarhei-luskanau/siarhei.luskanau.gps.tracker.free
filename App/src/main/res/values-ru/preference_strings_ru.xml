@@ -50,6 +50,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <!--preference_location_filter_gps-->
     <!--preference_location_filter_network-->
     <!--preference_location_filter_gsm-->
+    <string name="preference_location_filter_gps">GPS</string>
+    <string name="preference_location_filter_wireless_network">Определение местоположения по сети</string>
 
     <!--preference_location_filter_time-->
     <string name="preference_location_filter_time">Интервал опр. позиции</string>

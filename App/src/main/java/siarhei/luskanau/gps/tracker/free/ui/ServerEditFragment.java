@@ -24,7 +24,6 @@
 package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +31,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidquery.AQuery;
 
@@ -122,22 +123,17 @@ public class ServerEditFragment extends SimpleAppBarWithUpFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_accept: {
-                createServer();
-                onUpClicked();
-                return true;
+        if (item.getItemId() == R.id.menu_action_accept) {
+            createServer();
+            onUpClicked();
+            return true;
+        } else if (item.getItemId() == R.id.menu_action_check) {
+            if (getActivity().getSupportFragmentManager().findFragmentByTag(CheckServerDialogFragment.TAG) == null) {
+                CheckServerDialogFragment.newInstance(serverEntity).show(getActivity().getSupportFragmentManager(), CheckServerDialogFragment.TAG);
             }
-            case R.id.menu_action_check: {
-                if (getActivity().getSupportFragmentManager().findFragmentByTag(CheckServerDialogFragment.TAG) == null) {
-                    CheckServerDialogFragment.newInstance(serverEntity).show(getActivity().getSupportFragmentManager(), CheckServerDialogFragment.TAG);
-                }
-                return true;
-            }
-            default: {
-                return super.onOptionsItemSelected(item);
-            }
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void createServer() {

@@ -24,15 +24,16 @@
 package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,15 +75,11 @@ public class ServersFragment extends SimpleAppBarWithUpFragment implements AppCo
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_add: {
-                AppController.get(getActivity()).onShowServerEditFragmentWithBackStack(null);
-                return true;
-            }
-            default: {
-                return super.onOptionsItemSelected(item);
-            }
+        if (item.getItemId() == R.id.menu_action_add) {
+            AppController.get(getActivity()).onShowServerEditFragmentWithBackStack(null);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void updateServerEntities() {

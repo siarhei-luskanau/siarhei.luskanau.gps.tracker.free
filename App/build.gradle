@@ -20,19 +20,28 @@
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 apply plugin: "com.android.application"
-apply plugin: 'io.fabric'
+apply plugin: "com.google.devtools.ksp"
 
 android {
-    compileSdkVersion project.COMPILE_SDK_VERSION
-    buildToolsVersion project.BUILD_TOOLS_VERSION
+    namespace = "siarhei.luskanau.gps.tracker.free"
+    compileSdk = project.COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId "siarhei.luskanau.gps.tracker.free"
-        minSdkVersion 9
+        minSdkVersion project.MIN_SDK_VERSION
         targetSdkVersion project.TARGET_SDK_VERSION
         versionCode 34
         versionName '4.0.34'
         vectorDrawables.useSupportLibrary = true
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     signingConfigs {
@@ -49,35 +58,38 @@ android {
             applicationIdSuffix ".debug"
         }
         release {
-            signingConfig signingConfigs.debug
+            signingConfig = signingConfigs.debug
             debuggable true
-            zipAlignEnabled true
             minifyEnabled false
             proguardFile 'proguard.cfg'
         }
     }
 
-    applicationVariants.all { variant ->
+}
+
+androidComponents {
+    onVariants(selector().all()) { variant ->
         variant.outputs.each { output ->
-            def file = output.outputFile
-            output.outputFile = new File(file.parent, "Free_GPS_Tracker-" + defaultConfig.versionName + ".apk")
+            output.outputFileName.set("Free_GPS_Tracker-" + android.defaultConfig.versionName + ".apk")
         }
     }
-
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':Modules:AndroidDataLib')
-    compile project(':Modules:AndroidBroadcastLib')
-    compile "com.android.support:preference-v7:${project.SUPPORT_LIBRARY_VERSION}"
-    compile "com.google.android.gms:play-services-gcm:${project.PLAY_SERVICES_VERSION}"
-    compile 'nl.qbusict:cupboard:2.1.4'
-    compile 'nl.littlerobots:cupboard-tools:0.2.0'
-    compile 'com.googlecode.android-query:android-query:0.25.9'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
-    }
+    debugImplementation libs.leakcanary.android
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libs.android.query
+    implementation libs.androidx.legacy.support.v4
+    implementation libs.androidx.preference
+    implementation libs.androidx.room3.runtime
+    implementation libs.gson
+    implementation libs.kotlinx.coroutines.android
+    implementation libs.material
+    implementation libs.okhttp
+    implementation libs.play.services.gcm
+    implementation libs.retrofit
+    implementation libs.retrofit.converter.gson
+    implementation project(':Modules:AndroidBroadcastLib')
+    implementation project(':Modules:AndroidDataLib')
+    ksp libs.androidx.room3.compiler
 }

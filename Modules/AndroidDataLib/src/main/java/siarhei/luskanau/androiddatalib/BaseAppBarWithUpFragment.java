@@ -24,9 +24,10 @@
 package siarhei.luskanau.androiddatalib;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.fragment.app.FragmentManager;
 
 public abstract class BaseAppBarWithUpFragment extends BaseDrawerFragment {
 

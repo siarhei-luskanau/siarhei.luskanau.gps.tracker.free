@@ -30,7 +30,7 @@ import android.content.IntentFilter;
 public abstract class BroadcastReceiverWrapper<C extends BroadcastCallback> extends BroadcastReceiver {
 
     protected static void registerReceiver(Context context, BroadcastReceiverWrapper broadcastReceiverWrapper, IntentFilter intentFilter) {
-       context.registerReceiver(broadcastReceiverWrapper, intentFilter);
+        context.registerReceiver(broadcastReceiverWrapper, intentFilter);
     }
 
     public abstract void registerReceiver(Context context);

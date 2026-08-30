@@ -25,15 +25,14 @@ package siarhei.luskanau.gps.tracker.free.ui.progress;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.LocalBroadcastManager;
-import android.view.KeyEvent;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class ProgressDialogFragment extends DialogFragment {
 
@@ -112,16 +111,6 @@ public class ProgressDialogFragment extends DialogFragment {
         progressDialog.setProgress(0);
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    // ProgressBinder.getInstance().cancelTask((ProgressDialogActivity) getContext());
-                    return true;
-                }
-                return false;
-            }
-        });
         return progressDialog;
     }
 

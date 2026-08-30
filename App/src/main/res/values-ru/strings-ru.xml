@@ -50,4 +50,24 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <string name="fragment_settings_general_warning_reset_counter">Обнулить счетчик?</string>
     <string name="fragment_settings_general_language">Язык</string>
 
+    <!-- fragment_tracker.xml -->
+    <string name="fragment_tracker_imei">IMEI: %1$s</string>
+    <string name="fragment_tracker_server">Сервер: %1$s</string>
+
+    <!-- fragment_edit_server.xml -->
+    <string name="fragment_edit_server_name">Название сервера</string>
+    <string name="fragment_edit_server_type">Тип сервера</string>
+    <string name="fragment_edit_server_address">Адрес сервера</string>
+    <string name="fragment_edit_server_port">Порт сервера</string>
+
+    <!-- fragment_edit_server.xml -->
+    <string name="server_type_socket">Сокет</string>
+    <string name="server_type_json_form">JSON форма</string>
+    <string name="server_type_json_body">JSON тело</string>
+
+    <!--fragment_about.xml-->
+    <string name="fragment_about_email">Email</string>
+    <string name="fragment_about_linkedin">LinkedIn</string>
+    <string name="fragment_about_github">Исходный код</string>
+
 </resources>

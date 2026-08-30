@@ -24,12 +24,12 @@
 package siarhei.luskanau.gps.tracker.free.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.androidquery.AQuery;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import siarhei.luskanau.androiddatalib.SimpleAppBarWithDrawerFragment;
 import siarhei.luskanau.gps.tracker.free.R;

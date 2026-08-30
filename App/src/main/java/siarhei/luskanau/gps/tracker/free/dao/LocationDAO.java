@@ -104,8 +104,8 @@ public class LocationDAO extends BaseDAO {
     }
 
     private static LocationModel fromCursor(Cursor cursor) {
-        LocationModel locationEntity = AppConstants.GSON.fromJson(cursor.getString(cursor.getColumnIndex(LocationColumns.PACKET)), LocationModel.class);
-        locationEntity.rowId = cursor.getLong(cursor.getColumnIndex(LocationColumns._ID));
+        LocationModel locationEntity = AppConstants.GSON.fromJson(cursor.getString(cursor.getColumnIndexOrThrow(LocationColumns.PACKET)), LocationModel.class);
+        locationEntity.rowId = cursor.getLong(cursor.getColumnIndexOrThrow(LocationColumns._ID));
         return locationEntity;
     }
 

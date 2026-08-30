@@ -26,7 +26,6 @@ package siarhei.luskanau.gps.tracker.free.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -34,6 +33,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import siarhei.luskanau.androiddatalib.SimpleAppBarWithDrawerFragment;
 import siarhei.luskanau.gps.tracker.free.R;

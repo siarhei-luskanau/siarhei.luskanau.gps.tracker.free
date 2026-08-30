@@ -53,7 +53,7 @@ public class BaseDAO {
             Uri uri = Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), tableName);
             cursor = context.getContentResolver().query(uri, new String[]{COUNT_SELECT}, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
-                return cursor.getLong(cursor.getColumnIndex(BaseColumns._COUNT));
+                return cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._COUNT));
             }
         } finally {
             close(cursor);
@@ -67,7 +67,7 @@ public class BaseDAO {
             Uri uri = Uri.withAppendedPath(ContentProvider.getProviderAuthorityUri(context), inTables);
             cursor = context.getContentResolver().query(uri, new String[]{COUNT_SELECT}, selection, whereArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
-                return cursor.getLong(cursor.getColumnIndex(BaseColumns._COUNT));
+                return cursor.getLong(cursor.getColumnIndexOrThrow(BaseColumns._COUNT));
             }
         } finally {
             close(cursor);

@@ -26,12 +26,11 @@ package siarhei.luskanau.gps.tracker.free.service.sync.tracking.json;
 import android.content.Context;
 import android.util.Log;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
@@ -63,7 +62,7 @@ public class SendJsonForm {
 
 
                 if (DEBUG) {
-                    Log.d(TAG, "Send request: " + request.urlString() + " " + requestJsonString);
+                    Log.d(TAG, "Send request: " + request.url() + " " + requestJsonString);
                 }
                 Response response = client.newCall(request).execute();
                 String responseJsonString = response.body().string();

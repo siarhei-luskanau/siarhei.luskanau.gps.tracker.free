@@ -23,11 +23,13 @@
 
 package siarhei.luskanau.gps.tracker.free.service.location;
 
+import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.Location;
@@ -37,6 +39,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
 
 import java.util.Iterator;
 
@@ -74,7 +78,7 @@ public class LocationService extends Service {
         if (intent != null) {
             if (ACTION_SAVE_INVALID_LOCATION.equals(intent.getAction())) {
                 if (AppSettings.getAppSettingsEntity(this).isTrackerStarted && locationListener != null) {
-                    locationListener.onLocationChanged(null);
+                    locationListener.onLocationChanged((Location) null);
                 }
             } else if (ACTION_UPDATE_GPS_LISTENER.equals(intent.getAction())) {
                 stopListenLocation();
@@ -104,7 +108,8 @@ public class LocationService extends Service {
 
             AppSettings.State appSettingsState = AppSettings.getAppSettingsEntity(this);
             gpsLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.filterGpsLocations);
-            if (appSettingsState.locationSettings.filterGpsLocations != AppSettings.FilterGpsLocations.DONT_USE) {
+            if (appSettingsState.locationSettings.filterGpsLocations != AppSettings.FilterGpsLocations.DONT_USE
+                    && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 try {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 } catch (Exception e) {
@@ -113,7 +118,9 @@ public class LocationService extends Service {
             }
             networkLocationsController = new LocationsController(deviceId, appSettingsState.locationSettings.timeFilter, appSettingsState.locationSettings.filterNetworkLocations);
 
-            if (appSettingsState.locationSettings.filterNetworkLocations != AppSettings.FilterNetworkLocations.DONT_USE) {
+            if (appSettingsState.locationSettings.filterNetworkLocations != AppSettings.FilterNetworkLocations.DONT_USE
+                    && (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
                 try {
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                 } catch (Exception e) {
@@ -151,7 +158,7 @@ public class LocationService extends Service {
     }
 
     private PendingIntent getSaveInvalidPendingIntent(Context context) {
-        return PendingIntent.getService(context, 0, new Intent(context, LocationService.class).setAction(ACTION_SAVE_INVALID_LOCATION), PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getService(context, 0, new Intent(context, LocationService.class).setAction(ACTION_SAVE_INVALID_LOCATION), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     private class InnerLocationListener implements LocationListener {
@@ -181,6 +188,9 @@ public class LocationService extends Service {
 
         private void updateSatellites(Location location) {
             if (location.getExtras() != null && location.getExtras().containsKey(AppConstants.SATELLITES)) {
+                return;
+            }
+            if (ContextCompat.checkSelfPermission(LocationService.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             try {

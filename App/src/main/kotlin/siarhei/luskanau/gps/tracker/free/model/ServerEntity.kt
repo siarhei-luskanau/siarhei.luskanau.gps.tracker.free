@@ -21,39 +21,51 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package siarhei.luskanau.gps.tracker.free.model;
+package siarhei.luskanau.gps.tracker.free.model
 
-import android.provider.BaseColumns;
+import android.provider.BaseColumns
+import androidx.room3.ColumnInfo
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
 
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
+@Entity(tableName = "ServerEntity")
+class ServerEntity {
 
-import java.lang.reflect.Type;
-import java.util.List;
+    companion object {
+        @JvmField
+        val COLLECTION_TYPE: java.lang.reflect.Type =
+            object : TypeToken<List<ServerEntity>>() {}.type
+    }
 
-import nl.qbusict.cupboard.annotation.Column;
-import nl.qbusict.cupboard.annotation.Index;
-
-public class ServerEntity {
-
-    public static final Type COLLECTION_TYPE = new TypeToken<List<ServerEntity>>() {
-    }.getType();
-
-    @Index
-    @Column(BaseColumns._ID)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = BaseColumns._ID)
     @SerializedName("rowId")
-    public Long rowId;
-    @SerializedName("name")
-    public String name;
-    @SerializedName("site_url")
-    public String site_url;
-    @SerializedName("server_type")
-    public ServerType serverType;
-    @SerializedName("server_address")
-    public String server_address;
-    @SerializedName("server_port")
-    public int server_port;
-    @SerializedName("custom")
-    public boolean custom;
+    @JvmField
+    var rowId: Long? = null
 
+    @SerializedName("name")
+    @JvmField
+    var name: String? = null
+
+    @SerializedName("site_url")
+    @JvmField
+    var site_url: String? = null
+
+    @SerializedName("server_type")
+    @JvmField
+    var serverType: ServerType? = null
+
+    @SerializedName("server_address")
+    @JvmField
+    var server_address: String? = null
+
+    @SerializedName("server_port")
+    @JvmField
+    var server_port: Int = 0
+
+    @SerializedName("custom")
+    @JvmField
+    var custom: Boolean = false
 }

@@ -144,7 +144,7 @@ public class TrackerService extends Service {
     }
 
     private PendingIntent getAntiKillerPendingIntent(Context context) {
-        return PendingIntent.getService(context, 0, new Intent(context, LocationService.class).setAction(ACTION_ANTI_KILLER), PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getService(context, 0, new Intent(context, LocationService.class).setAction(ACTION_ANTI_KILLER), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
 }

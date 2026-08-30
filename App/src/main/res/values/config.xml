@@ -24,21 +24,21 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 <resources>
 
     <!--preference_key-->
-    <string name="preference_key_server">preference_key_server</string>
-    <string name="preference_key_autostart">preference_key_autostart</string>
-    <string name="preference_key_show_notification">preference_key_show_notification</string>
-    <string name="preference_key_disable_ad">preference_key_disable_ad</string>
-    <string name="preference_key_reset_packet_counter">preference_key_reset_packet_counter</string>
-    <string name="preference_key_language">preference_key_language</string>
-    <string name="preference_key_internet_type">preference_key_internet_type</string>
-    <string name="preference_key_send_to_server_interval">preference_key_send_to_server_interval</string>
-    <string name="preference_key_stop_if_battery_low">preference_key_stop_if_battery_low</string>
-    <string name="preference_key_start_if_battery_ok">preference_key_start_if_battery_ok</string>
-    <string name="preference_key_stop_if_charger_disconnected">preference_key_stop_if_charger_disconnected</string>
-    <string name="preference_key_start_if_charger_connected">preference_key_start_if_charger_connected</string>
-    <string name="preference_key_location_filter_time">preference_key_location_filter_time</string>
-    <string name="preference_key_location_filter_gps">preference_key_location_filter_gps</string>
-    <string name="preference_key_location_filter_network">preference_key_location_filter_network</string>
-    <string name="preference_key_location_filter_gsm">preference_key_location_filter_gsm</string>
+    <string name="preference_key_server" translatable="false">preference_key_server</string>
+    <string name="preference_key_autostart" translatable="false">preference_key_autostart</string>
+    <string name="preference_key_show_notification" translatable="false">preference_key_show_notification</string>
+    <string name="preference_key_disable_ad" translatable="false">preference_key_disable_ad</string>
+    <string name="preference_key_reset_packet_counter" translatable="false">preference_key_reset_packet_counter</string>
+    <string name="preference_key_language" translatable="false">preference_key_language</string>
+    <string name="preference_key_internet_type" translatable="false">preference_key_internet_type</string>
+    <string name="preference_key_send_to_server_interval" translatable="false">preference_key_send_to_server_interval</string>
+    <string name="preference_key_stop_if_battery_low" translatable="false">preference_key_stop_if_battery_low</string>
+    <string name="preference_key_start_if_battery_ok" translatable="false">preference_key_start_if_battery_ok</string>
+    <string name="preference_key_stop_if_charger_disconnected" translatable="false">preference_key_stop_if_charger_disconnected</string>
+    <string name="preference_key_start_if_charger_connected" translatable="false">preference_key_start_if_charger_connected</string>
+    <string name="preference_key_location_filter_time" translatable="false">preference_key_location_filter_time</string>
+    <string name="preference_key_location_filter_gps" translatable="false">preference_key_location_filter_gps</string>
+    <string name="preference_key_location_filter_network" translatable="false">preference_key_location_filter_network</string>
+    <string name="preference_key_location_filter_gsm" translatable="false">preference_key_location_filter_gsm</string>
 
 </resources>

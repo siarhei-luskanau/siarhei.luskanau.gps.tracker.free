@@ -23,6 +23,7 @@
 
 package siarhei.luskanau.gps.tracker.free.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -33,11 +34,13 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -55,15 +58,21 @@ public class Utils {
         return new BigDecimal(value).setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
+    // TelephonyManager#getDeviceId() requires READ_PRIVILEGED_PHONE_STATE since API 29, which
+    // third-party apps cannot hold; the SDK_INT check below keeps the call reachable only on
+    // older platform versions where READ_PHONE_STATE alone is sufficient.
+    @SuppressLint("MissingPermission")
     public static String getDeviceId(final Context context) {
         String deviceId = null;
-        try {
-            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            if (telephonyManager != null) {
-                deviceId = telephonyManager.getDeviceId();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            try {
+                TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                if (telephonyManager != null) {
+                    deviceId = telephonyManager.getDeviceId();
+                }
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage(), e);
             }
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage(), e);
         }
         if (deviceId == null) {
             deviceId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -96,7 +105,7 @@ public class Utils {
                 .addParentStack(AppActivity.class)
                 .addNextIntent(new Intent(context, AppActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
-        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         notificationBuilder.setContentIntent(resultPendingIntent);
         return notificationBuilder.build();
     }

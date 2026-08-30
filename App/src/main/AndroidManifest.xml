@@ -21,8 +21,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="siarhei.luskanau.gps.tracker.free">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <supports-screens
         android:anyDensity="true"
@@ -51,8 +50,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.BATTERY_STATS" />
     <uses-permission android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
 
     <!-- GCM -->
     <permission
@@ -72,15 +72,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         android:theme="@style/Theme.AppTheme">
 
         <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="ee5fe32948918d6d0a8eae6d4e224850a3109eb4" />
-
-        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
             android:name="siarhei.luskanau.gps.tracker.free.ui.app.MainActivity"
+            android:exported="true"
             android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,7 +88,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
         <service
             android:name="siarhei.luskanau.gps.tracker.free.service.TrackerService"
-            android:exported="false" />
+            android:exported="false"
+            android:foregroundServiceType="location" />
 
         <service
             android:name="siarhei.luskanau.gps.tracker.free.service.sync.SyncService"
@@ -106,12 +104,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             android:authorities="${packageName}.provider"
             android:exported="false" />
 
-        <provider
-            android:name="siarhei.luskanau.gps.tracker.free.provider.AppContentProvider"
-            android:authorities="${packageName}.cupboard_provider"
-            android:exported="false" />
-
-        <receiver android:name="siarhei.luskanau.gps.tracker.free.receiver.StaticReceiver">
+        <receiver
+            android:name="siarhei.luskanau.gps.tracker.free.receiver.StaticReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -127,6 +122,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <!-- GCM -->
         <receiver
             android:name="siarhei.luskanau.gps.tracker.free.gcm.GcmBroadcastReceiver"
+            android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />

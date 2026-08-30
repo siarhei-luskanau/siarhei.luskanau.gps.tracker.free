@@ -61,7 +61,7 @@ public class SyncService extends Service {
     public static void delaySendPositions(Context context, long delayFromCurrent) {
         Intent intent = new Intent(context, SyncService.class).setAction(ACTION_SEND_POSITIONS);
         delayFromCurrent = Math.max(delayFromCurrent, 2000);
-        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + delayFromCurrent, pendingIntent);
     }

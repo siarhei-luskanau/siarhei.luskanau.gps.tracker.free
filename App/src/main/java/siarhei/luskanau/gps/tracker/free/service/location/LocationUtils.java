@@ -23,14 +23,18 @@
 
 package siarhei.luskanau.gps.tracker.free.service.location;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.telephony.CellLocation;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
+
+import androidx.core.content.ContextCompat;
 
 import java.util.HashMap;
 
@@ -98,6 +102,10 @@ public class LocationUtils {
     }
 
     public static void setGsmInfo(LocationModel locationEntity, Context context) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         try {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             CellLocation cellLocation = telephonyManager.getCellLocation();

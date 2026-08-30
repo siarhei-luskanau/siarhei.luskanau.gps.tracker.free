@@ -26,17 +26,16 @@ package siarhei.luskanau.gps.tracker.free.service.sync.tracking;
 import android.content.Context;
 import android.util.Log;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import retrofit.Call;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-import retrofit.http.Body;
-import retrofit.http.GET;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
 import siarhei.luskanau.gps.tracker.free.AppConstants;
 import siarhei.luskanau.gps.tracker.free.broadcast.AppBroadcastController;
 import siarhei.luskanau.gps.tracker.free.dao.LocationDAO;
@@ -71,7 +70,7 @@ public class SendRestTask {
     }
 
     private interface RestClient {
-        @GET("/api/tracker")
+        @GET("api/tracker")
         Call<String> send(@Body List<LocationModel> list);
     }
 
@@ -79,11 +78,14 @@ public class SendRestTask {
         public static final int CONNECTION_TIMEOUT = 30 * 1000;
 
         public static RestClient build(String serverUrl) {
-            OkHttpClient okClient = new OkHttpClient();
-            okClient.setConnectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS);
-            okClient.setReadTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS);
+            OkHttpClient okClient = new OkHttpClient.Builder()
+                    .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
+                    .readTimeout(CONNECTION_TIMEOUT, TimeUnit.MILLISECONDS)
+                    .build();
+            String baseUrl = serverUrl.endsWith("/") ? serverUrl : serverUrl + "/";
             return new Retrofit.Builder()
-                    .baseUrl(serverUrl)
+                    .baseUrl(baseUrl)
+                    .client(okClient)
                     .addConverterFactory(GsonConverterFactory.create(AppConstants.GSON))
                     .build()
                     .create(RestClient.class);
